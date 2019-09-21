@@ -1,6 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg_index"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
 
-</LinearLayout>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textColor="@color/colorWhite"
+        android:text="@string/index_message"
+        android:gravity="end"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="@dimen/spacing_large2"
+        android:id="@+id/app_name"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_medium2"
+        android:textColor="@color/colorWhite"
+        android:text="@string/simple_and_fun"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_alignParentBottom="true"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="@color/colorWhite"
+        android:text="@string/network_not_working"
+        android:gravity="center"
+        android:id="@+id/message"
+        android:visibility="gone"
+        android:layout_margin="8dp"
+        android:layout_above="@+id/close"
+        />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/text_size_medium"
+        android:text="@string/submit"
+        android:id="@+id/close"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:layout_margin="8dp"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

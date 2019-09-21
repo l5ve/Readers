@@ -14,7 +14,7 @@
 
     <!-- 시작 화면 -->
     <string name="index_message">편리하게,\nReaders</string>
-    <string name="delicious">Delicious</string>
+    <string name="simple_and_fun">Simple and Fun</string>
 
     <string name="submit">확인</string>
     <string name="network_not_working">네트워크에 연결되어 있지 않습니다.\n확인 후 다시 실행해 주세요.</string>
