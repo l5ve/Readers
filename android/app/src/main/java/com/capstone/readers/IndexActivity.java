@@ -16,6 +16,14 @@ import retrofit2.Response;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.capstone.readers.item.MemberInfoItem;
+import com.capstone.readers.lib.EtcLib;
+import com.capstone.readers.lib.MyLog;
+import com.capstone.readers.lib.RemoteLib;
+import com.capstone.readers.lib.StringLib;
+import com.capstone.readers.remote.RemoteService;
+import com.capstone.readers.remote.ServiceGenerator;
+
 /**
  * 시작 액티비티이며 이 액티비티에서 사용자 정보 조회 후
  * 메인 액티비티를 실행할 지, 프로필 액티비티를 실행할 지를 결정함.
@@ -158,8 +166,9 @@ public class IndexActivity extends AppCompatActivity {
         Intent intent = new Intent(IndexActivity.this, MainActivity.class);
         startActivity(intent);
 
-        Intent intent2 = new Intent(this, ProfileActivity.class);
-        startActivity(intent2);
+        // 아직 profileActivity 안 만들어서 주석 처리함
+        // Intent intent2 = new Intent(this, ProfileActivity.class);
+        // startActivity(intent2);
 
         finish();
     }
