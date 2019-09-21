@@ -46,7 +46,8 @@ public class PermissionActivity extends AppCompatActivity {
      */
     private boolean checkAndRequestPermissions() {
         String [] permissions = new String[]{
-                Manifest.permission.CAMERA
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_PHONE_STATE
         };
 
         List<String> listPermissionsNeeded = new ArrayList<>();
@@ -129,8 +130,6 @@ public class PermissionActivity extends AppCompatActivity {
         dialog.setPositiveButton(R.string.setting, new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                MyToast.makeText(PermissionActivity.this, R.string.permission_setting_restart, Toast.LENGTH_SHORT);
-                MyToast.show();
 
                 PermissionActivity.this.finish();
                 goAppSettingActivity();
