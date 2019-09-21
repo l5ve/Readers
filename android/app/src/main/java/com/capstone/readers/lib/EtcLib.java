@@ -52,7 +52,7 @@ public class EtcLib {
                     }
                 }
 
-                MyLog.d(TAG, "number " + number);
+                MyLog.d(TAG, "hey hey your number is" + number);
 
             } else {
                 number = getDeviceId(context);

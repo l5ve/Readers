@@ -124,7 +124,7 @@ public class IndexActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<MemberInfoItem> call, Throwable t) {
                 MyLog.d(TAG, "no internet connectivity");
-                MyLog.d(TAG, t.toString());
+                MyLog.d(TAG, "selectMemberInfo" + t.toString());
             }
         });
     }
@@ -163,6 +163,8 @@ public class IndexActivity extends AppCompatActivity {
             insertMemberPhone();
         }
 
+        MyLog.d(TAG, "BAAAAAAAAAAAAAAAAAAAAAAAAAAAM");
+
         Intent intent = new Intent(IndexActivity.this, MainActivity.class);
         startActivity(intent);
 
@@ -198,7 +200,7 @@ public class IndexActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                MyLog.d(TAG, "no internet connectivity");
+                MyLog.d(TAG, "insertMemberPhone: no internet connectivity");
             }
         });
     }
