@@ -10,13 +10,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.capstone.readers.item.MemberInfoItem;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+/**
+ * Readers의 핵심 액티비티
+ * 아래쪽에 navigation menu를 가진다.
+ * 다양한 프래그먼트를 보여주는 컨테이너 역할을 한다.
+ */
 public class MainActivity extends AppCompatActivity {
+    private final String TAG = getClass().getSimpleName();
+
+    MemberInfoItem memberInfoItem;
+
     // FrameLayout에 각 메뉴의 Fragment를 바꿔줌
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    // 3개의 메뉴에 들어갈 Fragment들
+    // 3개의 메뉴에 들어갈 Fragments
     private Menu1Fragment menu1Fragment = new Menu1Fragment();
     private Menu2Fragment menu2Fragment = new Menu2Fragment();
     private Menu3Fragment menu3Fragment = new Menu3Fragment();
@@ -25,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        memberInfoItem = ((MyApp)getApplication()).getMemberInfoItem();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         //첫 화면 지정
@@ -53,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-
     }
+
+
 
 }
