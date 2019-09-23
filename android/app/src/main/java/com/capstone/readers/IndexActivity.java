@@ -89,6 +89,7 @@ public class IndexActivity extends AppCompatActivity {
     /**
      * 현재 폰의 전화번호와 동일한 사용자 정보를 조회할 수 있도록
      * selectMemberInfo() 메소드를 호출함.
+     * ***** ======> 계속되는 오류로 일단 바로 main 화면으로 넘어가는 것으로 수정.
      */
     public void startTask() {
         String phone = EtcLib.getInstance().getPhoneNumber(this);
@@ -100,7 +101,6 @@ public class IndexActivity extends AppCompatActivity {
      * 리트로핏을 활용해서 서버로부터 사용자 정보를 조회한다.
      * 사용자 정보를 조회했다면 setMemberInfoItem() 메소드를 호출하고
      * 그렇지 않다면 goProfileActivity() 메소드를 호출한다.
-     *
      * @param phone 폰의 전화번호
      */
     public void selectMemberInfo(String phone) {
@@ -124,7 +124,7 @@ public class IndexActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<MemberInfoItem> call, Throwable t) {
                 MyLog.d(TAG, "no internet connectivity");
-                MyLog.d(TAG, "selectMemberInfo" + t.toString());
+                MyLog.d(TAG, "selectMemberInfo here! " + t.toString());
             }
         });
     }
@@ -168,9 +168,8 @@ public class IndexActivity extends AppCompatActivity {
         Intent intent = new Intent(IndexActivity.this, MainActivity.class);
         startActivity(intent);
 
-        // 아직 profileActivity 안 만들어서 주석 처리함
-        // Intent intent2 = new Intent(this, ProfileActivity.class);
-        // startActivity(intent2);
+        Intent intent2 = new Intent(this, ProfileActivity.class);
+        startActivity(intent2);
 
         finish();
     }
