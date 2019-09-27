@@ -64,6 +64,7 @@ public class IndexActivity extends AppCompatActivity {
             @Override
             public void run() {
                 startTask();
+
             }
         }, 1200);
     }
@@ -92,9 +93,13 @@ public class IndexActivity extends AppCompatActivity {
      * ***** ======> 계속되는 오류로 일단 바로 main 화면으로 넘어가는 것으로 수정.
      */
     public void startTask() {
-        String phone = EtcLib.getInstance().getPhoneNumber(this);
+        // 일단 바로 메인 화면으로 가는 걸로 바꿈
+        Intent intent = new Intent(IndexActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+        // String phone = EtcLib.getInstance().getPhoneNumber(this);
 
-        selectMemberInfo(phone);
+        // selectMemberInfo(phone);
     }
 
     /**
@@ -153,7 +158,7 @@ public class IndexActivity extends AppCompatActivity {
 
     /**
      * 사용자 정보를 조회하지 못했다면 insertMemberPhone() 메소드를 통해
-     * 전화번호를 서버에 저장하고 MainActivity를 실행한 후 ProfileActivity를 실행한다.
+     * 전화번호를 서버에 저장하고 MainActivity를 실행한 후 // ProfileActivity를 실행한다.
      * 그리고 현재 액티비티를 종료한다.
      *
      * @param item 사용자 정보
@@ -167,9 +172,6 @@ public class IndexActivity extends AppCompatActivity {
 
         Intent intent = new Intent(IndexActivity.this, MainActivity.class);
         startActivity(intent);
-
-        Intent intent2 = new Intent(this, ProfileActivity.class);
-        startActivity(intent2);
 
         finish();
     }

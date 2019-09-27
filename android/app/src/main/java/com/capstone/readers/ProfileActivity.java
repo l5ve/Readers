@@ -37,14 +37,14 @@ import retrofit2.Response;
 /**
  * 프로필을 설정할 수 있는 액티비티
  */
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity {
     private final String TAG = this.getClass().getSimpleName();
-    Context context;
-    Image
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
 }
 }
