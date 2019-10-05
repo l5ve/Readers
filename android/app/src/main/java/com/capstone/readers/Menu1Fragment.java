@@ -34,6 +34,7 @@ public class Menu1Fragment extends Fragment {
         View fv = inflater.inflate(R.layout.fragment_menu1, container, false);
 
         TabLayout tabs = (TabLayout) fv.findViewById(R.id.first_tabs);
+        setChildFragment(Menu1Fragment1.newInstance());
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
             @Override

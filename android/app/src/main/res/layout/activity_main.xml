@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     >
 
-
     <!-- 각각의 fragment를 넣을 Container -->
     <FrameLayout
         android:id="@+id/frame_layout"
@@ -24,9 +23,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimaryBright2"
-        app:itemIconTint="@color/colorWhite"
-        app:itemTextColor="@color/colorWhite"
+        android:background="@color/colorWhite"
+        app:itemIconTint="@color/colorBlack"
+        app:itemTextColor="@color/colorBlack"
         app:layout_constraintTop_toBottomOf="@id/frame_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

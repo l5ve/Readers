@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Readers</string>
-    <string name="title_left">Webtoons</string>
-    <string name="title_middle">My 구독</string>
-    <string name="title_right">설정</string>
+
+    <!-- 하단바 메뉴-->
+    <string name="menu1">Home</string>
+    <string name="menu2">추천</string>
+    <string name="menu3">마이페이지</string>
+    <string name="menu4">설정</string>
 
     <!-- 권한 화면 -->
     <string name="permission_checking">권한 확인중</string>

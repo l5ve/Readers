@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Menu1Fragment menu1Fragment = new Menu1Fragment();
     private Menu2Fragment menu2Fragment = new Menu2Fragment();
     private Menu3Fragment menu3Fragment = new Menu3Fragment();
+    private Menu4Fragment menu4Fragment = new Menu4Fragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         memberInfoItem = ((MyApp)getApplication()).getMemberInfoItem();
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+        final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         //첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
@@ -51,19 +53,25 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 FragmentTransaction transaction1 = fragmentManager.beginTransaction();
                 switch(menuItem.getItemId()) {
-                    // 왼쪽 메뉴: Webtoons
+                    // 1번 메뉴: 홈
                     case R.id.nav_menu1: {
                         transaction1.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
                         break;
                     }
-                    // 가운데 메뉴: My 구독
+                    // 2번 메뉴: 추천
                     case R.id.nav_menu2: {
                         transaction1.replace(R.id.frame_layout, menu2Fragment).commitAllowingStateLoss();
                         break;
                     }
-                    // 오른쪽 메뉴: 설정
+                    // 3번 메뉴: 마이페이지
                     case R.id.nav_menu3: {
                         transaction1.replace(R.id.frame_layout, menu3Fragment).commitAllowingStateLoss();
+                        break;
+                    }
+
+                    // 4번 메뉴: 설정
+                    case R.id.nav_menu4: {
+                        transaction1.replace(R.id.frame_layout, menu4Fragment).commitAllowingStateLoss();
                         break;
                     }
                 }
