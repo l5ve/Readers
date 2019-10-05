@@ -49,14 +49,17 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 FragmentTransaction transaction1 = fragmentManager.beginTransaction();
                 switch(menuItem.getItemId()) {
+                    // 왼쪽 메뉴: Webtoons
                     case R.id.nav_menu1: {
                         transaction1.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
                         break;
                     }
+                    // 가운데 메뉴: My 구독
                     case R.id.nav_menu2: {
                         transaction1.replace(R.id.frame_layout, menu2Fragment).commitAllowingStateLoss();
                         break;
                     }
+                    // 오른쪽 메뉴: 설정
                     case R.id.nav_menu3: {
                         transaction1.replace(R.id.frame_layout, menu3Fragment).commitAllowingStateLoss();
                         break;
