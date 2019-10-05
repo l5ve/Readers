@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+/** 1-1 홈화면의 요일별 정렬 화면을 나타내는 프래그먼트
+ *
+ */
 public class Menu1Fragment1 extends Fragment {
     public static Menu1Fragment1 newInstance(){
         return new Menu1Fragment1();

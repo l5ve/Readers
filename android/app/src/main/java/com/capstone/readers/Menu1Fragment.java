@@ -17,9 +17,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.capstone.readers.R;
 import com.google.android.material.tabs.TabLayout;
 
+/** 1번째 메뉴인 홈(웹툰) 화면을 나타내는 프래그먼트
+ *
+ */
 public class Menu1Fragment extends Fragment {
-    Toolbar toolbar;
-
     Menu1Fragment1 menu1Fragment1;   // 요일별
     Menu1Fragment2 menu1Fragment2;   // 장르별
     Menu1Fragment3 menu1Fragment3;   // 완결

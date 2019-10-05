@@ -1,5 +1,6 @@
 package com.capstone.readers;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     // 1번 메뉴: 홈
                     case R.id.nav_menu1: {
                         transaction1.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
+
                         break;
                     }
                     // 2번 메뉴: 추천

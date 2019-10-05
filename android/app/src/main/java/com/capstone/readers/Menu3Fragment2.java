@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-/** 1-2 홈화면의 장르별 정렬을 나타내는 프래그먼트
+/** 3-2 마이페이지 화면의 구독/책갈피/메모 화면을 나타내는 프래그먼트
  *
  */
-public class Menu1Fragment2 extends Fragment {
-    public static Menu1Fragment2 newInstance(){
-        return new Menu1Fragment2();
+public class Menu3Fragment2 extends Fragment {
+    public static Menu3Fragment2 newInstance(){
+        return new Menu3Fragment2();
     }
 
     @Override
@@ -22,7 +22,7 @@ public class Menu1Fragment2 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fv = inflater.inflate(R.layout.fragment2_menu1, container, false);
+        View fv = inflater.inflate(R.layout.fragment2_menu3, container, false);
 
         return fv;
     }

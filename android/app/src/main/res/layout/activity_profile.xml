@@ -27,7 +27,7 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/profile_name"
+            android:id="@+id/profile_edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -60,7 +60,7 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/profile_gender"
+            android:id="@+id/profile_edit_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -92,7 +92,7 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/profile_birth"
+            android:id="@+id/profile_edit_birth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -124,7 +124,7 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/profile_phone"
+            android:id="@+id/profile_edit_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
