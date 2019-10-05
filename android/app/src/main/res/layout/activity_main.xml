@@ -15,12 +15,6 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"
         >
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="81dp"
-            android:layout_height="58dp"
-            android:text="TextView" />
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
