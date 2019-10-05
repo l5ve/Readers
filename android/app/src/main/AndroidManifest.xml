@@ -28,6 +28,7 @@
         <activity android:name=".IndexActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".ProfileActivity"/>
+        <activity android:name=".LoginActivity"/>
 
     </application>
 

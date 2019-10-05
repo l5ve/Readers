@@ -3,6 +3,7 @@ package com.capstone.readers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -32,6 +33,8 @@ public class IndexActivity extends AppCompatActivity {
     private final String TAG = this.getClass().getSimpleName();
 
     Context context;
+    private SharedPreferences appData;
+    private boolean saveLoginData;
 
     /**
      * 레이아웃을 설정하고 인터넷에 연결되어 있는지를 확인.
@@ -93,10 +96,22 @@ public class IndexActivity extends AppCompatActivity {
      * ***** ======> 계속되는 오류로 일단 바로 main 화면으로 넘어가는 것으로 수정.
      */
     public void startTask() {
-        // 일단 바로 메인 화면으로 가는 걸로 바꿈
-        Intent intent = new Intent(IndexActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        // 설정값 불러오기
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+        // 저장된 로그인 정보가 있다면 메인 액티비티로 이동
+        if(saveLoginData) {
+            Intent intent = new Intent(IndexActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        // 저장된 로그인 정보가 없다면 로그인 액티비티로 이동
+        else {
+            // 일단 바로 로그인 화면으로 가는 걸로 바꿈
+            Intent intent = new Intent(IndexActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
         // String phone = EtcLib.getInstance().getPhoneNumber(this);
 
         // selectMemberInfo(phone);
@@ -148,9 +163,10 @@ public class IndexActivity extends AppCompatActivity {
 
     /**
      * MainActivity를 실행하고 현재 액티비티를 종료한다.
+     * 일단은 로그인 화면으로.
      */
     public void startMain() {
-        Intent intent = new Intent(IndexActivity.this, MainActivity.class);
+        Intent intent = new Intent(IndexActivity.this, LoginActivity.class);
         startActivity(intent);
 
         finish();

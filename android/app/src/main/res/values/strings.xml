@@ -30,6 +30,10 @@
     <string name="profile_birth">생일</string>
     <string name="profile_phone">전화</string>
 
+    <!-- 로그인 -->
+    <string name="remember_info">로그인 정보 기억하기</string>
+    <string name="login">로그인</string>
+
 
 
 
