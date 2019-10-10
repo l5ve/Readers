@@ -11,6 +11,7 @@
     <dimen name="spacing_large2">28dp</dimen>
     <dimen name="spacing_xlarge">32dp</dimen>
     <dimen name="spacing_xlarge2">36dp</dimen>
+    <dimen name="spacing_xxxlarge">60dp</dimen>
 
     <dimen name="text_size_xsmall">9sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
@@ -23,6 +24,8 @@
     <dimen name="text_size_xlarge">30sp</dimen>
     <dimen name="text_size_xlarge2">36sp</dimen>
     <dimen name="text_size_xlarge3">42sp</dimen>
+
+    <dimen name="icon_size_large">100sp</dimen>
 
     <dimen name="cardview_round_basic">4dp</dimen>
 

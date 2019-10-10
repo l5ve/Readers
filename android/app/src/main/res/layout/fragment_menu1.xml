@@ -12,7 +12,6 @@
         android:background="@color/colorPrimaryBright2">
 
         <ImageView
-            android:id="@+id/imageView2"
             android:layout_width="@dimen/text_size_xlarge3"
             android:layout_height="@dimen/text_size_xlarge3"
             android:layout_gravity="center"
@@ -20,6 +19,7 @@
             app:srcCompat="@drawable/readers_logo_white" />
 
         <EditText
+            android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_size_xlarge3"
             android:layout_gravity="center"
@@ -57,6 +57,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/list_end" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/frag1_tab4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/platforms" />
     </com.google.android.material.tabs.TabLayout>
 
     <FrameLayout

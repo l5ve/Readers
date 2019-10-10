@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Menu1Fragment4"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_large2"
+            android:layout_marginTop="@dimen/spacing_xxxlarge"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/platform1"
+                android:layout_width="@dimen/icon_size_large"
+                android:layout_height="@dimen/icon_size_large"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                app:srcCompat="@drawable/readers_logo_black"/>
+
+            <ImageButton
+                android:id="@+id/platform2"
+                android:layout_width="@dimen/icon_size_large"
+                android:layout_height="@dimen/icon_size_large"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                app:srcCompat="@drawable/readers_logo_black" />
+
+            <ImageButton
+                android:id="@+id/platform3"
+                android:layout_width="@dimen/icon_size_large"
+                android:layout_height="@dimen/icon_size_large"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                app:srcCompat="@drawable/readers_logo_black" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
