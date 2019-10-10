@@ -1,12 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorGrayBright">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="MENU 4"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/login_setting_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginVertical="@dimen/spacing_small2"
+            android:layout_marginHorizontal="@dimen/spacing_small"
+            android:text="@string/login_setting"
+            android:textSize="@dimen/text_size_large3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryBright5">
+
+        <TextView
+            android:id="@+id/hide_setting_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginVertical="@dimen/spacing_small2"
+            android:layout_marginHorizontal="@dimen/spacing_small"
+            android:text="@string/hide_setting"
+            android:textSize="@dimen/text_size_large3"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/notice_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginVertical="@dimen/spacing_small2"
+            android:layout_marginHorizontal="@dimen/spacing_small"
+            android:text="@string/notice"
+            android:textSize="@dimen/text_size_large3"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryBright5">
+
+        <TextView
+            android:id="@+id/FAQ_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginVertical="@dimen/spacing_small2"
+            android:layout_marginHorizontal="@dimen/spacing_small"
+            android:text="@string/FAQ"
+            android:textSize="@dimen/text_size_large3"  />
+    </LinearLayout>
 
 </LinearLayout>
