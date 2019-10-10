@@ -5,11 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryBright2">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/text_size_xlarge3"
+            android:layout_height="@dimen/text_size_xlarge3"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing_medium"
+            app:srcCompat="@drawable/readers_logo_white" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_size_xlarge3"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:paddingLeft="@dimen/spacing_medium2"
+            android:background="@drawable/search_layout"
+            android:hint="@string/search__message"
+            android:textSize="@dimen/text_size_medium"/>
+    </LinearLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/first_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryBright4"
+        android:background="@color/colorPrimaryBright2"
         app:tabTextColor="@color/colorWhite"
         app:tabIndicatorColor="@color/colorPrimary"
         app:tabMode="fixed"

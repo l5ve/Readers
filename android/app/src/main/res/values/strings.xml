@@ -40,6 +40,7 @@
     <string name="list_day">요일별</string>
     <string name="list_genre">장르별</string>
     <string name="list_end">완결</string>
+    <string name="search__message">작품명, 작가명 검색</string>
 
     <!-- 3. 마이페이지 -->
     <string name="profile_edit">프로필 수정</string>
