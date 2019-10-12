@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/webtoon_genre"
+        android:id="@+id/webtoon_genre_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryBright4"
@@ -32,7 +32,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pure_love" />
+            android:text="@string/love" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -75,4 +75,8 @@
             android:text="@string/fantasy" />
     </com.google.android.material.tabs.TabLayout>
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/webtoon_genre_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
