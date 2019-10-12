@@ -75,5 +75,4 @@
             android:text="@string/fantasy" />
     </com.google.android.material.tabs.TabLayout>
 
-
 </LinearLayout>
