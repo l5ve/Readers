@@ -38,6 +38,19 @@
 
     <!-- 1. 홈화면 -->
     <string name="list_day">요일별</string>
+    <string name="sentimental">감성</string>
+    <string name="humor">개그</string>
+    <string name="drama">드라마</string>
+    <string name="pure_love">순정</string>
+    <string name="thriller">스릴러</string>
+    <string name="story">스토리</string>
+    <string name="sports">스포츠</string>
+    <string name="omnibus">옴니버스</string>
+    <string name="action">액션</string>
+    <string name="daily_life">일상</string>
+    <string name="episode">에피소드</string>
+    <string name="fantasy">판타지</string>
+
     <string name="list_genre">장르별</string>
     <string name="list_end">완결</string>
     <string name="platforms">연재처</string>
