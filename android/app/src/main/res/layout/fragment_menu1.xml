@@ -5,13 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryBright2">
+
+        <ImageView
+            android:layout_width="@dimen/text_size_xlarge3"
+            android:layout_height="@dimen/text_size_xlarge3"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing_medium"
+            app:srcCompat="@drawable/readers_logo_white" />
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_size_xlarge3"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:paddingLeft="@dimen/spacing_medium2"
+            android:background="@drawable/search_layout"
+            android:hint="@string/search__message"
+            android:textSize="@dimen/text_size_medium"/>
+    </LinearLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/first_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryBright4"
-        app:tabTextColor="@color/colorWhite"
-        app:tabIndicatorColor="@color/colorPrimary"
+        android:background="@color/colorPrimaryBright2"
+        app:tabTextColor="@color/colorGray"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabIndicatorColor="@color/colorPrimaryBright2"
         app:tabMode="fixed"
         >
 
@@ -32,6 +58,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/list_end" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/frag1_tab4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/platforms" />
     </com.google.android.material.tabs.TabLayout>
 
     <FrameLayout

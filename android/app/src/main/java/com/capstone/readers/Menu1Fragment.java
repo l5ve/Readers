@@ -21,10 +21,6 @@ import com.google.android.material.tabs.TabLayout;
  *
  */
 public class Menu1Fragment extends Fragment {
-    Menu1Fragment1 menu1Fragment1;   // 요일별
-    Menu1Fragment2 menu1Fragment2;   // 장르별
-    Menu1Fragment3 menu1Fragment3;   // 완결
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +53,10 @@ public class Menu1Fragment extends Fragment {
                         fg = Menu1Fragment3.newInstance();
                         setChildFragment(fg);
                         break;
+                    case 3:
+                        fg = Menu1Fragment4.newInstance();
+                        setChildFragment(fg);
+
                 }
             }
 

@@ -1,12 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorGrayBright">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="MENU 4"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/text_size_xlarge"
+            android:layout_height="@dimen/text_size_xlarge"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:srcCompat="@drawable/readers_logo_black" />
+
+        <TextView
+            android:id="@+id/login_setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:text="@string/login_setting"
+            android:textSize="@dimen/text_size_large3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryBright5">
+
+        <ImageView
+            android:layout_width="@dimen/text_size_xlarge"
+            android:layout_height="@dimen/text_size_xlarge"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:srcCompat="@drawable/readers_logo_white" />
+
+        <TextView
+            android:id="@+id/hide_setting_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:text="@string/hide_setting"
+            android:textSize="@dimen/text_size_large3"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/text_size_xlarge"
+            android:layout_height="@dimen/text_size_xlarge"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:srcCompat="@drawable/readers_logo_black" />
+
+        <TextView
+            android:id="@+id/notice_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:text="@string/notice"
+            android:textSize="@dimen/text_size_large3"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryBright5">
+
+        <ImageView
+            android:layout_width="@dimen/text_size_xlarge"
+            android:layout_height="@dimen/text_size_xlarge"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:srcCompat="@drawable/readers_logo_white" />
+
+        <TextView
+            android:id="@+id/FAQ_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:text="@string/FAQ"
+            android:textSize="@dimen/text_size_large3"  />
+    </LinearLayout>
 
 </LinearLayout>

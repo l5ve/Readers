@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Menu1Fragment4"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/platform_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/button_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/spacing_xlarge"
+            android:paddingBottom="@dimen/spacing_xxxlarge"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/platform01"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/naver" />
+
+                <ImageButton
+                    android:id="@+id/platform02"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/daum" />
+
+                <ImageButton
+                    android:id="@+id/platform03"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/lezhin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_large2"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/platform04"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/mrblue" />
+
+                <ImageButton
+                    android:id="@+id/platform05"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/bufftoon" />
+
+                <ImageButton
+                    android:id="@+id/platform06"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/bomtoon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_large2"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/platform07"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/bbuding" />
+
+                <ImageButton
+                    android:id="@+id/platform08"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/kakaopage" />
+
+                <ImageButton
+                    android:id="@+id/platform09"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/comica" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_large2"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/platform10"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/comicgt" />
+
+                <ImageButton
+                    android:id="@+id/platform11"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ktoon" />
+
+                <ImageButton
+                    android:id="@+id/platform12"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/toptoon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_large2"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/platform13"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/toomics" />
+
+                <ImageButton
+                    android:id="@+id/platform14"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/foxtoon" />
+
+                <ImageButton
+                    android:id="@+id/platform15"
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="@dimen/icon_size_large"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/peanutoon" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <WebView
+        android:id="@+id/platform_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+</LinearLayout>

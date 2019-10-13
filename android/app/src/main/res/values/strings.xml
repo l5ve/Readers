@@ -38,8 +38,23 @@
 
     <!-- 1. 홈화면 -->
     <string name="list_day">요일별</string>
+    <string name="sentimental">감성</string>
+    <string name="humor">개그</string>
+    <string name="drama">드라마</string>
+    <string name="love">순정</string>
+    <string name="thriller">스릴러</string>
+    <string name="story">스토리</string>
+    <string name="sports">스포츠</string>
+    <string name="omnibus">옴니버스</string>
+    <string name="action">액션</string>
+    <string name="daily_life">일상</string>
+    <string name="episode">에피소드</string>
+    <string name="fantasy">판타지</string>
+
     <string name="list_genre">장르별</string>
     <string name="list_end">완결</string>
+    <string name="platforms">연재처</string>
+    <string name="search__message">작품명, 작가명 검색</string>
 
     <!-- 3. 마이페이지 -->
     <string name="profile_edit">프로필 수정</string>
@@ -51,5 +66,12 @@
     <string name="friday">금</string>
     <string name="saturday">토</string>
     <string name="sunday">일</string>
+
+
+    <!-- 4. 설정 -->
+    <string name="login_setting">통합 로그인 관리</string>
+    <string name="hide_setting">숨김 작품 목록 관리</string>
+    <string name="notice">공지사항</string>
+    <string name="FAQ">문의 FAQ</string>
 
 </resources>

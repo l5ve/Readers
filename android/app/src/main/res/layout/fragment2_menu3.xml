@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_large"
-        android:text="요기에 구독 책갈피 메모 넣을꼬얌" />
-    
+        android:text="구독/책갈피/메모가 표시되는 화면" />
+
 </LinearLayout>
