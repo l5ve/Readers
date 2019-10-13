@@ -1,5 +1,6 @@
 # Readers
-2019 CAU Capstone Design
+__2019 CAU Capstone Design__
+<hr>
 
 Application's goal : Webtoon Integration Platform including Recommendation System
 
