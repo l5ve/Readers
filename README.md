@@ -5,6 +5,6 @@ _Application's goal_ : Webtoon Integration Platform including Recommendation Sys
 
 <hr>
 You can see our
-Proposal ☞ https://bit.ly/2kkKPG3
-Prototype via AxureRP ☞ https://xleegk.axshare.com/
-Development schedule ☞ https://bit.ly/2OETTlM
+*Proposal ☞ https://bit.ly/2kkKPG3
+*Prototype via AxureRP ☞ https://xleegk.axshare.com/
+*Development schedule ☞ https://bit.ly/2OETTlM
