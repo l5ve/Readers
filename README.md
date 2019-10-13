@@ -1,10 +1,9 @@
 # Readers
 2019 CAU Capstone Design
 
+Application's goal : Webtoon Integration Platform including Recommendation System
 
-
-google drive
-https://bit.ly/2kvXcPl
-
-You can see our prototype via Axure
-https://xleegk.axshare.com/
+You can see our
+Proposal ☞ https://bit.ly/2kkKPG3
+Prototype via AxureRP ☞ https://xleegk.axshare.com/
+Development schedule ☞ https://bit.ly/2OETTlM
