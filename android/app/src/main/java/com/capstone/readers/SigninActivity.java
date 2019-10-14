@@ -2,82 +2,59 @@ package com.capstone.readers;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.capstone.readers.lib.MyLog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.capstone.readers.lib.MyToast;
 
-public class LoginActivity extends AppCompatActivity {
+public class SigninActivity extends AppCompatActivity {
     private boolean saveLoginData;
     private String id;
     private String pwd;
 
     private EditText idText;
     private EditText pwdText;
-    private CheckBox checkBox;
-    private ImageButton loginBtn;
+    private EditText pwdText_ver;
     private ImageButton sign_up_Btn;
 
     private SharedPreferences appData;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signin);
 
-        // 설정값 불러오기
-        appData = getSharedPreferences("appData", MODE_PRIVATE);
-        load();
+        idText = (EditText) findViewById(R.id.signin_id);
+        pwdText = (EditText) findViewById(R.id.signin_pw);
+        pwdText_ver = (EditText) findViewById(R.id.signin_pw_ver);
+        sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_Btn);
 
-        idText = (EditText) findViewById(R.id.idText);
-        pwdText = (EditText) findViewById(R.id.pwdText);
-        checkBox = (CheckBox) findViewById(R.id.checkBox);
-        loginBtn = (ImageButton) findViewById(R.id.loginBtn);
-        sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_page_Btn);
-
-        // 이전에 로그인 정보를 저장시킨 기록이 있다면
-        if (saveLoginData) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-
-            finish();
-        }
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id_input = idText.getText().toString();
-                String pw_input = pwdText.getText().toString();
-                if (id_input.length() != 0 && pw_input.length() != 0){
-                // 로그인 정보 저장 클릭시 자동 저장 처리
-                    if(checkBox.isChecked())
-                        save();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-
-                    finish();
-                }
-                else {
-                    MyToast.s(getApplicationContext(), getString(R.string.login_warning));
-                }
-            }
-        });
 
         sign_up_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, SigninActivity.class);
-                startActivity(intent);
+                String id_input = idText.getText().toString();
+                String pw_input = pwdText.getText().toString();
+                String pw_ver = pwdText_ver.getText().toString();
+                if (id_input.length() != 0 && pw_input.length() != 0){
+                    if (pw_input.equals(pw_ver)){
+                        MyToast.s(getApplicationContext(), getString(R.string.sign_up_done));
+                        Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                        startActivity(intent);
 
-                finish();
+                        finish();
+                    }
+                    else{
+                        MyToast.s(getApplicationContext(), getString(R.string.different_pw));
+                    }
+                }
+                else {
+                    MyToast.s(getApplicationContext(), getString(R.string.login_warning));
+                }
             }
         });
     }
@@ -89,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
         // 저장시킬 이름이 이미 존재하면 덮어씌움
-        editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
+        editor.putBoolean("SAVE_LOGIN_DATA", false);
         editor.putString("ID", idText.getText().toString().trim());
         editor.putString("PWD", pwdText.getText().toString().trim());
 
