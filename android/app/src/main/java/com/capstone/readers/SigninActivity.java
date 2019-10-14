@@ -42,7 +42,7 @@ public class SigninActivity extends AppCompatActivity {
                 String pw_ver = pwdText_ver.getText().toString();
                 if (id_input.length() != 0 && pw_input.length() != 0){
                     if (pw_input.equals(pw_ver)){
-                        MyToast.s(getApplicationContext(), getString(R.string.sign_up_done));
+                        MyToast.l(getApplicationContext(), getString(R.string.sign_up_done));
                         Intent intent = new Intent(SigninActivity.this, MainActivity.class);
                         startActivity(intent);
 

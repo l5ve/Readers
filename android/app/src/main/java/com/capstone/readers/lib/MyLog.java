@@ -36,3 +36,4 @@ public class MyLog {
         Log.e(tag, text);
     }
 }
+
