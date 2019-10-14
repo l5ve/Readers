@@ -2,12 +2,18 @@ package com.capstone.readers;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.capstone.readers.lib.MyLog;
+import com.capstone.readers.lib.MyToast;
 
 public class LoginActivity extends AppCompatActivity {
     private boolean saveLoginData;
@@ -17,7 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText idText;
     private EditText pwdText;
     private CheckBox checkBox;
-    private Button loginBtn;
+    private ImageButton loginBtn;
+    private ImageButton sign_up_Btn;
 
     private SharedPreferences appData;
 
@@ -33,7 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         idText = (EditText) findViewById(R.id.idText);
         pwdText = (EditText) findViewById(R.id.pwdText);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
-        loginBtn = (Button) findViewById(R.id.loginBtn);
+        loginBtn = (ImageButton) findViewById(R.id.loginBtn);
+        sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_page_Btn);
 
         // 이전에 로그인 정보를 저장시킨 기록이 있다면
         if (saveLoginData) {
@@ -46,10 +54,27 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String id_input = idText.getText().toString();
+                String pw_input = pwdText.getText().toString();
+                if (id_input.length() != 0 && pw_input.length() != 0){
                 // 로그인 정보 저장 클릭시 자동 저장 처리
-                if(checkBox.isChecked())
-                    save();
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    if(checkBox.isChecked())
+                        save();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+                    finish();
+                }
+                else {
+                    MyToast.s(getApplicationContext(), getString(R.string.login_warning));
+                }
+            }
+        });
+
+        sign_up_Btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SigninActivity.class);
                 startActivity(intent);
 
                 finish();

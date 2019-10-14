@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryBright2"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <EditText
+        android:id="@+id/signin_id"
+        android:layout_marginTop="@dimen/spacing_xxxlarge"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:ems="10"
+        android:hint="@string/id"
+        android:textSize="@dimen/text_size_medium"
+        android:background="@drawable/input_layout"
+        android:padding="@dimen/spacing_small2"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <EditText
+        android:id="@+id/signin_pw"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:ems="10"
+        android:hint="@string/password"
+        android:textSize="@dimen/text_size_medium"
+        android:background="@drawable/input_layout"
+        android:padding="@dimen/spacing_small2"
+        android:layout_marginBottom="@dimen/spacing_medium"/>
+
+    <EditText
+        android:id="@+id/signin_pw_ver"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:ems="10"
+        android:hint="@string/password_verification"
+        android:textSize="@dimen/text_size_medium"
+        android:background="@drawable/input_layout"
+        android:padding="@dimen/spacing_small2"
+        android:layout_marginBottom="@dimen/spacing_medium"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/your_taste"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_size_medium2"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_xlarge"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_medium">
+
+        <Button
+            android:id="@+id/singin_sentimental"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sentimental"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+
+        <Button
+            android:id="@+id/singin_humor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/humor"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+
+        <Button
+            android:id="@+id/singin_drama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drama"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_medium">
+
+        <Button
+            android:id="@+id/singin_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/love"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+
+        <Button
+            android:id="@+id/singin_thriller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thriller"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+
+        <Button
+            android:id="@+id/singin_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/story"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_medium">
+
+        <Button
+            android:id="@+id/singin_sports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sports"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:background="@drawable/taste_button" />
+
+        <Button
+            android:id="@+id/singin_historical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/historical"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:background="@drawable/taste_button" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_medium">
+
+        <Button
+            android:id="@+id/singin_omnibus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/omnibus"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+
+        <Button
+            android:id="@+id/singin_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+
+        <Button
+            android:id="@+id/singin_daily_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_life"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2"
+            android:background="@drawable/taste_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_medium2">
+
+        <Button
+            android:id="@+id/singin_episode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/episode"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:background="@drawable/taste_button" />
+
+        <Button
+            android:id="@+id/singin_fantasy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fantasy"
+            android:textSize="@dimen/text_size_medium2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:background="@drawable/taste_button" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/sign_up_Btn"
+        android:layout_width="@dimen/spacing_xxxlarge"
+        android:layout_height="@dimen/spacing_xxxlarge"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:layout_gravity="end"
+        android:src="@drawable/next" />
+
+</LinearLayout>

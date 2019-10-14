@@ -12,3 +12,4 @@ You can see our
 + Proposal ☞ https://bit.ly/2kkKPG3
 + Prototype via AxureRP ☞ https://xleegk.axshare.com/
 + Development schedule ☞ https://bit.ly/2OETTlM
++ Meeting Log ☞ https://bit.ly/2MEFP95
