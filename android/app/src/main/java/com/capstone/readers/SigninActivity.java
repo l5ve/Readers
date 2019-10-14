@@ -28,6 +28,10 @@ public class SigninActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
+        // 설정값 불러오기
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        load();
+
         idText = (EditText) findViewById(R.id.signin_id);
         pwdText = (EditText) findViewById(R.id.signin_pw);
         pwdText_ver = (EditText) findViewById(R.id.signin_pw_ver);
@@ -42,6 +46,7 @@ public class SigninActivity extends AppCompatActivity {
                 String pw_ver = pwdText_ver.getText().toString();
                 if (id_input.length() != 0 && pw_input.length() != 0){
                     if (pw_input.equals(pw_ver)){
+                        save();
                         MyToast.l(getApplicationContext(), getString(R.string.sign_up_done));
                         Intent intent = new Intent(SigninActivity.this, MainActivity.class);
                         startActivity(intent);

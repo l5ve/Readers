@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/signin_id"
-        android:layout_marginTop="@dimen/spacing_xxxlarge"
+        android:layout_marginTop="@dimen/spacing_xlarge"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -17,6 +17,20 @@
         android:gravity="center"
         android:ems="10"
         android:hint="@string/id"
+        android:textSize="@dimen/text_size_medium"
+        android:background="@drawable/input_layout"
+        android:padding="@dimen/spacing_small2"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <EditText
+        android:id="@+id/signin_nickname"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:ems="10"
+        android:hint="@string/nickname"
         android:textSize="@dimen/text_size_medium"
         android:background="@drawable/input_layout"
         android:padding="@dimen/spacing_small2"
@@ -48,7 +62,7 @@
         android:textSize="@dimen/text_size_medium"
         android:background="@drawable/input_layout"
         android:padding="@dimen/spacing_small2"
-        android:layout_marginBottom="@dimen/spacing_medium"/>
+        android:layout_marginBottom="@dimen/spacing_small2"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -58,7 +72,7 @@
         android:textSize="@dimen/text_size_medium2"
         android:gravity="center"
         android:layout_marginTop="@dimen/spacing_large"
-        android:layout_marginBottom="@dimen/spacing_xlarge"/>
+        android:layout_marginBottom="@dimen/spacing_medium"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sentimental"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="@dimen/text_size_medium2"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:paddingHorizontal="@dimen/spacing_medium"
@@ -84,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/humor"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="@dimen/text_size_medium2"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:paddingHorizontal="@dimen/spacing_medium"
@@ -96,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/drama"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="@dimen/text_size_medium2"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:paddingHorizontal="@dimen/spacing_medium"
