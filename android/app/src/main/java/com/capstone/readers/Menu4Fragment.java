@@ -33,9 +33,10 @@ public class Menu4Fragment extends Fragment {
             @Override
             public void onClick(View view){
                 Intent email = new Intent(Intent.ACTION_SEND);
+                String[] address = {"readers.cau@gmail.com"};
                 email.setType("plain/Text");
-                email.putExtra(Intent.EXTRA_EMAIL, "readers.cau@gmail.com");
-                email.putExtra(Intent.EXTRA_SUBJECT, "[Ask]");
+                email.putExtra(Intent.EXTRA_EMAIL, address);
+                email.putExtra(Intent.EXTRA_SUBJECT, "[Ask] 제목을 작성해주세요.");
                 email.putExtra(Intent.EXTRA_TEXT, "문의 내용을 작성해주세요.\n");
                 email.setType("message/rfc822");
                 startActivity(email);
