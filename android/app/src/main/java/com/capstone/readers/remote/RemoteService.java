@@ -22,7 +22,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * 서버에 ㅍ호출할 메소드를 선언하는 인터페이스
+ * 서버에 호출할 메소드를 선언하는 인터페이스
  */
 public interface RemoteService {
     String BASE_URL = "http://192.168.0.6:3000";

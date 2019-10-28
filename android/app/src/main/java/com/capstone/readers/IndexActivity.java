@@ -34,6 +34,7 @@ public class IndexActivity extends AppCompatActivity {
     Context context;
     private SharedPreferences appData;
     private boolean saveLoginData;
+    private boolean hasNetwork;
 
     /**
      * 레이아웃을 설정하고 인터넷에 연결되어 있는지를 확인.
@@ -46,8 +47,10 @@ public class IndexActivity extends AppCompatActivity {
         setContentView(R.layout.activity_index);
 
         context = this;
+        hasNetwork = true;
 
         if (!RemoteLib.getInstance().isConnected(context)) {
+            hasNetwork = false;
             showNoService();
             return;
         }
@@ -61,14 +64,19 @@ public class IndexActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startTask();
+        if (hasNetwork == false) {
 
-            }
-        }, 1200);
+        }
+        else {
+            Handler mHandler = new Handler();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startTask();
+
+                }
+            }, 1200);
+        }
     }
 
     /**
