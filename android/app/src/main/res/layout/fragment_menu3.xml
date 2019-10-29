@@ -5,7 +5,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mypage_profile_container"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -16,8 +16,11 @@
             android:id="@+id/profile_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_margin="@dimen/spacing_medium"
             android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing_small2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/readers_logo_white" />
 
         <TextView
@@ -25,43 +28,56 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_medium2"
             android:text="김중앙"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_large"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_image" />
 
         <Button
             android:id="@+id/mypage_subscribe"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="@dimen/spacing_large"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:layout_margin="@dimen/spacing_small"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/mypage_button"
-            android:text="구독\n15" />
+            android:gravity="center"
+            android:text="구독\n15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/mypage_bookmark"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/mypage_bookmark"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="@dimen/spacing_small2"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:layout_margin="@dimen/spacing_small"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/mypage_button"
-            android:text="책갈피\n30" />
+            android:gravity="center"
+            android:text="책갈피\n30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/mypage_memo"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/mypage_memo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="@dimen/spacing_small2"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:layout_margin="@dimen/spacing_small2"
             android:background="@drawable/mypage_button"
-            android:text="메모\n1" />
-
-    </LinearLayout>
+            android:gravity="center"
+            android:text="메모\n1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <fragment
         android:id="@+id/fragment"
