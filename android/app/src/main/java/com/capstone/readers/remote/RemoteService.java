@@ -1,5 +1,9 @@
 package com.capstone.readers.remote;
 
+import com.capstone.readers.item.JoinData;
+import com.capstone.readers.item.JoinResponse;
+import com.capstone.readers.item.LoginData;
+import com.capstone.readers.item.LoginResponse;
 import com.capstone.readers.item.WebtoonInfoItem;
 import com.capstone.readers.item.KeepItem;
 import com.capstone.readers.item.MemberInfoItem;
@@ -30,6 +34,12 @@ public interface RemoteService {
     // 사용자 정보
     @GET("/member/{phone}")
     Call<MemberInfoItem> selectMemberInfo(@Path("phone") String phone);
+
+    @POST("/user/login")
+    Call<LoginResponse> userLogin(@Body LoginData data);
+
+    @POST("/user/join")
+    Call<JoinResponse> userJoin(@Body JoinData data);
 
     @POST("/member/info")
     Call<String> insertMemberInfo(@Body MemberInfoItem memberInfoItem);

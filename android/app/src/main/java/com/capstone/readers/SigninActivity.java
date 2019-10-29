@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.capstone.readers.lib.MyToast;
+import com.capstone.readers.remote.RemoteService;
 
 public class SigninActivity extends AppCompatActivity {
     private boolean saveLoginData;
@@ -21,6 +22,8 @@ public class SigninActivity extends AppCompatActivity {
     private EditText pwdText;
     private EditText pwdText_ver;
     private ImageButton sign_up_Btn;
+
+    private RemoteService service;
 
     private SharedPreferences appData;
 
@@ -37,6 +40,7 @@ public class SigninActivity extends AppCompatActivity {
         pwdText_ver = (EditText) findViewById(R.id.signin_pw_ver);
         sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_Btn);
 
+        service = RetrofitClient.getClient().create(RemoteService.class);
 
         sign_up_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
