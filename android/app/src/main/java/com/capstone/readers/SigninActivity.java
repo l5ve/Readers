@@ -5,17 +5,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.capstone.readers.item.JoinData;
-import com.capstone.readers.item.JoinResponse;
 import com.capstone.readers.lib.MyToast;
-import com.capstone.readers.remote.RemoteService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,15 +89,15 @@ public class SigninActivity extends AppCompatActivity {
         }
 
         if (!cancel) {
-            startJoin(new SigninData(id, name, pwd));
+            startJoin(new JoinData(id, name, pwd));
         }
     }
 
-    private void startJoin(SigninData data) {
-        service.userJoin(data).enqueue(new Callback<SigninResponse>() {
+    private void startJoin(JoinData data) {
+        service.userJoin(data).enqueue(new Callback<JoinResponse>() {
             @Override
-            public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
-                SigninResponse result = response.body();
+            public void onResponse(Call<JoinResponse> call, Response<JoinResponse> response) {
+                JoinResponse result = response.body();
                 MyToast.s(getApplicationContext(), result.getMessage());
 
                 // 200: 회원가입 성공 시 받는 코드
@@ -115,7 +111,7 @@ public class SigninActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<SigninResponse> call, Throwable t) {
+            public void onFailure(Call<JoinResponse> call, Throwable t) {
                 Toast.makeText(SigninActivity.this, R.string.signin_error, Toast.LENGTH_SHORT).show();
                 Log.e("회원가입 에러 발생", t.getMessage());
             }

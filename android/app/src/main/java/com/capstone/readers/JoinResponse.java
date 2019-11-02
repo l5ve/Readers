@@ -2,7 +2,7 @@ package com.capstone.readers;
 
 import com.google.gson.annotations.SerializedName;
 
-public class SigninResponse {
+public class JoinResponse {
     @SerializedName("code")
     private int code;
 

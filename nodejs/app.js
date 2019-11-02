@@ -11,7 +11,7 @@ var app = express();
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : "52.78.23.232",
+  host     : "http://ec2-52-78-23-232.ap-northeast-2.compute.amazonaws.com/",
   user     : "root",
   password : "readers7",
   port     : 3306,
