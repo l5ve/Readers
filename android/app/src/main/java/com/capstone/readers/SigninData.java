@@ -2,18 +2,17 @@ package com.capstone.readers;
 
 import com.google.gson.annotations.SerializedName;
 
-/* 로그인 요청 시 보낼 데이터 */
-public class LoginData {
+public class SigninData {
     @SerializedName("userID")
-    String user_id;
+    private String user_id;
 
     @SerializedName("userName")
-    String user_name;
+    private String user_name;
 
     @SerializedName("userPwd")
-    String user_pwd;
+    private String user_pwd;
 
-    public LoginData(String userID, String userName, String userPwd) {
+    public SigninData(String userID, String userName, String userPwd) {
         this.user_id = userID;
         this.user_name = userName;
         this.user_pwd = userPwd;
