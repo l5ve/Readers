@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
@@ -23,6 +25,8 @@ import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
+    public static final int REQUEST_CODE_SIGNIN = 101;
+
     private EditText idText;
     private EditText pwdText;
     private CheckBox checkBox;
@@ -30,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     private ImageButton sign_up_Btn;
 
     private ServiceApi service;
+
+    private SharedPreferences appData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +61,25 @@ public class LoginActivity extends AppCompatActivity {
         sign_up_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, SigninActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_SIGNIN);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_SIGNIN) {
+            Log.d("회원가입/", "회원가입 성공 후 인텐트 로그인 액티비티에 전달");
+            if (resultCode == RESULT_OK) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+
+                finish();
+            }
+        }
     }
 
     private void attemptLogin(){

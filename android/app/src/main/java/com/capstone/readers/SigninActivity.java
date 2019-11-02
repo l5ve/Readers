@@ -107,6 +107,9 @@ public class SigninActivity extends AppCompatActivity {
                 // 200: 회원가입 성공 시 받는 코드
                 if (result.getCode() == 200) {
                     MyToast.l(getApplicationContext(), R.string.sign_up_done);
+                    Intent intent = new Intent();
+                    setResult(RESULT_OK, intent);
+
                     finish();
                 }
             }
