@@ -7,15 +7,11 @@ public class LoginData {
     @SerializedName("userID")
     String user_id;
 
-    @SerializedName("userName")
-    String user_name;
-
     @SerializedName("userPwd")
     String user_pwd;
 
-    public LoginData(String userID, String userName, String userPwd) {
+    public LoginData(String userID, String userPwd) {
         this.user_id = userID;
-        this.user_name = userName;
         this.user_pwd = userPwd;
     }
 }
