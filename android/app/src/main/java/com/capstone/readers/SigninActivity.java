@@ -68,7 +68,7 @@ public class SigninActivity extends AppCompatActivity {
         if (pwd.isEmpty()) {
             MyToast.s(getApplicationContext(), R.string.login_warning);
             cancel = true;
-        } else if(isPasswordValid(pwd)) {
+        } else if(!isPasswordValid(pwd)) {
             MyToast.s(getApplicationContext(), R.string.pwd_length_warning);
             cancel = true;
         } else if(!isPasswordConsistent(pwd, pwd_ver)) {
@@ -80,7 +80,7 @@ public class SigninActivity extends AppCompatActivity {
         if (id.isEmpty()) {
             MyToast.s(getApplicationContext(), R.string.login_warning);
             cancel = true;
-        } else if(isIdValid(id)) {
+        } else if(!isIdValid(id)) {
             MyToast.s(getApplicationContext(), R.string.id_length_warning);
             cancel = true;
         }
@@ -102,7 +102,7 @@ public class SigninActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                 SigninResponse result = response.body();
-                Toast.makeText(SigninActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+                MyToast.s(getApplicationContext(), result.getMessage());
 
                 // 200: 회원가입 성공 시 받는 코드
                 if (result.getCode() == 200) {
@@ -123,12 +123,12 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private boolean isIdValid(String id) {
-        return id.length() < 6;
+        return id.length() >= 5;
     }
 
 
     private boolean isPasswordValid(String password) {
-        return password.length() < 6;
+        return password.length() >= 5;
     }
 
     private boolean isPasswordConsistent(String pw, String pw_ver) {
@@ -136,5 +136,20 @@ public class SigninActivity extends AppCompatActivity {
             return true;
         else
             return false;
+    }
+
+    // 설정값을 저장하는 함수
+    private void save() {
+        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
+        SharedPreferences.Editor editor = appData.edit();
+
+        // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
+        // 저장시킬 이름이 이미 존재하면 덮어씌움
+        editor.putBoolean("SAVE_LOGIN_DATA", true);
+        editor.putString("ID", idText.getText().toString().trim());
+        editor.putString("PWD", pwdText.getText().toString().trim());
+
+        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
+        editor.apply();
     }
 }

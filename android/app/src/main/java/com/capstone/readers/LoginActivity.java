@@ -27,6 +27,10 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_SIGNIN = 101;
 
+    private boolean saveLoginData;
+    private String saved_id;
+    private String saved_pw;
+
     private EditText idText;
     private EditText pwdText;
     private CheckBox checkBox;
@@ -42,14 +46,26 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // 설정값 불러오기
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        load();
+
+
         idText = (EditText) findViewById(R.id.idText);
         pwdText = (EditText) findViewById(R.id.pwdText);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
         loginBtn = (ImageButton) findViewById(R.id.loginBtn);
         sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_page_Btn);
 
-        service = RetrofitClient.getClient().create(ServiceApi.class);
 
+        // 이전에 로그인 정보를 저장시킨 기록이 있다면
+        if (saveLoginData) {
+            idText.setText(saved_id);
+            pwdText.setText(saved_pw);
+            attemptLogin();
+        }
+
+        service = RetrofitClient.getClient().create(ServiceApi.class);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,10 +111,17 @@ public class LoginActivity extends AppCompatActivity {
         if (pwd.isEmpty()) {
             MyToast.s(getApplicationContext(), R.string.login_warning);
             cancel = true;
+        }else if(!isPasswordValid(pwd)) {
+            MyToast.s(getApplicationContext(), R.string.pwd_length_warning);
+            cancel = true;
         }
+
         // ID 유효성 검사
         if (id.isEmpty()) {
             MyToast.s(getApplicationContext(), R.string.login_warning);
+            cancel = true;
+        } else if(!isIdValid(id)) {
+            MyToast.s(getApplicationContext(), R.string.id_length_warning);
             cancel = true;
         }
 
@@ -114,6 +137,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse result = response.body();
                 Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+
+                if (result.getCode() == 200) {
+                    if (checkBox.isChecked()){
+                        save();
+                    }
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
 
             @Override
@@ -130,4 +162,38 @@ public class LoginActivity extends AppCompatActivity {
         else
             return false;
     }
+
+    private boolean isIdValid(String id) {
+        return id.length() >= 5;
+    }
+
+
+    private boolean isPasswordValid(String password) {
+        return password.length() >= 5;
+    }
+
+    // 설정값을 저장하는 함수
+    private void save() {
+        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
+        SharedPreferences.Editor editor = appData.edit();
+
+        // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
+        // 저장시킬 이름이 이미 존재하면 덮어씌움
+        editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
+        editor.putString("ID", idText.getText().toString().trim());
+        editor.putString("PWD", pwdText.getText().toString().trim());
+
+        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
+        editor.apply();
+    }
+
+    // 설정값을 불러오는 함수
+    private void load() {
+        // SharedPreferences 객체.get타입( 저장된 이름, 기본값
+        // 저장된 이름이 존재하지 않을 시 기본값
+        saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+        saved_id = appData.getString("ID", "");
+        saved_pw = appData.getString("PWD", "");
+    }
+
 }
