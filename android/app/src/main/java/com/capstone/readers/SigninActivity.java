@@ -66,25 +66,29 @@ public class SigninActivity extends AppCompatActivity {
 
         // 비밀번호 유효성 검사
         if (pwd.isEmpty()) {
-            MyToast.s(getApplicationContext(), "@string/login_warning");
+            MyToast.s(getApplicationContext(), R.string.login_warning);
             cancel = true;
         } else if(isPasswordValid(pwd)) {
-            MyToast.s(getApplicationContext(), "@string/pwd_length_warning");
+            MyToast.s(getApplicationContext(), R.string.pwd_length_warning);
             cancel = true;
-        } else if(isPasswordConsistent(pwd, pwd_ver)) {
-            MyToast.s(getApplicationContext(), "@string/different_pw");
+        } else if(!isPasswordConsistent(pwd, pwd_ver)) {
+            MyToast.s(getApplicationContext(),  R.string.different_pw);
             cancel = true;
         }
 
         // ID 유효성 검사
         if (id.isEmpty()) {
-            MyToast.s(getApplicationContext(), "@string/login_warning");
+            MyToast.s(getApplicationContext(), R.string.login_warning);
+            cancel = true;
+        } else if(isIdValid(id)) {
+            MyToast.s(getApplicationContext(), R.string.id_length_warning);
             cancel = true;
         }
 
+
         // 닉네임 유효성 검사
         if (name.isEmpty()) {
-            MyToast.s(getApplicationContext(), "@string/nickname_warning");
+            MyToast.s(getApplicationContext(), R.string.nickname_warning);
             cancel = true;
         }
 
@@ -102,20 +106,26 @@ public class SigninActivity extends AppCompatActivity {
 
                 // 200: 회원가입 성공 시 받는 코드
                 if (result.getCode() == 200) {
+                    MyToast.l(getApplicationContext(), R.string.sign_up_done);
                     finish();
                 }
             }
 
             @Override
             public void onFailure(Call<SigninResponse> call, Throwable t) {
-                Toast.makeText(SigninActivity.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SigninActivity.this, R.string.signin_error, Toast.LENGTH_SHORT).show();
                 Log.e("회원가입 에러 발생", t.getMessage());
             }
         });
     }
 
+    private boolean isIdValid(String id) {
+        return id.length() < 6;
+    }
+
+
     private boolean isPasswordValid(String password) {
-        return password.length() >= 6;
+        return password.length() < 6;
     }
 
     private boolean isPasswordConsistent(String pw, String pw_ver) {

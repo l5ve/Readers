@@ -72,12 +72,12 @@ public class LoginActivity extends AppCompatActivity {
 
         // 비밀번호 유효성 검사
         if (pwd.isEmpty()) {
-            MyToast.s(getApplicationContext(), "@string/login_warning");
+            MyToast.s(getApplicationContext(), R.string.login_warning);
             cancel = true;
         }
         // ID 유효성 검사
         if (id.isEmpty()) {
-            MyToast.s(getApplicationContext(), "@string/login_warning");
+            MyToast.s(getApplicationContext(), R.string.login_warning);
             cancel = true;
         }
 
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "로그인 에러 발생", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
                 Log.e("로그인 에러 발생", t.getMessage());
             }
         });
