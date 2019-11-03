@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,8 @@ public class Menu4Fragment extends Fragment {
     private TextView settingHideBtn;
     private TextView settingNoticeBtn;
     private TextView settingAskBtn;
+    private LinearLayout NoticeContents;
+    private Boolean isOpened;
 
     @Nullable
     @Override
@@ -29,11 +32,25 @@ public class Menu4Fragment extends Fragment {
         settingHideBtn = (TextView) fv.findViewById(R.id.setting_hide_btn);
         settingNoticeBtn = (TextView) fv.findViewById(R.id.setting_notice_btn);
         settingAskBtn = (TextView) fv.findViewById(R.id.setting_ask_btn);
+        NoticeContents = (LinearLayout) fv.findViewById(R.id.setting_notice_contents);
+        isOpened = false;
 
         settingLoginBtn.setOnClickListener(new TextView.OnClickListener(){
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).replaceFragment(ManageLoginFragment.newInstance());
+            }
+        });
+
+        settingNoticeBtn.setOnClickListener(new TextView.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                isOpened = !isOpened;
+                if (isOpened){
+                    NoticeContents.setVisibility(View.VISIBLE);
+                } else {
+                    NoticeContents.setVisibility(View.GONE);
+                }
             }
         });
 
