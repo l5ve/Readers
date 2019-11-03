@@ -32,7 +32,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/naver" />
+                    app:srcCompat="@drawable/naver"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform02"
@@ -40,7 +42,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/daum" />
+                    app:srcCompat="@drawable/daum"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform03"
@@ -48,7 +52,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/lezhin" />
+                    app:srcCompat="@drawable/lezhin"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
             </LinearLayout>
 
             <LinearLayout
@@ -95,7 +101,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/mrblue" />
+                    app:srcCompat="@drawable/mrblue"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform05"
@@ -103,7 +111,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/bufftoon" />
+                    app:srcCompat="@drawable/bufftoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform06"
@@ -111,7 +121,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/bomtoon" />
+                    app:srcCompat="@drawable/bomtoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
             </LinearLayout>
 
             <LinearLayout
@@ -158,7 +170,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/bbuding" />
+                    app:srcCompat="@drawable/bbuding"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform08"
@@ -166,7 +180,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/kakaopage" />
+                    app:srcCompat="@drawable/kakaopage"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform09"
@@ -174,7 +190,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/comica" />
+                    app:srcCompat="@drawable/comica"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
             </LinearLayout>
 
             <LinearLayout
@@ -221,7 +239,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/comicgt" />
+                    app:srcCompat="@drawable/comicgt"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform11"
@@ -229,7 +249,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ktoon" />
+                    app:srcCompat="@drawable/ktoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform12"
@@ -237,7 +259,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/toptoon" />
+                    app:srcCompat="@drawable/toptoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
             </LinearLayout>
 
             <LinearLayout
@@ -284,7 +308,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/toomics" />
+                    app:srcCompat="@drawable/toomics"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform14"
@@ -292,7 +318,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/foxtoon" />
+                    app:srcCompat="@drawable/foxtoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
 
                 <ImageButton
                     android:id="@+id/platform15"
@@ -300,7 +328,9 @@
                     android:layout_height="@dimen/icon_size_large"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/peanutoon" />
+                    app:srcCompat="@drawable/peanutoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
             </LinearLayout>
 
             <LinearLayout

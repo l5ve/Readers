@@ -16,7 +16,7 @@ public class ManageLoginActivity extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fv = inflater.inflate(R.layout.fragment_menu4, container, false);
+        View fv = inflater.inflate(R.layout.activity_managelogin, container, false);
 
         return fv;
     }
