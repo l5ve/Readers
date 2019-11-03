@@ -11,9 +11,14 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.capstone.readers.lib.MyToast;
+
 public class WebviewActivity extends AppCompatActivity {
     private WebView mWebView;
     private WebSettings mWebSettings; //웹뷰세팅
+    private String name;
+    private String url;
+    private boolean close;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +26,19 @@ public class WebviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webview);
 
         mWebView = (WebView) findViewById(R.id.general_webview);
+        close = false;
 
         Intent intent = getIntent();
-        String url = intent.getExtras().getString("url");
+        name = intent.getExtras().getString("name");
+        url = intent.getExtras().getString("url");
+        close = intent.getExtras().getBoolean("close");
+
         makeWebview(url);
+
+        if (close) {
+            MyToast.l(getApplicationContext(), R.string.logout_done);
+            finish();
+        }
     }
 
     public void makeWebview(String url){
