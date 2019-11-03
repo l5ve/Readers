@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.capstone.readers.lib.MyLog;
 import com.capstone.readers.lib.MyToast;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -135,16 +136,23 @@ public class LoginActivity extends AppCompatActivity {
         service.userLogin(data).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                LoginResponse result = response.body();
-                Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()){
+                    Log.d("RESPONSE_BODY", "RESPONSE_BODY_IS_NOT_NULL");
+                    LoginResponse result = response.body();
+                    Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
 
-                if (result.getCode() == 200) {
-                    if (checkBox.isChecked()){
-                        save();
+                    if (result.getCode() == 200) {
+                        if (checkBox.isChecked()){
+                            save();
+                        }
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                } else{
+                    ResponseBody errorBody = response.errorBody();
+                    Log.e("RESPONSE_BODY", "RESPONSE_BODY_IS_NULL");
+                    MyToast.s(getApplicationContext(), R.string.login_error);
                 }
             }
 

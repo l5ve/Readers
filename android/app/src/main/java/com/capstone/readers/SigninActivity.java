@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.capstone.readers.lib.MyToast;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -97,16 +98,24 @@ public class SigninActivity extends AppCompatActivity {
         service.userJoin(data).enqueue(new Callback<JoinResponse>() {
             @Override
             public void onResponse(Call<JoinResponse> call, Response<JoinResponse> response) {
-                JoinResponse result = response.body();
-                MyToast.s(getApplicationContext(), result.getMessage());
+                if (response.isSuccessful()) {
+                    Log.d("RESPONSE_BODY", "RESPONSE_BODY_IS_NOT_NULL");
+                    JoinResponse result = response.body();
+                    MyToast.s(getApplicationContext(), result.getMessage());
 
-                // 200: 회원가입 성공 시 받는 코드
-                if (result.getCode() == 200) {
-                    MyToast.l(getApplicationContext(), R.string.sign_up_done);
-                    Intent intent = new Intent();
-                    setResult(RESULT_OK, intent);
+                    // 200: 회원가입 성공 시 받는 코드
+                    if (result.getCode() == 200) {
+                        MyToast.l(getApplicationContext(), R.string.sign_up_done);
+                        save();
+                        Intent intent = new Intent();
+                        setResult(RESULT_OK, intent);
 
-                    finish();
+                        finish();
+                    }
+                } else{
+                    ResponseBody errorBody = response.errorBody();
+                    Log.e("RESPONSE_BODY", "RESPONSE_BODY_IS_NULL");
+                    MyToast.s(getApplicationContext(), R.string.signin_error);
                 }
             }
 
