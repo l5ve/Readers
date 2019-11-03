@@ -54,7 +54,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_large2"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/naver" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/daum" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/lezhin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -87,7 +117,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_large2"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/mrblue" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/bufftoon" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/bomtoon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -120,7 +180,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_large2"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/bbuding" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/kakaopage" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/comica" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -153,7 +243,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_large2"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/comicgt" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/ktoon" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/toptoon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -181,6 +301,36 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/peanutoon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/toomics" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/foxtoon" />
+                <TextView
+                    android:layout_width="@dimen/icon_size_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="center"
+                    android:textSize="@dimen/spacing_medium"
+                    android:text="@string/peanutoon" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
