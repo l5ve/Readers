@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import org.w3c.dom.Text;
 
@@ -29,6 +30,13 @@ public class Menu4Fragment extends Fragment {
         settingNoticeBtn = (TextView) fv.findViewById(R.id.setting_notice_btn);
         settingAskBtn = (TextView) fv.findViewById(R.id.setting_ask_btn);
 
+        settingLoginBtn.setOnClickListener(new TextView.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment(ManageLoginFragment.newInstance());
+            }
+        });
+
         settingAskBtn.setOnClickListener(new TextView.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -44,4 +52,5 @@ public class Menu4Fragment extends Fragment {
         });
         return fv;
     }
+
 }

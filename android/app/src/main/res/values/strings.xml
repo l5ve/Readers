@@ -35,6 +35,7 @@
     <!-- 로그인 -->
     <string name="remember_info">로그인 정보 기억하기</string>
     <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
     <string name="welcome">이미 회원이신가요?\n로그인 해 주세요 :)</string>
@@ -76,6 +77,21 @@
     <string name="platforms">연재처</string>
     <string name="search__message">작품명, 작가명 검색</string>
 
+    <string name="naver">네이버웹툰</string>
+    <string name="daum">다음웹툰</string>
+    <string name="lezhin">레진코믹스</string>
+    <string name="mrblue">미스터블루</string>
+    <string name="bufftoon">버프툰</string>
+    <string name="bomtoon">봄툰</string>
+    <string name="bbuding">뿌딩</string>
+    <string name="kakaopage">카카오페이지</string>
+    <string name="comica">코미카</string>
+    <string name="comicgt">코믹지티</string>
+    <string name="ktoon">케이툰</string>
+    <string name="toptoon">탑툰</string>
+    <string name="toomics">투믹스</string>
+    <string name="foxtoon">폭스툰</string>
+    <string name="peanutoon">피너툰</string>
 
     <!-- 3. 마이페이지 -->
     <string name="profile_edit">프로필 수정</string>
@@ -93,8 +109,10 @@
 
     <!-- 4. 설정 -->
     <string name="login_setting">통합 로그인 관리</string>
+    <string name="logout_done">로그아웃 완료</string>
     <string name="hide_setting">숨김 작품 목록 관리</string>
     <string name="notice">공지사항</string>
     <string name="FAQ">문의</string>
+
 
 </resources>

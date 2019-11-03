@@ -27,8 +27,11 @@
     <dimen name="text_size_xlarge2">36sp</dimen>
     <dimen name="text_size_xlarge3">42sp</dimen>
 
+    <dimen name="text_box1">110sp</dimen>
+
     <dimen name="sign_in_genre_buttons">12sp</dimen>
 
+    <dimen name="icon_size_medium">75sp</dimen>
     <dimen name="icon_size_large">100sp</dimen>
 
     <dimen name="cardview_round_basic">4dp</dimen>

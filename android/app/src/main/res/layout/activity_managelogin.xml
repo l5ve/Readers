@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrayBright">
+
+    <ScrollView
+        android:id="@+id/manage_login_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/manage_login_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/naver"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_naver"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/naver"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/naver_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/naver_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:background="@color/colorPrimaryBright5"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/daum"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_daum"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/daum"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/daum_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/daum_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/lezhin"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2" />
+
+                <TextView
+                    android:id="@+id/manage_login_lezhin"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/lezhin"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/lezhin_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/lezhin_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:background="@color/colorPrimaryBright5"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/mrblue"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2" />
+
+                <TextView
+                    android:id="@+id/manage_login_mrblue"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/mrblue"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/mrblue_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/mrblue_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/bufftoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2" />
+
+                <TextView
+                    android:id="@+id/manage_login_bufftoon"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/bufftoon"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/bufftoon_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/bufftoon_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:background="@color/colorPrimaryBright5"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/bomtoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2" />
+
+                <TextView
+                    android:id="@+id/manage_login_bomtoon"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/bomtoon"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/bomtoon_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/bomtoon_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/bbuding"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2" />
+
+                <TextView
+                    android:id="@+id/manage_login_bbuding"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/bbuding"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/bbuding_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/bbuding_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:background="@color/colorPrimaryBright5"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/kakaopage"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2" />
+
+                <TextView
+                    android:id="@+id/manage_login_kakaopage"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/kakaopage"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/kakaopage_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/kakaopage_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/comica"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_comica"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/comica"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/comica_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/comica_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:background="@color/colorPrimaryBright5"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/comicgt"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_comicgt"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/comicgt"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/comicgt_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/comicgt_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ktoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_ktoon"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/ktoon"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/ktoon_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/ktoon_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:background="@color/colorPrimaryBright5"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/toptoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_toptoon"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/toptoon"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/toptoon_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/toptoon_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/toomics"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_toomics"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/toomics"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/toomics_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/toomics_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:background="@color/colorPrimaryBright5"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/foxtoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_foxtoon"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/foxtoon"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/foxtoon_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/foxtoon_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_purple"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/peanutoon"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/spacing_small2"/>
+
+                <TextView
+                    android:id="@+id/manage_login_peanutoon"
+                    android:layout_width="@dimen/text_box1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_small2"
+                    android:gravity="left"
+                    android:text="@string/peanutoon"
+                    android:textSize="@dimen/text_size_medium2" />
+
+                <Button
+                    android:id="@+id/peanutoon_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/login"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/peanutoon_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/loginout_button_white"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <WebView
+        android:id="@+id/platform_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+</LinearLayout>
