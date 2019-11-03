@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.capstone.readers.lib.MyToast;
+import com.capstone.readers.item.JoinResponse;
+import com.capstone.readers.item.JoinData;
+
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -113,6 +116,10 @@ public class SigninActivity extends AppCompatActivity {
                         finish();
                     }
                 } else{
+                    JoinResponse result = response.body();
+                    if (result == null)
+                        MyToast.l(getApplicationContext(), "response 비었음");
+
                     ResponseBody errorBody = response.errorBody();
                     Log.e("RESPONSE_BODY", "RESPONSE_BODY_IS_NULL");
                     MyToast.s(getApplicationContext(), R.string.signin_error);

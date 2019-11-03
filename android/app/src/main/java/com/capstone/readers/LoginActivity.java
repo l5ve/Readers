@@ -19,6 +19,9 @@ import android.widget.Toast;
 import com.capstone.readers.lib.MyLog;
 import com.capstone.readers.lib.MyToast;
 
+import com.capstone.readers.item.LoginResponse;
+import com.capstone.readers.item.LoginData;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
