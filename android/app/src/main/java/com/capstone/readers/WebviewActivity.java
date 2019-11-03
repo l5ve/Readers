@@ -19,7 +19,7 @@ public class WebviewActivity extends AppCompatActivity {
     private String name;
     private String url;
     private boolean close;
-
+    private boolean automatic;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +32,16 @@ public class WebviewActivity extends AppCompatActivity {
         name = intent.getExtras().getString("name");
         url = intent.getExtras().getString("url");
         close = intent.getExtras().getBoolean("close");
+        automatic = intent.getExtras().getBoolean("automatic");
 
         makeWebview(url);
 
         if (close) {
-            MyToast.l(getApplicationContext(), R.string.logout_done);
+            MyToast.l(getApplicationContext(), name + " " + getString(R.string.logout_done));
             finish();
+        }
+        if (!automatic) {
+            MyToast.l(getApplicationContext(), "[" + name + "] " + getString(R.string.no_automatic_logout));
         }
     }
 
