@@ -2,47 +2,32 @@ package com.capstone.readers;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ManageLoginActivity extends Fragment {
-    private WebView mWebView; // 웹뷰 선언
+public class WebviewActivity extends AppCompatActivity {
+    private WebView mWebView;
     private WebSettings mWebSettings; //웹뷰세팅
-    private LinearLayout manage_login_container;
-    private ScrollView manage_login_scroll;
 
-    public static ManageLoginActivity newInstance(){
-        return new ManageLoginActivity();
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_webview);
+
+        mWebView = (WebView) findViewById(R.id.general_webview);
+
+        Intent intent = getIntent();
+        String url = intent.getExtras().getString("url");
+        makeWebview(url);
     }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fv = inflater.inflate(R.layout.activity_managelogin, container, false);
-
-
-        return fv;
-    }
-
 
     public void makeWebview(String url){
-        manage_login_scroll.setVisibility(View.GONE);
         mWebView.setVisibility(View.VISIBLE);
         mWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
         mWebSettings = mWebView.getSettings(); //세부 세팅 등록
