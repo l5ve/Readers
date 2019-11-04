@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.capstone.readers.lib.MyToast;
 import com.capstone.readers.item.JoinResponse;
 import com.capstone.readers.item.JoinData;
+import com.capstone.readers.security.SecurityUtil;
 
 
 import okhttp3.ResponseBody;
@@ -44,6 +45,8 @@ public class SigninActivity extends AppCompatActivity {
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+
         sign_up_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -61,6 +64,10 @@ public class SigninActivity extends AppCompatActivity {
         String name = nameText.getText().toString();
         String pwd = pwdText.getText().toString();
         String pwd_ver = pwdText_ver.getText().toString();
+
+        SecurityUtil securityUtil = new SecurityUtil();
+
+        String enc_pwd = securityUtil.encryptSHA256(pwd);
 
         boolean cancel = false;
 
@@ -93,7 +100,7 @@ public class SigninActivity extends AppCompatActivity {
         }
 
         if (!cancel) {
-            startJoin(new JoinData(id, name, pwd));
+            startJoin(new JoinData(id, name, enc_pwd));
         }
     }
 
@@ -108,19 +115,13 @@ public class SigninActivity extends AppCompatActivity {
 
                     // 200: 회원가입 성공 시 받는 코드
                     if (result.getCode() == 200) {
-                        MyToast.l(getApplicationContext(), R.string.sign_up_done);
                         save();
                         Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
-
+                        Log.d("SigninActivity", "Set result_ok and go back to loginActivity");
                         finish();
                     }
                 } else{
-                    JoinResponse result = response.body();
-                    if (result == null)
-                        MyToast.l(getApplicationContext(), "response 비었음");
-
-                    ResponseBody errorBody = response.errorBody();
                     Log.e("RESPONSE_BODY", "RESPONSE_BODY_IS_NULL");
                     MyToast.s(getApplicationContext(), R.string.signin_error);
                 }
@@ -137,7 +138,6 @@ public class SigninActivity extends AppCompatActivity {
     private boolean isIdValid(String id) {
         return id.length() >= 5;
     }
-
 
     private boolean isPasswordValid(String password) {
         return password.length() >= 5;
@@ -159,6 +159,7 @@ public class SigninActivity extends AppCompatActivity {
         // 저장시킬 이름이 이미 존재하면 덮어씌움
         editor.putBoolean("SAVE_LOGIN_DATA", true);
         editor.putString("ID", idText.getText().toString().trim());
+        editor.putString("NAME", nameText.getText().toString().trim());
         editor.putString("PWD", pwdText.getText().toString().trim());
 
         // apply, commit 을 안하면 변경된 내용이 저장되지 않음

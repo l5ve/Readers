@@ -21,6 +21,9 @@ import com.capstone.readers.lib.MyToast;
 
 import com.capstone.readers.item.LoginResponse;
 import com.capstone.readers.item.LoginData;
+import com.capstone.readers.security.SecurityUtil;
+
+import java.security.Security;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -94,8 +97,10 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SIGNIN) {
             Log.d("회원가입/", "회원가입 성공 후 인텐트 로그인 액티비티에 전달");
             if (resultCode == RESULT_OK) {
+                save();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
+                Log.d("LoginActivity", "Get the result from SigninActivity and go to the main activity");
 
                 finish();
             }
@@ -108,6 +113,10 @@ public class LoginActivity extends AppCompatActivity {
 
         String id = idText.getText().toString();
         String pwd = pwdText.getText().toString();
+
+        SecurityUtil securityUtil = new SecurityUtil();
+
+        String enc_pwd = securityUtil.encryptSHA256(pwd);
 
         boolean cancel = false;
 
@@ -130,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (!cancel) {
-            startLogin(new LoginData(id, pwd));
+            startLogin(new LoginData(id, enc_pwd));
         }
 
     }
@@ -142,8 +151,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Log.d("RESPONSE_BODY", "RESPONSE_BODY_IS_NOT_NULL");
                     LoginResponse result = response.body();
-                    Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+                    MyToast.l(getApplicationContext(), result.getMessage());
 
+                    SharedPreferences.Editor editor = appData.edit();
+                    editor.putString("NAME", result.getName().trim());
+                    editor.apply();
+                    MyToast.l(getApplicationContext(), "닉네임 확인 " + result.getName());
                     if (result.getCode() == 200) {
                         if (checkBox.isChecked()){
                             save();
@@ -206,5 +219,4 @@ public class LoginActivity extends AppCompatActivity {
         saved_id = appData.getString("ID", "");
         saved_pw = appData.getString("PWD", "");
     }
-
 }
