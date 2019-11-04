@@ -107,7 +107,9 @@
     <string name="friday">금</string>
     <string name="saturday">토</string>
     <string name="sunday">일</string>
-
+    <string name="sort_new">최신순</string>
+    <string name="sort_old">오래된순</string>
+    <string name="no_memo">현재 저장된 메모가 없습니다.</string>
 
     <!-- 4. 설정 -->
     <string name="login_setting">통합 로그인 관리</string>
@@ -117,5 +119,7 @@
     <string name="notice">공지사항</string>
     <string name="FAQ">문의</string>
 
+    <string name="server_error_message">서버에 오류가 있습니다.</string>
+    <string name="no_internet_connectivity">인터넷 연결이 없습니다.</string>
 
 </resources>

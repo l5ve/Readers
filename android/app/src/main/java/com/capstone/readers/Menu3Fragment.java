@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
 
 import com.capstone.readers.lib.MyToast;
+import com.capstone.readers.mypage.MypageMemoFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import org.w3c.dom.Text;
@@ -64,7 +65,28 @@ public class Menu3Fragment extends Fragment {
         mypage_bookmark.setText(Integer.toString(bookmark_num));
         mypage_memo.setText(Integer.toString(memo_num));
 
+        Fragment fg = Menu3Fragment1.newInstance();
+        setChildFragment(fg);
+
+        mypage_memo.setOnClickListener(new TextView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fg = MypageMemoFragment.newInstance();
+                setChildFragment(fg);
+            }
+        });
+
         return fv;
+    }
+
+    private void setChildFragment(Fragment child) {
+        FragmentTransaction childFt = getChildFragmentManager().beginTransaction();
+
+        if(!child.isAdded()) {
+            childFt.replace(R.id.mypage_fragment, child);
+            childFt.addToBackStack(null);
+            childFt.commit();
+        }
     }
 
     // 설정값을 불러오는 함수
