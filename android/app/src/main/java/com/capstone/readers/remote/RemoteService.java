@@ -35,10 +35,10 @@ public interface RemoteService {
     @GET("/member/{phone}")
     Call<MemberInfoItem> selectMemberInfo(@Path("phone") String phone);
 
-    @POST("/user/login")
+    @POST("/users/login")
     Call<LoginResponse> userLogin(@Body LoginData data);
 
-    @POST("/user/join")
+    @POST("/users/join")
     Call<JoinResponse> userJoin(@Body JoinData data);
 
     @POST("/member/info")
