@@ -161,6 +161,9 @@ public class SigninActivity extends AppCompatActivity {
         editor.putString("ID", idText.getText().toString().trim());
         editor.putString("NAME", nameText.getText().toString().trim());
         editor.putString("PWD", pwdText.getText().toString().trim());
+        editor.putInt("SUBS_NUM", 0);
+        editor.putInt("BOOKMARK_NUM", 0);
+        editor.putInt("MEMO_NUM", 0);
 
         // apply, commit 을 안하면 변경된 내용이 저장되지 않음
         editor.apply();

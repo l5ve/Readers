@@ -153,14 +153,16 @@ public class LoginActivity extends AppCompatActivity {
                     LoginResponse result = response.body();
                     MyToast.l(getApplicationContext(), result.getMessage());
 
-                    SharedPreferences.Editor editor = appData.edit();
-                    editor.putString("NAME", result.getName().trim());
-                    editor.apply();
-                    MyToast.l(getApplicationContext(), "닉네임 확인 " + result.getName());
                     if (result.getCode() == 200) {
                         if (checkBox.isChecked()){
                             save();
                         }
+                        SharedPreferences.Editor editor = appData.edit();
+                        editor.putString("NAME", result.getName().trim());
+                        editor.putInt("SUBS_NUM", result.getSubs_num());
+                        editor.putInt("BOOKMARK_NUM", result.getBookmark_num());
+                        editor.putInt("MEMO_NUM", result.getMemo_num());
+                        editor.apply();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
