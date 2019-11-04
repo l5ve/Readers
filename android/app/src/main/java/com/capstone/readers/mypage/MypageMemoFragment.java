@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -20,6 +21,7 @@ import com.capstone.readers.LoginActivity;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
+import com.capstone.readers.adapter.MemoListAdapter;
 import com.capstone.readers.item.LoginResponse;
 import com.capstone.readers.item.MemoData;
 import com.capstone.readers.item.MemoResponse;
@@ -27,10 +29,14 @@ import com.capstone.readers.lib.MyLog;
 import com.capstone.readers.lib.MyToast;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MypageMemoFragment extends Fragment {
     private RecyclerView memo_list;
@@ -58,7 +64,22 @@ public class MypageMemoFragment extends Fragment {
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
+        appData = this.getActivity().getSharedPreferences("appData", MODE_PRIVATE);
         user_id = appData.getString("ID", "");
+
+        // 리사이클러뷰에 표시할 데이터 리스트 생성
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            list.add(String.format("TEXT %d", i));
+        }
+
+        // 리사이클러뷰에 LinearLayoutManager 객체 지정
+        RecyclerView recyclerView = fv.findViewById(R.id.memo_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // 리사이클러뷰에 MemoListAdapter 객체 지정
+        MemoListAdapter adapter = new MemoListAdapter(list);
+        recyclerView.setAdapter(adapter);
 
         return fv;
     }
