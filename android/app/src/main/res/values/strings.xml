@@ -43,6 +43,7 @@
     <string name="forgot_pw">비밀번호 찾기</string>
     <string name="sign_up">회원가입</string>
     <string name="login_warning">아이디와 비밀번호를 모두 입력해주세요!</string>
+    <string name="login_succeed">로그인 성공!</string>
     <string name="login_error">로그인 에러 발생</string>
 
     <!--회원가입-->
@@ -94,6 +95,7 @@
     <string name="peanutoon">피너툰</string>
 
     <!-- 3. 마이페이지 -->
+    <string name="sir">님</string>
     <string name="profile_edit">프로필 수정</string>
     <string name="subscribe">구독</string>
     <string name="bookmark">책갈피</string>
