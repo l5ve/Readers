@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,38 +34,6 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
         mDataset = Dataset;
     }
 
-    // onCreateViewHolder() 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴
-    @Override
-    public MemoListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View view = inflater.inflate(R.layout.recyclerview_memo, parent, false);
-        MemoListAdapter.ViewHolder vh = new MemoListAdapter.ViewHolder(view);
-
-        return vh;
-    }
-
-    // onBindViewHolder() position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
-    @Override
-    public void onBindViewHolder(MemoListAdapter.ViewHolder holder, int position){
-        final String a = mDataset.get(position).memo;
-        holder.mImageView.setImageResource(mDataset.get(position).img);
-        holder.mTextView.setText(mDataset.get(position).memo);
-        holder.mCardView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                MyToast.s(context, a);
-            }
-        });
-    }
-
-    // getItemCount() 전체 데이터 갯수 리턴
-    @Override
-    public int getItemCount() {
-        return mDataset.size();
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mImageView;
         TextView mTextView;
@@ -78,6 +47,41 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
             mTextView = itemView.findViewById(R.id.memo_text);
             mCardView = itemView.findViewById(R.id.memo_cardview);
         }
+    }
+
+    // onCreateViewHolder() 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴
+    @Override
+    public MemoListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View view = inflater.inflate(R.layout.recyclerview_memo, parent, false);
+
+        return new MemoListAdapter.ViewHolder(view);
+    }
+
+    // onBindViewHolder() position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
+    @Override
+    public void onBindViewHolder(MemoListAdapter.ViewHolder holder, int position){
+        /*myImgView.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
+         * myImgView.setImageDrawable(getResources().getDrawable(R.drawable.monkey, getApplicationContext().getTheme()));
+        * */
+        final String a = mDataset.get(position).memo;
+        holder.mTextView.setText(mDataset.get(position).memo);
+        holder.mImageView.setImageResource(R.drawable.naver);
+        Log.d("MemoListAdapter", "Put Dataset(" + position + ") " + mDataset.get(position).img + ", " + mDataset.get(position).memo);
+        holder.mCardView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                MyToast.s(context, a);
+            }
+        });
+    }
+
+    // getItemCount() 전체 데이터 갯수 리턴
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
     }
 }
 

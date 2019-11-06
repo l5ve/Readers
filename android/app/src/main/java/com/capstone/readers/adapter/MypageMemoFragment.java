@@ -11,6 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -62,17 +64,18 @@ public class MypageMemoFragment extends Fragment {
         appData = this.getActivity().getSharedPreferences("appData", MODE_PRIVATE);
         user_id = appData.getString("ID", "");
 
+        noDataText = (TextView) fv.findViewById(R.id.memo_no_data);
+        sort_new = (RadioButton) fv.findViewById(R.id.memo_sort_new);
+        sort_old = (RadioButton) fv.findViewById(R.id.memo_sort_old);
+        sort_group = (RadioGroup) fv.findViewById(R.id.memo_sort_group);
+
         // 리사이클러뷰에 LinearLayoutManager 객체 지정
         mRecyclerView = (RecyclerView) fv.findViewById(R.id.memo_list);
-        mLayoutManager = new StaggeredGridLayoutManager(100, StaggeredGridLayoutManager.VERTICAL);
+        mLayoutManager = new GridLayoutManager(getContext(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // 리사이클러뷰에 표시할 데이터 리스트 생성
         myDataset = new ArrayList<>();
-
-        // 리사이클러뷰에 MemoListAdapter 객체 지정
-        mAdapter = new MemoListAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);
 
         myDataset.add(new MemoCard(getString(R.string.naver), R.drawable.naver));
         myDataset.add(new MemoCard(getString(R.string.daum), R.drawable.daum));
@@ -83,21 +86,19 @@ public class MypageMemoFragment extends Fragment {
         myDataset.add(new MemoCard(getString(R.string.kakaopage), R.drawable.kakaopage));
         myDataset.add(new MemoCard(getString(R.string.toptoon), R.drawable.toptoon));
 
+        for(int i = 0; i < myDataset.size(); i++){
+            Log.d("MypageMemoFragment", "Dataset(" + i + ") " + myDataset.get(i).img + ", " + myDataset.get(i).memo);
+        }
+
+        // 리사이클러뷰에 MemoListAdapter 객체 지정
+        mAdapter = new MemoListAdapter(myDataset);
+        mRecyclerView.setAdapter(mAdapter);
         return fv;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.memo_list);
-        noDataText = (TextView) view.findViewById(R.id.memo_no_data);
-
-        sort_new = (RadioButton) view.findViewById(R.id.memo_sort_new);
-        sort_old = (RadioButton) view.findViewById(R.id.memo_sort_old);
-        sort_group = (RadioGroup) view.findViewById(R.id.memo_sort_group);
-
-
     }
 
     private void listInfo(MemoData data) {
