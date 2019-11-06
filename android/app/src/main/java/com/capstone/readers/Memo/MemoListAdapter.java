@@ -1,14 +1,9 @@
-package com.capstone.readers.adapter;
+package com.capstone.readers.Memo;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
-import androidx.recyclerview.widget.RecyclerView.LayoutManager;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.capstone.readers.R;
-import com.capstone.readers.item.MemoData;
 import com.capstone.readers.lib.MyToast;
 
 import java.util.ArrayList;
@@ -43,9 +36,9 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
             super(itemView);
 
             // 뷰 객체에 대한 참조
-            mImageView = itemView.findViewById(R.id.memo_image);
-            mTextView = itemView.findViewById(R.id.memo_text);
-            mCardView = itemView.findViewById(R.id.memo_cardview);
+            mImageView = itemView.findViewById(R.id.memo_cv_image);
+            mTextView = itemView.findViewById(R.id.memo_cv_platform);
+            mCardView = itemView.findViewById(R.id.memo_cv);
         }
     }
 

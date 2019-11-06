@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.capstone.readers.adapter.MypageMemoFragment;
+import com.capstone.readers.Memo.MypageMemoFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 

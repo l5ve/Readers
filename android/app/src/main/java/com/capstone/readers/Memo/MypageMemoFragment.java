@@ -1,4 +1,4 @@
-package com.capstone.readers.adapter;
+package com.capstone.readers.Memo;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,10 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.capstone.readers.R;
 import com.capstone.readers.ServiceApi;
@@ -71,7 +69,7 @@ public class MypageMemoFragment extends Fragment {
 
         // 리사이클러뷰에 LinearLayoutManager 객체 지정
         mRecyclerView = (RecyclerView) fv.findViewById(R.id.memo_list);
-        mLayoutManager = new GridLayoutManager(getContext(), 3);
+        mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // 리사이클러뷰에 표시할 데이터 리스트 생성

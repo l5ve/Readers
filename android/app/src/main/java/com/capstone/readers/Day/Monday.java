@@ -1,4 +1,4 @@
-package com.capstone.readers;
+package com.capstone.readers.Day;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import static android.content.Context.MODE_PRIVATE;
+import com.capstone.readers.R;
 
 public class Monday extends Fragment {
     private SharedPreferences appData;

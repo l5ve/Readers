@@ -10,6 +10,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.capstone.readers.Genre.Action;
+import com.capstone.readers.Genre.Daily_life;
+import com.capstone.readers.Genre.Drama;
+import com.capstone.readers.Genre.Episode;
+import com.capstone.readers.Genre.Fantasy;
+import com.capstone.readers.Genre.Humor;
+import com.capstone.readers.Genre.Love;
+import com.capstone.readers.Genre.Omnibus;
+import com.capstone.readers.Genre.Sentimental;
+import com.capstone.readers.Genre.Sports;
+import com.capstone.readers.Genre.Story;
+import com.capstone.readers.Genre.Thriller;
 import com.capstone.readers.lib.MyLog;
 import com.google.android.material.tabs.TabLayout;
 

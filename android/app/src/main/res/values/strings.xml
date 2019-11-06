@@ -111,7 +111,11 @@
     <string name="sort_old">오래된순</string>
     <string name="no_memo">현재 저장된 메모가 없습니다.</string>
 
-    <!-- 4. 설정 -->
+    <string name="last_update">마지막 수정 날짜</string>
+    <string name="title">제목</string>
+    <string name="author">작가</string>
+
+   <!-- 4. 설정 -->
     <string name="login_setting">통합 로그인 관리</string>
     <string name="logout_done">로그아웃 완료</string>
     <string name="no_automatic_logout">자동 로그아웃 미지원 사이트입니다.\n직접 로그아웃 해주세요.</string>

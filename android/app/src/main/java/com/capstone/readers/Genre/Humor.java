@@ -1,4 +1,4 @@
-package com.capstone.readers;
+package com.capstone.readers.Genre;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,14 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class Fantasy extends Fragment {
+import com.capstone.readers.R;
 
-    public static Fantasy newInstance(){
-        return new Fantasy();
+public class Humor extends Fragment {
+
+    public static Humor newInstance(){
+        return new Humor();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fantasy, container, false);
+        return inflater.inflate(R.layout.humor, container, false);
     }
 }
