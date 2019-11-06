@@ -11,18 +11,20 @@
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/memo_sort_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/sort_new" />
+
+        <RadioButton
             android:id="@+id/memo_sort_old"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/sort_old" />
 
-        <RadioButton
-            android:id="@+id/memo_sort_new"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/sort_new" />
     </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView

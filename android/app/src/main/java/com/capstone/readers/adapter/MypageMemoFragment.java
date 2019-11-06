@@ -1,8 +1,7 @@
-package com.capstone.readers.mypage;
+package com.capstone.readers.adapter;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,24 +9,16 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.capstone.readers.LoginActivity;
 import com.capstone.readers.R;
-import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
-import com.capstone.readers.adapter.MemoListAdapter;
-import com.capstone.readers.item.LoginResponse;
 import com.capstone.readers.item.MemoData;
 import com.capstone.readers.item.MemoResponse;
-import com.capstone.readers.lib.MyLog;
 import com.capstone.readers.lib.MyToast;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -39,7 +30,11 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 public class MypageMemoFragment extends Fragment {
-    private RecyclerView memo_list;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<MemoCard> myDataset;
+
     private TextView noDataText;
     private RadioGroup sort_group;
     private RadioButton sort_new;
@@ -62,24 +57,31 @@ public class MypageMemoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_mypagememo, container, false);
 
-        service = RetrofitClient.getClient().create(ServiceApi.class);
+        // service = RetrofitClient.getClient().create(ServiceApi.class);
 
         appData = this.getActivity().getSharedPreferences("appData", MODE_PRIVATE);
         user_id = appData.getString("ID", "");
 
-        // 리사이클러뷰에 표시할 데이터 리스트 생성
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            list.add(String.format("TEXT %d", i));
-        }
-
         // 리사이클러뷰에 LinearLayoutManager 객체 지정
-        RecyclerView recyclerView = fv.findViewById(R.id.memo_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView = (RecyclerView) fv.findViewById(R.id.memo_list);
+        mLayoutManager = new StaggeredGridLayoutManager(100, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // 리사이클러뷰에 표시할 데이터 리스트 생성
+        myDataset = new ArrayList<>();
 
         // 리사이클러뷰에 MemoListAdapter 객체 지정
-        MemoListAdapter adapter = new MemoListAdapter(list);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new MemoListAdapter(myDataset);
+        mRecyclerView.setAdapter(mAdapter);
+
+        myDataset.add(new MemoCard(getString(R.string.naver), R.drawable.naver));
+        myDataset.add(new MemoCard(getString(R.string.daum), R.drawable.daum));
+        myDataset.add(new MemoCard(getString(R.string.lezhin), R.drawable.lezhin));
+        myDataset.add(new MemoCard(getString(R.string.mrblue), R.drawable.mrblue));
+        myDataset.add(new MemoCard(getString(R.string.bufftoon), R.drawable.bufftoon));
+        myDataset.add(new MemoCard(getString(R.string.bomtoon), R.drawable.bomtoon));
+        myDataset.add(new MemoCard(getString(R.string.kakaopage), R.drawable.kakaopage));
+        myDataset.add(new MemoCard(getString(R.string.toptoon), R.drawable.toptoon));
 
         return fv;
     }
@@ -88,7 +90,7 @@ public class MypageMemoFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        memo_list = (RecyclerView) view.findViewById(R.id.memo_list);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.memo_list);
         noDataText = (TextView) view.findViewById(R.id.memo_no_data);
 
         sort_new = (RadioButton) view.findViewById(R.id.memo_sort_new);

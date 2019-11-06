@@ -1,27 +1,18 @@
 package com.capstone.readers;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.FragmentManager;
 
-import com.capstone.readers.lib.MyToast;
-import com.capstone.readers.mypage.MypageMemoFragment;
-import com.google.android.material.tabs.TabLayout;
-
-import org.w3c.dom.Text;
+import com.capstone.readers.adapter.MypageMemoFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
