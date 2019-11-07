@@ -1,7 +1,6 @@
 package com.capstone.readers;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -30,7 +29,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class LoginActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_SIGNIN = 101;
 
@@ -46,17 +44,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private ServiceApi service;
 
-    private SharedPreferences appData;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         // 설정값 불러오기
-        appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
-
 
         idText = (EditText) findViewById(R.id.idText);
         pwdText = (EditText) findViewById(R.id.pwdText);
@@ -64,13 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = (ImageButton) findViewById(R.id.loginBtn);
         sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_page_Btn);
 
-
-        // 이전에 로그인 정보를 저장시킨 기록이 있다면
-        if (saveLoginData) {
-            idText.setText(saved_id);
-            pwdText.setText(saved_pw);
-            attemptLogin();
-        }
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
@@ -88,6 +75,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_SIGNIN);
             }
         });
+
+        // 이전에 로그인 정보를 저장시킨 기록이 있다면
+        if (((MyApp) getApplication()).getSavedData()) {
+            idText.setText(saved_id);
+            pwdText.setText(saved_pw);
+            checkBox.setChecked(true);
+            startLogin(new LoginData(saved_id, saved_pw));
+        }
     }
 
     @Override
@@ -97,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SIGNIN) {
             Log.d("회원가입/", "회원가입 성공 후 인텐트 로그인 액티비티에 전달");
             if (resultCode == RESULT_OK) {
-                save();
+                save(true);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 Log.d("LoginActivity", "Get the result from SigninActivity and go to the main activity");
@@ -155,14 +150,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (result.getCode() == 200) {
                         if (checkBox.isChecked()){
-                            save();
+                            save(true);
+                        } else {
+                            save(false);
                         }
-                        SharedPreferences.Editor editor = appData.edit();
-                        editor.putString("NAME", result.getName().trim());
-                        editor.putInt("SUBS_NUM", result.getSubs_num());
-                        editor.putInt("BOOKMARK_NUM", result.getBookmark_num());
-                        editor.putInt("MEMO_NUM", result.getMemo_num());
-                        editor.apply();
+                        ((MyApp) getApplication()).setUser_name(result.getName().trim());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -199,26 +191,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // 설정값을 저장하는 함수
-    private void save() {
-        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
-        SharedPreferences.Editor editor = appData.edit();
-
-        // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
+    private void save(boolean save) {
         // 저장시킬 이름이 이미 존재하면 덮어씌움
-        editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
-        editor.putString("ID", idText.getText().toString().trim());
-        editor.putString("PWD", pwdText.getText().toString().trim());
+        SecurityUtil securityUtil = new SecurityUtil();
+        String enc_pwd = securityUtil.encryptSHA256(pwdText.getText().toString().trim());
 
-        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
-        editor.apply();
+        ((MyApp) getApplication()).setUser_id(idText.getText().toString().trim());
+        ((MyApp) getApplication()).setUser_pw(enc_pwd);
+        ((MyApp) getApplication()).setSavedData(save);
     }
 
     // 설정값을 불러오는 함수
     private void load() {
-        // SharedPreferences 객체.get타입( 저장된 이름, 기본값
-        // 저장된 이름이 존재하지 않을 시 기본값
-        saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
-        saved_id = appData.getString("ID", "");
-        saved_pw = appData.getString("PWD", "");
+        saveLoginData = ((MyApp) getApplication()).getSavedData();
+        saved_id = ((MyApp) getApplication()).getUser_id();
+        saved_pw = ((MyApp) getApplication()).getUser_pw();
     }
 }

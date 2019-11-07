@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.content.SharedPreferences;
 
-import com.capstone.readers.item.MemberInfoItem;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,7 +24,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
 
-    MemberInfoItem memberInfoItem;
     private SharedPreferences appData;
 
     // FrameLayout에 각 메뉴의 Fragment를 바꿔줌
@@ -40,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        memberInfoItem = ((MyApp)getApplication()).getMemberInfoItem();
 
         final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         //첫 화면 지정
