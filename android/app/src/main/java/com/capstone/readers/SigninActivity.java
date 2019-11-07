@@ -32,8 +32,6 @@ public class SigninActivity extends AppCompatActivity {
 
     private ServiceApi service;
 
-    private SharedPreferences appData;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
@@ -45,8 +43,6 @@ public class SigninActivity extends AppCompatActivity {
         sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_Btn);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
-
-        appData = getSharedPreferences("appData", MODE_PRIVATE);
 
         sign_up_Btn.setOnClickListener(new View.OnClickListener(){
             @Override

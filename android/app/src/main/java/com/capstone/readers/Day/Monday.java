@@ -5,14 +5,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 
+import org.w3c.dom.Text;
+
 public class Monday extends Fragment {
-    private SharedPreferences appData;
-    private String nametest;
+    private TextView id;
+    private TextView pw;
+    private TextView saved;
+    private TextView name;
+    private TextView subs_num;
+    private TextView bookmark_num;
+    private TextView memo_num;
+
+    private String saved_id;
+    private String saved_pw;
+    private boolean saveLoginData;
+    private String saved_name;
+    private int saved_sub;
+    private int saved_bm;
+    private int saved_memo;
 
     public static Monday newInstance(){
         return new Monday();
@@ -22,16 +39,33 @@ public class Monday extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.monday, container, false);
 
+        id = (TextView) fv.findViewById(R.id.mon_id);
+        pw = (TextView) fv.findViewById(R.id.mon_pw);
+        saved = (TextView) fv.findViewById(R.id.mon_saved);
+        name = (TextView) fv.findViewById(R.id.mon_name);
+        subs_num = (TextView) fv.findViewById(R.id.mon_subs_num);
+        bookmark_num = (TextView) fv.findViewById(R.id.mon_bookmark_num);
+        memo_num = (TextView) fv.findViewById(R.id.mon_memo_num);
 
-
+        id.setText(saved_id);
+        pw.setText(saved_pw);
+        saved.setText(String.valueOf(saveLoginData));
+        name.setText(saved_name);
+        subs_num.setText(Integer.toString(saved_sub));
+        bookmark_num.setText(Integer.toString(saved_bm));
+        memo_num.setText(Integer.toString(saved_memo));
 
         return fv;
     }
 
     // 설정값을 불러오는 함수
     private void load() {
-        // SharedPreferences 객체.get타입( 저장된 이름, 기본값
-        // 저장된 이름이 존재하지 않을 시 기본값
-        nametest = appData.getString("NAME", "");
+        saved_id = ((MyApp) getActivity().getApplication()).getUser_id();
+        saved_pw = ((MyApp) getActivity().getApplication()).getUser_pw();
+        saveLoginData = ((MyApp)getActivity().getApplication()).getSavedData();
+        saved_name = ((MyApp) getActivity().getApplication()).getUser_name();
+        saved_sub = ((MyApp) getActivity().getApplication()).getSubs_num();
+        saved_bm = ((MyApp) getActivity().getApplication()).getBookmark_num();
+        saved_memo = ((MyApp) getActivity().getApplication()).getMemo_num();
     }
 }

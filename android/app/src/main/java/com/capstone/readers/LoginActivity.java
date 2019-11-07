@@ -46,17 +46,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private ServiceApi service;
 
-    private SharedPreferences appData;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         // 설정값 불러오기
-        appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
-
 
         idText = (EditText) findViewById(R.id.idText);
         pwdText = (EditText) findViewById(R.id.pwdText);
@@ -66,10 +62,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // 이전에 로그인 정보를 저장시킨 기록이 있다면
-        if (saveLoginData) {
+        if (((MyApp) getApplication()).getSavedData()) {
             idText.setText(saved_id);
             pwdText.setText(saved_pw);
-            attemptLogin();
+            startLogin(new LoginData(saved_id, saved_pw));
         }
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
@@ -157,12 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (checkBox.isChecked()){
                             save();
                         }
-                        SharedPreferences.Editor editor = appData.edit();
-                        editor.putString("NAME", result.getName().trim());
-                        editor.putInt("SUBS_NUM", result.getSubs_num());
-                        editor.putInt("BOOKMARK_NUM", result.getBookmark_num());
-                        editor.putInt("MEMO_NUM", result.getMemo_num());
-                        editor.apply();
+                        ((MyApp) getApplication()).setUser_name(result.getName().trim());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -200,25 +191,19 @@ public class LoginActivity extends AppCompatActivity {
 
     // 설정값을 저장하는 함수
     private void save() {
-        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
-        SharedPreferences.Editor editor = appData.edit();
-
-        // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
         // 저장시킬 이름이 이미 존재하면 덮어씌움
-        editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
-        editor.putString("ID", idText.getText().toString().trim());
-        editor.putString("PWD", pwdText.getText().toString().trim());
+        SecurityUtil securityUtil = new SecurityUtil();
+        String enc_pwd = securityUtil.encryptSHA256(pwdText.getText().toString().trim());
 
-        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
-        editor.apply();
+        ((MyApp) getApplication()).setUser_id(idText.getText().toString().trim());
+        ((MyApp) getApplication()).setUser_pw(enc_pwd);
+        ((MyApp) getApplication()).setSavedData(true);
     }
 
     // 설정값을 불러오는 함수
     private void load() {
-        // SharedPreferences 객체.get타입( 저장된 이름, 기본값
-        // 저장된 이름이 존재하지 않을 시 기본값
-        saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
-        saved_id = appData.getString("ID", "");
-        saved_pw = appData.getString("PWD", "");
+        saveLoginData = ((MyApp) getApplication()).getSavedData();
+        saved_id = ((MyApp) getApplication()).getUser_id();
+        saved_pw = ((MyApp) getApplication()).getUser_pw();
     }
 }

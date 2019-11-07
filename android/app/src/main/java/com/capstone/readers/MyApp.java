@@ -5,9 +5,7 @@ import android.os.StrictMode;
 
 /**
  * 앱 전역에서 사용할 수 있는 클래스
- * Application 클래스를 상속하고 있으며,
- * 사용자 정보인 MemberInfoItem을 저장하고 반환하는 역할
- * 이를 통해 앱의 어디서나 사용자 정보에 접근할 수 있다.
+ * Application 클래스를 상속하고 있으며
  */
 public class MyApp extends Application {
     private String user_id;
@@ -59,7 +57,7 @@ public class MyApp extends Application {
         this.user_name = user_name;
     }
 
-    public String getUser_name(String user_name) {
+    public String getUser_name() {
         return user_name;
     }
 
