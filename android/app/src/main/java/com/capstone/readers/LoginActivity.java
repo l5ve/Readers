@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SIGNIN) {
             Log.d("회원가입/", "회원가입 성공 후 인텐트 로그인 액티비티에 전달");
             if (resultCode == RESULT_OK) {
-                save();
+                save(true);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 Log.d("LoginActivity", "Get the result from SigninActivity and go to the main activity");
@@ -151,7 +151,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (result.getCode() == 200) {
                         if (checkBox.isChecked()){
-                            save();
+                            save(true);
+                        } else {
+                            save(false);
                         }
                         ((MyApp) getApplication()).setUser_name(result.getName().trim());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -190,14 +192,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // 설정값을 저장하는 함수
-    private void save() {
+    private void save(boolean save) {
         // 저장시킬 이름이 이미 존재하면 덮어씌움
         SecurityUtil securityUtil = new SecurityUtil();
         String enc_pwd = securityUtil.encryptSHA256(pwdText.getText().toString().trim());
 
         ((MyApp) getApplication()).setUser_id(idText.getText().toString().trim());
         ((MyApp) getApplication()).setUser_pw(enc_pwd);
-        ((MyApp) getApplication()).setSavedData(true);
+        ((MyApp) getApplication()).setSavedData(save);
     }
 
     // 설정값을 불러오는 함수

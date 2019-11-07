@@ -82,9 +82,9 @@ public class Menu3Fragment extends Fragment {
 
     // 설정값을 불러오는 함수
     private void load() {
-        name = appData.getString("NAME", "");
-        subs_num = appData.getInt("SUBS_NUM", 0);
-        bookmark_num = appData.getInt("BOOKMARK_NUM", 0);
-        memo_num = appData.getInt("MEMO_NUM", 0);
+        name = ((MyApp) getActivity().getApplication()).getUser_name();
+        subs_num = ((MyApp) getActivity().getApplication()).getSubs_num();
+        bookmark_num = ((MyApp) getActivity().getApplication()).getBookmark_num();
+        memo_num = ((MyApp) getActivity().getApplication()).getMemo_num();
     }
 }

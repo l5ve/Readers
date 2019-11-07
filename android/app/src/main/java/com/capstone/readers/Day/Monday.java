@@ -39,6 +39,8 @@ public class Monday extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.monday, container, false);
 
+        load();
+        
         id = (TextView) fv.findViewById(R.id.mon_id);
         pw = (TextView) fv.findViewById(R.id.mon_pw);
         saved = (TextView) fv.findViewById(R.id.mon_saved);
