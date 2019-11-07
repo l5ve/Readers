@@ -1,7 +1,6 @@
 package com.capstone.readers;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -29,7 +28,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class LoginActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_SIGNIN = 101;
@@ -61,13 +59,6 @@ public class LoginActivity extends AppCompatActivity {
         sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_page_Btn);
 
 
-        // 이전에 로그인 정보를 저장시킨 기록이 있다면
-        if (((MyApp) getApplication()).getSavedData()) {
-            idText.setText(saved_id);
-            pwdText.setText(saved_pw);
-            startLogin(new LoginData(saved_id, saved_pw));
-        }
-
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +75,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_SIGNIN);
             }
         });
+
+        // 이전에 로그인 정보를 저장시킨 기록이 있다면
+        if (((MyApp) getApplication()).getSavedData()) {
+            idText.setText(saved_id);
+            pwdText.setText(saved_pw);
+            startLogin(new LoginData(saved_id, saved_pw));
+        }
     }
 
     @Override
