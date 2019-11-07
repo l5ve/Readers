@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         if (((MyApp) getApplication()).getSavedData()) {
             idText.setText(saved_id);
             pwdText.setText(saved_pw);
+            checkBox.setChecked(true);
             startLogin(new LoginData(saved_id, saved_pw));
         }
     }
