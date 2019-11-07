@@ -8,21 +8,22 @@
         android:id="@+id/memo_sort_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/memo_sort_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:checked="true"
+            android:layout_marginHorizontal="@dimen/spacing_large2"
             android:text="@string/sort_new" />
 
         <RadioButton
             android:id="@+id/memo_sort_old"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/spacing_large2"
             android:text="@string/sort_old" />
 
     </RadioGroup>

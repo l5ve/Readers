@@ -1,4 +1,4 @@
-package com.capstone.readers.Memo;
+package com.capstone.readers.MemoCard;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -75,22 +75,31 @@ public class MypageMemoFragment extends Fragment {
         // 리사이클러뷰에 표시할 데이터 리스트 생성
         myDataset = new ArrayList<>();
 
-        myDataset.add(new MemoCard(getString(R.string.naver), R.drawable.naver));
-        myDataset.add(new MemoCard(getString(R.string.daum), R.drawable.daum));
-        myDataset.add(new MemoCard(getString(R.string.lezhin), R.drawable.lezhin));
-        myDataset.add(new MemoCard(getString(R.string.mrblue), R.drawable.mrblue));
-        myDataset.add(new MemoCard(getString(R.string.bufftoon), R.drawable.bufftoon));
-        myDataset.add(new MemoCard(getString(R.string.bomtoon), R.drawable.bomtoon));
-        myDataset.add(new MemoCard(getString(R.string.kakaopage), R.drawable.kakaopage));
-        myDataset.add(new MemoCard(getString(R.string.toptoon), R.drawable.toptoon));
+        myDataset.add(new MemoCard("01232", 0, getString(R.string.naver), "제목1", "작가1", "메모메모", "2018-01-02"));
+        myDataset.add(new MemoCard("13244", 0, getString(R.string.daum), "제목2", "작가2", "메모메모2", "2019-01-02"));
+        myDataset.add(new MemoCard("25432", 0, getString(R.string.lezhin), "제목3", "작가3", "메모메모3", "2018-07-15"));
 
         for(int i = 0; i < myDataset.size(); i++){
             Log.d("MypageMemoFragment", "Dataset(" + i + ") " + myDataset.get(i).img + ", " + myDataset.get(i).memo);
         }
 
-        // 리사이클러뷰에 MemoListAdapter 객체 지정
-        mAdapter = new MemoListAdapter(myDataset);
+        mAdapter = new MemoListAdapter(getContext(), myDataset, true);
         mRecyclerView.setAdapter(mAdapter);
+
+        sort_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId){
+                String result;
+                if(checkedId == R.id.memo_sort_new){
+                    mAdapter = new MemoListAdapter(getContext(), myDataset, true);
+                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    mAdapter = new MemoListAdapter(getContext(), myDataset, false);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+            }
+        });
+
         return fv;
     }
 
@@ -117,7 +126,6 @@ public class MypageMemoFragment extends Fragment {
                     MyToast.s(getContext(), R.string.server_error_message);
                 }
             }
-
 
             @Override
             public void onFailure(Call<MemoResponse> call, Throwable t) {
