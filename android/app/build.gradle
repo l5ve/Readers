@@ -10,6 +10,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    repositories {
+        maven {url "https://jitpack.io"}
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -50,4 +53,6 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-appsync:2.6.+'
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 }

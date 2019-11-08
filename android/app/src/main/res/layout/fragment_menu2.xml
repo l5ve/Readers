@@ -3,10 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="MENU 2"/>
+        android:id="@+id/chart" />
 
 </LinearLayout>
