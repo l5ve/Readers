@@ -17,15 +17,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:orientation="horizontal">
-
+                android:layout_marginHorizontal="@dimen/spacing_small2">
                 <ImageButton
+                    android:id="@+id/ml_naver"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/naver"
                     android:background="@android:color/transparent"
@@ -35,6 +36,8 @@
                     android:id="@+id/manage_login_naver"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ml_naver"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -46,6 +49,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_toLeftOf="@+id/naver_logout"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/login"
                     android:textSize="@dimen/text_size_medium" />
@@ -54,22 +59,27 @@
                     android:id="@+id/naver_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:background="@color/colorPrimaryBright5"
-                android:orientation="horizontal">
+                android:background="@color/colorPrimaryBright5">
 
                 <ImageButton
+                    android:id="@+id/ml_daum"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/daum"
                     android:background="@android:color/transparent"
@@ -79,6 +89,8 @@
                     android:id="@+id/manage_login_daum"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_daum"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -89,6 +101,8 @@
                     android:id="@+id/daum_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/daum_logout"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/login"
@@ -98,21 +112,26 @@
                     android:id="@+id/daum_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:orientation="horizontal">
+                android:layout_marginHorizontal="@dimen/spacing_small2">
 
                 <ImageButton
+                    android:id="@+id/ml_lezhin"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/lezhin"
                     android:background="@android:color/transparent"
@@ -122,6 +141,8 @@
                     android:id="@+id/manage_login_lezhin"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ml_lezhin"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -132,6 +153,8 @@
                     android:id="@+id/lezhin_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/lezhin_logout"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/login"
@@ -141,22 +164,27 @@
                     android:id="@+id/lezhin_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:background="@color/colorPrimaryBright5"
-                android:orientation="horizontal">
+                android:background="@color/colorPrimaryBright5">
 
                 <ImageButton
+                    android:id="@+id/ml_mrblue"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/mrblue"
                     android:background="@android:color/transparent"
@@ -166,6 +194,8 @@
                     android:id="@+id/manage_login_mrblue"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ml_mrblue"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -176,6 +206,8 @@
                     android:id="@+id/mrblue_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/mrblue_logout"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/login"
@@ -185,21 +217,26 @@
                     android:id="@+id/mrblue_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:orientation="horizontal">
+                android:layout_marginHorizontal="@dimen/spacing_small2">
 
                 <ImageButton
+                    android:id="@+id/ml_bufftoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/bufftoon"
                     android:background="@android:color/transparent"
@@ -209,6 +246,8 @@
                     android:id="@+id/manage_login_bufftoon"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_bufftoon"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -219,6 +258,8 @@
                     android:id="@+id/bufftoon_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/bufftoon_logout"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/login"
@@ -228,22 +269,27 @@
                     android:id="@+id/bufftoon_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:background="@color/colorPrimaryBright5"
-                android:orientation="horizontal">
+                android:background="@color/colorPrimaryBright5">
 
                 <ImageButton
+                    android:id="@+id/ml_bomtoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/bomtoon"
                     android:background="@android:color/transparent"
@@ -253,6 +299,8 @@
                     android:id="@+id/manage_login_bomtoon"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_bomtoon"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -263,6 +311,8 @@
                     android:id="@+id/bomtoon_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/bomtoon_logout"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/login"
@@ -272,21 +322,26 @@
                     android:id="@+id/bomtoon_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:orientation="horizontal">
+                android:layout_marginHorizontal="@dimen/spacing_small2">
 
                 <ImageButton
+                    android:id="@+id/ml_bbuding"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/bbuding"
                     android:background="@android:color/transparent"
@@ -296,6 +351,8 @@
                     android:id="@+id/manage_login_bbuding"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_bbuding"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -306,6 +363,8 @@
                     android:id="@+id/bbuding_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/bbuding_logout"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/login"
@@ -315,22 +374,35 @@
                     android:id="@+id/bbuding_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:background="@color/colorPrimaryBright5"
-                android:orientation="horizontal">
+                android:background="@color/colorPrimaryBright5">
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
+                android:background="@color/colorPrimaryBright5">
 
                 <ImageButton
+                    android:id="@+id/ml_kakaopage"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/kakaopage"
                     android:background="@android:color/transparent"
@@ -340,6 +412,8 @@
                     android:id="@+id/manage_login_kakaopage"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_kakaopage"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -350,6 +424,8 @@
                     android:id="@+id/kakaopage_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/kakaopage_logout"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/login"
@@ -359,21 +435,26 @@
                     android:id="@+id/kakaopage_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:orientation="horizontal">
+                android:layout_marginHorizontal="@dimen/spacing_small2">
 
                 <ImageButton
+                    android:id="@+id/ml_comica"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/comica"
                     android:background="@android:color/transparent"
@@ -383,6 +464,8 @@
                     android:id="@+id/manage_login_comica"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_comica"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -393,6 +476,8 @@
                     android:id="@+id/comica_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/comica_logout"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/login"
@@ -402,22 +487,27 @@
                     android:id="@+id/comica_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:background="@color/colorPrimaryBright5"
-                android:orientation="horizontal">
+                android:background="@color/colorPrimaryBright5">
 
                 <ImageButton
+                    android:id="@+id/ml_comicgt"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/comicgt"
                     android:background="@android:color/transparent"
@@ -427,6 +517,8 @@
                     android:id="@+id/manage_login_comicgt"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_comicgt"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -437,6 +529,8 @@
                     android:id="@+id/comicgt_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/comicgt_logout"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/login"
@@ -446,21 +540,26 @@
                     android:id="@+id/comicgt_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:orientation="horizontal">
+                android:layout_marginHorizontal="@dimen/spacing_small2">
 
                 <ImageButton
+                    android:id="@+id/ml_ktoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ktoon"
                     android:background="@android:color/transparent"
@@ -470,6 +569,8 @@
                     android:id="@+id/manage_login_ktoon"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_ktoon"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -480,6 +581,8 @@
                     android:id="@+id/ktoon_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/ktoon_logout"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/login"
@@ -489,22 +592,27 @@
                     android:id="@+id/ktoon_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:background="@color/colorPrimaryBright5"
-                android:orientation="horizontal">
+                android:background="@color/colorPrimaryBright5">
 
                 <ImageButton
+                    android:id="@+id/ml_toptoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/toptoon"
                     android:background="@android:color/transparent"
@@ -514,6 +622,8 @@
                     android:id="@+id/manage_login_toptoon"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_toptoon"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -524,6 +634,8 @@
                     android:id="@+id/toptoon_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/toptoon_logout"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/login"
@@ -533,21 +645,26 @@
                     android:id="@+id/toptoon_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:orientation="horizontal">
+                android:layout_marginHorizontal="@dimen/spacing_small2">
 
                 <ImageButton
+                    android:id="@+id/ml_toomics"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/toomics"
                     android:background="@android:color/transparent"
@@ -557,6 +674,8 @@
                     android:id="@+id/manage_login_toomics"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_toomics"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -567,6 +686,8 @@
                     android:id="@+id/toomics_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/toomics_logout"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/login"
@@ -576,22 +697,27 @@
                     android:id="@+id/toomics_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:background="@color/colorPrimaryBright5"
-                android:orientation="horizontal">
+                android:background="@color/colorPrimaryBright5">
 
                 <ImageButton
+                    android:id="@+id/ml_foxtoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/foxtoon"
                     android:background="@android:color/transparent"
@@ -601,6 +727,8 @@
                     android:id="@+id/manage_login_foxtoon"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ml_foxtoon"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -611,6 +739,8 @@
                     android:id="@+id/foxtoon_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/foxtoon_logout"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/login"
@@ -620,21 +750,26 @@
                     android:id="@+id/foxtoon_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_purple"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:orientation="horizontal">
+                android:layout_marginHorizontal="@dimen/spacing_small2">
 
                 <ImageButton
+                    android:id="@+id/ml_peanutoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/peanutoon"
                     android:background="@android:color/transparent"
@@ -644,6 +779,8 @@
                     android:id="@+id/manage_login_peanutoon"
                     android:layout_width="@dimen/text_box1"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ml_peanutoon"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
@@ -654,6 +791,8 @@
                     android:id="@+id/peanutoon_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/peanutoon_logout"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/login"
@@ -663,11 +802,15 @@
                     android:id="@+id/peanutoon_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
                     android:textSize="@dimen/text_size_medium" />
-            </LinearLayout>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </ScrollView>

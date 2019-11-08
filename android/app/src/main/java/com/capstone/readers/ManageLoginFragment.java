@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -38,7 +37,7 @@ public class ManageLoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fv = inflater.inflate(R.layout.activity_managelogin, container, false);
+        View fv = inflater.inflate(R.layout.fragment_managelogin, container, false);
 
         manage_login_container = (LinearLayout) fv.findViewById(R.id.manage_login_container);
         manage_login_scroll = (ScrollView) fv.findViewById(R.id.manage_login_scroll);
