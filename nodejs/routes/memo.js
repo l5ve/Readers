@@ -1,7 +1,11 @@
 var express = require('express');
-var mysql      = require('mysql');
 var router = express.Router();
-
+var db = require('../db');
+// 생략
+db.get().query(sql, phone, function(err, rows){
+  // 생략
+});
+//생략
 
 var connection = mysql.createConnection({
   host     : "52.78.23.232",
