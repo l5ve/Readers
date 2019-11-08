@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,9 @@ public class ManageLoginFragment extends Fragment {
     private WebSettings mWebSettings; //웹뷰세팅
     private LinearLayout manage_login_container;
     private ScrollView manage_login_scroll;
+    private LinearLayout manage_login_notice;
+    private TextView manage_login_notice_content;
+    private Boolean isOpened;
 
     public static ManageLoginFragment newInstance(){
         return new ManageLoginFragment();
@@ -44,6 +48,36 @@ public class ManageLoginFragment extends Fragment {
         manage_login_container = (LinearLayout) fv.findViewById(R.id.manage_login_container);
         manage_login_scroll = (ScrollView) fv.findViewById(R.id.manage_login_scroll);
         manage_login_scroll.setVerticalScrollBarEnabled(true);
+        manage_login_notice = (LinearLayout) fv.findViewById(R.id.manage_login_notice);
+        manage_login_notice_content = (TextView) fv.findViewById(R.id.manage_login_notice_content);
+        isOpened = false;
+
+        manage_login_notice.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                isOpened = !isOpened;
+                if (isOpened){
+                    manage_login_notice_content.setVisibility(View.VISIBLE);
+                } else {
+                    manage_login_notice_content.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        Switch switch_readers = (Switch) fv.findViewById(R.id.switch_readers);
+        switch_readers.setChecked(true);
+        switch_readers.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                ((MyApp) getActivity().getApplication()).initialize();
+                MyToast.s(getContext(), getString(R.string.logout_done));
+
+                getActivity().startActivity(intent);
+            }
+        });
 
         Switch switch_naver = (Switch) fv.findViewById(R.id.switch_naver);
         switch_naver.setChecked(((MyApp) getActivity().getApplication()).isLogin_naver());
@@ -51,24 +85,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_naver(isChecked);
-            }
-        });
-
-        Button naver_login = (Button) fv.findViewById(R.id.naver_login);
-        naver_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://nid.naver.com/nidlogin.login?svctype=262144&url=http://m.naver.com/aside/";
-                callWebview(getString(R.string.naver), url, false, true);
-            }
-        });
-
-        Button naver_logout = (Button) fv.findViewById(R.id.naver_logout);
-        naver_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/";
-                callWebview(getString(R.string.naver), url, true, true);
+                if(isChecked) {
+                    String url = "https://nid.naver.com/nidlogin.login?svctype=262144&url=http://m.naver.com/aside/";
+                    callWebview(getString(R.string.naver), url, false, true);
+                }
+                else {
+                    String url = "https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/";
+                    callWebview(getString(R.string.naver), url, true, true);
+                }
             }
         });
 
@@ -79,24 +103,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_daum(isChecked);
-            }
-        });
-
-        Button daum_login = (Button) fv.findViewById(R.id.daum_login);
-        daum_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://logins.daum.net/accounts/loginform.do?status=-401&url=http%3A%2F%2Fwebtoon.daum.net%2F";
-                callWebview(getString(R.string.daum), url, false, true);
-            }
-        });
-
-        Button daum_logout = (Button) fv.findViewById(R.id.daum_logout);
-        daum_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://logins.daum.net/accounts/logout.do?url=http%3A%2F%2Fwebtoon.daum.net%2F";
-                callWebview(getString(R.string.daum), url, true, true);
+                if(isChecked) {
+                    String url = "https://logins.daum.net/accounts/loginform.do?status=-401&url=http%3A%2F%2Fwebtoon.daum.net%2F";
+                    callWebview(getString(R.string.daum), url, false, true);
+                }
+                else {
+                    String url = "https://logins.daum.net/accounts/logout.do?url=http%3A%2F%2Fwebtoon.daum.net%2F";
+                    callWebview(getString(R.string.daum), url, true, true);
+                }
             }
         });
 
@@ -107,24 +121,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_lezhin(isChecked);
-            }
-        });
-
-        Button lezhin_login = (Button) fv.findViewById(R.id.lezhin_login);
-        lezhin_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.lezhin.com/ko/login";
-                callWebview(getString(R.string.lezhin), url, false, true);
-            }
-        });
-
-        Button lezhin_logout = (Button) fv.findViewById(R.id.lezhin_logout);
-        lezhin_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.lezhin.com/ko/logout";
-                callWebview(getString(R.string.lezhin), url, true, true);
+                if(isChecked) {
+                    String url = "https://www.lezhin.com/ko/login";
+                    callWebview(getString(R.string.lezhin), url, false, true);
+                }
+                else {
+                    String url = "https://www.lezhin.com/ko/logout";
+                    callWebview(getString(R.string.lezhin), url, true, true);
+                }
             }
         });
 
@@ -135,24 +139,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_mrblue(isChecked);
-            }
-        });
-
-        Button mrblue_login = (Button) fv.findViewById(R.id.mrblue_login);
-        mrblue_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.mrblue.com/login?returnUrl=%2F";
-                callWebview(getString(R.string.mrblue), url, false, true);
-            }
-        });
-
-        Button mrblue_logout = (Button) fv.findViewById(R.id.mrblue_logout);
-        mrblue_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.mrblue.com/logout";
-                callWebview(getString(R.string.mrblue), url, true, true);
+                if(isChecked) {
+                    String url = "https://www.mrblue.com/login?returnUrl=%2F";
+                    callWebview(getString(R.string.mrblue), url, false, true);
+                }
+                else {
+                    String url = "https://www.mrblue.com/logout";
+                    callWebview(getString(R.string.mrblue), url, true, true);
+                }
             }
         });
 
@@ -163,24 +157,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_bufftoon(isChecked);
-            }
-        });
-
-        Button bufftoon_login = (Button) fv.findViewById(R.id.bufftoon_login);
-        bufftoon_login.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                String url = "https://mlogin.plaync.com/login/signin?return_url=https%3A%2F%2Fbufftoon.plaync.com%2F&remove_cookie=true";
-                callWebview(getString(R.string.bufftoon), url, false, true);
-            }
-        });
-
-        Button bufftoon_logout = (Button) fv.findViewById(R.id.bufftoon_logout);
-        bufftoon_logout.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                String url = "https://bufftoon.plaync.com/";
-                callWebview(getString(R.string.bufftoon), url, false, false);
+                if(isChecked) {
+                    String url = "https://mlogin.plaync.com/login/signin?return_url=https%3A%2F%2Fbufftoon.plaync.com%2F&remove_cookie=true";
+                    callWebview(getString(R.string.bufftoon), url, false, true);
+                }
+                else {
+                    String url = "https://bufftoon.plaync.com/";
+                    callWebview(getString(R.string.bufftoon), url, false, false);
+                }
             }
         });
 
@@ -191,24 +175,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_bomtoon(isChecked);
-            }
-        });
-
-        Button bomtoon_login = (Button) fv.findViewById(R.id.bomtoon_login);
-        bomtoon_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.bomtoon.com/login?redirect=/present";
-                callWebview(getString(R.string.bomtoon), url, false, true);
-            }
-        });
-
-        Button bomtoon_logout = (Button) fv.findViewById(R.id.bomtoon_logout);
-        bomtoon_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.bomtoon.com/login/logout";
-                callWebview(getString(R.string.bomtoon), url, true, true);
+                if(isChecked) {
+                    String url = "https://www.bomtoon.com/login?redirect=/present";
+                    callWebview(getString(R.string.bomtoon), url, false, true);
+                }
+                else {
+                    String url = "https://www.bomtoon.com/login/logout";
+                    callWebview(getString(R.string.bomtoon), url, true, true);
+                }
             }
         });
 
@@ -218,23 +192,14 @@ public class ManageLoginFragment extends Fragment {
         switch_bbuding.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ((MyApp) getActivity().getApplication()).setLogin_bbuding(isChecked);
-            }
-        });
-
-        Button bbuding_login = (Button) fv.findViewById(R.id.bbuding_login);
-        bbuding_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyToast.l(getActivity(), "해당 사이트는 현재 점검 중입니다.");
-            }
-        });
-
-        Button bbuding_logout = (Button) fv.findViewById(R.id.bbuding_logout);
-        bbuding_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyToast.l(getActivity(), "해당 사이트는 현재 점검 중입니다.");
+                ((MyApp) getActivity().getApplication()).setLogin_bbuding(false);
+                if(isChecked) {
+                    buttonView.setChecked(false);
+                    MyToast.l(getActivity(), "해당 사이트는 현재 점검 중입니다.");
+                }
+                else {
+                    MyToast.l(getActivity(), "해당 사이트는 현재 점검 중입니다.");
+                }
             }
         });
 
@@ -245,24 +210,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_kakaopage(isChecked);
-            }
-        });
-
-        Button kakaopage_login = (Button) fv.findViewById(R.id.kakaopage_login);
-        kakaopage_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                String url = "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fredirect_uri%3Dkakaojs%26response_type%3Dcode%26state%3Dxdql7gkewjc5pe5r0jb3i%26proxy%3DeasyXDM_Kakao_58xx5ofrynv_provider%26ka%3Dsdk%252F1.32.1%2520os%252Fjavascript%2520lang%252Fko-KR%2520device%252FWin32%2520origin%252Fhttps%25253A%25252F%25252Fpage.kakao.com%26origin%3Dhttps%253A%252F%252Fpage.kakao.com%26client_id%3D49bbb48c5fdb0199e5da1b89de359484";
-                callWebview(getString(R.string.kakaopage), url, false, true);
-            }
-        });
-
-        Button kakaopage_logout = (Button) fv.findViewById(R.id.kakaopage_logout);
-        kakaopage_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                String url = "https://page.kakao.com/main";
-                callWebview(getString(R.string.kakaopage), url, false, false);
+                if(isChecked){
+                    String url = "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fredirect_uri%3Dkakaojs%26response_type%3Dcode%26state%3Dxdql7gkewjc5pe5r0jb3i%26proxy%3DeasyXDM_Kakao_58xx5ofrynv_provider%26ka%3Dsdk%252F1.32.1%2520os%252Fjavascript%2520lang%252Fko-KR%2520device%252FWin32%2520origin%252Fhttps%25253A%25252F%25252Fpage.kakao.com%26origin%3Dhttps%253A%252F%252Fpage.kakao.com%26client_id%3D49bbb48c5fdb0199e5da1b89de359484";
+                    callWebview(getString(R.string.kakaopage), url, false, true);
+                }
+                else {
+                    String url = "https://page.kakao.com/main";
+                    callWebview(getString(R.string.kakaopage), url, false, false);
+                }
             }
         });
 
@@ -273,24 +228,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_comica(isChecked);
-            }
-        });
-
-        Button comica_login = (Button) fv.findViewById(R.id.comica_login);
-        comica_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                String url = "https://www.comica.com/";
-                callWebview(getString(R.string.comica), url, false, true);
-            }
-        });
-
-        Button comica_logout = (Button) fv.findViewById(R.id.comica_logout);
-        comica_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                String url = "https://www.comica.com/";
-                callWebview(getString(R.string.comica), url, false, false);
+                if(isChecked){
+                    String url = "https://www.comica.com/";
+                    callWebview(getString(R.string.comica), url, false, true);
+                }
+                else {
+                    String url = "https://www.comica.com/";
+                    callWebview(getString(R.string.comica), url, false, false);
+                }
             }
         });
 
@@ -301,24 +246,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_comicgt(isChecked);
-            }
-        });
-
-        Button comicgt_login = (Button) fv.findViewById(R.id.comicgt_login);
-        comicgt_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                String url = "http://www.comicgt.com/Base/Login?Param=&callbackURL=http%3A%2F%2Fwww.comicgt.com%2F";
-                callWebview(getString(R.string.comicgt), url, false, true);
-            }
-        });
-
-        Button comicgt_logout = (Button) fv.findViewById(R.id.comicgt_logout);
-        comicgt_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                String url = "http://www.comicgt.com/Base/Logout";
-                callWebview(getString(R.string.comicgt), url, true, true);
+                if(isChecked){
+                    String url = "http://www.comicgt.com/Base/Login?Param=&callbackURL=http%3A%2F%2Fwww.comicgt.com%2F";
+                    callWebview(getString(R.string.comicgt), url, false, true);
+                }
+                else {
+                    String url = "http://www.comicgt.com/Base/Logout";
+                    callWebview(getString(R.string.comicgt), url, true, true);
+                }
             }
         });
 
@@ -329,24 +264,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_ktoon(isChecked);
-            }
-        });
-
-        Button ktoon_login = (Button) fv.findViewById(R.id.ktoon_login);
-        ktoon_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.myktoon.com/mw/user/ktoon/login.kt";
-                callWebview(getString(R.string.ktoon), url, false, true);
-            }
-        });
-
-        Button ktoon_logout = (Button) fv.findViewById(R.id.ktoon_logout);
-        ktoon_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.myktoon.com/web/homescreen/logout.kt";
-                callWebview(getString(R.string.ktoon), url, true, true);
+                if(isChecked){
+                    String url = "https://www.myktoon.com/mw/user/ktoon/login.kt";
+                    callWebview(getString(R.string.ktoon), url, false, true);
+                }
+                else {
+                    String url = "https://www.myktoon.com/web/homescreen/logout.kt";
+                    callWebview(getString(R.string.ktoon), url, true, true);
+                }
             }
         });
 
@@ -357,24 +282,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_toptoon(isChecked);
-            }
-        });
-
-        Button toptoon_login = (Button) fv.findViewById(R.id.toptoon_login);
-        toptoon_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://toptoon.com/login";
-                callWebview(getString(R.string.toptoon), url, false, true);
-            }
-        });
-
-        Button toptoon_logout = (Button) fv.findViewById(R.id.toptoon_logout);
-        toptoon_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://toptoon.com/";
-                callWebview(getString(R.string.toptoon), url, false, false);
+                if(isChecked){
+                    String url = "https://toptoon.com/login";
+                    callWebview(getString(R.string.toptoon), url, false, true);
+                }
+                else {
+                    String url = "https://toptoon.com/";
+                    callWebview(getString(R.string.toptoon), url, false, false);
+                }
             }
         });
 
@@ -385,24 +300,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_toomics(isChecked);
-            }
-        });
-
-        Button toomics_login = (Button) fv.findViewById(R.id.toomics_login);
-        toomics_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.toomics.com/";
-                callWebview(getString(R.string.toomics), url, false, true);
-            }
-        });
-
-        Button toomics_logout = (Button) fv.findViewById(R.id.toomics_logout);
-        toomics_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.toomics.com/auth/logout";
-                callWebview(getString(R.string.toomics), url, true, true);
+                if(isChecked){
+                    String url = "https://www.toomics.com/";
+                    callWebview(getString(R.string.toomics), url, false, true);
+                }
+                else {
+                    String url = "https://www.toomics.com/auth/logout";
+                    callWebview(getString(R.string.toomics), url, true, true);
+                }
             }
         });
 
@@ -413,24 +318,14 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_foxtoon(isChecked);
-            }
-        });
-
-        Button foxtoon_login = (Button) fv.findViewById(R.id.foxtoon_login);
-        foxtoon_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.foxtoon.com/login";
-                callWebview(getString(R.string.foxtoon), url, false, true);
-            }
-        });
-
-        Button foxtoon_logout = (Button) fv.findViewById(R.id.foxtoon_logout);
-        foxtoon_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.foxtoon.com/logout";
-                callWebview(getString(R.string.foxtoon), url, true, true);
+                if(isChecked){
+                    String url = "https://www.foxtoon.com/login";
+                    callWebview(getString(R.string.foxtoon), url, false, true);
+                }
+                else {
+                    String url = "https://www.foxtoon.com/logout";
+                    callWebview(getString(R.string.foxtoon), url, true, true);
+                }
             }
         });
 
@@ -441,26 +336,17 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((MyApp) getActivity().getApplication()).setLogin_peanutoon(isChecked);
+                if(isChecked){
+                    String url = "https://www.peanutoon.com/ko/login?p_sign_route=0&topPage=1";
+                    callWebview(getString(R.string.peanutoon), url, false, true);
+                }
+                else {
+                    String url = "https://www.peanutoon.com/ko/logout";
+                    callWebview(getString(R.string.peanutoon), url, true, true);
+                }
             }
         });
 
-        Button peanutoon_login = (Button) fv.findViewById(R.id.peanutoon_login);
-        peanutoon_login.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.peanutoon.com/ko/login?p_sign_route=0&topPage=1";
-                callWebview(getString(R.string.peanutoon), url, false, true);
-            }
-        });
-
-        Button peanutoon_logout = (Button) fv.findViewById(R.id.peanutoon_logout);
-        peanutoon_logout.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://www.peanutoon.com/ko/logout";
-                callWebview(getString(R.string.peanutoon), url, true, true);
-            }
-        });
 
         return fv;
     }
