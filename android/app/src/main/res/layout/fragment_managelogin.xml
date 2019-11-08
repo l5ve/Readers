@@ -21,11 +21,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
+
+                <Switch
+                    android:id="@+id/switch_naver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_naver"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_naver"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/naver"
@@ -42,7 +51,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/naver"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/naver_login"
@@ -74,11 +83,19 @@
                 android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:background="@color/colorPrimaryBright5">
 
+                <Switch
+                    android:id="@+id/switch_daum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_daum"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_daum"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/daum"
@@ -95,7 +112,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/daum"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/daum_login"
@@ -126,12 +143,20 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
 
+                <Switch
+                    android:id="@+id/switch_lezhin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_lezhin"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_lezhin"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/lezhin"
                     android:background="@android:color/transparent"
@@ -147,7 +172,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/lezhin"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/lezhin_login"
@@ -169,7 +194,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/loginout_button_white"
                     android:text="@string/logout"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/manage_login_text" />
 
             </RelativeLayout>
 
@@ -179,11 +204,19 @@
                 android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:background="@color/colorPrimaryBright5">
 
+                <Switch
+                    android:id="@+id/switch_mrblue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_mrblue"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_mrblue"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/mrblue"
@@ -200,7 +233,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/mrblue"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/mrblue_login"
@@ -231,12 +264,20 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
 
+                <Switch
+                    android:id="@+id/switch_bufftoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_bufftoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_bufftoon"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/bufftoon"
                     android:background="@android:color/transparent"
@@ -252,7 +293,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/bufftoon"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/bufftoon_login"
@@ -284,12 +325,20 @@
                 android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:background="@color/colorPrimaryBright5">
 
+                <Switch
+                    android:id="@+id/switch_bomtoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_bomtoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_bomtoon"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/bomtoon"
                     android:background="@android:color/transparent"
@@ -305,7 +354,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/bomtoon"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/bomtoon_login"
@@ -336,11 +385,19 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
 
+                <Switch
+                    android:id="@+id/switch_bbuding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_bbuding"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_bbuding"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/bbuding"
@@ -357,7 +414,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/bbuding"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/bbuding_login"
@@ -389,19 +446,19 @@
                 android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:background="@color/colorPrimaryBright5">
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/spacing_small2"
-                android:background="@color/colorPrimaryBright5">
+                <Switch
+                    android:id="@+id/switch_kakaopage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
 
                 <ImageButton
                     android:id="@+id/ml_kakaopage"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_kakaopage"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/kakaopage"
@@ -418,7 +475,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/kakaopage"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/kakaopage_login"
@@ -449,11 +506,19 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
 
+                <Switch
+                    android:id="@+id/switch_comica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_comica"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_comica"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/comica"
@@ -470,7 +535,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/comica"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/comica_login"
@@ -502,11 +567,19 @@
                 android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:background="@color/colorPrimaryBright5">
 
+                <Switch
+                    android:id="@+id/switch_comicgt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_comicgt"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_comicgt"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/comicgt"
@@ -523,7 +596,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/comicgt"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/comicgt_login"
@@ -554,11 +627,19 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
 
+                <Switch
+                    android:id="@+id/switch_ktoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_ktoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_ktoon"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ktoon"
@@ -575,7 +656,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/ktoon"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/ktoon_login"
@@ -607,11 +688,19 @@
                 android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:background="@color/colorPrimaryBright5">
 
+                <Switch
+                    android:id="@+id/switch_toptoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_toptoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_toptoon"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/toptoon"
@@ -628,7 +717,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/toptoon"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/toptoon_login"
@@ -659,11 +748,19 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
 
+                <Switch
+                    android:id="@+id/switch_toomics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_toomics"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_toomics"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/toomics"
@@ -680,7 +777,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/toomics"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/toomics_login"
@@ -712,11 +809,19 @@
                 android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:background="@color/colorPrimaryBright5">
 
+                <Switch
+                    android:id="@+id/switch_foxtoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_foxtoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_foxtoon"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/foxtoon"
@@ -733,7 +838,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/foxtoon"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/foxtoon_login"
@@ -764,12 +869,20 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
 
+                <Switch
+                    android:id="@+id/switch_peanutoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
                 <ImageButton
                     android:id="@+id/ml_peanutoon"
                     android:layout_width="@dimen/icon_size_medium"
                     android:layout_height="@dimen/icon_size_medium"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
+                    android:layout_toRightOf="@+id/switch_peanutoon"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/peanutoon"
                     android:background="@android:color/transparent"
@@ -785,7 +898,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/peanutoon"
-                    android:textSize="@dimen/text_size_medium2" />
+                    android:textSize="@dimen/manage_login_text" />
 
                 <Button
                     android:id="@+id/peanutoon_login"

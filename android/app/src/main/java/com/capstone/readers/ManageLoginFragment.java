@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +45,15 @@ public class ManageLoginFragment extends Fragment {
         manage_login_scroll = (ScrollView) fv.findViewById(R.id.manage_login_scroll);
         manage_login_scroll.setVerticalScrollBarEnabled(true);
 
+        Switch switch_naver = (Switch) fv.findViewById(R.id.switch_naver);
+        switch_naver.setChecked(((MyApp) getActivity().getApplication()).isLogin_naver());
+        switch_naver.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_naver(isChecked);
+            }
+        });
+
         Button naver_login = (Button) fv.findViewById(R.id.naver_login);
         naver_login.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -58,6 +69,16 @@ public class ManageLoginFragment extends Fragment {
             public void onClick(View view) {
                 String url = "https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/";
                 callWebview(getString(R.string.naver), url, true, true);
+            }
+        });
+
+
+        Switch switch_daum = (Switch) fv.findViewById(R.id.switch_daum);
+        switch_daum.setChecked(((MyApp) getActivity().getApplication()).isLogin_daum());
+        switch_daum.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_daum(isChecked);
             }
         });
 
@@ -79,6 +100,16 @@ public class ManageLoginFragment extends Fragment {
             }
         });
 
+
+        Switch switch_lezhin = (Switch) fv.findViewById(R.id.switch_lezhin);
+        switch_lezhin.setChecked(((MyApp) getActivity().getApplication()).isLogin_lezhin());
+        switch_lezhin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_lezhin(isChecked);
+            }
+        });
+
         Button lezhin_login = (Button) fv.findViewById(R.id.lezhin_login);
         lezhin_login.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -94,6 +125,16 @@ public class ManageLoginFragment extends Fragment {
             public void onClick(View view) {
                 String url = "https://www.lezhin.com/ko/logout";
                 callWebview(getString(R.string.lezhin), url, true, true);
+            }
+        });
+
+
+        Switch switch_mrblue = (Switch) fv.findViewById(R.id.switch_mrblue);
+        switch_mrblue.setChecked(((MyApp) getActivity().getApplication()).isLogin_mrblue());
+        switch_mrblue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_mrblue(isChecked);
             }
         });
 
@@ -115,6 +156,16 @@ public class ManageLoginFragment extends Fragment {
             }
         });
 
+
+        Switch switch_bufftoon = (Switch) fv.findViewById(R.id.switch_bufftoon);
+        switch_bufftoon.setChecked(((MyApp) getActivity().getApplication()).isLogin_bufftoon());
+        switch_bufftoon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_bufftoon(isChecked);
+            }
+        });
+
         Button bufftoon_login = (Button) fv.findViewById(R.id.bufftoon_login);
         bufftoon_login.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -130,6 +181,16 @@ public class ManageLoginFragment extends Fragment {
             public void onClick(View view) {
                 String url = "https://bufftoon.plaync.com/";
                 callWebview(getString(R.string.bufftoon), url, false, false);
+            }
+        });
+
+
+        Switch switch_bomtoon = (Switch) fv.findViewById(R.id.switch_bomtoon);
+        switch_bomtoon.setChecked(((MyApp) getActivity().getApplication()).isLogin_bomtoon());
+        switch_bomtoon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_bomtoon(isChecked);
             }
         });
 
@@ -151,6 +212,16 @@ public class ManageLoginFragment extends Fragment {
             }
         });
 
+
+        Switch switch_bbuding = (Switch) fv.findViewById(R.id.switch_bbuding);
+        switch_bbuding.setChecked(((MyApp) getActivity().getApplication()).isLogin_bbuding());
+        switch_bbuding.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_bbuding(isChecked);
+            }
+        });
+
         Button bbuding_login = (Button) fv.findViewById(R.id.bbuding_login);
         bbuding_login.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -164,6 +235,16 @@ public class ManageLoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 MyToast.l(getActivity(), "해당 사이트는 현재 점검 중입니다.");
+            }
+        });
+
+
+        Switch switch_kakaopage = (Switch) fv.findViewById(R.id.switch_kakaopage);
+        switch_kakaopage.setChecked(((MyApp) getActivity().getApplication()).isLogin_kakaopage());
+        switch_kakaopage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_kakaopage(isChecked);
             }
         });
 
@@ -185,6 +266,16 @@ public class ManageLoginFragment extends Fragment {
             }
         });
 
+
+        Switch switch_comica = (Switch) fv.findViewById(R.id.switch_comica);
+        switch_comica.setChecked(((MyApp) getActivity().getApplication()).isLogin_comica());
+        switch_comica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_comica(isChecked);
+            }
+        });
+
         Button comica_login = (Button) fv.findViewById(R.id.comica_login);
         comica_login.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -200,6 +291,16 @@ public class ManageLoginFragment extends Fragment {
             public void onClick(View view){
                 String url = "https://www.comica.com/";
                 callWebview(getString(R.string.comica), url, false, false);
+            }
+        });
+
+
+        Switch switch_comicgt = (Switch) fv.findViewById(R.id.switch_comicgt);
+        switch_comicgt.setChecked(((MyApp) getActivity().getApplication()).isLogin_comicgt());
+        switch_comicgt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_comicgt(isChecked);
             }
         });
 
@@ -221,6 +322,16 @@ public class ManageLoginFragment extends Fragment {
             }
         });
 
+
+        Switch switch_ktoon = (Switch) fv.findViewById(R.id.switch_ktoon);
+        switch_ktoon.setChecked(((MyApp) getActivity().getApplication()).isLogin_ktoon());
+        switch_ktoon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_ktoon(isChecked);
+            }
+        });
+
         Button ktoon_login = (Button) fv.findViewById(R.id.ktoon_login);
         ktoon_login.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -236,6 +347,16 @@ public class ManageLoginFragment extends Fragment {
             public void onClick(View view) {
                 String url = "https://www.myktoon.com/web/homescreen/logout.kt";
                 callWebview(getString(R.string.ktoon), url, true, true);
+            }
+        });
+
+
+        Switch switch_toptoon = (Switch) fv.findViewById(R.id.switch_toptoon);
+        switch_toptoon.setChecked(((MyApp) getActivity().getApplication()).isLogin_toptoon());
+        switch_toptoon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_toptoon(isChecked);
             }
         });
 
@@ -257,6 +378,16 @@ public class ManageLoginFragment extends Fragment {
             }
         });
 
+
+        Switch switch_toomics = (Switch) fv.findViewById(R.id.switch_toomics);
+        switch_toomics.setChecked(((MyApp) getActivity().getApplication()).isLogin_naver());
+        switch_toomics.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_toomics(isChecked);
+            }
+        });
+
         Button toomics_login = (Button) fv.findViewById(R.id.toomics_login);
         toomics_login.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -275,6 +406,16 @@ public class ManageLoginFragment extends Fragment {
             }
         });
 
+
+        Switch switch_foxtoon = (Switch) fv.findViewById(R.id.switch_foxtoon);
+        switch_foxtoon.setChecked(((MyApp) getActivity().getApplication()).isLogin_foxtoon());
+        switch_foxtoon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_foxtoon(isChecked);
+            }
+        });
+
         Button foxtoon_login = (Button) fv.findViewById(R.id.foxtoon_login);
         foxtoon_login.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -290,6 +431,16 @@ public class ManageLoginFragment extends Fragment {
             public void onClick(View view) {
                 String url = "https://www.foxtoon.com/logout";
                 callWebview(getString(R.string.foxtoon), url, true, true);
+            }
+        });
+
+
+        Switch switch_peanutoon = (Switch) fv.findViewById(R.id.switch_peanutoon);
+        switch_peanutoon.setChecked(((MyApp) getActivity().getApplication()).isLogin_peanutoon());
+        switch_peanutoon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((MyApp) getActivity().getApplication()).setLogin_peanutoon(isChecked);
             }
         });
 
