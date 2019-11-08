@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.item.MemoData;
@@ -42,7 +43,6 @@ public class MypageMemoFragment extends Fragment {
 
     private String user_id;
     private ServiceApi service;
-    private SharedPreferences appData;
 
     public static MypageMemoFragment newInstance(){
         return new MypageMemoFragment();
@@ -58,9 +58,7 @@ public class MypageMemoFragment extends Fragment {
         View fv = inflater.inflate(R.layout.fragment_mypagememo, container, false);
 
         // service = RetrofitClient.getClient().create(ServiceApi.class);
-
-        appData = this.getActivity().getSharedPreferences("appData", MODE_PRIVATE);
-        user_id = appData.getString("ID", "");
+        user_id = ((MyApp) getActivity().getApplication()).getUser_id();
 
         noDataText = (TextView) fv.findViewById(R.id.memo_no_data);
         sort_new = (RadioButton) fv.findViewById(R.id.memo_sort_new);
@@ -133,7 +131,5 @@ public class MypageMemoFragment extends Fragment {
                 Log.e("메모 통신 에러 발생", t.getMessage());
             }
         });
-
-
     }
 }

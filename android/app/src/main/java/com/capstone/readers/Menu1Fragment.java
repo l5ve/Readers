@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.capstone.readers.R;
+import com.capstone.readers.lib.MyLog;
 import com.google.android.material.tabs.TabLayout;
 
 /** 1번째 메뉴인 홈(웹툰) 화면을 나타내는 프래그먼트
@@ -33,11 +34,12 @@ public class Menu1Fragment extends Fragment {
         TabLayout tabs = (TabLayout) fv.findViewById(R.id.first_tabs);
         setChildFragment(Menu1Fragment1.newInstance());
 
+        /* 탭의 상태가 변경될 때 호출되는 리스너 */
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                Log.d("Menu1Fragment", "선택된 탭: "+position);
+                MyLog.d("Menu1Fragment", "선택된 탭: "+position);
 
                 Fragment fg;
                 switch (position) {
