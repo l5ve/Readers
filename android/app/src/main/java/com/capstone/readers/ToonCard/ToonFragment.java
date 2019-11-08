@@ -64,6 +64,16 @@ public class ToonFragment extends Fragment {
         myDataset.add(new ToonCard("2", 0, getString(R.string.lezhin), "레진만화임","이작가", "2019-11-07"));
         myDataset.add(new ToonCard("3", 0, getString(R.string.daum), "다음이용","네 다음 작가", "2018-01-03"));
         myDataset.add(new ToonCard("4", 0, getString(R.string.daum), "다음다음~","네다작", "2019-11-08"));
+        myDataset.add(new ToonCard("5", 0, getString(R.string.bomtoon), "코코리치","망고맛", "2018-11-08"));
+
+        myDataset.add(new ToonCard("4", 0, getString(R.string.bufftoon), "머신러닝","홍병우", "2019-11-08"));
+        myDataset.add(new ToonCard("4", 0, getString(R.string.bomtoon), "스크레이핑","위키북스", "2016-11-08"));
+        myDataset.add(new ToonCard("4", 0, getString(R.string.toptoon), "크롤링","위키북스", "2015-11-08"));
+
+        myDataset.add(new ToonCard("4", 0, getString(R.string.comicgt), "실전개발입문","강사", "2016-12-08"));
+        myDataset.add(new ToonCard("4", 0, getString(R.string.comicgt), "데이터","사이언스", "2019-11-01"));
+        myDataset.add(new ToonCard("4", 0, getString(R.string.comica), "사이언스","뭐다?", "2017-11-02"));
+        myDataset.add(new ToonCard("4", 0, getString(R.string.daum), "뿌뿌뿌","빠빠빠", "2017-10-08"));
 
         for(int i = 0; i < myDataset.size(); i++){
             Log.d("ToonMemoFragment", "Dataset(" + i + ") " + myDataset.get(i).img + ", " + myDataset.get(i).title);

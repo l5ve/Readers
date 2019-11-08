@@ -146,7 +146,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Log.d("RESPONSE_BODY", "RESPONSE_BODY_IS_NOT_NULL");
                     LoginResponse result = response.body();
-                    MyToast.l(getApplicationContext(), result.getMessage());
+                    if (result.getCode() != 200)
+                        MyToast.l(getApplicationContext(), result.getMessage());
 
                     if (result.getCode() == 200) {
                         if (checkBox.isChecked()){
