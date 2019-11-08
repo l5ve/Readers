@@ -26,13 +26,6 @@ router.post('/join', function (req, res) {
     console.log('pw:', user_pwd);
     console.log('name:', user_name);
 
-    // connection.query('SELECT * from user_info', function(err, rows, fields) {
-    //   if (!err)
-    //     console.log('The solution is: ', rows);
-    //   else
-    //     console.log('Error while performing Query.', err);
-    // });
-
     // 삽입을 수행하는 sql문.
     var sql = 'INSERT INTO user_info (user_id, user_pwd, user_name, subs_num, bookmark_num, memo_num) VALUES (?, ?, ?, ?, ?, ?)';
     var params = [user_id, user_pwd, user_name, 0, 0, 0];
