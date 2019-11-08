@@ -28,7 +28,7 @@ public class MyApp extends Application {
     private boolean login_comicgt;
     private boolean login_ktoon;
     private boolean login_toptoon;
-    private boolean isLogin_toomics;
+    private boolean login_toomics;
     private boolean login_foxtoon;
     private boolean login_peanutoon;
 
@@ -44,6 +44,25 @@ public class MyApp extends Application {
         bookmark_num = 0;
         memo_num = 0;
 
+    }
+
+    public void initialize(){
+        savedData = false;
+        login_naver = false;
+        login_daum = false;
+        login_lezhin = false;
+        login_mrblue = false;
+        login_bufftoon = false;
+        login_bomtoon = false;
+        login_bbuding = false;
+        login_kakaopage = false;
+        login_comica = false;
+        login_comicgt = false;
+        login_ktoon = false;
+        login_toptoon = false;
+        login_toomics = false;
+        login_foxtoon = false;
+        login_peanutoon = false;
     }
 
     public void setUser_id(String user_id){
@@ -155,7 +174,7 @@ public class MyApp extends Application {
     }
 
     public boolean isLogin_toomics() {
-        return isLogin_toomics;
+        return login_toomics;
     }
 
     public boolean isLogin_toptoon() {
@@ -211,7 +230,7 @@ public class MyApp extends Application {
     }
 
     public void setLogin_toomics(boolean login_toomics) {
-        isLogin_toomics = login_toomics;
+        this.login_toomics = login_toomics;
     }
 
     public void setLogin_foxtoon(boolean login_foxtoon) {

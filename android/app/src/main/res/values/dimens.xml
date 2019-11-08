@@ -33,6 +33,7 @@
 
     <dimen name="sign_in_genre_buttons">12sp</dimen>
 
+    <dimen name="icon_size_small">30sp</dimen>
     <dimen name="icon_size_medium">75sp</dimen>
     <dimen name="icon_size_large">100sp</dimen>
 
