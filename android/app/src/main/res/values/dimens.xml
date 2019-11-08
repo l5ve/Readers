@@ -27,6 +27,8 @@
     <dimen name="text_size_xlarge2">36sp</dimen>
     <dimen name="text_size_xlarge3">42sp</dimen>
 
+    <dimen name="manage_login_text">15sp</dimen>
+
     <dimen name="text_box1">110sp</dimen>
 
     <dimen name="sign_in_genre_buttons">12sp</dimen>
@@ -35,5 +37,8 @@
     <dimen name="icon_size_large">100sp</dimen>
 
     <dimen name="cardview_round_basic">4dp</dimen>
+
+    <dimen name="cardview_memo_thumbnail">70dp</dimen>
+    <dimen name="cardview_toon_thumbnail">90dp</dimen>
 
 </resources>

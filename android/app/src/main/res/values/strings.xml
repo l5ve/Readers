@@ -107,9 +107,13 @@
     <string name="friday">금</string>
     <string name="saturday">토</string>
     <string name="sunday">일</string>
+    <string name="no_memo">현재 저장된 메모가 없습니다.</string>
 
+    <string name="last_update">마지막 수정 날짜</string>
+    <string name="title">제목</string>
+    <string name="author">작가</string>
 
-    <!-- 4. 설정 -->
+   <!-- 4. 설정 -->
     <string name="login_setting">통합 로그인 관리</string>
     <string name="logout_done">로그아웃 완료</string>
     <string name="no_automatic_logout">자동 로그아웃 미지원 사이트입니다.\n직접 로그아웃 해주세요.</string>
@@ -117,5 +121,16 @@
     <string name="notice">공지사항</string>
     <string name="FAQ">문의</string>
 
+    <string name="server_error_message">서버에 오류가 있습니다.</string>
+    <string name="no_internet_connectivity">인터넷 연결이 없습니다.</string>
+
+    <!-- 정렬 -->
+    <string name="sort_new">최신순</string>
+    <string name="sort_old">오래된순</string>
+    <string name="sort_update">업데이트순</string>
+    <string name="sort_title">제목순</string>
+    <string name="sort_platform">연재처순</string>
+
+    <string name="hide_toons">작품 숨김</string>
 
 </resources>

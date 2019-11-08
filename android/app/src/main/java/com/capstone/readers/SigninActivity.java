@@ -15,6 +15,7 @@ import com.capstone.readers.lib.MyToast;
 import com.capstone.readers.item.JoinResponse;
 import com.capstone.readers.item.JoinData;
 import com.capstone.readers.security.SecurityUtil;
+import java.security.Security;
 
 
 import okhttp3.ResponseBody;
@@ -31,8 +32,6 @@ public class SigninActivity extends AppCompatActivity {
 
     private ServiceApi service;
 
-    private SharedPreferences appData;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
@@ -44,8 +43,6 @@ public class SigninActivity extends AppCompatActivity {
         sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_Btn);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
-
-        appData = getSharedPreferences("appData", MODE_PRIVATE);
 
         sign_up_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -152,20 +149,13 @@ public class SigninActivity extends AppCompatActivity {
 
     // 설정값을 저장하는 함수
     private void save() {
-        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
-        SharedPreferences.Editor editor = appData.edit();
-
-        // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
         // 저장시킬 이름이 이미 존재하면 덮어씌움
-        editor.putBoolean("SAVE_LOGIN_DATA", true);
-        editor.putString("ID", idText.getText().toString().trim());
-        editor.putString("NAME", nameText.getText().toString().trim());
-        editor.putString("PWD", pwdText.getText().toString().trim());
-        editor.putInt("SUBS_NUM", 0);
-        editor.putInt("BOOKMARK_NUM", 0);
-        editor.putInt("MEMO_NUM", 0);
+        SecurityUtil securityUtil = new SecurityUtil();
+        String enc_pwd = securityUtil.encryptSHA256(pwdText.getText().toString().trim());
 
-        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
-        editor.apply();
+        ((MyApp) getApplication()).setUser_id(idText.getText().toString().trim());
+        ((MyApp) getApplication()).setUser_pw(enc_pwd);
+        ((MyApp) getApplication()).setSavedData(true);
+        ((MyApp) getApplication()).setUser_name(nameText.getText().toString().trim());
     }
 }

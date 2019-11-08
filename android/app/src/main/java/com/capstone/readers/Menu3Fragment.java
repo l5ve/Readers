@@ -1,26 +1,18 @@
 package com.capstone.readers;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.FragmentManager;
 
-import com.capstone.readers.lib.MyToast;
-import com.google.android.material.tabs.TabLayout;
-
-import org.w3c.dom.Text;
+import com.capstone.readers.MemoCard.MypageMemoFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -64,14 +56,35 @@ public class Menu3Fragment extends Fragment {
         mypage_bookmark.setText(Integer.toString(bookmark_num));
         mypage_memo.setText(Integer.toString(memo_num));
 
+        Fragment fg = Menu3Fragment1.newInstance();
+        setChildFragment(fg);
+
+        mypage_memo.setOnClickListener(new TextView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fg = MypageMemoFragment.newInstance();
+                setChildFragment(fg);
+            }
+        });
+
         return fv;
+    }
+
+    private void setChildFragment(Fragment child) {
+        FragmentTransaction childFt = getChildFragmentManager().beginTransaction();
+
+        if(!child.isAdded()) {
+            childFt.replace(R.id.mypage_fragment, child);
+            childFt.addToBackStack(null);
+            childFt.commit();
+        }
     }
 
     // 설정값을 불러오는 함수
     private void load() {
-        name = appData.getString("NAME", "");
-        subs_num = appData.getInt("SUBS_NUM", 0);
-        bookmark_num = appData.getInt("BOOKMARK_NUM", 0);
-        memo_num = appData.getInt("MEMO_NUM", 0);
+        name = ((MyApp) getActivity().getApplication()).getUser_name();
+        subs_num = ((MyApp) getActivity().getApplication()).getSubs_num();
+        bookmark_num = ((MyApp) getActivity().getApplication()).getBookmark_num();
+        memo_num = ((MyApp) getActivity().getApplication()).getMemo_num();
     }
 }

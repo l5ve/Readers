@@ -29,7 +29,6 @@
         <activity android:name=".IndexActivity"/>
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".ProfileActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SigninActivity"/>
         <activity android:name=".WebviewActivity"/>

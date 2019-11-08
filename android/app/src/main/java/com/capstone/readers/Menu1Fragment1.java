@@ -1,7 +1,6 @@
 package com.capstone.readers;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.capstone.readers.Day.Friday;
+import com.capstone.readers.Day.Monday;
+import com.capstone.readers.Day.Saturday;
+import com.capstone.readers.Day.Sunday;
+import com.capstone.readers.Day.Thursday;
+import com.capstone.readers.Day.Tuesday;
+import com.capstone.readers.Day.Wednesday;
 import com.capstone.readers.lib.MyLog;
 import com.google.android.material.tabs.TabLayout;
 

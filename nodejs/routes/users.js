@@ -47,12 +47,13 @@ router.post('/join', function (req, res) {
         } else {
             resultCode = 200;
             message = '회원가입에 성공했습니다.';
+
             console.log(message);
         }
 
         res.json({
             'code': resultCode,
-            'message': message
+            'message': message,
         });
     });
 });
@@ -68,6 +69,10 @@ router.post('/login', function (req, res) {
     connection.query(sql, user_id, function (err, result) {
         var resultCode = 404;
         var message = '에러가 발생했습니다';
+        var nickname;
+        var subs_num;
+        var bookmark_num;
+        var memo_num;
 
         if (err) {
             console.log(err);
@@ -80,13 +85,21 @@ router.post('/login', function (req, res) {
                 message = '비밀번호가 틀렸습니다!';
             } else {
                 resultCode = 200;
-                message = '로그인 성공! ' + result[0].user_name + '님 환영합니다!';
+                message = "로그인 성공! " + result[0].user_name + "님 환영합니다.";
+                nickname = result[0].user_name;
+                subs_num = result[0].subs_num;
+                bookmark_num = result[0].bookmark_num;
+                memo_num = result[0].memo_num;
             }
         }
 
         res.json({
             'code': resultCode,
-            'message': message
+            'message': message,
+            'name' : nickname,
+            'subs_num' : subs_num,
+            'bookmark_num' : bookmark_num,
+            'memo_num' : memo_num
         });
     })
 });

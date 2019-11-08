@@ -4,10 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
-
-import com.capstone.readers.remote.RemoteService;
-import com.capstone.readers.remote.ServiceGenerator;
-
 import java.io.File;
 
 import okhttp3.MediaType;
