@@ -106,30 +106,4 @@ public class MypageMemoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void listInfo(MemoData data) {
-        service.memoGet(data).enqueue(new Callback<MemoResponse>() {
-            @Override
-            public void onResponse(Call<MemoResponse> call, Response<MemoResponse> response) {
-                if (response.isSuccessful()) {
-                    Log.d("MEMO_RESPONSE_BODY", "MEMO_RESPONSE_BODY_IS_NOT_NULL");
-                    MemoResponse result = response.body();
-
-                    if (result.getCode() == 200) {
-
-
-                    }
-                } else{
-                    ResponseBody errorBody = response.errorBody();
-                    Log.e("RESPONSE_BODY", "RESPONSE_BODY_IS_NULL");
-                    MyToast.s(getContext(), R.string.server_error_message);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MemoResponse> call, Throwable t) {
-                MyToast.s(getContext(), R.string.no_internet_connectivity);
-                Log.e("메모 통신 에러 발생", t.getMessage());
-            }
-        });
-    }
 }

@@ -32,6 +32,13 @@ public class MyApp extends Application {
     private boolean login_foxtoon;
     private boolean login_peanutoon;
 
+    private boolean DayTab;
+    private boolean GenreTab;
+    private boolean EndTab;
+
+    private String day;
+    private String genre;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -241,4 +248,53 @@ public class MyApp extends Application {
         this.login_peanutoon = login_peanutoon;
     }
 
+    public void setDayTab() {
+        DayTab = true;
+        GenreTab = false;
+        genre = null;
+        EndTab = false;
+    }
+
+    public boolean getDayTab() {
+        return DayTab;
+    }
+
+    public void setGenreTab() {
+        DayTab = false;
+        day = null;
+        GenreTab = true;
+        EndTab = false;
+    }
+
+    public boolean getGenreTab() {
+        return GenreTab;
+    }
+
+    public void setEndTab() {
+        DayTab = false;
+        day = null;
+        GenreTab = false;
+        genre = null;
+        EndTab = true;
+    }
+
+    public boolean getEndTab() {
+        return EndTab;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
 }

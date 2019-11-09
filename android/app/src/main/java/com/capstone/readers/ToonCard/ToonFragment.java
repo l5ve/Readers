@@ -30,6 +30,11 @@ public class ToonFragment extends Fragment {
     private RadioButton sort_update;
     private RadioButton sort_platform;
     private String user_id;
+    private Boolean DayTab;
+    private Boolean GenreTab;
+    private Boolean EndTab;
+    private String day;
+    private String genre;
 
     public static ToonFragment newInstance() {
         return new ToonFragment();
@@ -42,6 +47,11 @@ public class ToonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_toon, container, false);
+
+        /* 요일/장르/완결 탭 구분 */
+        DayTab = ((MyApp) getActivity().getApplication()).getDayTab();
+        GenreTab = ((MyApp) getActivity().getApplication()).getGenreTab();
+        EndTab = ((MyApp) getActivity().getApplication()).getEndTab();
 
         // service = RetrofitClient.getClient().create(ServiceApi.class);
         user_id = ((MyApp) getActivity().getApplication()).getUser_id();
@@ -59,21 +69,20 @@ public class ToonFragment extends Fragment {
         // 리사이클러뷰에 표시할 데이터 리스트 생성
         myDataset = new ArrayList<>();
 
-        myDataset.add(new ToonCard("0", 0, getString(R.string.naver), "가짜만화","김작가", "2017-02-01"));
-        myDataset.add(new ToonCard("1", 0, getString(R.string.naver), "아무만화","아무개작가", "2019-03-31"));
-        myDataset.add(new ToonCard("2", 0, getString(R.string.lezhin), "레진만화임","이작가", "2019-11-07"));
-        myDataset.add(new ToonCard("3", 0, getString(R.string.daum), "다음이용","네 다음 작가", "2018-01-03"));
-        myDataset.add(new ToonCard("4", 0, getString(R.string.daum), "다음다음~","네다작", "2019-11-08"));
-        myDataset.add(new ToonCard("5", 0, getString(R.string.bomtoon), "코코리치","망고맛", "2018-11-08"));
-
-        myDataset.add(new ToonCard("4", 0, getString(R.string.bufftoon), "머신러닝","홍병우", "2019-11-08"));
-        myDataset.add(new ToonCard("4", 0, getString(R.string.bomtoon), "스크레이핑","위키북스", "2016-11-08"));
-        myDataset.add(new ToonCard("4", 0, getString(R.string.toptoon), "크롤링","위키북스", "2015-11-08"));
-
-        myDataset.add(new ToonCard("4", 0, getString(R.string.comicgt), "실전개발입문","강사", "2016-12-08"));
-        myDataset.add(new ToonCard("4", 0, getString(R.string.comicgt), "데이터","사이언스", "2019-11-01"));
-        myDataset.add(new ToonCard("4", 0, getString(R.string.comica), "사이언스","뭐다?", "2017-11-02"));
-        myDataset.add(new ToonCard("4", 0, getString(R.string.daum), "뿌뿌뿌","빠빠빠", "2017-10-08"));
+        if(DayTab) {
+            day = ((MyApp) getActivity().getApplication()).getDay();
+            Log.d("ToonFragment", "Argument(Day): " + day);
+            getDayData(day);
+        }
+        else if (GenreTab) {
+            genre = ((MyApp) getActivity().getApplication()).getGenre();
+            Log.d("ToonFragment", "Argument(Genre): " + genre);
+            getGenreData(genre);
+        }
+        else if (EndTab) {
+            Log.d("ToonFragment", "Argument(End): true");
+            getEndData();
+        }
 
         for(int i = 0; i < myDataset.size(); i++){
             Log.d("ToonMemoFragment", "Dataset(" + i + ") " + myDataset.get(i).img + ", " + myDataset.get(i).title);
@@ -100,5 +109,49 @@ public class ToonFragment extends Fragment {
         });
 
         return fv;
+    }
+
+    public void getDayData(String day){
+        if (day.equals("mon")){
+            myDataset.add(new ToonCard("0", 0, getString(R.string.naver), "월요일만화","김작가", "2017-02-01"));
+            myDataset.add(new ToonCard("1", 0, getString(R.string.naver), "아무만화","아무개작가", "2019-03-31"));
+            myDataset.add(new ToonCard("2", 0, getString(R.string.lezhin), "왈왈","이작가", "2019-11-07"));
+            myDataset.add(new ToonCard("3", 0, getString(R.string.daum), "룬디","요일작가", "2018-01-03"));
+            myDataset.add(new ToonCard("4", 0, getString(R.string.daum), "먼데이","일요일요일", "2019-11-08"));
+        }
+        else {
+            myDataset.add(new ToonCard("0", 0, getString(R.string.naver), "월요일말곤","김작가", "2017-02-01"));
+            myDataset.add(new ToonCard("1", 0, getString(R.string.naver), "귀찮아서","아무개작가", "2019-03-31"));
+            myDataset.add(new ToonCard("2", 0, getString(R.string.lezhin), "예시 안 넣음","이작가", "2019-11-07"));
+            myDataset.add(new ToonCard("3", 0, getString(R.string.daum), "화수목금토일","요일작가", "2018-01-03"));
+            myDataset.add(new ToonCard("4", 0, getString(R.string.daum), "주말","일요일요일", "2019-11-08"));
+        }
+
+    }
+
+    public void getGenreData(String genre) {
+        if (genre.equals("감성")) {
+            myDataset.add(new ToonCard("542", 0, getString(R.string.bomtoon), "감성장르","김작가", "2018-11-08"));
+            myDataset.add(new ToonCard("754", 0, getString(R.string.bufftoon), "갬성","이작가", "2019-11-08"));
+            myDataset.add(new ToonCard("324", 0, getString(R.string.bomtoon), "센티멘탈","윤작가", "2016-11-08"));
+            myDataset.add(new ToonCard("924", 0, getString(R.string.comicgt), "장르장르","한작가", "2019-11-01"));
+        }
+        else {
+            myDataset.add(new ToonCard("542", 0, getString(R.string.naver), "다른장르","최작가", "2018-11-08"));
+            myDataset.add(new ToonCard("754", 0, getString(R.string.daum), "아무장르","정작가", "2019-11-08"));
+            myDataset.add(new ToonCard("324", 0, getString(R.string.daum), "감성말곤","신작가", "2016-11-08"));
+            myDataset.add(new ToonCard("924", 0, getString(R.string.comicgt), "귀찮아서","송작가", "2019-11-01"));
+            myDataset.add(new ToonCard("542", 0, getString(R.string.bomtoon), "안했음","김작가", "2018-11-08"));
+            myDataset.add(new ToonCard("754", 0, getString(R.string.bufftoon), "쏘리","이작가", "2019-11-08"));
+            myDataset.add(new ToonCard("324", 0, getString(R.string.bomtoon), "낫쏘리","윤작가", "2016-11-08"));
+            myDataset.add(new ToonCard("924", 0, getString(R.string.mrblue), "하하하","한작가", "2019-11-01"));
+        }
+    }
+
+    public void getEndData(){
+        myDataset.add(new ToonCard("100", 0, getString(R.string.toptoon), "옛날웹툰1","완결", "2015-11-08"));
+        myDataset.add(new ToonCard("120", 0, getString(R.string.comicgt), "오래된웹툰","완완", "2016-12-08"));
+        myDataset.add(new ToonCard("439", 0, getString(R.string.comica), "라떼는웹툰","결결", "2017-11-02"));
+        myDataset.add(new ToonCard("954", 0, getString(R.string.daum), "예전만화","결완", "2017-10-08"));
     }
 }
