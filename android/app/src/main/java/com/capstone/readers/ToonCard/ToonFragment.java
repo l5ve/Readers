@@ -144,8 +144,7 @@ public class ToonFragment extends Fragment {
     }
 
     public void getGenreData(String genre_name) {
-        String is_end = "X";
-        service.getGenreToon(is_end, genre_name).enqueue(new Callback<ArrayList<ToonResponse>>() {
+        service.getGenreToon(genre_name).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
                 ArrayList<ToonResponse> list = response.body();

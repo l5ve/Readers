@@ -32,7 +32,7 @@ public interface ServiceApi {
     Call<ArrayList<ToonResponse>> getDayToon(@Query("is_end") String is_end, @Query("toon_weekday") String toon_weekday);
 
     @GET("/toon/genrelist")
-    Call<ArrayList<ToonResponse>> getGenreToon(@Query("is_end") String is_end, @Query("genre_name") String genre_name);
+    Call<ArrayList<ToonResponse>> getGenreToon(@Query("genre_name") String genre_name);
 
     @GET("/toon/endlist")
     Call<ArrayList<ToonResponse>> getEndToon(@Query("is_end") String is_end);

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Handler;
 
 public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHolder> {
     int OrderType; // 1: 제목순, 2: 업데이트순, 3: 연재처순
@@ -28,6 +29,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         this.context = context;
         mDataset = Dataset;
         this.OrderType = OrderType;
+
         /* 제목 순 */
         if (OrderType == 1) {
             Collections.sort(mDataset, new Comparator<ToonCard>() {
@@ -59,7 +61,6 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         TextView mPlatform;
         TextView mTitle;
         TextView mAuthor;
-        TextView mUpdate;
         CardView mCardView;
 
         ViewHolder(View itemView) {
@@ -89,6 +90,8 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ToonListAdapter.ViewHolder holder, int position){
         holder.mImageView.setImageResource(R.drawable.profile_image_temp);
+
+
         holder.mPlatform.setText(mDataset.get(position).platform);
         switch(mDataset.get(position).platform){
             case "naver":
@@ -103,7 +106,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         }
         holder.mTitle.setText(mDataset.get(position).title);
         holder.mAuthor.setText(mDataset.get(position).author);
-        Log.d("ToonListAdapter", "Put Dataset(" + position + ") " + mDataset.get(position).platform + " " + mDataset.get(position).title);
+        // Log.d("ToonListAdapter", "Put Dataset(" + position + ") " + mDataset.get(position).platform + " " + mDataset.get(position).title);
     }
 
     // getItemCount() 전체 데이터 갯수 리턴
