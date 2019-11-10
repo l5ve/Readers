@@ -59,7 +59,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
         chart.setDrawGridBackground(false);
         chart.setDrawValueAboveBar(false);
-        chart.getDescription().setEnabled(true);
+        chart.getDescription().setEnabled(false);
 
         // change the position of the y-labels
         YAxis leftAxis = chart.getAxisLeft();
@@ -71,13 +71,14 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         for (int i = 0; i < 13; i++) {
             float val = (float) (Math.random());
 
-            if (Math.random() * 100 < 25) {
+            if (Math.random() * 100 > 0) {
                 values.add(new BarEntry(i, val));
             } else {
                 values.add(new BarEntry(i, val));
             }
         }
 
+        /**라벨 지정 외않뒈*/
         final ArrayList<String> xAxisLabel = new ArrayList<>();
         xAxisLabel.add("Mon");
         xAxisLabel.add("Tue");
@@ -105,10 +106,10 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         data.setValueTextSize(10f);
         data.setBarWidth(0.9f);
 
-        chart.setTouchEnabled(true);
+        chart.setTouchEnabled(false);
         chart.setData(data);
         chart.setFitBars(true);
-        chart.animateY(2500);
+        chart.animateY(1000);
         chart.invalidate();
 
         return fv;

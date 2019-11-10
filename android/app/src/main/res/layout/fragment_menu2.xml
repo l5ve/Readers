@@ -57,11 +57,54 @@
         android:layout_width="match_parent"
         android:layout_height="300dp" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
-        android:id="@+id/frag1_day_container"
+        android:id="@+id/webtoon1_container"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/webtoon2_container"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/webtoon3_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-    </FrameLayout>
+        />
 
 </LinearLayout>
