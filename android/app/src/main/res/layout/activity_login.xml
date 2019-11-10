@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryBright2"
+    android:background="@drawable/gradient"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -59,8 +59,8 @@
 
     <ImageButton
         android:id="@+id/loginBtn"
-        android:layout_width="@dimen/spacing_xxxlarge"
-        android:layout_height="@dimen/spacing_xxxlarge"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="end"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -77,14 +77,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/sign_up"
+            android:text="새로운 리더스가 되어주세요! "
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_large"/>
+            android:textSize="15dp"/>
 
         <ImageButton
             android:id="@+id/sign_up_page_Btn"
-            android:layout_width="@dimen/spacing_xxxlarge"
-            android:layout_height="@dimen/spacing_xxxlarge"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:layout_gravity="end"
