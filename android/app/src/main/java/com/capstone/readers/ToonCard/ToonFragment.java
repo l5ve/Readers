@@ -116,7 +116,7 @@ public class ToonFragment extends Fragment {
     }
 
     public void getDayData(String toon_weekday){
-        String is_end = "O";
+        String is_end = "X";
         service.getDayToon(is_end, toon_weekday).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
@@ -144,7 +144,7 @@ public class ToonFragment extends Fragment {
     }
 
     public void getGenreData(String genre_name) {
-        String is_end = "O";
+        String is_end = "X";
         service.getGenreToon(is_end, genre_name).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
