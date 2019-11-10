@@ -1,6 +1,8 @@
 package com.capstone.readers.ToonCard;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +16,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.capstone.readers.MemoCard.MemoListAdapter;
 import com.capstone.readers.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
+import retrofit2.http.Url;
 
 public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHolder> {
     int OrderType; // 1: 제목순, 2: 업데이트순, 3: 연재처순
     Context context;
     private List<ToonCard> mDataset;
+    Bitmap bitmap;
 
     public ToonListAdapter(Context context, ArrayList<ToonCard> Dataset, int OrderType) {
         this.context = context;
@@ -89,8 +100,38 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
     // onBindViewHolder() position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(ToonListAdapter.ViewHolder holder, int position){
-        holder.mImageView.setImageResource(R.drawable.profile_image_temp);
+        final int pos = position;
+        Thread mThread = new Thread(){
+            @Override
+            public void run() {
+                try{
+                    URL url = new URL(mDataset.get(pos).getThumbnail());
 
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.connect();
+
+                    // InputStream 값을 가져와 Bitmap으로 변환
+                    InputStream is = conn.getInputStream();
+                    bitmap = BitmapFactory.decodeStream(is);
+
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
+
+        mThread.start();;
+
+        try {
+            mThread.join();
+            holder.mImageView.setImageBitmap(bitmap);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         holder.mPlatform.setText(mDataset.get(position).platform);
         switch(mDataset.get(position).platform){
