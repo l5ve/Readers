@@ -99,28 +99,25 @@ public class ToonFragment extends Fragment {
 
         if(DayTab) {
             day = ((MyApp) getActivity().getApplication()).getDay();
-            Log.d("ToonFragment", "Argument(Day): " + day);
+            Log.d("ToonFragment", "요일 탭: " + day);
             getDayData(day);
         }
         else if (GenreTab) {
             genre = ((MyApp) getActivity().getApplication()).getGenre();
-            Log.d("ToonFragment", "Argument(Genre): " + genre);
+            Log.d("ToonFragment", "장르 탭: " + genre);
             getGenreData(genre);
         }
         else if (EndTab) {
-            Log.d("ToonFragment", "Argument(End): true");
+            Log.d("ToonFragment", "완결 탭: true");
             getEndData();
-
-            Log.d("ToonFragment", "getEndData 끝났음~~~");
         }
-
-        Log.d("ToonFragment", "Complete getting the dataset(size: " + myDataset.size() + ")");
 
         return fv;
     }
 
     public void getDayData(String toon_weekday){
-        service.getDayToon(toon_weekday).enqueue(new Callback<ArrayList<ToonResponse>>() {
+        String is_end = "O";
+        service.getDayToon(is_end, toon_weekday).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
                 ArrayList<ToonResponse> list = response.body();
@@ -130,7 +127,7 @@ public class ToonFragment extends Fragment {
                     for (int i = 0; i < list.size(); i++) {
                         myDataset.add(list.get(i).getToonCard());
                     }
-                    Log.d("ToonFragment", "getEndToon: put the response data in myDataset(size: " + list.size() + ")");
+                    Log.d("ToonFragment", "Put DayToons in myDataset(size: " + list.size() + ")");
 
                     mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
                     mRecyclerView.setAdapter(mAdapter);
@@ -147,7 +144,8 @@ public class ToonFragment extends Fragment {
     }
 
     public void getGenreData(String genre_name) {
-        service.getGenreToon(genre_name).enqueue(new Callback<ArrayList<ToonResponse>>() {
+        String is_end = "O";
+        service.getGenreToon(is_end, genre_name).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
                 ArrayList<ToonResponse> list = response.body();
@@ -157,7 +155,7 @@ public class ToonFragment extends Fragment {
                     for (int i = 0; i < list.size(); i++) {
                         myDataset.add(list.get(i).getToonCard());
                     }
-                    Log.d("ToonFragment", "getGenreToon: put the response data in myDataset(size: " + list.size() +")");
+                    Log.d("ToonFragment", "Put GenreToons in myDataset(size: " + list.size() + ")");
 
                     mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
                     mRecyclerView.setAdapter(mAdapter);
@@ -187,7 +185,7 @@ public class ToonFragment extends Fragment {
 
                         myDataset.add(list.get(i).getToonCard());
                     }
-                    Log.d("ToonFragment", "getEndToon: put the response data in myDataset(size: " + list.size() + ")");
+                    Log.d("ToonFragment", "Put EndToons in myDataset(size: " + list.size() + ")");
 
                     mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
                     mRecyclerView.setAdapter(mAdapter);

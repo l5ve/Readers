@@ -91,7 +91,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         holder.mImageView.setImageResource(R.drawable.profile_image_temp);
         holder.mPlatform.setText(mDataset.get(position).platform);
         switch(mDataset.get(position).platform){
-            case "네이버웹툰":
+            case "naver":
                 holder.mPlatform.setTextColor(context.getResources().getColor(R.color.NaverGreen));
                 break;
             case "다음웹툰":
