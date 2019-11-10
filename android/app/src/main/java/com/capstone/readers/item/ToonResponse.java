@@ -1,5 +1,6 @@
 package com.capstone.readers.item;
 
+import com.capstone.readers.ToonCard.ToonCard;
 import com.google.gson.annotations.SerializedName;
 
 public class ToonResponse {
@@ -43,5 +44,11 @@ public class ToonResponse {
 
     public String getUpdate() {
         return update;
+    }
+
+    public ToonCard getToonCard() {
+        ToonCard t = new ToonCard(id, title, platform, author, thumbnail, update);
+
+        return t;
     }
 }

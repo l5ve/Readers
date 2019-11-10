@@ -125,25 +125,18 @@ public class ToonFragment extends Fragment {
                 ArrayList<ToonResponse> list = response.body();
 
                 /* list ToonCard 데이터형으로 생성해서 myDataset에 넣기 */
-                String id, title, platform, author, thumbnail, update;
                 if (response.isSuccessful() && list != null) {
-                    if (response.isSuccessful() && list != null) {
-                        for (int i = 0; i < list.size(); i++) {
-                            id = list.get(i).getId();
-                            title = list.get(i).getTitle();
-                            platform = list.get(i).getPlatform();
-                            author = list.get(i).getAuthor();
-                            thumbnail = list.get(i).getThumbnail();
-                            update = list.get(i).getUpdate();
-                            myDataset.add(new ToonCard(id, title, platform, author, thumbnail, update));
-                        }
+                    for (int i = 0; i < list.size(); i++) {
+                        myDataset.add(list.get(i).getToonCard());
                     }
                 }
+                Log.d("ToonFragment", "getEndToon: put the response data in mydataset");
             }
 
             @Override
             public void onFailure(Call<ArrayList<ToonResponse>> call, Throwable t) {
-
+                Log.e("ToonFragment", "getDayData: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
             }
         });
 
@@ -156,20 +149,12 @@ public class ToonFragment extends Fragment {
                 ArrayList<ToonResponse> list = response.body();
 
                 /* list ToonCard 데이터형으로 생성해서 myDataset에 넣기 */
-                String id, title, platform, author, thumbnail, update;
                 if (response.isSuccessful() && list != null) {
-                    if (response.isSuccessful() && list != null) {
-                        for (int i = 0; i < list.size(); i++) {
-                            id = list.get(i).getId();
-                            title = list.get(i).getTitle();
-                            platform = list.get(i).getPlatform();
-                            author = list.get(i).getAuthor();
-                            thumbnail = list.get(i).getThumbnail();
-                            update = list.get(i).getUpdate();
-                            myDataset.add(new ToonCard(id, title, platform, author, thumbnail, update));
-                        }
+                    for (int i = 0; i < list.size(); i++) {
+                        myDataset.add(list.get(i).getToonCard());
                     }
                 }
+                Log.d("ToonFragment", "getGenreToon: put the response data in mydataset");
             }
 
             @Override
@@ -182,25 +167,18 @@ public class ToonFragment extends Fragment {
     }
 
     public void getEndData(){
-        String is_end = "O"; // 알파벳 대문자 오
-
+        String is_end ="O";
         service.getEndToon(is_end).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
                 ArrayList<ToonResponse> list = response.body();
 
                 /* list ToonCard 데이터형으로 생성해서 myDataset에 넣기 */
-                String id, title, platform, author, thumbnail, update;
                 if (response.isSuccessful() && list != null) {
                     for (int i = 0; i < list.size(); i++) {
-                        id = list.get(i).getId();
-                        title = list.get(i).getTitle();
-                        platform = list.get(i).getPlatform();
-                        author = list.get(i).getAuthor();
-                        thumbnail = list.get(i).getThumbnail();
-                        update = list.get(i).getUpdate();
-                        myDataset.add(new ToonCard(id, title, platform, author, thumbnail, update));
+                        myDataset.add(list.get(i).getToonCard());
                     }
+                    Log.d("ToonFragment", "getEndToon: put the response data in mydataset");
                 }
             }
 
