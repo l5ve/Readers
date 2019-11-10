@@ -41,7 +41,7 @@ public class Menu1Fragment2 extends Fragment {
         GenreList.add("감성");
         GenreList.add("개그");
         GenreList.add("드라마");
-        GenreList.add("순정");
+        GenreList.add("로맨스");
         GenreList.add("스릴러");
         GenreList.add("스토리");
         GenreList.add("스포츠");

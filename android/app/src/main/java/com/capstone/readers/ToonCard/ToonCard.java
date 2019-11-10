@@ -16,4 +16,8 @@ public class ToonCard {
         this.thumbnail = thumbnail;
         this.update = update;
     }
+
+    public String getThumbnail(){
+        return thumbnail;
+    }
 }
