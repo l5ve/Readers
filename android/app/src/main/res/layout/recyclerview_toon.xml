@@ -7,9 +7,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/toon_cv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_xsmall"
+        android:layout_width="@dimen/tooncard_width"
+        android:layout_height="@dimen/tooncard_height"
+        android:layout_margin="@dimen/spacing_xsmall2"
         card:cardCornerRadius="5dp">
 
         <LinearLayout
@@ -27,7 +27,7 @@
                 android:id="@+id/toon_cv_platform"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small2"
+                android:textSize="@dimen/text_size_small"
                 android:text="@string/platforms" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_size_large"
+                android:textSize="@dimen/text_size_small2"
                 android:text="@string/title" />
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_xsmall"
                 android:text="@string/author" />
         </LinearLayout>
 

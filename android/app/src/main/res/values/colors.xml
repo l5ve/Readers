@@ -22,6 +22,15 @@
     <color name="DaumBlue">#5f8ffb</color>
     <color name="DaumRed">#e73d3e</color>
     <color name="LezhinRed">#e50020</color>
+    <color name="MrBlueBlue">#00bce4</color>
+    <color name="BufftoonBlue">#00c6d9</color>
+    <color name="BomtoonPink">#ff33ac</color>
+    <color name="BbudingYellow">#ffe85a</color>
+    <color name="KakaopageYellow">#ffd200</color>
+    <color name="ComicaPurple">#8633ff</color>
+    <color name="ComicgtYellow">#ffde00</color>
+    <color name="KtoonYellow">#facc30</color>
+    <color name="ToptoonRed">#dc1e25</color>
 
     <color name="bg_default">#ffffff</color>
 

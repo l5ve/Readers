@@ -75,28 +75,6 @@ public class ToonFragment extends Fragment {
         mLayoutManager = new GridLayoutManager(getContext(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // 리사이클러뷰에 표시할 데이터 리스트 생성
-        myDataset = new ArrayList<>();
-
-        if(DayTab) {
-            day = ((MyApp) getActivity().getApplication()).getDay();
-            Log.d("ToonFragment", "Argument(Day): " + day);
-            getDayData(day);
-        }
-        else if (GenreTab) {
-            genre = ((MyApp) getActivity().getApplication()).getGenre();
-            Log.d("ToonFragment", "Argument(Genre): " + genre);
-            getGenreData(genre);
-        }
-        else if (EndTab) {
-            Log.d("ToonFragment", "Argument(End): true");
-            getEndData();
-        }
-
-        Log.d("ToonMemoFragment", "Get the dataset(size: " + myDataset.size() + ")");
-
-        mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
-        mRecyclerView.setAdapter(mAdapter);
 
         sort_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
@@ -115,6 +93,29 @@ public class ToonFragment extends Fragment {
             }
         });
 
+
+        // 리사이클러뷰에 표시할 데이터 리스트 생성
+        myDataset = new ArrayList<>();
+
+        if(DayTab) {
+            day = ((MyApp) getActivity().getApplication()).getDay();
+            Log.d("ToonFragment", "Argument(Day): " + day);
+            getDayData(day);
+        }
+        else if (GenreTab) {
+            genre = ((MyApp) getActivity().getApplication()).getGenre();
+            Log.d("ToonFragment", "Argument(Genre): " + genre);
+            getGenreData(genre);
+        }
+        else if (EndTab) {
+            Log.d("ToonFragment", "Argument(End): true");
+            getEndData();
+
+            Log.d("ToonFragment", "getEndData 끝났음~~~");
+        }
+
+        Log.d("ToonFragment", "Complete getting the dataset(size: " + myDataset.size() + ")");
+
         return fv;
     }
 
@@ -129,8 +130,11 @@ public class ToonFragment extends Fragment {
                     for (int i = 0; i < list.size(); i++) {
                         myDataset.add(list.get(i).getToonCard());
                     }
+                    Log.d("ToonFragment", "getEndToon: put the response data in myDataset(size: " + list.size() + ")");
+
+                    mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
+                    mRecyclerView.setAdapter(mAdapter);
                 }
-                Log.d("ToonFragment", "getEndToon: put the response data in mydataset");
             }
 
             @Override
@@ -153,8 +157,11 @@ public class ToonFragment extends Fragment {
                     for (int i = 0; i < list.size(); i++) {
                         myDataset.add(list.get(i).getToonCard());
                     }
+                    Log.d("ToonFragment", "getGenreToon: put the response data in myDataset(size: " + list.size() +")");
+
+                    mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
+                    mRecyclerView.setAdapter(mAdapter);
                 }
-                Log.d("ToonFragment", "getGenreToon: put the response data in mydataset");
             }
 
             @Override
@@ -176,9 +183,14 @@ public class ToonFragment extends Fragment {
                 /* list ToonCard 데이터형으로 생성해서 myDataset에 넣기 */
                 if (response.isSuccessful() && list != null) {
                     for (int i = 0; i < list.size(); i++) {
+                        Log.d("ToonFragment", "getEndToon: data(" + i + "): " + list.get(i).getTitle());
+
                         myDataset.add(list.get(i).getToonCard());
                     }
-                    Log.d("ToonFragment", "getEndToon: put the response data in mydataset");
+                    Log.d("ToonFragment", "getEndToon: put the response data in myDataset(size: " + list.size() + ")");
+
+                    mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
+                    mRecyclerView.setAdapter(mAdapter);
                 }
             }
 
