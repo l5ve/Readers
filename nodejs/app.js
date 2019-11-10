@@ -12,16 +12,6 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-
-// connection.connect(); // mysql 연결
-// connection.query('SELECT * from user_info', function(err, rows, fields) {
-//   if (!err)
-//     console.log('The solution is: ', rows);
-//   else
-//     console.log('Error while performing Query.', err);
-// });
-// connection.end();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -37,8 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/toon', require('./routes/toon'));
-app.use('/memo', require('./routes/memo'));
+// app.use('/bookmark', require('./routes/bookmark'));
+// app.use('/episode', require('./routes/episode'));
+// app.use('/memo', require('./routes/memo'));
+// app.use('/subscribe', require('./routes/subscribe'));
+app.use('/toon', require('./routes/toon'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
