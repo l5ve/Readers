@@ -94,6 +94,8 @@
     <string name="foxtoon">폭스툰</string>
     <string name="peanutoon">피너툰</string>
 
+    <string name="toon_server_error">서버 통신 에러 발생</string>
+
     <!-- 3. 마이페이지 -->
     <string name="sir">님</string>
     <string name="profile_edit">프로필 수정</string>
