@@ -21,7 +21,6 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.formatter.StackedValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
@@ -61,54 +60,53 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         // -1. Axis
         YAxis yAxis = chart.getAxisLeft();
         yAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-        chart.getAxisRight().setEnabled(false);
+        yAxis.setDrawLabels(false);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
-        xAxis.setGranularityEnabled(true);
+        xAxis.setGranularityEnabled(true); //
         xAxis.setCenterAxisLabels(true);
         xAxis.setDrawGridLines(false);
+        xAxis.setDrawLabels(true);
 
         // -2. grid property
         chart.setDrawGridBackground(false);
-        yAxis.setDrawLabels(false);
         yAxis.setDrawGridLines(false);
         yAxis.setDrawAxisLine(false);
-        xAxis.setDrawLabels(true);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
-        chart.setDrawValueAboveBar(true);
+
 
         // -3.
-        chart.getDescription().setEnabled(false); // 효력x
+        chart.getDescription().setEnabled(false);
         chart.setNoDataText("데이터가 없습니다");  // 효력x
         chart.setNoDataTextColor(Color.parseColor("#281e42"));
-        chart.setHorizontalFadingEdgeEnabled(true);
-        chart.setTouchEnabled(false);
+        chart.getAxisRight().setEnabled(false);
+        chart.setHorizontalFadingEdgeEnabled(false);
+        chart.setTouchEnabled(true);
+        chart.setDrawValueAboveBar(true); // false면 bar 안으로 값 표시 들어감
 
 
         /** set data */
+
         // -1. Labels
         String[] xAxisLabel = new String[] {"감성", "개그", "드라마", "로맨스", "스릴러", "스토리", "스포츠", "시대극", "옴니버스", "액션", "일상", "에피소드", "판타지"};
         /**
-        ArrayList xAxisLabel = new ArrayList();
-        xAxisLabel.add("Mon");
-        xAxisLabel.add("Tue");
-        xAxisLabel.add("Wed");
-        xAxisLabel.add("Thu");
-        xAxisLabel.add("Fri");
-        xAxisLabel.add("Sat");
-        xAxisLabel.add("Sun");
+         ArrayList xAxisLabel = new ArrayList();
+         xAxisLabel.add("Mon");
+         xAxisLabel.add("Tue");
+         ... 이런 식으로도 가능
          */
         chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabel));
-
-
+        chart.getXAxis().setLabelCount(13);
+        chart.getXAxis().setCenterAxisLabels(false);
         // -2. Data (Temporary)
         ArrayList values = new ArrayList();
         for (int i = 0; i < 13; i++) {
             values.add(new BarEntry(i, (float) i+1));
         }
+
 
 
         BarDataSet set1 = new BarDataSet(values, "선호 장르 통계");
@@ -124,14 +122,17 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         //             or ColorTemplate.VORDIPLOM_COLORS    for 알록달록~~
         BarData data = new BarData(set1);
         /**
-        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-        dataSets.add(set1);
+         굳이 이 방식 안 써도 되는데 혹시 몰라서 넣어둠
 
-        BarData data = new BarData(dataSets);
+         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+         dataSets.add(set1);
+         BarData data = new BarData(dataSets);
          */
-        data.setValueFormatter(new StackedValueFormatter(false, "", 1));
-        data.setValueTextSize(10f);
-        data.setBarWidth(0.9f);
+
+        // 얘는 stack으로 하면 쓰일 것
+        // data.setValueFormatter(new StackedValueFormatter(false, "", 1));
+        data.setValueTextSize(0f);  // y데이터 값 표시 if 0f == hide
+        data.setBarWidth(1f);
 
 
         // need to implement click event listener
@@ -160,11 +161,6 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         return fv;
     }
 
-    // 설정값을 불러오는 함수
-    private void load() {
-        name = ((MyApp) getActivity().getApplication()).getUser_name();
-    }
-
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
@@ -179,7 +175,5 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
-
-
 
 }
