@@ -5,7 +5,7 @@ import android.os.StrictMode;
 
 /**
  * 앱 전역에서 사용할 수 있는 클래스
- * Application 클래스를 상속하고 있으며
+ * Application 클래스를 상속
  */
 public class MyApp extends Application {
     private String user_id;

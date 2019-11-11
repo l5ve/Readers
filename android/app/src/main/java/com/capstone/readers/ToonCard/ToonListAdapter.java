@@ -45,7 +45,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         if (OrderType == 1) {
             Collections.sort(mDataset, new Comparator<ToonCard>() {
                 public int compare(ToonCard o1, ToonCard o2) {
-                    return o1.title.compareTo(o2.title);
+                    return o1.getTitle().compareTo(o2.getTitle());
                 }
             });
         }
@@ -53,7 +53,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         else if (OrderType == 2) {
             Collections.sort(mDataset, new Comparator<ToonCard>() {
                 public int compare(ToonCard o1, ToonCard o2) {
-                    return o2.update.compareTo(o1.update);
+                    return o2.getUpdate().compareTo(o1.getUpdate());
                 }
             });
         }
@@ -61,7 +61,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         else if (OrderType == 3) {
             Collections.sort(mDataset, new Comparator<ToonCard>() {
                 public int compare(ToonCard o1, ToonCard o2) {
-                    return o1.platform.compareTo(o2.platform);
+                    return o1.getPlatform().compareTo(o2.getPlatform());
                 }
             });
         }
@@ -133,8 +133,8 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
             e.printStackTrace();
         }
 
-        holder.mPlatform.setText(mDataset.get(position).platform);
-        switch(mDataset.get(position).platform){
+        holder.mPlatform.setText(mDataset.get(position).getPlatform());
+        switch(mDataset.get(position).getPlatform()){
             case "naver":
                 holder.mPlatform.setText("NAVER");
                 holder.mPlatform.setTextColor(context.getResources().getColor(R.color.NaverGreen));
@@ -146,8 +146,8 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
                 holder.mPlatform.setTextColor(context.getResources().getColor(R.color.LezhinRed));
                 break;
         }
-        holder.mTitle.setText(mDataset.get(position).title);
-        holder.mAuthor.setText(mDataset.get(position).author);
+        holder.mTitle.setText(mDataset.get(position).getTitle());
+        holder.mAuthor.setText(mDataset.get(position).getAuthor());
         // Log.d("ToonListAdapter", "Put Dataset(" + position + ") " + mDataset.get(position).platform + " " + mDataset.get(position).title);
     }
 
