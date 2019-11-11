@@ -3,6 +3,8 @@ package com.capstone.readers;
 import android.app.Application;
 import android.os.StrictMode;
 
+import java.util.ArrayList;
+
 /**
  * 앱 전역에서 사용할 수 있는 클래스
  * Application 클래스를 상속
@@ -15,6 +17,7 @@ public class MyApp extends Application {
     private int subs_num;
     private int bookmark_num;
     private int memo_num;
+    private int[] genre_preference;
 
     private boolean login_naver;
     private boolean login_daum;
@@ -39,6 +42,11 @@ public class MyApp extends Application {
     private String day;
     private String genre;
 
+    public final int genre_choice_score = 100;
+    public final int hide_score = 10;
+    public final int subscribe_score = 10;
+    public final int bookmark_score = 1;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -51,6 +59,7 @@ public class MyApp extends Application {
         bookmark_num = 0;
         memo_num = 0;
 
+        genre_preference = new int[13];
     }
 
     public void initialize(){
