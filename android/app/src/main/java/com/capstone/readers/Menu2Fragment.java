@@ -1,6 +1,7 @@
 package com.capstone.readers;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,6 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.StackedValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -57,9 +57,13 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         // Retrive chart on Fragment
         HorizontalBarChart chart = (HorizontalBarChart) fv.findViewById(R.id.chart);
 
+        // settings
         chart.setDrawGridBackground(false);
-        chart.setDrawValueAboveBar(false);
-        chart.getDescription().setEnabled(false);
+        chart.setDrawValueAboveBar(true);
+        chart.getDescription().setEnabled(false); // 효력x
+        chart.setNoDataText("데이터가 없습니다");  // 효력x
+        chart.setNoDataTextColor(Color.parseColor("#281e42"));
+        chart.setHorizontalFadingEdgeEnabled(true);
 
         // change the position of the y-labels
         YAxis leftAxis = chart.getAxisLeft();
@@ -94,9 +98,17 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
         BarDataSet set1;
         set1 = new BarDataSet(values, "선호 장르 통계");
-        set1.setStackLabels(new String[]{"Births", "Divorces", "Marriages"});
-        set1.setColors(ColorTemplate.MATERIAL_COLORS);
+        // ?  set1.setStackLabels(new String[]{"Births", "Divorces", "Marriages"});
 
+        // Setting bar colors
+        set1.setColors(new int[] {  Color.parseColor("#281e42"),
+                                    Color.parseColor("#493e5f"),
+                                    Color.parseColor("#6a617c"),
+                                    Color.parseColor("#8e869c"),
+                                    Color.parseColor("#b2adbc"),
+                                    Color.parseColor("#d8d5dd")
+                                });
+        // set1.setColors(ColorTemplate.MATERIAL_COLORS); // or ColorTemplate.VORDIPLOM_COLORS
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
         dataSets.add(set1);
