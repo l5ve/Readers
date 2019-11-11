@@ -1,6 +1,5 @@
 package com.capstone.readers;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,14 +20,13 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.StackedValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /** 2번째 메뉴인 추천페이지 화면을 나타내는 프래그먼트
  *
@@ -37,7 +35,6 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
     private String name;
     private TextView profile_name;
-    private SharedPreferences appData;
 
 
     @Override
@@ -50,47 +47,46 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_menu2, container, false);
 
-        // 설정값 불러오기
-        appData = this.getActivity().getSharedPreferences("appData", MODE_PRIVATE);
-        load();
+        // Get Username
+        name = ((MyApp) getActivity().getApplication()).getUser_name();
         profile_name = (TextView) fv.findViewById(R.id.profile_name);
         profile_name.setText(name);
 
 
         /************************* 아래 부터 선호 장르 통계 그래프 표시 */
-        // Retrive chart on Fragment
+
+        /** Retrive chart on Fragment*/
         HorizontalBarChart chart = (HorizontalBarChart) fv.findViewById(R.id.chart);
 
-        // settings
+        /** settings */
+        // -1. Axis
+        YAxis yAxis = chart.getAxisLeft();
+        yAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        chart.getAxisRight().setEnabled(false);
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.TOP);
+
+        // -2. grid property
         chart.setDrawGridBackground(false);
+        yAxis.setDrawLabels(false);
+        yAxis.setDrawGridLines(false);
+        yAxis.setDrawAxisLine(false);
+        xAxis.setDrawLabels(false);
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(false);
         chart.setDrawValueAboveBar(true);
+
+        // -3.
         chart.getDescription().setEnabled(false); // 효력x
         chart.setNoDataText("데이터가 없습니다");  // 효력x
         chart.setNoDataTextColor(Color.parseColor("#281e42"));
         chart.setHorizontalFadingEdgeEnabled(true);
 
-        // change the position of the y-labels
-        YAxis leftAxis = chart.getAxisLeft();
-        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-        leftAxis.setDrawLabels(false);
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setDrawAxisLine(false);
-        chart.getAxisRight().setEnabled(false);
 
-        // set data
-        ArrayList<BarEntry> values = new ArrayList<BarEntry>();
-        for (int i = 0; i < 13; i++) {
-            float val = (float) (Math.random());
-
-            if (Math.random() * 100 > 0) {
-                values.add(new BarEntry(i, val));
-            } else {
-                values.add(new BarEntry(i, val));
-            }
-        }
-
-        /**라벨 지정 외않뒈*/
-        final ArrayList<String> xAxisLabel = new ArrayList<>();
+        /** set data */
+        // -1. Labels
+        ArrayList xAxisLabel = new ArrayList();
         xAxisLabel.add("Mon");
         xAxisLabel.add("Tue");
         xAxisLabel.add("Wed");
@@ -98,17 +94,18 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         xAxisLabel.add("Fri");
         xAxisLabel.add("Sat");
         xAxisLabel.add("Sun");
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisLabel));
 
-        XAxis xLabels = chart.getXAxis();
-        xLabels.setDrawLabels(false);
-        xLabels.setDrawGridLines(false);
-        xLabels.setPosition(XAxis.XAxisPosition.TOP);
-        xLabels.setDrawAxisLine(false);
+
+        // -2. Data (Temporary)
+        ArrayList values = new ArrayList();
+        for (int i = 0; i < 13; i++) {
+            values.add(new BarEntry(i, (float) i+1));
+        }
+
 
         BarDataSet set1;
         set1 = new BarDataSet(values, "선호 장르 통계");
-        // ?  set1.setStackLabels(new String[]{"Births", "Divorces", "Marriages"});
-
         // Setting bar colors
         set1.setColors(new int[] {  Color.parseColor("#281e42"),
                                     Color.parseColor("#493e5f"),
@@ -117,7 +114,8 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
                                     Color.parseColor("#b2adbc"),
                                     Color.parseColor("#d8d5dd")
                                 });
-        // set1.setColors(ColorTemplate.MATERIAL_COLORS); // or ColorTemplate.VORDIPLOM_COLORS
+        // set1.setColors(ColorTemplate.MATERIAL_COLORS);
+        //             or ColorTemplate.VORDIPLOM_COLORS    for 알록달록~~
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
         dataSets.add(set1);
