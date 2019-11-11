@@ -14,25 +14,28 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="vertical"
             android:layout_margin="@dimen/spacing_medium">
 
             <ImageView
                 android:id="@+id/toon_cv_image"
                 android:layout_width="@dimen/cardview_toon_thumbnail"
-                android:layout_height="@dimen/cardview_toon_thumbnail"/>
+                android:layout_height="@dimen/cardview_toon_thumbnail"
+                android:layout_marginVertical="@dimen/spacing_small"/>
 
             <TextView
                 android:id="@+id/toon_cv_platform"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_small2"
+                android:textStyle="bold"
                 android:text="@string/platforms" />
 
             <TextView
                 android:id="@+id/toon_cv_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_size_medium"

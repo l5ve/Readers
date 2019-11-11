@@ -136,6 +136,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         holder.mPlatform.setText(mDataset.get(position).platform);
         switch(mDataset.get(position).platform){
             case "naver":
+                holder.mPlatform.setText("NAVER");
                 holder.mPlatform.setTextColor(context.getResources().getColor(R.color.NaverGreen));
                 break;
             case "다음웹툰":
