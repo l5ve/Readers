@@ -23,7 +23,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.StackedValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
@@ -65,14 +64,18 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         chart.getAxisRight().setEnabled(false);
 
         XAxis xAxis = chart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.TOP);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(1f);
+        xAxis.setGranularityEnabled(true);
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setDrawGridLines(false);
 
         // -2. grid property
         chart.setDrawGridBackground(false);
         yAxis.setDrawLabels(false);
         yAxis.setDrawGridLines(false);
         yAxis.setDrawAxisLine(false);
-        xAxis.setDrawLabels(false);
+        xAxis.setDrawLabels(true);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
         chart.setDrawValueAboveBar(true);
@@ -82,10 +85,13 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         chart.setNoDataText("데이터가 없습니다");  // 효력x
         chart.setNoDataTextColor(Color.parseColor("#281e42"));
         chart.setHorizontalFadingEdgeEnabled(true);
+        chart.setTouchEnabled(false);
 
 
         /** set data */
         // -1. Labels
+        String[] xAxisLabel = new String[] {"감성", "개그", "드라마", "로맨스", "스릴러", "스토리", "스포츠", "시대극", "옴니버스", "액션", "일상", "에피소드", "판타지"};
+        /**
         ArrayList xAxisLabel = new ArrayList();
         xAxisLabel.add("Mon");
         xAxisLabel.add("Tue");
@@ -94,7 +100,8 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         xAxisLabel.add("Fri");
         xAxisLabel.add("Sat");
         xAxisLabel.add("Sun");
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisLabel));
+         */
+        chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabel));
 
 
         // -2. Data (Temporary)
@@ -104,8 +111,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         }
 
 
-        BarDataSet set1;
-        set1 = new BarDataSet(values, "선호 장르 통계");
+        BarDataSet set1 = new BarDataSet(values, "선호 장르 통계");
         // Setting bar colors
         set1.setColors(new int[] {  Color.parseColor("#281e42"),
                                     Color.parseColor("#493e5f"),
@@ -116,16 +122,17 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
                                 });
         // set1.setColors(ColorTemplate.MATERIAL_COLORS);
         //             or ColorTemplate.VORDIPLOM_COLORS    for 알록달록~~
-
+        BarData data = new BarData(set1);
+        /**
         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
         dataSets.add(set1);
 
         BarData data = new BarData(dataSets);
+         */
         data.setValueFormatter(new StackedValueFormatter(false, "", 1));
         data.setValueTextSize(10f);
         data.setBarWidth(0.9f);
 
-        chart.setTouchEnabled(false);
 
         // need to implement click event listener
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -144,7 +151,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
             }
         });
 
-
+        chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabel));
         chart.setData(data);
         chart.setFitBars(true);
         chart.animateY(1000);
@@ -172,4 +179,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
+
+
+
 }
