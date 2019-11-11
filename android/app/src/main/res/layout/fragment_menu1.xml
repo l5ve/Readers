@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/gradient_r">
+        android:background="@drawable/gradient">
 
         <ImageView
             android:layout_width="@dimen/text_size_xlarge3"
