@@ -3,6 +3,7 @@ package com.capstone.readers;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,11 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.StackedValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 
@@ -68,6 +72,9 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         // change the position of the y-labels
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        leftAxis.setDrawLabels(false);
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setDrawAxisLine(false);
         chart.getAxisRight().setEnabled(false);
 
         // set data
@@ -93,8 +100,10 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         xAxisLabel.add("Sun");
 
         XAxis xLabels = chart.getXAxis();
+        xLabels.setDrawLabels(false);
+        xLabels.setDrawGridLines(false);
         xLabels.setPosition(XAxis.XAxisPosition.TOP);
-
+        xLabels.setDrawAxisLine(false);
 
         BarDataSet set1;
         set1 = new BarDataSet(values, "선호 장르 통계");
@@ -119,6 +128,25 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         data.setBarWidth(0.9f);
 
         chart.setTouchEnabled(false);
+
+        // need to implement click event listener
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                // fire up event
+                e.getData();
+                Log.d("VAL SELECTED",
+                        "Value: " + e.getY() + ", xIndex: " + e.getX()
+                                + ", DataSet index: " + h.getDataSetIndex());
+            }
+
+            @Override
+            public void onNothingSelected() {
+                Log.d("BAR_CHART_SAMPLE", "nothing selected X is ");
+            }
+        });
+
+
         chart.setData(data);
         chart.setFitBars(true);
         chart.animateY(1000);
