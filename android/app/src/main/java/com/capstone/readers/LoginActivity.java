@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // 이전에 로그인 정보를 저장시킨 기록이 있다면
-        if (((MyApp) getApplication()).getSavedData()) {
+        if (saveLoginData) {
             idText.setText(saved_id);
             pwdText.setText(saved_pw);
             checkBox.setChecked(true);
@@ -155,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             save(false);
                         }
+                        MyToast.l(getApplicationContext(), result.getMessage());
                         ((MyApp) getApplication()).setUser_name(result.getName().trim());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);

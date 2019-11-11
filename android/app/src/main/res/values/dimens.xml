@@ -29,7 +29,7 @@
     <dimen name="text_size_xlarge2">36sp</dimen>
     <dimen name="text_size_xlarge3">42sp</dimen>
 
-    <dimen name="manage_login_text">15sp</dimen>
+    <dimen name="manage_login_text">18sp</dimen>
 
     <dimen name="text_box1">110sp</dimen>
 

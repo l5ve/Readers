@@ -20,7 +20,6 @@ import java.util.List;
 
 public class PermissionActivity extends AppCompatActivity {
     private static final int PERMISSION_MULTI_CODE=100;
-    Toast MyToast;
 
     /**
      * 화면 구성 후 SDK 버전과 권한에 따른 처리를 한다.
