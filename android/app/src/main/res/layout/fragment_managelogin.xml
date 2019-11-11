@@ -80,6 +80,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/app_name"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -119,6 +120,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/naver"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -159,6 +161,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/daum"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -198,6 +201,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/lezhin"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -237,6 +241,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/mrblue"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -275,6 +280,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/bufftoon"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -314,6 +320,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/bomtoon"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -352,6 +359,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/bbuding"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -391,6 +399,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/kakaopage"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -429,6 +438,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/comica"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -468,6 +478,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/comicgt"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -506,6 +517,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/ktoon"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -545,6 +557,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/toptoon"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -584,6 +597,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/toomics"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -623,6 +637,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/foxtoon"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
@@ -661,6 +676,7 @@
                     android:layout_marginHorizontal="@dimen/spacing_small2"
                     android:gravity="left"
                     android:text="@string/peanutoon"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/manage_login_text" />
 
                 <Switch
