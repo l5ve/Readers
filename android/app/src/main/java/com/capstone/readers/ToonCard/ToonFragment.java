@@ -51,6 +51,7 @@ public class ToonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_toon, container, false);
@@ -131,6 +132,7 @@ public class ToonFragment extends Fragment {
 
                     mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
                     mRecyclerView.setAdapter(mAdapter);
+
                 }
             }
 

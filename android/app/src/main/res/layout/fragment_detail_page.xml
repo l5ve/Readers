@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_page_height"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/spacing_medium"
+        android:layout_marginHorizontal="@dimen/spacing_large">
+
+        <ImageView
+            android:id="@+id/detail_page_thumbnail"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/cardview_big_thumbnail"
+            android:layout_height="@dimen/cardview_big_thumbnail"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/detail_page_platform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small2"
+                android:textStyle="bold"
+                android:text="@string/platforms" />
+
+            <TextView
+                android:id="@+id/detail_page_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_medium"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/title" />
+
+            <TextView
+                android:id="@+id/detail_page_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/author" />
+
+            <TextView
+                android:id="@+id/detail_page_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small2"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/detail_page_description" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detail_page_genre_btn"
+                android:orientation="horizontal">
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/episode_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

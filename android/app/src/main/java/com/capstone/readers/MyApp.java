@@ -47,6 +47,8 @@ public class MyApp extends Application {
     public final int subscribe_score = 10;
     public final int bookmark_score = 1;
 
+    private String detail_page_id;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -305,5 +307,13 @@ public class MyApp extends Application {
 
     public String getGenre() {
         return genre;
+    }
+
+    public String getDetail_page_id() {
+        return detail_page_id;
+    }
+
+    public void setDetail_page_id(String id) {
+        this.detail_page_id = id;
     }
 }
