@@ -3,6 +3,7 @@ package com.capstone.readers.ToonCard;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.capstone.readers.EpisodeCard.EpisodeFragment;
+import com.capstone.readers.MainActivity;
 import com.capstone.readers.MemoCard.MemoListAdapter;
+import com.capstone.readers.Menu1Fragment;
+import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 
 import java.io.IOException;
@@ -31,6 +39,8 @@ import java.util.logging.LogRecord;
 import retrofit2.http.Url;
 
 public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHolder> {
+
+
     int OrderType; // 1: 제목순, 2: 업데이트순, 3: 연재처순
     Context context;
     private List<ToonCard> mDataset;
@@ -100,6 +110,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
     // onBindViewHolder() position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(ToonListAdapter.ViewHolder holder, int position){
+        final ToonCard item = mDataset.get(position);
         final int pos = position;
         Thread mThread = new Thread(){
             @Override
@@ -148,7 +159,12 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         }
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mAuthor.setText(mDataset.get(position).getAuthor());
-        // Log.d("ToonListAdapter", "Put Dataset(" + position + ") " + mDataset.get(position).platform + " " + mDataset.get(position).title);
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     // getItemCount() 전체 데이터 갯수 리턴
@@ -156,4 +172,5 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
     public int getItemCount() {
         return mDataset.size();
     }
+
 }

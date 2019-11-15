@@ -6,6 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
+import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.ToonResponse;
 import com.capstone.readers.item.JoinResponse;
 import com.capstone.readers.item.JoinData;
@@ -36,4 +37,11 @@ public interface ServiceApi {
 
     @GET("/toon/endlist")
     Call<ArrayList<ToonResponse>> getEndToon(@Query("is_end") String is_end);
+
+    @POST("/toon/detail")
+    Call<DetailPageResponse> getDetailPage(@Body String toon_id);
+
+    @GET("/toon/detailGenres")
+    Call<ArrayList<String>> getDetailGenres(@Query("toon_id") String toon_id);
+
 }
