@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.ToonCard.ToonFragment;
 import com.capstone.readers.ToonCard.ToonListAdapter;
 import com.capstone.readers.lib.MyLog;
@@ -91,4 +92,5 @@ public class Menu1Fragment1 extends Fragment {
             childFt.commit();
         }
     }
+
 }

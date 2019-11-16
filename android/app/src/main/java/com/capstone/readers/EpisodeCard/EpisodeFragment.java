@@ -72,14 +72,14 @@ public class EpisodeFragment extends Fragment {
         mAuthor = (TextView) fv.findViewById(R.id.detail_page_author);
         mDesc = (TextView) fv.findViewById(R.id.detail_page_desc);
 
-        getDetailData(id);
+        //getDetailData(id);
         genres = new ArrayList<String>();
 
-        if(!getMainData) {
-            return fv;
-        }
+        //if(!getMainData) {
+        //    return fv;
+        //}
 
-        getDetailGenresData(id);
+        //getDetailGenresData(id);
 
 
 

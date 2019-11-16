@@ -9,10 +9,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
+import com.capstone.readers.OnItemClick;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
@@ -25,7 +28,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ToonFragment extends Fragment {
+public class ToonFragment extends Fragment implements OnItemClick {
+
+    @Override
+    public void onClick (String toon_id){
+        Fragment fg = EpisodeFragment.newInstance();
+        setDetailPageFragment(fg, toon_id);
+    }
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -82,14 +92,11 @@ public class ToonFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId){
                 String result;
                 if(checkedId == R.id.toon_sort_title){
-                    mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
-                    mRecyclerView.setAdapter(mAdapter);
+                    setAdapter(1);
                 } else if(checkedId == R.id.toon_sort_update) {
-                    mAdapter = new ToonListAdapter(getContext(), myDataset, 2);
-                    mRecyclerView.setAdapter(mAdapter);
+                    setAdapter(2);
                 } else if(checkedId == R.id.toon_sort_platform) {
-                    mAdapter = new ToonListAdapter(getContext(), myDataset, 3);
-                    mRecyclerView.setAdapter(mAdapter);
+                    setAdapter(3);
                 }
             }
         });
@@ -116,6 +123,11 @@ public class ToonFragment extends Fragment {
         return fv;
     }
 
+    public void setAdapter(int ordertype) {
+        mAdapter = new ToonListAdapter(getContext(), myDataset, ordertype, this);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
     public void getDayData(String toon_weekday){
         String is_end = "X";
         service.getDayToon(is_end, toon_weekday).enqueue(new Callback<ArrayList<ToonResponse>>() {
@@ -130,8 +142,7 @@ public class ToonFragment extends Fragment {
                     }
                     Log.d("ToonFragment", "Put DayToons in myDataset(size: " + list.size() + ")");
 
-                    mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
-                    mRecyclerView.setAdapter(mAdapter);
+                    setAdapter(1);
 
                 }
             }
@@ -158,8 +169,7 @@ public class ToonFragment extends Fragment {
                     }
                     Log.d("ToonFragment", "Put GenreToons in myDataset(size: " + list.size() + ")");
 
-                    mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
-                    mRecyclerView.setAdapter(mAdapter);
+                    setAdapter(1);
                 }
             }
 
@@ -188,8 +198,7 @@ public class ToonFragment extends Fragment {
                     }
                     Log.d("ToonFragment", "Put EndToons in myDataset(size: " + list.size() + ")");
 
-                    mAdapter = new ToonListAdapter(getContext(), myDataset, 1);
-                    mRecyclerView.setAdapter(mAdapter);
+                    setAdapter(1);
                 }
             }
 
@@ -199,5 +208,17 @@ public class ToonFragment extends Fragment {
                 MyToast.s(getContext(), getString(R.string.toon_server_error));
             }
         });
+    }
+
+    private void setDetailPageFragment(Fragment child, String toon_id) {
+        FragmentTransaction childFt = getChildFragmentManager().beginTransaction();
+
+        ((MyApp) getActivity().getApplication()).setDetail_page_id(toon_id);
+
+        if(!child.isAdded()) {
+            childFt.replace(R.id.frag1_day_container,  child);
+            childFt.addToBackStack(null);
+            childFt.commit();
+        }
     }
 }

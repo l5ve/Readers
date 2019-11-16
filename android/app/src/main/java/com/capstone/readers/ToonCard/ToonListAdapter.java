@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -22,6 +23,7 @@ import com.capstone.readers.MainActivity;
 import com.capstone.readers.MemoCard.MemoListAdapter;
 import com.capstone.readers.Menu1Fragment;
 import com.capstone.readers.MyApp;
+import com.capstone.readers.OnItemClick;
 import com.capstone.readers.R;
 
 import java.io.IOException;
@@ -40,16 +42,17 @@ import retrofit2.http.Url;
 
 public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHolder> {
 
-
     int OrderType; // 1: 제목순, 2: 업데이트순, 3: 연재처순
     Context context;
     private List<ToonCard> mDataset;
     Bitmap bitmap;
+    private OnItemClick mCallback;
 
-    public ToonListAdapter(Context context, ArrayList<ToonCard> Dataset, int OrderType) {
+    public ToonListAdapter(Context context, ArrayList<ToonCard> Dataset, int OrderType, OnItemClick listener) {
         this.context = context;
         mDataset = Dataset;
         this.OrderType = OrderType;
+        this.mCallback = listener;
 
         /* 제목 순 */
         if (OrderType == 1) {
@@ -93,6 +96,18 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
             mTitle = itemView.findViewById(R.id.toon_cv_title);
             mAuthor = itemView.findViewById(R.id.toon_cv_author);
             mCardView = itemView.findViewById(R.id.toon_cv);
+
+            mCardView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    ((MyApp) context.getApplicationContext()).setDetail_page_id(/* 이거 넣기*/);
+                    Fragment fg = EpisodeFragment.newInstance();
+                    FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.replace(R.id.frag1_day_container, fg).commit();
+                }
+
+            });
         }
     }
 
