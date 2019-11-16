@@ -27,11 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/bookmark', require('./routes/bookmark'));
-// app.use('/episode', require('./routes/episode'));
-// app.use('/memo', require('./routes/memo'));
-// app.use('/subscribe', require('./routes/subscribe'));
+app.use('/bookmark', require('./routes/bookmark'));
+app.use('/memo', require('./routes/memo'));
+app.use('/subscribe', require('./routes/subscribe'));
 app.use('/toon', require('./routes/toon'));
+app.use('/block', require('./routes/block'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
