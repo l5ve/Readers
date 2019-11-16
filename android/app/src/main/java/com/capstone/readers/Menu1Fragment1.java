@@ -47,7 +47,6 @@ public class Menu1Fragment1 extends Fragment {
         DayList.add("sat");
         DayList.add("sun");
 
-        // Initialize the tablayout
         tabLayout = (TabLayout) fv.findViewById(R.id.webtoon_day_tab);
 
         // 기본 화면으로 월요일 웹툰

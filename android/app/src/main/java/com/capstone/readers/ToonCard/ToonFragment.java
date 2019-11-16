@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,6 +55,7 @@ public class ToonFragment extends Fragment {
     private int indicator;
     final int paging = 12;
 
+
     public static ToonFragment newInstance() {
         return new ToonFragment();
     }
@@ -73,6 +73,9 @@ public class ToonFragment extends Fragment {
 
         order_by = "name";
         indicator = 0;
+
+        /* RecyclerView에 표시할 데이터 리스트 생성 */
+        myDataset = new ArrayList<>();
 
         /* 요일/장르/완결 탭 구분 */
         DayTab = ((MyApp) getActivity().getApplication()).getDayTab();
@@ -98,7 +101,9 @@ public class ToonFragment extends Fragment {
             public void onScrollStateChanged (RecyclerView recyclerView, int newState) {
                 if (!mRecyclerView.canScrollVertically(1)){
                     Log.d("ToonFragment", "End of list");
-                    addMoreItem();
+                    if (indicator < list.size()){
+                        addMoreItem();
+                    }
                 }
             }
         });
@@ -111,16 +116,15 @@ public class ToonFragment extends Fragment {
                 if(checkedId == R.id.toon_sort_title){
                     order_by = "name";
                 } else if(checkedId == R.id.toon_sort_update) {
-                    order_by = "site";
-                } else if(checkedId == R.id.toon_sort_platform) {
                     order_by = "update";
+                } else if(checkedId == R.id.toon_sort_platform) {
+                    order_by = "site";
                 }
+                myDataset.clear();
                 getData();
             }
         });
 
-        /* RecyclerView에 표시할 데이터 리스트 생성 */
-        myDataset = new ArrayList<>();
 
         getData();
 
@@ -161,9 +165,11 @@ public class ToonFragment extends Fragment {
                 list = response.body();
 
                 if (response.isSuccessful() && list != null) {
-                    for (int i = 0; i < paging; i++) {
+                    int i;
+                    for (i = 0; i < paging && i < list.size(); i++) {
                        myDataset.add(list.get(i).getToonCard());
                     }
+                    indicator = i;
                     Log.d("ToonFragment", "Put DayToons in myDataset(size: " + list.size() + ")");
 
                     setAdapter();
@@ -188,9 +194,11 @@ public class ToonFragment extends Fragment {
 
                 /* ArrayList ToonCard 데이터형으로 생성해서 totalDataset에 넣기 */
                 if (response.isSuccessful() && list != null) {
-                    for (int i = 0; i < paging; i++) {
+                    int i;
+                    for (i = 0; i < paging && i < list.size(); i++) {
                         myDataset.add(list.get(i).getToonCard());
                     }
+                    indicator = i;
                     Log.d("ToonFragment", "Put GenreToons in myDataset(size: " + list.size() + ")");
 
                     setAdapter();
@@ -215,9 +223,11 @@ public class ToonFragment extends Fragment {
 
                 /* ArrayList ToonCard 데이터형으로 생성해서 totalDataset에 넣기 */
                 if (response.isSuccessful() && list != null) {
-                    for (int i = 0; i < paging; i++) {
+                    int i;
+                    for (i = 0; i < paging && i < list.size(); i++) {
                         myDataset.add(list.get(i).getToonCard());
                     }
+                    indicator = i;
                     Log.d("ToonFragment", "Put EndToons in myDataset(size: " + list.size() + ")");
 
                     setAdapter();

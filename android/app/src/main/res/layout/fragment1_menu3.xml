@@ -6,12 +6,13 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/mypage_day"
+        android:id="@+id/mypage_day_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryBright4"
+        app:tabBackground="@drawable/tab_custom"
         app:tabTextColor="@color/colorWhite"
-        app:tabIndicatorColor="@color/colorPrimary">
+        app:tabIndicatorColor="@color/colorPrimaryBright2">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -48,13 +49,18 @@
             android:layout_height="wrap_content"
             android:text="@string/sunday" />
 
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_end" />
+
     </com.google.android.material.tabs.TabLayout>
 
-    <TextView
-        android:id="@+id/textView3"
+    <FrameLayout
+        android:id="@+id/frag3_day_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_large"
-        android:text="구독한 웹툰이 표시되는 화면" />
+        android:layout_height="match_parent"
+        >
+    </FrameLayout>
 
 </LinearLayout>
