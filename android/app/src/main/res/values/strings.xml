@@ -143,4 +143,6 @@
     <string name="detail_page_description">작품 설명</string>
     <string name="null_body">body값이 null입니다.</string>
 
+    <string name="update">업데이트 날짜</string>
+
 </resources>

@@ -10,13 +10,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apollographql.apollo.interceptor.ApolloInterceptor;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.ServiceApi;
+import com.capstone.readers.ToonCard.ToonListAdapter;
 import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.lib.MyToast;
 
@@ -31,7 +35,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/* 각 웹툰의 회차정보를 표시하는 Fragment */
 public class EpisodeFragment extends Fragment {
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -72,8 +78,19 @@ public class EpisodeFragment extends Fragment {
         mAuthor = (TextView) fv.findViewById(R.id.detail_page_author);
         mDesc = (TextView) fv.findViewById(R.id.detail_page_desc);
 
+        mRecyclerView = (RecyclerView) fv.findViewById(R.id.episode_list);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        myDataset = new ArrayList<>();
+        String temp = ((MyApp) getActivity().getApplication()).getTemp();
+        mTitle.setText(temp);
+        myDataset.add(new EpisodeCard("0", "0", temp + " 1화", "2019-01-01"));
+
+        setAdapter();
         //getDetailData(id);
-        genres = new ArrayList<String>();
+        //genres = new ArrayList<String>();
+
 
         //if(!getMainData) {
         //    return fv;
@@ -84,6 +101,40 @@ public class EpisodeFragment extends Fragment {
 
 
         return fv;
+    }
+
+    public void setAdapter() {
+        mAdapter = new EpisodeListAdapter(getContext(), myDataset);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("EpisodeFragment", "onPause(): deleteeeeeeeeeeeeeeeeeee");
+        AppCompatActivity aca = (AppCompatActivity) getContext();
+        aca.getSupportFragmentManager().beginTransaction().remove(this).commit();
+//        FragmentTransaction ft = getParentFragment().getChildFragmentManager().beginTransaction();
+//        ft.remove(this);
+//        ft.commit();
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("EpisodeFragment", "onStop(): deleteeeeeeeeeeeeeeeeeee");
+        AppCompatActivity aca = (AppCompatActivity) getContext();
+        aca.getSupportFragmentManager().beginTransaction().remove(this).commit();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Log.d("EpisodeFragment", "onDestroyView(): deleteeeeeeeeeeeeeeeeeee");
+        AppCompatActivity aca = (AppCompatActivity) getContext();
+        aca.getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 
     public void getDetailGenresData(String toon_id) {

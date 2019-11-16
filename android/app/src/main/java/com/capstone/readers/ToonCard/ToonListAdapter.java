@@ -3,7 +3,6 @@ package com.capstone.readers.ToonCard;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +13,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.EpisodeCard.EpisodeFragment;
-import com.capstone.readers.MainActivity;
-import com.capstone.readers.MemoCard.MemoListAdapter;
-import com.capstone.readers.Menu1Fragment;
 import com.capstone.readers.MyApp;
-import com.capstone.readers.OnItemClick;
 import com.capstone.readers.R;
 
 import java.io.IOException;
@@ -35,24 +28,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-
-import retrofit2.http.Url;
 
 public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHolder> {
-
     int OrderType; // 1: 제목순, 2: 업데이트순, 3: 연재처순
     Context context;
     private List<ToonCard> mDataset;
     Bitmap bitmap;
-    private OnItemClick mCallback;
 
-    public ToonListAdapter(Context context, ArrayList<ToonCard> Dataset, int OrderType, OnItemClick listener) {
+    public ToonListAdapter(Context context, ArrayList<ToonCard> Dataset, int OrderType) {
         this.context = context;
         mDataset = Dataset;
         this.OrderType = OrderType;
-        this.mCallback = listener;
 
         /* 제목 순 */
         if (OrderType == 1) {
@@ -100,11 +86,12 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
             mCardView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    ((MyApp) context.getApplicationContext()).setDetail_page_id(/* 이거 넣기*/);
+                    ((MyApp) context.getApplicationContext()).setDetail_page_id(mDataset.get(getAdapterPosition()).getId());
+                    ((MyApp) context.getApplicationContext()).setTemp(mDataset.get(getAdapterPosition()).getTitle());
+
+                    AppCompatActivity aca = (AppCompatActivity) view.getContext();
                     Fragment fg = EpisodeFragment.newInstance();
-                    FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                    fragmentTransaction.replace(R.id.frag1_day_container, fg).commit();
+                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
                 }
 
             });
@@ -174,12 +161,6 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         }
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mAuthor.setText(mDataset.get(position).getAuthor());
-        holder.mCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     // getItemCount() 전체 데이터 갯수 리턴

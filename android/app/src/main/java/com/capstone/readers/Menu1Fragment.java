@@ -74,7 +74,7 @@ public class Menu1Fragment extends Fragment {
         return fv;
     }
 
-    private void setChildFragment(Fragment child) {
+    public void setChildFragment(Fragment child) {
         FragmentTransaction childFt = getChildFragmentManager().beginTransaction();
 
         if(!child.isAdded()) {

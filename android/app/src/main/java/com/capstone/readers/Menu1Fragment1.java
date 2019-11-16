@@ -81,16 +81,18 @@ public class Menu1Fragment1 extends Fragment {
     }
 
     private void setChildFragment(Fragment child, String day) {
-        FragmentTransaction childFt = getChildFragmentManager().beginTransaction();
-
         ((MyApp) getActivity().getApplication()).setDayTab();
         ((MyApp) getActivity().getApplication()).setDay(day);
+
+        FragmentTransaction childFt = getChildFragmentManager().beginTransaction();
+
 
         if(!child.isAdded()) {
             childFt.replace(R.id.frag1_day_container, child);
             childFt.addToBackStack(null);
             childFt.commit();
         }
+
     }
 
 }

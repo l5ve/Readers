@@ -48,6 +48,10 @@ public class MyApp extends Application {
     public final int bookmark_score = 1;
 
     private String detail_page_id;
+    private String temp;
+
+    public String getTemp() { return temp; }
+    public void setTemp(String temp) { this.temp = temp; }
 
     @Override
     public void onCreate() {
