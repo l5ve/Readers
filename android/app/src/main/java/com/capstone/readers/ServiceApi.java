@@ -14,6 +14,9 @@ import com.capstone.readers.item.LoginResponse;
 import com.capstone.readers.item.LoginData;
 import com.capstone.readers.item.MemoData;
 import com.capstone.readers.item.MemoResponse;
+import com.capstone.readers.item.getDayToonData;
+import com.capstone.readers.item.getEndToonData;
+import com.capstone.readers.item.getGenreToonData;
 
 import java.util.ArrayList;
 
@@ -29,14 +32,14 @@ public interface ServiceApi {
     @POST("/memo/memo")
     Call<MemoResponse> getMemo(@Body MemoData data);
 
-    @GET("/toon/daylist")
-    Call<ArrayList<ToonResponse>> getDayToon(@Query("is_end") String is_end, @Query("toon_weekday") String toon_weekday);
+    @POST("/toon/daylist")
+    Call<ArrayList<ToonResponse>> getDayToon(@Body getDayToonData data);
 
-    @GET("/toon/genrelist")
-    Call<ArrayList<ToonResponse>> getGenreToon(@Query("genre_name") String genre_name);
+    @POST("/toon/genrelist")
+    Call<ArrayList<ToonResponse>> getGenreToon(@Body getGenreToonData data);
 
-    @GET("/toon/endlist")
-    Call<ArrayList<ToonResponse>> getEndToon(@Query("is_end") String is_end);
+    @POST("/toon/endlist")
+    Call<ArrayList<ToonResponse>> getEndToon(@Body getEndToonData data);
 
     @POST("/toon/detail")
     Call<DetailPageResponse> getDetailPage(@Body String toon_id);

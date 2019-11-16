@@ -18,6 +18,9 @@ import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.item.ToonResponse;
+import com.capstone.readers.item.getDayToonData;
+import com.capstone.readers.item.getEndToonData;
+import com.capstone.readers.item.getGenreToonData;
 import com.capstone.readers.lib.MyToast;
 
 import java.util.ArrayList;
@@ -34,13 +37,14 @@ public class ToonFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<ToonCard> totalDataset;
+    private ArrayList<ToonResponse> list;
     private ArrayList<ToonCard> myDataset;
 
     private RadioGroup sort_group;
     private RadioButton sort_title;
     private RadioButton sort_update;
     private RadioButton sort_platform;
+    private String order_by;
     private String user_id;
     private Boolean DayTab;
     private Boolean GenreTab;
@@ -67,6 +71,7 @@ public class ToonFragment extends Fragment {
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
+        order_by = "name";
         indicator = 0;
 
         /* 요일/장르/완결 탭 구분 */
@@ -104,73 +109,64 @@ public class ToonFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId){
                 String result;
                 if(checkedId == R.id.toon_sort_title){
-                    setAdapter(1);
+                    order_by = "name";
                 } else if(checkedId == R.id.toon_sort_update) {
-                    setAdapter(2);
+                    order_by = "site";
                 } else if(checkedId == R.id.toon_sort_platform) {
-                    setAdapter(3);
+                    order_by = "update";
                 }
+                getData();
             }
         });
 
         /* RecyclerView에 표시할 데이터 리스트 생성 */
-        totalDataset = new ArrayList<>();
         myDataset = new ArrayList<>();
 
-        if(DayTab) {
-            day = ((MyApp) getActivity().getApplication()).getDay();
-            Log.d("ToonFragment", "요일 탭: " + day);
-            getDayData(day);
-        }
-        else if (GenreTab) {
-            genre = ((MyApp) getActivity().getApplication()).getGenre();
-            Log.d("ToonFragment", "장르 탭: " + genre);
-            getGenreData(genre);
-        }
-        else if (EndTab) {
-            Log.d("ToonFragment", "완결 탭: true");
-            getEndData();
-        }
+        getData();
 
         return fv;
     }
 
-    public void addMoreItem() {
-        if (indicator >= totalDataset.size())
-            return;
-
-        for (int i = indicator; i < indicator + paging && i < totalDataset.size(); i++) {
-            myDataset.add(totalDataset.get(i));
+    public void getData() {
+        if(DayTab) {
+            day = ((MyApp) getActivity().getApplication()).getDay();
+            Log.d("ToonFragment", "요일 탭: " + day);
+            getDayToonData data = new getDayToonData(day, user_id, order_by);
+            getDayData(data);
         }
-
-        indicator = indicator + paging;
-
-        mAdapter.notifyDataSetChanged();
+        else if (GenreTab) {
+            genre = ((MyApp) getActivity().getApplication()).getGenre();
+            Log.d("ToonFragment", "장르 탭: " + genre);
+            getGenreToonData data = new getGenreToonData(genre, user_id, order_by);
+            getGenreData(data);
+        }
+        else if (EndTab) {
+            Log.d("ToonFragment", "완결 탭: true");
+            getEndToonData data = new getEndToonData(user_id, order_by);
+            getEndData(data);
+        }
     }
 
     /* RecyclerView adapter 지정 */
-    public void setAdapter(int ordertype) {
-        mAdapter = new ToonListAdapter(getContext(), myDataset, ordertype);
+    public void setAdapter() {
+        mAdapter = new ToonListAdapter(getContext(), myDataset);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     /* 요일별 웹툰 데이터 받아오기 */
-    public void getDayData(String toon_weekday){
-        String is_end = "X";
-        service.getDayToon(is_end, toon_weekday).enqueue(new Callback<ArrayList<ToonResponse>>() {
+    public void getDayData(getDayToonData data){
+        service.getDayToon(data).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
-                ArrayList<ToonResponse> list = response.body();
+                list = response.body();
 
-                /* list ToonCard 데이터형으로 생성해서 myDataset에 넣기 */
                 if (response.isSuccessful() && list != null) {
-                    for (int i = 0; i < list.size(); i++) {
-                        totalDataset.add(list.get(i).getToonCard());
-//                        myDataset.add(list.get(i).getToonCard());
+                    for (int i = 0; i < paging; i++) {
+                       myDataset.add(list.get(i).getToonCard());
                     }
                     Log.d("ToonFragment", "Put DayToons in myDataset(size: " + list.size() + ")");
 
-                    setAdapter(1);
+                    setAdapter();
                 }
             }
 
@@ -184,21 +180,20 @@ public class ToonFragment extends Fragment {
     }
 
     /* 장르별 웹툰 데이터 받아오기 */
-    public void getGenreData(String genre_name) {
-        service.getGenreToon(genre_name).enqueue(new Callback<ArrayList<ToonResponse>>() {
+    public void getGenreData(getGenreToonData data) {
+        service.getGenreToon(data).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
-                ArrayList<ToonResponse> list = response.body();
+                list = response.body();
 
-                /* list ToonCard 데이터형으로 생성해서 myDataset에 넣기 */
+                /* ArrayList ToonCard 데이터형으로 생성해서 totalDataset에 넣기 */
                 if (response.isSuccessful() && list != null) {
-                    for (int i = 0; i < list.size(); i++) {
-                        totalDataset.add(list.get(i).getToonCard());
-//                        myDataset.add(list.get(i).getToonCard());
+                    for (int i = 0; i < paging; i++) {
+                        myDataset.add(list.get(i).getToonCard());
                     }
                     Log.d("ToonFragment", "Put GenreToons in myDataset(size: " + list.size() + ")");
 
-                    setAdapter(1);
+                    setAdapter();
                 }
             }
 
@@ -212,22 +207,20 @@ public class ToonFragment extends Fragment {
     }
 
     /* 완결 웹툰 데이터 받아오기 */
-    public void getEndData(){
-        String is_end ="O";
-        service.getEndToon(is_end).enqueue(new Callback<ArrayList<ToonResponse>>() {
+    public void getEndData(getEndToonData data){
+        service.getEndToon(data).enqueue(new Callback<ArrayList<ToonResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonResponse>> call, Response<ArrayList<ToonResponse>> response) {
-                ArrayList<ToonResponse> list = response.body();
+                list = response.body();
 
-                /* list ToonCard 데이터형으로 생성해서 myDataset에 넣기 */
+                /* ArrayList ToonCard 데이터형으로 생성해서 totalDataset에 넣기 */
                 if (response.isSuccessful() && list != null) {
-                    for (int i = 0; i < list.size(); i++) {
-                        totalDataset.add(list.get(i).getToonCard());
-//                        myDataset.add(list.get(i).getToonCard());
+                    for (int i = 0; i < paging; i++) {
+                        myDataset.add(list.get(i).getToonCard());
                     }
                     Log.d("ToonFragment", "Put EndToons in myDataset(size: " + list.size() + ")");
 
-                    setAdapter(1);
+                    setAdapter();
                 }
             }
 
@@ -237,5 +230,18 @@ public class ToonFragment extends Fragment {
                 MyToast.s(getContext(), getString(R.string.toon_server_error));
             }
         });
+    }
+
+    public void addMoreItem() {
+        if (indicator >= list.size())
+            return;
+
+        int limit = indicator + paging;
+        for (int i = indicator; i < limit && i < list.size(); i++) {
+            myDataset.add(list.get(i).getToonCard());
+            indicator++;
+        }
+
+        mAdapter.notifyDataSetChanged();
     }
 }
