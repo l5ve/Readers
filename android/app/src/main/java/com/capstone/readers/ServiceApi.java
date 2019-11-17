@@ -39,6 +39,9 @@ public interface ServiceApi {
     @POST("toon/detailpage")
     Call<ArrayList<DetailPageResponse>> getDetailPageData(@Body UserToonData data);
 
+    @POST("toon/detailgenrelist")
+    Call<ArrayList<DetailGenreResponse>> getDetailGenres(@Body String toon_id);
+
     /* 구독 */
     @POST("subscribe/add")
     Call<ResponseBody> subscribe(@Body UserToonData data);
@@ -74,8 +77,5 @@ public interface ServiceApi {
     Call<ArrayList<BlockCard>> getBlockList(@Body String user_id);
 
 
-
-    @GET("/toon/detailGenres")
-    Call<ArrayList<String>> getDetailGenres(@Query("toon_id") String toon_id);
 
 }

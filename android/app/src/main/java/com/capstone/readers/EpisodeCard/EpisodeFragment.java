@@ -23,6 +23,7 @@ import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ToonCard.ToonCard;
 import com.capstone.readers.ServiceApi;
+import com.capstone.readers.item.DetailGenreResponse;
 import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.UserToonData;
@@ -34,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -51,6 +53,8 @@ public class EpisodeFragment extends Fragment {
     private DetailPageResponse mData;
     private boolean isSubscribed;
     private boolean isBlocked;
+    private List<DetailGenreResponse> list;
+    private ArrayList<String> genres;
 
     private ToonCard info;
     private LinearLayout mSubscribe;
@@ -72,8 +76,6 @@ public class EpisodeFragment extends Fragment {
     private TextView mDesc;
     private String user_id;
     Bitmap bitmap;
-
-    private ArrayList<String> genres;
 
     private ServiceApi service;
 
@@ -116,7 +118,10 @@ public class EpisodeFragment extends Fragment {
         isSubscribed = false;
         isBlocked = false;
 
+        /* 작품 설명, 메모, 구독 여부, 숨김 여부 데이터를 받아옴 */
         getDetailPageData();
+        /* 작품 장르를 받아옴 */
+        getGenres();
 
         mSubscribe.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -252,6 +257,29 @@ public class EpisodeFragment extends Fragment {
         });
     }
 
+    public void getGenres() {
+        service.getDetailGenres(info.getId()).enqueue(new Callback<ArrayList<DetailGenreResponse>>() {
+            @Override
+            public void onResponse(Call<ArrayList<DetailGenreResponse>> call, Response<ArrayList<DetailGenreResponse>> response) {
+                list = response.body();
+                if(response.code() == 200) {
+                    MyToast.l(getContext(), "장르 받기 성공 "+ genres.size());
+                    for (int i = 0; i < list.size(); i++) {
+                        genres.add(list.get(i).getGenre_name());
+                    }
+                }
+                else {
+                    MyToast.l(getContext(), "장르 받기 실패 " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<DetailGenreResponse>> call, Throwable t) {
+                MyToast.l(getContext(), "장르 받기 실패");
+            }
+        });
+
+    }
 
     public void subscribe() {
         service.subscribe(utdata).enqueue(new Callback<ResponseBody>() {

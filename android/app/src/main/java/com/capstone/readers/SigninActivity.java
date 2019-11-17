@@ -10,7 +10,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.capstone.readers.Taste.TasteFragment;
 import com.capstone.readers.lib.MyToast;
 import com.capstone.readers.item.JoinResponse;
 import com.capstone.readers.item.JoinData;
@@ -50,6 +53,11 @@ public class SigninActivity extends AppCompatActivity {
                attemptSignin();
             }
         });
+
+        /* 사용자가 취향을 고를 수 있는 button을 담은 recyclerview */
+        Fragment fg = TasteFragment.newInstance();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.taste_frame, fg).addToBackStack(null).commit();
     }
 
     private void attemptSignin(){

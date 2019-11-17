@@ -18,7 +18,6 @@ public class MyApp extends Application {
     private int subs_num;
     private int bookmark_num;
     private int memo_num;
-    private int[] genre_preference;
 
     private boolean login_naver;
     private boolean login_daum;
@@ -48,6 +47,8 @@ public class MyApp extends Application {
     public final int subscribe_score = 10;
     public final int bookmark_score = 1;
 
+    private double[] genre_weight;
+
     private ToonCard detail_page_info;
 
     @Override
@@ -62,7 +63,10 @@ public class MyApp extends Application {
         bookmark_num = 0;
         memo_num = 0;
 
-        genre_preference = new int[13];
+        genre_weight = new double[13];
+        for (int i = 0; i < 13; i++) {
+            genre_weight[i] = 0;
+        }
     }
 
     public void initialize(){
@@ -316,5 +320,9 @@ public class MyApp extends Application {
 
     public ToonCard getDetail_page_info() {
         return this.detail_page_info;
+    }
+
+    public void setGenre_weight(int i, double weight) {
+        genre_weight[i] += weight;
     }
 }

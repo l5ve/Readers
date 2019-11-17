@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/taste_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/taste"
+        android:textSize="@dimen/sign_in_genre_buttons"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/spacing_small2"
+        android:background="@drawable/taste_button"
+        />
+
+</RelativeLayout>
