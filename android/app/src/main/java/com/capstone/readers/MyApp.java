@@ -2,6 +2,7 @@ package com.capstone.readers;
 
 import android.app.Application;
 import android.os.StrictMode;
+import com.capstone.readers.ToonCard.ToonCard;
 
 import java.util.ArrayList;
 
@@ -47,11 +48,7 @@ public class MyApp extends Application {
     public final int subscribe_score = 10;
     public final int bookmark_score = 1;
 
-    private String detail_page_id;
-    private String temp;
-
-    public String getTemp() { return temp; }
-    public void setTemp(String temp) { this.temp = temp; }
+    private ToonCard detail_page_info;
 
     @Override
     public void onCreate() {
@@ -313,11 +310,11 @@ public class MyApp extends Application {
         return genre;
     }
 
-    public String getDetail_page_id() {
-        return detail_page_id;
+    public void setDetail_page_info(ToonCard info) {
+        this.detail_page_info = info;
     }
 
-    public void setDetail_page_id(String id) {
-        this.detail_page_id = id;
+    public ToonCard getDetail_page_info() {
+        return this.detail_page_info;
     }
 }

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apollographql.apollo.interceptor.ApolloInterceptor;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
+import com.capstone.readers.ToonCard.ToonCard;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.ToonCard.ToonListAdapter;
 import com.capstone.readers.item.DetailPageResponse;
@@ -43,7 +44,7 @@ public class EpisodeFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<EpisodeCard> myDataset;
 
-    private String id;
+    private ToonCard info;
     private ImageView mImageView;
     private TextView mPlatform;
     private TextView mTitle;
@@ -53,7 +54,6 @@ public class EpisodeFragment extends Fragment {
 
     private ArrayList<String> genres;
 
-    private boolean getMainData;
     private ServiceApi service;
 
     public static EpisodeFragment newInstance() {
@@ -69,8 +69,7 @@ public class EpisodeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_detail_page, container, false);
 
-        id = ((MyApp) getActivity().getApplication()).getDetail_page_id();
-        getMainData = false;
+        info = ((MyApp) getActivity().getApplicationContext()).getDetail_page_info();
 
         mImageView = (ImageView) fv.findViewById(R.id.detail_page_thumbnail);
         mPlatform = (TextView) fv.findViewById(R.id.detail_page_platform);
@@ -78,26 +77,24 @@ public class EpisodeFragment extends Fragment {
         mAuthor = (TextView) fv.findViewById(R.id.detail_page_author);
         mDesc = (TextView) fv.findViewById(R.id.detail_page_desc);
 
+        /* 작품 상세 페이지 상단의 작품 썸네일 설정 */
+        setThumbnail(info.getThumbnail());
+
+        mPlatform.setText(info.getPlatform());
+
+        mTitle.setText(info.getTitle());
+        mAuthor.setText(info.getAuthor());
+
+
+
         mRecyclerView = (RecyclerView) fv.findViewById(R.id.episode_list);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         myDataset = new ArrayList<>();
-        String temp = ((MyApp) getActivity().getApplication()).getTemp();
-        mTitle.setText(temp);
-        myDataset.add(new EpisodeCard("0", "0", temp + " 1화", "2019-01-01"));
+        myDataset.add(new EpisodeCard("0", "0", info.getTitle() + " 1화", "2019-01-01"));
 
         setAdapter();
-        //getDetailData(id);
-        //genres = new ArrayList<String>();
-
-
-        //if(!getMainData) {
-        //    return fv;
-        //}
-
-        //getDetailGenresData(id);
-
 
 
         return fv;
@@ -108,57 +105,6 @@ public class EpisodeFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("EpisodeFragment", "onPause(): deleteeeeeeeeeeeeeeeeeee");
-        AppCompatActivity aca = (AppCompatActivity) getContext();
-        aca.getSupportFragmentManager().beginTransaction().remove(this).commit();
-//        FragmentTransaction ft = getParentFragment().getChildFragmentManager().beginTransaction();
-//        ft.remove(this);
-//        ft.commit();
-    }
-
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("EpisodeFragment", "onStop(): deleteeeeeeeeeeeeeeeeeee");
-        AppCompatActivity aca = (AppCompatActivity) getContext();
-        aca.getSupportFragmentManager().beginTransaction().remove(this).commit();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        Log.d("EpisodeFragment", "onDestroyView(): deleteeeeeeeeeeeeeeeeeee");
-        AppCompatActivity aca = (AppCompatActivity) getContext();
-        aca.getSupportFragmentManager().beginTransaction().remove(this).commit();
-    }
-
-    public void getDetailGenresData(String toon_id) {
-        service.getDetailGenres(toon_id).enqueue(new Callback<ArrayList<String>>() {
-            @Override
-            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
-                ArrayList<String> list = response.body();
-
-                if (response.isSuccessful() && list != null) {
-                    for (int i = 0; i < list.size(); i++) {
-                        genres.add(list.get(i));
-                    }
-                    Log.d("EpisodeFragment", "getDetailGenresData: Put Genres(size: " + list.size() + ")");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
-                Log.e("EpisodeFragment", "getDetailGenresData: " + getString(R.string.server_error_message));
-                MyToast.s(getContext(), getString(R.string.server_error_message));
-            }
-        });
-
-    }
 
     public void getDetailData(String toon_id) {
         service.getDetailPage(toon_id).enqueue(new Callback<DetailPageResponse>() {
@@ -223,5 +169,7 @@ public class EpisodeFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+
 
 }
