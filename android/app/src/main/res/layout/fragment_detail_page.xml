@@ -5,6 +5,33 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/detail_page_subscribe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_custom"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_medium"
+            android:text="@string/subscribe" />
+
+        <Button
+            android:id="@+id/detail_page_hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_custom"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_medium"
+            android:text="@string/hide" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/detail_page_height"
