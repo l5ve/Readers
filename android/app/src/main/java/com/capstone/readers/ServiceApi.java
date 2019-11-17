@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
+import com.capstone.readers.MemoCard.MemoCard;
 import com.capstone.readers.item.*;
 
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ public interface ServiceApi {
     /* 메모 */
     @POST("/memo/save")
     Call<ResponseBody> saveMemo(@Body MemoSaveData data);
+
+    @POST("/memo/list")
+    Call<ArrayList<MemoCard>> getMemoList(@Body MypageMemoData data);
 
     @POST("/toon/detail")
     Call<DetailPageResponse> getDetailPage(@Body String toon_id);
