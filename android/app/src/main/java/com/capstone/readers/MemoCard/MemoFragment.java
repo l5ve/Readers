@@ -25,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MypageMemoFragment extends Fragment {
+public class MemoFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -40,8 +40,8 @@ public class MypageMemoFragment extends Fragment {
     private String order_by;
     private ServiceApi service;
 
-    public static MypageMemoFragment newInstance(){
-        return new MypageMemoFragment();
+    public static MemoFragment newInstance(){
+        return new MemoFragment();
     }
 
     @Override
@@ -107,7 +107,7 @@ public class MypageMemoFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<MemoCard>> call, Throwable t) {
-                Log.e("MypageMemoFragment", "getData: " + getString(R.string.toon_server_error));
+                Log.e("MemoFragment", "getData: " + getString(R.string.toon_server_error));
                 MyToast.s(getContext(), getString(R.string.toon_server_error));
             }
         });

@@ -100,6 +100,8 @@
     <string name="detail_page_memo">메모(~140자)</string>
     <string name="memo_save_success">메모 저장 성공</string>
     <string name="memo_save_fail">메모 저장 실패</string>
+    <string name="memo_delete_success">메모 삭제 성공</string>
+    <string name="memo_delete_fail">메모 삭제 실패</string>
     <string name="hide">숨김</string>
     <string name="save">저장</string>
     <string name="delete">삭제</string>

@@ -169,7 +169,6 @@ public class ToonFragment extends Fragment {
                        myDataset.add(list.get(i).getToonCard());
                     }
                     indicator = i;
-                    Log.d("ToonFragment", "Put DayToons in myDataset(size: " + list.size() + ")");
 
                     setAdapter();
                 }

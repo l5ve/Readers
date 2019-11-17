@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.capstone.readers.MemoCard.MypageMemoFragment;
+import com.capstone.readers.MemoCard.MemoFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -62,7 +62,7 @@ public class Menu3Fragment extends Fragment {
         mypage_memo.setOnClickListener(new TextView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fg = MypageMemoFragment.newInstance();
+                Fragment fg = MemoFragment.newInstance();
                 setChildFragment(fg);
             }
         });

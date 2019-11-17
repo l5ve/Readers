@@ -24,6 +24,7 @@ import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ToonCard.ToonCard;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.item.MemoSaveData;
+import com.capstone.readers.item.UserToonData;
 import com.capstone.readers.lib.MyToast;
 
 import java.io.IOException;
@@ -115,6 +116,13 @@ public class EpisodeFragment extends Fragment {
             }
         });
 
+        mMemoDelete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                deleteMemo();
+            }
+        });
+
         /* 작품 상세 페이지 상단의 작품 썸네일 설정 */
         setThumbnail(info.getThumbnail());
 
@@ -149,7 +157,7 @@ public class EpisodeFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
-                    Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_success));
+                    Log.d("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_success));
                     MyToast.s(getContext(), getString(R.string.memo_save_success));
                 } else {
                     Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_fail));
@@ -161,12 +169,31 @@ public class EpisodeFragment extends Fragment {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.toon_server_error));
                 MyToast.s(getContext(), getString(R.string.toon_server_error));
-
             }
         });
     }
 
+    public void deleteMemo() {
+        UserToonData data = new UserToonData(user_id, info.getId());
+        service.deleteMemo(data).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Log.d("EpisodeFragment", "deleteMemo: " + getString(R.string.memo_delete_success));
+                    MyToast.s(getContext(), getString(R.string.memo_delete_success));
+                } else {
+                    Log.e("EpisodeFragment", "deleteMemo: " + getString(R.string.memo_delete_fail));
+                    MyToast.s(getContext(), getString(R.string.memo_delete_fail));
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("EpisodeFragment", "deleteMemo: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+    }
 
     public void setThumbnail(String thb_url) {
         final String thumbnail_url = thb_url;

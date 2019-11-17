@@ -37,8 +37,13 @@ public interface ServiceApi {
     @POST("/memo/save")
     Call<ResponseBody> saveMemo(@Body MemoSaveData data);
 
+    @POST("/memo/delete")
+    Call<ResponseBody> deleteMemo(@Body UserToonData data);
+
     @POST("/memo/list")
     Call<ArrayList<MemoCard>> getMemoList(@Body MypageMemoData data);
+
+
 
     @POST("/toon/detail")
     Call<DetailPageResponse> getDetailPage(@Body String toon_id);
