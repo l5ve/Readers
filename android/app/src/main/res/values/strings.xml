@@ -105,10 +105,21 @@
     <string name="hide">숨김</string>
     <string name="save">저장</string>
     <string name="delete">삭제</string>
-    <string name="subs_success">구독되었습니다.</string>
+
+    <string name="subs_success">구독 성공</string>
     <string name="subs_fail">구독에 실패했습니다.\n다시 시도해주세요.</string>
-    <string name="unsubs_success">구독이 해지되었습니다.</string>
+
+    <string name="unsubs_success">구독 해지 성공</string>
     <string name="unsubs_fail">구독 해지에 실패했습니다.\n다시 시도해주세요.</string>
+
+    <string name="block_success">숨김 성공</string>
+    <string name="block_fail">숨기기를 실패했습니다.\n다시 시도해주세요.</string>
+
+    <string name="unblock_success">숨김 해제 성공</string>
+    <string name="unblock_fail">숨김 해제에 실패했습니다.\n다시 시도해주세요.</string>
+
+    <string name="subs_notice_msg">숨긴 작품은 구독할 수 없습니다.\n숨김을 해제하고 다시 시도해주세요.</string>
+    <string name="block_notice_msg">구독 작품은 숨길 수 없습니다.\n구독을 해지하고 다시 시도해주세요.</string>
 
     <!-- 3. 마이페이지 -->
     <string name="sir">님</string>

@@ -46,7 +46,12 @@ public interface ServiceApi {
     @POST("subscribe/delete")
     Call <ResponseBody> unsubscribe(@Body UserToonData data);
 
+    /* 숨김 */
+    @POST("block/add")
+    Call<ResponseBody> block(@Body UserToonData data);
 
+    @POST("block/delete")
+    Call<ResponseBody> unblock(@Body UserToonData data);
 
     /* 메모 */
     @POST("/memo/save")

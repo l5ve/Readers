@@ -185,7 +185,11 @@ public class EpisodeFragment extends Fragment {
 
     public void setSubscribeBtn() {
         isSubscribed = !isSubscribed;
-        if(isSubscribed) {
+        if (isSubscribed && isBlocked) {
+            MyToast.l(getContext(), getString(R.string.subs_notice_msg));
+            isSubscribed = !isSubscribed;
+        }
+        else if(isSubscribed) {
             subscribe();
             mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
             mSubscribeImg.setImageResource(R.drawable.check_green);
@@ -199,11 +203,17 @@ public class EpisodeFragment extends Fragment {
 
     public void setBlockBtn() {
         isBlocked = !isBlocked;
-        if(isBlocked){
+        if (isBlocked && isSubscribed) {
+            MyToast.l(getContext(), getString(R.string.block_notice_msg));
+            isBlocked = !isBlocked;
+        }
+        else if(isBlocked){
+            block();
             mBlockText.setTextColor(getResources().getColor(R.color.check_red));
             mBlockImg.setImageResource(R.drawable.check_red);
         }
         else {
+            unblock();
             mBlockText.setTextColor(getResources().getColor(R.color.colorWhite));
             mBlockImg.setImageResource(R.drawable.hide);
         }
@@ -285,6 +295,51 @@ public class EpisodeFragment extends Fragment {
                 MyToast.s(getContext(), getString(R.string.toon_server_error));
             }
         });
+    }
+
+    public void block() {
+        service.block(utdata).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Log.d("EpisodeFragment", "block: " + getString(R.string.block_success));
+                    MyToast.s(getContext(), getString(R.string.block_success));
+                }
+                else {
+                    Log.d("EpisodeFragment", "block: " + getString(R.string.block_fail));
+                    MyToast.s(getContext(), getString(R.string.block_fail));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("EpisodeFragment", "block: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+    }
+
+    public void unblock() {
+        service.unblock(utdata).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Log.d("EpisodeFragment", "unblock: " + getString(R.string.unblock_success));
+                    MyToast.s(getContext(), getString(R.string.unblock_success));
+                }
+                else {
+                    Log.d("EpisodeFragment", "unblock: " + getString(R.string.unblock_fail));
+                    MyToast.s(getContext(), getString(R.string.unblock_fail));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("EpisodeFragment", "unblock: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+
     }
 
 

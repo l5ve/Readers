@@ -17,6 +17,7 @@ import com.capstone.readers.ServiceApi;
 import com.capstone.readers.lib.MyToast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +29,7 @@ public class BlockFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ServiceApi service;
+    private List<BlockCard> list;
     private ArrayList<BlockCard> myDataset;
     private String user_id;
 
@@ -69,7 +71,11 @@ public class BlockFragment extends Fragment {
         service.getBlockList(user_id).enqueue(new Callback<ArrayList<BlockCard>>() {
             @Override
             public void onResponse(Call<ArrayList<BlockCard>> call, Response<ArrayList<BlockCard>> response) {
-                myDataset = response.body();
+                list = response.body();
+
+                for (int i = 0; i < list.size(); i++) {
+                    myDataset.add(list.get(i));
+                }
 
                 setAdapter();
             }
