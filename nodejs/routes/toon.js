@@ -94,7 +94,7 @@ router.post('/daylist', function(req, res){
 //toon/genrelist
 router.post('/genrelist', function(req, res){
   var user_id = req.body.user_id;
-  var genre_name = req.body.genre_name;
+  var genre_name = req.query.genre_name;
   var order_by = req.body.order_by; // name, site, update
   var params = [genre_name, user_id];
 
@@ -130,12 +130,15 @@ router.post('/genrelist', function(req, res){
   }
 });
 
-//toon/detail // 웹툰 상세 페이지
-router.get('/detail', function(req, res, next){
-  var toon_id = req.query.toon_id;
-  var sql = 'select toon_name, toon_site, wrt_name, toon_desc, toon_thumb_url from toon_info where toon_id = ?';
+// 웹툰 상세 페이지
+router.post('/detailPage', function(req, res){
+  var user_id = req.body.user_id;
+  var toon_id = req.body.toon_id;
 
-  connection.query(sql, toon_id, function(err, rows){
+  var params = [toon_id, user_id, toon_id, user_id, toon_id, user_id, toon_id];
+  var sql = 'select toon_id, toon_desc, (select content from memo where toon_id = ? and user_id = ?) as content, (select exists (select * from subscribe where toon_id = ? and user_id = ?)) as subs_flag, (select exists (select * from user_block where toon_id = ? and user_id = ?)) as block_flag from toon_info where toon_id = ?';
+
+  connection.query(sql, params, function(err, rows){
     if(err) return res.sendStatus(400);
 
     console.log("rows : " + JSON.stringify(rows));
@@ -144,9 +147,10 @@ router.get('/detail', function(req, res, next){
 });
 
 //toon/detailGenres // 웹툰 상세 페이지 - 장르 정보
-router.get('/detailGenres', function(req, res, next){
-  var toon_id = req.query.toon_id;
-  var sql = 'select genre_name from toon_genre where toon_id = ?';
+router.post('/detailgenrelist', function(req, res){
+  var toon_id = req.body.toon_id;
+
+  var sql = 'select * from toon_genre where toon_id = ?';
 
   connection.query(sql, toon_id, function(err, rows){
     if(err) return res.sendStatus(400);
