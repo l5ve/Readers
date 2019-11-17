@@ -39,6 +39,14 @@ public interface ServiceApi {
     @POST("toon/detailpage")
     Call<ArrayList<DetailPageResponse>> getDetailPageData(@Body UserToonData data);
 
+    /* 구독 */
+    @POST("subscribe/add")
+    Call<ResponseBody> subscribe(@Body UserToonData data);
+
+    @POST("subscribe/delete")
+    Call <ResponseBody> unsubscribe(@Body UserToonData data);
+
+
 
     /* 메모 */
     @POST("/memo/save")

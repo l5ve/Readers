@@ -28,8 +28,6 @@ import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.UserToonData;
 import com.capstone.readers.lib.MyToast;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -39,7 +37,6 @@ import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.CallAdapter;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -50,6 +47,7 @@ public class EpisodeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<EpisodeCard> myDataset;
+    private UserToonData utdata;
     private DetailPageResponse mData;
     private boolean isSubscribed;
     private boolean isBlocked;
@@ -95,6 +93,7 @@ public class EpisodeFragment extends Fragment {
         service = RetrofitClient.getClient().create(ServiceApi.class);
         info = ((MyApp) getActivity().getApplicationContext()).getDetail_page_info();
         user_id = ((MyApp) getActivity().getApplicationContext()).getUser_id();
+        utdata = new UserToonData(user_id, info.getId());
 
         mSubscribe = (LinearLayout) fv.findViewById(R.id.detail_page_subscribe);
         mSubscribeText = (TextView) fv.findViewById(R.id.detail_page_subscribe_text);
@@ -187,10 +186,12 @@ public class EpisodeFragment extends Fragment {
     public void setSubscribeBtn() {
         isSubscribed = !isSubscribed;
         if(isSubscribed) {
+            subscribe();
             mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
             mSubscribeImg.setImageResource(R.drawable.check_green);
         }
         else {
+            unsubscribe();
             mSubscribeText.setTextColor(getResources().getColor(R.color.colorWhite));
             mSubscribeImg.setImageResource(R.drawable.add);
         }
@@ -241,6 +242,52 @@ public class EpisodeFragment extends Fragment {
         });
     }
 
+
+    public void subscribe() {
+        service.subscribe(utdata).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Log.d("EpisodeFragment", "subscribe: " + getString(R.string.subs_success));
+                    MyToast.s(getContext(), getString(R.string.subs_success));
+                }
+                else {
+                    Log.d("EpisodeFragment", "subscribe: " + getString(R.string.subs_fail));
+                    MyToast.s(getContext(), getString(R.string.subs_fail));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("EpisodeFragment", "subscribe: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+    }
+
+    public void unsubscribe() {
+        service.unsubscribe(utdata).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Log.d("EpisodeFragment", "unsubscribe: " + getString(R.string.unsubs_success));
+                    MyToast.s(getContext(), getString(R.string.unsubs_success));
+                }
+                else {
+                    Log.d("EpisodeFragment", "unsubscribe: " + getString(R.string.unsubs_fail));
+                    MyToast.s(getContext(), getString(R.string.unsubs_fail));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("EpisodeFragment", "unsubscribe: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+    }
+
+
     public void saveMemo() {
         MemoSaveData data = new MemoSaveData(user_id, info.getId(), mEditText.getText().toString());
         service.saveMemo(data).enqueue(new Callback<ResponseBody>() {
@@ -264,8 +311,7 @@ public class EpisodeFragment extends Fragment {
     }
 
     public void deleteMemo() {
-        UserToonData data = new UserToonData(user_id, info.getId());
-        service.deleteMemo(data).enqueue(new Callback<ResponseBody>() {
+        service.deleteMemo(utdata).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {

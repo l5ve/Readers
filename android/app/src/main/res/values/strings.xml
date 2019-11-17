@@ -105,6 +105,10 @@
     <string name="hide">숨김</string>
     <string name="save">저장</string>
     <string name="delete">삭제</string>
+    <string name="subs_success">구독되었습니다.</string>
+    <string name="subs_fail">구독에 실패했습니다.\n다시 시도해주세요.</string>
+    <string name="unsubs_success">구독이 해지되었습니다.</string>
+    <string name="unsubs_fail">구독 해지에 실패했습니다.\n다시 시도해주세요.</string>
 
     <!-- 3. 마이페이지 -->
     <string name="sir">님</string>
