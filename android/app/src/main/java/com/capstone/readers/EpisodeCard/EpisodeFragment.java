@@ -7,22 +7,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.apollographql.apollo.interceptor.ApolloInterceptor;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
+import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ToonCard.ToonCard;
 import com.capstone.readers.ServiceApi;
-import com.capstone.readers.ToonCard.ToonListAdapter;
-import com.capstone.readers.item.DetailPageResponse;
+import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.lib.MyToast;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,11 +47,18 @@ public class EpisodeFragment extends Fragment {
     private ArrayList<EpisodeCard> myDataset;
 
     private ToonCard info;
+    private ImageButton mMemobtn;
+    private LinearLayout mMemolayout;
+    private EditText mEditText;
+    private Button mMemoSave;
+    private Button mMemoDelete;
+    private boolean isMemoOpened;
     private ImageView mImageView;
     private TextView mPlatform;
     private TextView mTitle;
     private TextView mAuthor;
     private TextView mDesc;
+    private String user_id;
     Bitmap bitmap;
 
     private ArrayList<String> genres;
@@ -69,13 +78,42 @@ public class EpisodeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_detail_page, container, false);
 
+        service = RetrofitClient.getClient().create(ServiceApi.class);
         info = ((MyApp) getActivity().getApplicationContext()).getDetail_page_info();
+        user_id = ((MyApp) getActivity().getApplicationContext()).getUser_id();
 
         mImageView = (ImageView) fv.findViewById(R.id.detail_page_thumbnail);
         mPlatform = (TextView) fv.findViewById(R.id.detail_page_platform);
         mTitle = (TextView) fv.findViewById(R.id.detail_page_title);
         mAuthor = (TextView) fv.findViewById(R.id.detail_page_author);
         mDesc = (TextView) fv.findViewById(R.id.detail_page_desc);
+
+        mMemobtn = (ImageButton) fv.findViewById(R.id.detail_page_memo_btn);
+        mEditText = (EditText) fv.findViewById(R.id.detail_page_memo_input);
+        mMemoSave = (Button) fv.findViewById(R.id.detail_page_memo_save);
+        mMemoDelete = (Button) fv.findViewById(R.id.detail_page_memo_delete);
+        mMemolayout = (LinearLayout) fv.findViewById(R.id.detail_page_memo_layout);
+        isMemoOpened = false;
+
+        /* 메모 버튼 클릭 시 메모 레이아웃 여닫기 */
+        mMemobtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                isMemoOpened = !isMemoOpened;
+                if(isMemoOpened){
+                    mMemolayout.setVisibility(View.VISIBLE);
+                } else {
+                    mMemolayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        mMemoSave.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                saveMemo();
+            }
+        });
 
         /* 작품 상세 페이지 상단의 작품 썸네일 설정 */
         setThumbnail(info.getThumbnail());
@@ -105,36 +143,30 @@ public class EpisodeFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-
-    public void getDetailData(String toon_id) {
-        service.getDetailPage(toon_id).enqueue(new Callback<DetailPageResponse>() {
+    public void saveMemo() {
+        MemoSaveData data = new MemoSaveData(user_id, info.getId(), mEditText.getText().toString());
+        service.saveMemo(data).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<DetailPageResponse> call, Response<DetailPageResponse> response) {
-                DetailPageResponse result = response.body();
-
-                if(result.getCode() != 200) {
-                    Log.e("EpisodeFragment", "getDetailData: " + getString(R.string.null_body));
-                    MyToast.s(getContext(), getString(R.string.server_error_message));
-                }
-                else {
-                   setThumbnail(result.getThumbnail());
-                   mPlatform.setText(result.getPlatform());
-                   mTitle.setText(result.getTitle());
-                   mAuthor.setText(result.getAuthor());
-                   mDesc.setText(result.getDesc());
-
-                   getMainData = true;
-                    Log.d("EpisodeFragment", "getDetailData: " + result.getTitle());
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_success));
+                    MyToast.s(getContext(), getString(R.string.memo_save_success));
+                } else {
+                    Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_fail));
+                    MyToast.s(getContext(), getString(R.string.memo_save_fail));
                 }
             }
 
             @Override
-            public void onFailure(Call<DetailPageResponse> call, Throwable t) {
-                Log.e("EpisodeFragment", "getDetailData: " + getString(R.string.server_error_message));
-                MyToast.s(getContext(), getString(R.string.server_error_message));
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+
             }
         });
     }
+
+
 
     public void setThumbnail(String thb_url) {
         final String thumbnail_url = thb_url;

@@ -1,6 +1,5 @@
 package com.capstone.readers.MemoCard;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,18 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.ServiceApi;
-import com.capstone.readers.item.MemoData;
-import com.capstone.readers.item.MemoResponse;
-import com.capstone.readers.lib.MyToast;
 
 import java.util.ArrayList;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class MypageMemoFragment extends Fragment {
     private RecyclerView mRecyclerView;

@@ -5,97 +5,161 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
 
-
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/detail_page_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/detail_page_subscribe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_custom"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_medium"
-            android:text="@string/subscribe" />
-
-        <Button
-            android:id="@+id/detail_page_hide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_custom"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_medium"
-            android:text="@string/hide" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/detail_page_height"
-        android:orientation="horizontal"
-        android:layout_marginVertical="@dimen/spacing_medium"
-        android:layout_marginHorizontal="@dimen/spacing_large">
-
-        <ImageView
-            android:id="@+id/detail_page_thumbnail"
-            android:layout_gravity="center"
-            android:layout_width="@dimen/cardview_big_thumbnail"
-            android:layout_height="@dimen/cardview_big_thumbnail"/>
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_gravity="center">
-
-            <TextView
-                android:id="@+id/detail_page_platform"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small2"
-                android:textStyle="bold"
-                android:text="@string/platforms" />
-
-            <TextView
-                android:id="@+id/detail_page_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_size_medium"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="@string/title" />
-
-            <TextView
-                android:id="@+id/detail_page_author"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_size_small"
-                android:text="@string/author" />
-
-            <TextView
-                android:id="@+id/detail_page_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small2"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_size_small"
-                android:text="@string/detail_page_description" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/detail_page_genre_btn"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <Button
+                    android:id="@+id/detail_page_subscribe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_custom"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_medium"
+                    android:text="@string/subscribe" />
 
+                <Button
+                    android:id="@+id/detail_page_hide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_custom"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_medium"
+                    android:text="@string/hide" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detail_page_height"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/spacing_xsmall2"
+                android:layout_marginHorizontal="@dimen/spacing_small2">
+
+                <ImageButton
+                    android:id="@+id/detail_page_memo_btn"
+                    android:layout_width="@dimen/detail_page_memo_btn"
+                    android:layout_height="@dimen/detail_page_memo_btn"
+                    android:layout_gravity="bottom"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/memo" />
+
+                <ImageView
+                    android:id="@+id/detail_page_thumbnail"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/cardview_big_thumbnail"
+                    android:layout_height="@dimen/cardview_big_thumbnail"
+                    android:layout_margin="@dimen/spacing_small2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/detail_page_platform"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_small2"
+                        android:textStyle="bold"
+                        android:text="@string/platforms" />
+
+                    <TextView
+                        android:id="@+id/detail_page_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_medium2"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@string/title" />
+
+                    <TextView
+                        android:id="@+id/detail_page_author"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_small"
+                        android:text="@string/author" />
+
+                    <TextView
+                        android:id="@+id/detail_page_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small2"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_small"
+                        android:text="@string/detail_page_description" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/detail_page_genre_btn"
+                        android:orientation="horizontal">
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_page_memo_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/detail_page_memo_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/detail_page_memo_height"
+                    android:background="@drawable/memo_custom"
+                    android:padding="@dimen/spacing_small"
+                    android:layout_margin="@dimen/spacing_xsmall2"
+                    android:textColor="@color/colorBlack"
+                    android:hint="@string/detail_page_memo"
+                    android:scrollHorizontally="false"
+                    android:gravity="top"
+                    android:maxLength="140"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/detail_page_memo_save_btn_height"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/detail_page_memo_save"
+                        android:layout_width="@dimen/detail_page_memo_save_btn_width"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:text="@string/save" />
+
+                    <Button
+                        android:id="@+id/detail_page_memo_delete"
+                        android:layout_width="@dimen/detail_page_memo_save_btn_width"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:text="@string/delete" />
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/episode_list"
@@ -104,5 +168,6 @@
         >
 
     </androidx.recyclerview.widget.RecyclerView>
+
 
 </LinearLayout>
