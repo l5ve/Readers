@@ -23,6 +23,7 @@ import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ToonCard.ToonCard;
 import com.capstone.readers.ServiceApi;
+import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.UserToonData;
 import com.capstone.readers.lib.MyToast;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.CallAdapter;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -48,12 +50,17 @@ public class EpisodeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<EpisodeCard> myDataset;
+    private DetailPageResponse mData;
+    private boolean isSubscribed;
+    private boolean isBlocked;
 
     private ToonCard info;
     private LinearLayout mSubscribe;
     private TextView mSubscribeText;
+    private ImageView mSubscribeImg;
     private LinearLayout mBlock;
     private TextView mBlockText;
+    private ImageView mBlockImg;
     private ImageButton mMemobtn;
     private LinearLayout mMemolayout;
     private EditText mEditText;
@@ -91,7 +98,10 @@ public class EpisodeFragment extends Fragment {
 
         mSubscribe = (LinearLayout) fv.findViewById(R.id.detail_page_subscribe);
         mSubscribeText = (TextView) fv.findViewById(R.id.detail_page_subscribe_text);
+        mSubscribeImg = (ImageView) fv.findViewById(R.id.detail_page_subscribe_icon);
         mBlock = (LinearLayout) fv.findViewById(R.id.detail_page_block);
+        mBlockText = (TextView) fv.findViewById(R.id.detail_page_block_text);
+        mBlockImg = (ImageView) fv.findViewById(R.id.detail_page_block_icon);
         mImageView = (ImageView) fv.findViewById(R.id.detail_page_thumbnail);
         mPlatform = (TextView) fv.findViewById(R.id.detail_page_platform);
         mTitle = (TextView) fv.findViewById(R.id.detail_page_title);
@@ -104,12 +114,22 @@ public class EpisodeFragment extends Fragment {
         mMemoDelete = (Button) fv.findViewById(R.id.detail_page_memo_delete);
         mMemolayout = (LinearLayout) fv.findViewById(R.id.detail_page_memo_layout);
         isMemoOpened = false;
+        isSubscribed = false;
+        isBlocked = false;
 
+        getDetailPageData();
 
         mSubscribe.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                setSubscribeBtn();
+            }
+        });
 
+        mBlock.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                setBlockBtn();
             }
         });
 
@@ -164,11 +184,62 @@ public class EpisodeFragment extends Fragment {
         return fv;
     }
 
+    public void setSubscribeBtn() {
+        isSubscribed = !isSubscribed;
+        if(isSubscribed) {
+            mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
+            mSubscribeImg.setImageResource(R.drawable.check_green);
+        }
+        else {
+            mSubscribeText.setTextColor(getResources().getColor(R.color.colorWhite));
+            mSubscribeImg.setImageResource(R.drawable.add);
+        }
+    }
+
+    public void setBlockBtn() {
+        isBlocked = !isBlocked;
+        if(isBlocked){
+            mBlockText.setTextColor(getResources().getColor(R.color.check_red));
+            mBlockImg.setImageResource(R.drawable.check_red);
+        }
+        else {
+            mBlockText.setTextColor(getResources().getColor(R.color.colorWhite));
+            mBlockImg.setImageResource(R.drawable.hide);
+        }
+    }
+
     public void setAdapter() {
         mAdapter = new EpisodeListAdapter(getContext(), myDataset);
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    public void getDetailPageData(){
+        UserToonData data = new UserToonData(user_id, info.getId());
+        service.getDetailPageData(data).enqueue(new Callback<ArrayList<DetailPageResponse>>() {
+            @Override
+            public void onResponse(Call<ArrayList<DetailPageResponse>> call, Response<ArrayList<DetailPageResponse>> response) {
+                mData = response.body().get(0);
+
+                mDesc.setText(mData.getToon_desc());
+                if(mData.getContent() != null) {
+                    isMemoOpened = true;
+                    mEditText.setText(mData.getContent());
+                    mMemolayout.setVisibility(View.VISIBLE);
+                }
+
+                if ((double) mData.getSubs_flag() == 1)
+                    setSubscribeBtn();
+                if ((double) mData.getBlock_flag() == 1)
+                    setBlockBtn();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<DetailPageResponse>> call, Throwable t) {
+                Log.e("EpisodeFragment", "getDetailPageData: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+    }
 
     public void saveMemo() {
         MemoSaveData data = new MemoSaveData(user_id, info.getId(), mEditText.getText().toString());

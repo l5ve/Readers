@@ -3,7 +3,7 @@
     <!--체크박스 선택상태-->
     <item
         android:state_checked="true"
-        android:drawable="@drawable/check_FF4D50"/>
+        android:drawable="@drawable/check_red"/>
     <!--체크박스 해제 or default 상태-->
     <item
         android:state_checked="false"

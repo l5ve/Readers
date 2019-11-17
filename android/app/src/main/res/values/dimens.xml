@@ -50,7 +50,7 @@
     <dimen name="detail_page_memo_height">120dp</dimen>
     <dimen name="detail_page_memo_save_btn_width">65dp</dimen>
     <dimen name="detail_page_memo_save_btn_height">40dp</dimen>
-    <dimen name="detail_page_top_btn_height">35dp</dimen>
+    <dimen name="detail_page_top_btn_height">40dp</dimen>
 
     <dimen name="tooncard_width">130dp</dimen>
     <dimen name="tooncard_height">200dp</dimen>

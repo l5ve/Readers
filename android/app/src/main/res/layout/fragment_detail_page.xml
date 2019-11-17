@@ -44,7 +44,8 @@
                         android:layout_height="@dimen/small_icon"
                         android:layout_margin="@dimen/spacing_small"
                         android:scaleType="fitCenter"
-                        android:background="@drawable/subscribe_custom"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/add"
                         />
                 </LinearLayout>
 
@@ -71,8 +72,8 @@
                         android:layout_width="@dimen/small_icon"
                         android:layout_height="@dimen/small_icon"
                         android:layout_margin="@dimen/spacing_small"
-                        android:scaleType="fitCenter"
-                        android:background="@drawable/block_custom" />
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/hide" />
                 </LinearLayout>
 
             </LinearLayout>

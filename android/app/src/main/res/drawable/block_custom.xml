@@ -3,7 +3,7 @@
     <!--체크박스 선택상태-->
     <item
         android:state_checked="true"
-        android:drawable="@drawable/check_3de46c"/>
+        android:drawable="@drawable/check_green"/>
     <!--체크박스 해제 or default 상태-->
     <item
         android:state_checked="false"

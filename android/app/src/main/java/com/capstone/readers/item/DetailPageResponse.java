@@ -6,45 +6,38 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 public class DetailPageResponse {
-    @SerializedName("code")
-    private int code;
-
-    @SerializedName("toon_thumb_url")
-    private String thumbnail;
-
-    @SerializedName("toon_site")
-    private String platform;
-
-    @SerializedName("toon_name")
-    private String title;
-
-    @SerializedName("wrt_name")
-    private String author;
+    @SerializedName("toon_id")
+    private String toon_id;
 
     @SerializedName("toon_desc")
-    private String desc;
+    private String toon_desc;
 
-    public int getCode() {
-        return code;
+    @SerializedName("content")
+    private String content;
+
+    @SerializedName("subs_flag")
+    private double subs_flag;
+
+    @SerializedName("block_flag")
+    private double block_flag;
+
+    public String getToon_id() {
+        return toon_id;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getToon_desc() {
+        return toon_desc;
     }
 
-    public String getTitle() {
-        return title;
+    public String getContent() {
+        return content;
     }
 
-    public String getPlatform() {
-        return platform;
+    public double getSubs_flag() {
+        return subs_flag;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getDesc() {
-        return desc;
+    public double getBlock_flag() {
+        return block_flag;
     }
 }

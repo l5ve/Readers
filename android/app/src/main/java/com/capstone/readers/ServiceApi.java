@@ -36,7 +36,8 @@ public interface ServiceApi {
     Call<ArrayList<ToonResponse>> getEndToon(@Body getEndToonData data);
 
     /* 작품 상세 페이지 */
-
+    @POST("toon/detailpage")
+    Call<ArrayList<DetailPageResponse>> getDetailPageData(@Body UserToonData data);
 
 
     /* 메모 */
@@ -60,8 +61,6 @@ public interface ServiceApi {
     Call<ArrayList<BlockCard>> getBlockList(@Body String user_id);
 
 
-    @POST("/toon/detail")
-    Call<DetailPageResponse> getDetailPage(@Body String toon_id);
 
     @GET("/toon/detailGenres")
     Call<ArrayList<String>> getDetailGenres(@Query("toon_id") String toon_id);
