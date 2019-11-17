@@ -59,8 +59,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
             mCardView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    ((MyApp) context.getApplicationContext()).setDetail_page_id(mDataset.get(getAdapterPosition()).getId());
-                    ((MyApp) context.getApplicationContext()).setTemp(mDataset.get(getAdapterPosition()).getTitle());
+                    ((MyApp) context.getApplicationContext()).setDetail_page_info(mDataset.get(getAdapterPosition()));
 
                     AppCompatActivity aca = (AppCompatActivity) view.getContext();
                     Fragment fg = EpisodeFragment.newInstance();
