@@ -2,7 +2,7 @@ package com.capstone.readers.item;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DetailGenreResponse {
+public class ToonGenreResponse {
     @SerializedName("toon_id")
     private String toon_id;
 

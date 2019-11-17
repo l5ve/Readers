@@ -1,12 +1,9 @@
 package com.capstone.readers;
 
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 import com.capstone.readers.MemoCard.MemoCard;
 import com.capstone.readers.item.*;
@@ -40,7 +37,7 @@ public interface ServiceApi {
     Call<ArrayList<DetailPageResponse>> getDetailPageData(@Body UserToonData data);
 
     @POST("toon/detailgenrelist")
-    Call<ArrayList<DetailGenreResponse>> getDetailGenres(@Body String toon_id);
+    Call<ArrayList<ToonGenreResponse>> getDetailGenres(@Body ToonIdData data);
 
     /* 구독 */
     @POST("subscribe/add")

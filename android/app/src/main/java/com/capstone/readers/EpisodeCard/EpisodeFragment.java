@@ -23,9 +23,10 @@ import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ToonCard.ToonCard;
 import com.capstone.readers.ServiceApi;
-import com.capstone.readers.item.DetailGenreResponse;
+import com.capstone.readers.item.ToonGenreResponse;
 import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.MemoSaveData;
+import com.capstone.readers.item.ToonIdData;
 import com.capstone.readers.item.UserToonData;
 import com.capstone.readers.lib.MyToast;
 
@@ -53,7 +54,7 @@ public class EpisodeFragment extends Fragment {
     private DetailPageResponse mData;
     private boolean isSubscribed;
     private boolean isBlocked;
-    private List<DetailGenreResponse> list;
+    private List<ToonGenreResponse> list;
     private ArrayList<String> genres;
 
     private ToonCard info;
@@ -258,9 +259,10 @@ public class EpisodeFragment extends Fragment {
     }
 
     public void getGenres() {
-        service.getDetailGenres(info.getId()).enqueue(new Callback<ArrayList<DetailGenreResponse>>() {
+        ToonIdData data = new ToonIdData(info.getId());
+        service.getDetailGenres(data).enqueue(new Callback<ArrayList<ToonGenreResponse>>() {
             @Override
-            public void onResponse(Call<ArrayList<DetailGenreResponse>> call, Response<ArrayList<DetailGenreResponse>> response) {
+            public void onResponse(Call<ArrayList<ToonGenreResponse>> call, Response<ArrayList<ToonGenreResponse>> response) {
                 list = response.body();
                 if(response.code() == 200) {
                     MyToast.l(getContext(), "장르 받기 성공 "+ genres.size());
@@ -274,7 +276,7 @@ public class EpisodeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<DetailGenreResponse>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<ToonGenreResponse>> call, Throwable t) {
                 MyToast.l(getContext(), "장르 받기 실패");
             }
         });
