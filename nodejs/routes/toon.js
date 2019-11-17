@@ -94,7 +94,7 @@ router.post('/daylist', function(req, res){
 //toon/genrelist
 router.post('/genrelist', function(req, res){
   var user_id = req.body.user_id;
-  var genre_name = req.query.genre_name;
+  var genre_name = req.body.genre_name;
   var order_by = req.body.order_by; // name, site, update
   var params = [genre_name, user_id];
 
