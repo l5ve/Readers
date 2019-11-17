@@ -2,23 +2,30 @@ package com.capstone.readers.MemoCard;
 
 import android.content.Context;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.service.autofill.Dataset;
-import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.fragment.app.Fragment;
 
+import com.capstone.readers.EpisodeCard.EpisodeFragment;
+import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
-import com.capstone.readers.lib.MyToast;
+import com.capstone.readers.ToonCard.ToonCard;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 // 메모 리스트의 메모를 처리하는 어댑터
@@ -27,27 +34,12 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
     final boolean OrderOld = false;
     Context context;
     private List<MemoCard> mDataset;
+    private Bitmap bitmap;
 
     // 생성자에서 데이터 리스트 객체를 전달받음
-    public MemoListAdapter(Context context, ArrayList<MemoCard> Dataset, boolean OrderType) {
+    public MemoListAdapter(Context context, ArrayList<MemoCard> Dataset) {
         this.context = context;
         mDataset = Dataset;
-        /* 최근 순 */
-        if(OrderType) {
-            Collections.sort(mDataset, new Comparator<MemoCard>() {
-                public int compare(MemoCard obj1, MemoCard obj2) {
-                    return obj2.update.compareTo(obj1.update);
-                }
-            });
-        }
-        /* 오래된 순 */
-        else {
-            Collections.sort(mDataset, new Comparator<MemoCard>() {
-                public int compare(MemoCard obj1, MemoCard obj2) {
-                    return obj1.update.compareTo(obj2.update);
-                }
-            });
-        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,6 +62,19 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
             mMemo = itemView.findViewById(R.id.memo_cv_text);
             mUpdate = itemView.findViewById(R.id.memo_cv_update);
             mCardView = itemView.findViewById(R.id.memo_cv);
+
+            mCardView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    MemoCard temp = mDataset.get(getAdapterPosition());
+                    ToonCard data = new ToonCard(temp.getToon_id(), temp.getTitle(), temp.getPlatform(), temp.getAuthor(), temp.getThumbnail(), temp.getMemo_date());
+                    ((MyApp) context.getApplicationContext()).setDetail_page_info(data);
+
+                    AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                    Fragment fg = EpisodeFragment.newInstance();
+                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
+                }
+            });
         }
     }
 
@@ -87,54 +92,49 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
     // onBindViewHolder() position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(MemoListAdapter.ViewHolder holder, int position){
-        /*myImgView.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
-         * myImgView.setImageDrawable(getResources().getDrawable(R.drawable.monkey, getApplicationContext().getTheme()));
-        * */
-        final String a = mDataset.get(position).memo;
-        holder.mImageView.setImageResource(R.drawable.naver);
-        holder.mPlatform.setText(mDataset.get(position).platform);
-        // String text = viewHolder.itemView.getContext().getString(R.string.mystring);
-        switch(mDataset.get(position).platform){
-            case "네이버웹툰":
-                holder.mPlatform.setTextColor(context.getResources().getColor(R.color.NaverGreen));
-                break;
-            case "다음웹툰":
-                holder.mPlatform.setTextColor(context.getResources().getColor(R.color.DaumBlue));
-                break;
-            case "레진코믹스":
-                holder.mPlatform.setTextColor(context.getResources().getColor(R.color.LezhinRed));
-                break;
+        final int pos = position;
+        Thread mThread = new Thread(){
+            @Override
+            public void run() {
+                try{
+                    URL url = new URL(mDataset.get(pos).getThumbnail());
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.connect();
+
+                    // InputStream 값을 가져와 Bitmap으로 변환
+                    InputStream is = conn.getInputStream();
+                    bitmap = BitmapFactory.decodeStream(is);
+
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
+
+        mThread.start();;
+
+        try {
+            mThread.join();
+            holder.mImageView.setImageBitmap(bitmap);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        holder.mTitle.setText(mDataset.get(position).title);
-        holder.mAuthor.setText(mDataset.get(position).author);
-        holder.mMemo.setText(mDataset.get(position).memo);
-        holder.mUpdate.setText(mDataset.get(position).update);
-        Log.d("MemoListAdapter", "Put Dataset(" + position + ") " + mDataset.get(position).img + ", " + mDataset.get(position).memo);
+
+        holder.mPlatform.setText(mDataset.get(position).getPlatform());
+        holder.mTitle.setText(mDataset.get(position).getTitle());
+        holder.mAuthor.setText(mDataset.get(position).getAuthor());
+        holder.mMemo.setText(mDataset.get(position).getContent());
+        holder.mUpdate.setText(mDataset.get(position).getMemo_date());
     }
 
     // getItemCount() 전체 데이터 갯수 리턴
     @Override
     public int getItemCount() {
         return mDataset.size();
-    }
-}
-
-class MemoCard{
-    public String id;
-    public int img;
-    public String platform;
-    public String title;
-    public String author;
-    public String memo;
-    public String update;
-
-    public MemoCard(String id, int img, String platform, String title, String author, String memo, String update){
-        this.id = id;
-        this.img = img;
-        this.platform = platform;
-        this.title = title;
-        this.author = author;
-        this.memo = memo;
-        this.update = update;
     }
 }

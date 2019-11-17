@@ -36,12 +36,4 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <TextView
-        android:id="@+id/memo_no_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_large"
-        android:text="@string/no_memo"
-        android:visibility="gone"/>
-
 </LinearLayout>

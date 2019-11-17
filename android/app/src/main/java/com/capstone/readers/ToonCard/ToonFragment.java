@@ -112,7 +112,6 @@ public class ToonFragment extends Fragment {
         sort_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId){
-                String result;
                 if(checkedId == R.id.toon_sort_title){
                     order_by = "name";
                 } else if(checkedId == R.id.toon_sort_update) {
@@ -170,7 +169,6 @@ public class ToonFragment extends Fragment {
                        myDataset.add(list.get(i).getToonCard());
                     }
                     indicator = i;
-                    Log.d("ToonFragment", "Put DayToons in myDataset(size: " + list.size() + ")");
 
                     setAdapter();
                 }
