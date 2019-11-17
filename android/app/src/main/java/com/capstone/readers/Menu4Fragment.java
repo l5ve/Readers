@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import org.w3c.dom.Text;
+import com.capstone.readers.Block.BlockFragment;
 
 public class Menu4Fragment extends Fragment {
     private TextView settingLoginBtn;
@@ -39,6 +39,15 @@ public class Menu4Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).replaceFragment(ManageLoginFragment.newInstance());
+            }
+        });
+
+        settingHideBtn.setOnClickListener(new TextView.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fg = BlockFragment.newInstance();
+                AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fg).addToBackStack(null).commit();
             }
         });
 

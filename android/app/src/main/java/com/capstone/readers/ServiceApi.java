@@ -1,5 +1,6 @@
 package com.capstone.readers;
 
+import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -9,6 +10,7 @@ import retrofit2.http.Query;
 
 import com.capstone.readers.MemoCard.MemoCard;
 import com.capstone.readers.item.*;
+import com.capstone.readers.Block.BlockCard;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,10 @@ public interface ServiceApi {
     @POST("/toon/endlist")
     Call<ArrayList<ToonResponse>> getEndToon(@Body getEndToonData data);
 
+    /* 작품 상세 페이지 */
+
+
+
     /* 메모 */
     @POST("/memo/save")
     Call<ResponseBody> saveMemo(@Body MemoSaveData data);
@@ -43,6 +49,15 @@ public interface ServiceApi {
     @POST("/memo/list")
     Call<ArrayList<MemoCard>> getMemoList(@Body MypageMemoData data);
 
+    /* 숨김(차단) */
+    @POST("/block/add")
+    Call<ResponseBody> addBlock(@Body UserToonData data);
+
+    @POST("/block/delete")
+    Call<ResponseBody> deleteBlock(@Body UserToonData data);
+
+    @POST("/block/list")
+    Call<ArrayList<BlockCard>> getBlockList(@Body String user_id);
 
 
     @POST("/toon/detail")

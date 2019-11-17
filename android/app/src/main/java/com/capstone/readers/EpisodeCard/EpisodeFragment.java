@@ -27,6 +27,8 @@ import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.UserToonData;
 import com.capstone.readers.lib.MyToast;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -48,6 +50,10 @@ public class EpisodeFragment extends Fragment {
     private ArrayList<EpisodeCard> myDataset;
 
     private ToonCard info;
+    private LinearLayout mSubscribe;
+    private TextView mSubscribeText;
+    private LinearLayout mBlock;
+    private TextView mBlockText;
     private ImageButton mMemobtn;
     private LinearLayout mMemolayout;
     private EditText mEditText;
@@ -83,6 +89,9 @@ public class EpisodeFragment extends Fragment {
         info = ((MyApp) getActivity().getApplicationContext()).getDetail_page_info();
         user_id = ((MyApp) getActivity().getApplicationContext()).getUser_id();
 
+        mSubscribe = (LinearLayout) fv.findViewById(R.id.detail_page_subscribe);
+        mSubscribeText = (TextView) fv.findViewById(R.id.detail_page_subscribe_text);
+        mBlock = (LinearLayout) fv.findViewById(R.id.detail_page_block);
         mImageView = (ImageView) fv.findViewById(R.id.detail_page_thumbnail);
         mPlatform = (TextView) fv.findViewById(R.id.detail_page_platform);
         mTitle = (TextView) fv.findViewById(R.id.detail_page_title);
@@ -95,6 +104,15 @@ public class EpisodeFragment extends Fragment {
         mMemoDelete = (Button) fv.findViewById(R.id.detail_page_memo_delete);
         mMemolayout = (LinearLayout) fv.findViewById(R.id.detail_page_memo_layout);
         isMemoOpened = false;
+
+
+        mSubscribe.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
         /* 메모 버튼 클릭 시 메모 레이아웃 여닫기 */
         mMemobtn.setOnClickListener(new View.OnClickListener(){
@@ -150,6 +168,7 @@ public class EpisodeFragment extends Fragment {
         mAdapter = new EpisodeListAdapter(getContext(), myDataset);
         mRecyclerView.setAdapter(mAdapter);
     }
+
 
     public void saveMemo() {
         MemoSaveData data = new MemoSaveData(user_id, info.getId(), mEditText.getText().toString());

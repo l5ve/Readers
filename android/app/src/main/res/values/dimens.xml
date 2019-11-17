@@ -50,11 +50,17 @@
     <dimen name="detail_page_memo_height">120dp</dimen>
     <dimen name="detail_page_memo_save_btn_width">65dp</dimen>
     <dimen name="detail_page_memo_save_btn_height">40dp</dimen>
+    <dimen name="detail_page_top_btn_height">35dp</dimen>
 
     <dimen name="tooncard_width">130dp</dimen>
     <dimen name="tooncard_height">200dp</dimen>
 
     <dimen name="epicard_height">120dp</dimen>
     <dimen name="epi_bookmark">30dp</dimen>
+
+    <dimen name="block_icon">20dp</dimen>
+    <dimen name="block_card_height">220</dimen>
+
+    <dimen name="small_icon">12dp</dimen>
 
 </resources>

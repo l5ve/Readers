@@ -43,6 +43,31 @@
             app:srcCompat="@drawable/readers_logo_white" />
 
         <TextView
+            android:id="@+id/setting_profile_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:text="@string/profile_edit"
+            android:textSize="@dimen/text_size_large3" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/text_size_xlarge"
+            android:layout_height="@dimen/text_size_xlarge"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:srcCompat="@drawable/readers_logo_black" />
+
+        <TextView
             android:id="@+id/setting_hide_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +81,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryBright5">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,7 +94,7 @@
                 android:layout_height="@dimen/text_size_xlarge"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_medium"
-                app:srcCompat="@drawable/readers_logo_black" />
+                app:srcCompat="@drawable/readers_logo_white" />
 
             <TextView
                 android:id="@+id/setting_notice_btn"
@@ -103,15 +129,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimaryBright5">
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="@dimen/text_size_xlarge"
             android:layout_height="@dimen/text_size_xlarge"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/spacing_medium"
-            app:srcCompat="@drawable/readers_logo_white" />
+            app:srcCompat="@drawable/readers_logo_black" />
 
         <TextView
             android:id="@+id/setting_ask_btn"

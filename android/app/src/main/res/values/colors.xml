@@ -34,4 +34,7 @@
 
     <color name="bg_default">#ffffff</color>
 
+    <color name="check_red">#ff4d50</color>
+    <color name="check_green">#3de46c</color>
+
 </resources>

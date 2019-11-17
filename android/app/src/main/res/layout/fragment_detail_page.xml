@@ -17,28 +17,64 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/detail_page_top_btn_height"
                 android:orientation="horizontal">
 
-                <Button
+                <LinearLayout
                     android:id="@+id/detail_page_subscribe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@drawable/button_custom"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/text_size_medium"
-                    android:text="@string/subscribe" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-                <Button
-                    android:id="@+id/detail_page_hide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    <TextView
+                        android:id="@+id/detail_page_subscribe_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_size_medium"
+                        android:text="@string/subscribe" />
+
+                    <ImageView
+                        android:id="@+id/detail_page_subscribe_icon"
+                        android:layout_width="@dimen/small_icon"
+                        android:layout_height="@dimen/small_icon"
+                        android:layout_margin="@dimen/spacing_small"
+                        android:scaleType="fitCenter"
+                        android:background="@drawable/subscribe_custom"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/detail_page_block"
                     android:background="@drawable/button_custom"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/text_size_medium"
-                    android:text="@string/hide" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/detail_page_block_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_size_medium"
+                        android:text="@string/hide" />
+
+                    <ImageView
+                        android:id="@+id/detail_page_block_icon"
+                        android:layout_width="@dimen/small_icon"
+                        android:layout_height="@dimen/small_icon"
+                        android:layout_margin="@dimen/spacing_small"
+                        android:scaleType="fitCenter"
+                        android:background="@drawable/block_custom" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
