@@ -59,11 +59,11 @@
     <dimen name="tooncard_width">130dp</dimen>
     <dimen name="tooncard_height">200dp</dimen>
 
-    <dimen name="epicard_height">120dp</dimen>
-    <dimen name="epi_bookmark">30dp</dimen>
+    <dimen name="epicard_height">100dp</dimen>
+    <dimen name="epi_bookmark">25dp</dimen>
 
     <dimen name="block_icon">20dp</dimen>
-    <dimen name="block_card_height">220</dimen>
+    <dimen name="block_card_height">220dp</dimen>
 
     <dimen name="small_icon">12dp</dimen>
 

@@ -31,6 +31,7 @@
                 android:layout_width="@dimen/cardview_toon_thumbnail"
                 android:layout_height="@dimen/cardview_toon_thumbnail"
                 android:layout_marginVertical="@dimen/spacing_small"
+                android:layout_marginHorizontal="@dimen/spacing_small2"
                 android:layout_gravity="center"/>
 
             <TextView

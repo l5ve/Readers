@@ -186,12 +186,34 @@ public class EpisodeFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         myDataset = new ArrayList<>();
-        myDataset.add(new EpisodeCard("0", "0", info.getTitle() + " 1화", "2019-01-01"));
 
-        setAdapter();
-
+        getEpisodeList();
 
         return fv;
+    }
+
+    public void setAdapter() {
+        mAdapter = new EpisodeListAdapter(getContext(), myDataset);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void getEpisodeList() {
+        service.getEpisodeList(utdata).enqueue(new Callback<ArrayList<EpisodeCard>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EpisodeCard>> call, Response<ArrayList<EpisodeCard>> response) {
+                myDataset = response.body();
+                Log.d("EpisodeFragment", "getEpisodeList epi_title " + myDataset.get(0).getEpi_title().getClass().getName());
+                Log.d("EpisodeFragment", "getEpisodeList epi_thumbnail " + myDataset.get(0).getEpi_thumbnail().getClass().getName());
+                Log.d("EpisodeFragment", "getEpisodeList epi_url " + myDataset.get(0).getEpi_url().getClass().getName());
+                setAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EpisodeCard>> call, Throwable t) {
+                Log.e("EpisodeFragment", "getEpisodeList: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
     }
 
     public void setSubscribeBtn() {
@@ -228,11 +250,6 @@ public class EpisodeFragment extends Fragment {
             mBlockText.setTextColor(getResources().getColor(R.color.colorWhite));
             mBlockImg.setImageResource(R.drawable.hide);
         }
-    }
-
-    public void setAdapter() {
-        mAdapter = new EpisodeListAdapter(getContext(), myDataset);
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     public void getDetailPageData(){
@@ -466,7 +483,5 @@ public class EpisodeFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-
 
 }

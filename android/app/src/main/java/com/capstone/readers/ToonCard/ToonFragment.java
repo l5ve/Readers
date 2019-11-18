@@ -250,6 +250,6 @@ public class ToonFragment extends Fragment {
             indicator++;
         }
 
-        mAdapter.notifyDataSetChanged();
+        mAdapter.notifyItemRangeChanged(indicator, paging);
     }
 }
