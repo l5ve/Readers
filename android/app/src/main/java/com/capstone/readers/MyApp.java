@@ -15,9 +15,9 @@ public class MyApp extends Application {
     private String user_pw; // 암호화된 비밀번호
     private boolean savedData;
     private String user_name;
-    private int subs_num;
-    private int bookmark_num;
-    private int memo_num;
+//    private int subs_num;
+//    private int bookmark_num;
+//    private int memo_num;
 
     private boolean login_naver;
     private boolean login_daum;
@@ -59,9 +59,9 @@ public class MyApp extends Application {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        subs_num = 0;
-        bookmark_num = 0;
-        memo_num = 0;
+//        subs_num = 0;
+//        bookmark_num = 0;
+//        memo_num = 0;
 
         genre_weight = new double[13];
         for (int i = 0; i < 13; i++) {
@@ -120,29 +120,29 @@ public class MyApp extends Application {
         return user_name;
     }
 
-    public void setSubs_num(int subs_num) {
-        this.subs_num = subs_num;
-    }
-
-    public int getSubs_num() {
-        return subs_num;
-    }
-
-    public void setBookmark_num(int bookmark_num) {
-        this.bookmark_num = bookmark_num;
-    }
-
-    public int getBookmark_num() {
-        return bookmark_num;
-    }
-
-    public void setMemo_num(int memo_num) {
-        this.memo_num = memo_num;
-    }
-
-    public int getMemo_num() {
-        return memo_num;
-    }
+//    public void setSubs_num(int subs_num) {
+//        this.subs_num = subs_num;
+//    }
+//
+//    public int getSubs_num() {
+//        return subs_num;
+//    }
+//
+//    public void setBookmark_num(int bookmark_num) {
+//        this.bookmark_num = bookmark_num;
+//    }
+//
+//    public int getBookmark_num() {
+//        return bookmark_num;
+//    }
+//
+//    public void setMemo_num(int memo_num) {
+//        this.memo_num = memo_num;
+//    }
+//
+//    public int getMemo_num() {
+//        return memo_num;
+//    }
 
     public boolean isLogin_naver() {
         return login_naver;

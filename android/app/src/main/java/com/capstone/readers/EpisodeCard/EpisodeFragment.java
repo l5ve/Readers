@@ -4,9 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -75,6 +77,7 @@ public class EpisodeFragment extends Fragment {
     private TextView mTitle;
     private TextView mAuthor;
     private TextView mDesc;
+    private LinearLayout mGenreLayout;
     private String user_id;
     Bitmap bitmap;
 
@@ -97,6 +100,7 @@ public class EpisodeFragment extends Fragment {
         info = ((MyApp) getActivity().getApplicationContext()).getDetail_page_info();
         user_id = ((MyApp) getActivity().getApplicationContext()).getUser_id();
         utdata = new UserToonData(user_id, info.getId());
+        genres = new ArrayList<>();
 
         mSubscribe = (LinearLayout) fv.findViewById(R.id.detail_page_subscribe);
         mSubscribeText = (TextView) fv.findViewById(R.id.detail_page_subscribe_text);
@@ -109,6 +113,7 @@ public class EpisodeFragment extends Fragment {
         mTitle = (TextView) fv.findViewById(R.id.detail_page_title);
         mAuthor = (TextView) fv.findViewById(R.id.detail_page_author);
         mDesc = (TextView) fv.findViewById(R.id.detail_page_desc);
+        mGenreLayout = (LinearLayout) fv.findViewById(R.id.detail_page_genre_layout);
 
         mMemobtn = (ImageButton) fv.findViewById(R.id.detail_page_memo_btn);
         mEditText = (EditText) fv.findViewById(R.id.detail_page_memo_input);
@@ -244,10 +249,16 @@ public class EpisodeFragment extends Fragment {
                     mMemolayout.setVisibility(View.VISIBLE);
                 }
 
-                if ((double) mData.getSubs_flag() == 1)
-                    setSubscribeBtn();
-                if ((double) mData.getBlock_flag() == 1)
-                    setBlockBtn();
+                if ((double) mData.getSubs_flag() == 1) {
+                    isSubscribed = true;
+                    mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
+                    mSubscribeImg.setImageResource(R.drawable.check_green);
+                }
+                if ((double) mData.getBlock_flag() == 1) {
+                    isBlocked = true;
+                    mBlockText.setTextColor(getResources().getColor(R.color.check_red));
+                    mBlockImg.setImageResource(R.drawable.check_red);
+                }
             }
 
             @Override
@@ -265,22 +276,28 @@ public class EpisodeFragment extends Fragment {
             public void onResponse(Call<ArrayList<ToonGenreResponse>> call, Response<ArrayList<ToonGenreResponse>> response) {
                 list = response.body();
                 if(response.code() == 200) {
-                    MyToast.l(getContext(), "장르 받기 성공 "+ genres.size());
                     for (int i = 0; i < list.size(); i++) {
                         genres.add(list.get(i).getGenre_name());
+
+                        Button btn = new Button(getContext());
+                        btn.setMinimumWidth(0);
+                        btn.setWidth((int) getResources().getDimension(R.dimen.detail_page_genre_width));
+                        btn.setText(list.get(i).getGenre_name());
+                        btn.setBackground(getResources().getDrawable(R.drawable.loginout_button_white));
+                        btn.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.detail_page_genre_text_size));
+                        mGenreLayout.addView(btn);
                     }
                 }
                 else {
-                    MyToast.l(getContext(), "장르 받기 실패 " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<ToonGenreResponse>> call, Throwable t) {
-                MyToast.l(getContext(), "장르 받기 실패");
+                Log.e("EpisodeFragment", "getGenres: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
             }
         });
-
     }
 
     public void subscribe() {

@@ -1,4 +1,4 @@
-package com.capstone.readers.Mypage;
+package com.capstone.readers.MypageToon;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

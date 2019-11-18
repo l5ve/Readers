@@ -45,7 +45,11 @@
     <dimen name="cardview_toon_thumbnail">90dp</dimen>
     <dimen name="cardview_big_thumbnail">110dp</dimen>
     <dimen name="detail_page_height">150dp</dimen>
-    <dimen name="detail_page_genre_btn">25dp</dimen>
+
+    <dimen name="detail_page_genre_width">50dp</dimen>
+    <dimen name="detail_page_genre_height">30dp</dimen>
+    <dimen name="detail_page_genre_text_size">12sp</dimen>
+
     <dimen name="detail_page_memo_btn">30dp</dimen>
     <dimen name="detail_page_memo_height">120dp</dimen>
     <dimen name="detail_page_memo_save_btn_width">65dp</dimen>

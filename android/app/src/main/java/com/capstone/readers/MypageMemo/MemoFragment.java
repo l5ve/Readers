@@ -1,4 +1,4 @@
-package com.capstone.readers.MemoCard;
+package com.capstone.readers.MypageMemo;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +29,6 @@ public class MemoFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<MemoCard> list;
     private ArrayList<MemoCard> myDataset;
 
     private RadioGroup sort_group;
@@ -51,7 +50,7 @@ public class MemoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fv = inflater.inflate(R.layout.fragment_mypagememo, container, false);
+        View fv = inflater.inflate(R.layout.fragment_mypage, container, false);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
@@ -62,22 +61,22 @@ public class MemoFragment extends Fragment {
         // 리사이클러뷰에 표시할 데이터 리스트 생성
         myDataset = new ArrayList<>();
 
-        sort_new = (RadioButton) fv.findViewById(R.id.memo_sort_new);
-        sort_old = (RadioButton) fv.findViewById(R.id.memo_sort_old);
-        sort_group = (RadioGroup) fv.findViewById(R.id.memo_sort_group);
+        sort_new = (RadioButton) fv.findViewById(R.id.mypage_sort_new);
+        sort_old = (RadioButton) fv.findViewById(R.id.mypage_sort_old);
+        sort_group = (RadioGroup) fv.findViewById(R.id.mypage_sort_group);
 
         // 리사이클러뷰에 LinearLayoutManager 객체 지정
-        mRecyclerView = (RecyclerView) fv.findViewById(R.id.memo_list);
+        mRecyclerView = (RecyclerView) fv.findViewById(R.id.mypage_list);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         sort_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                if(checkedId == R.id.memo_sort_new) {
+                if(checkedId == R.id.mypage_sort_new) {
                     order_by = "desc";
                 }
-                else if (checkedId == R.id.memo_sort_old) {
+                else if (checkedId == R.id.mypage_sort_old) {
                     order_by = "asc";
                 }
                 myDataset.clear();

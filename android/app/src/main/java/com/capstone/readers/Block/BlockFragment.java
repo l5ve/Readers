@@ -14,6 +14,7 @@ import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
+import com.capstone.readers.item.UserIdData;
 import com.capstone.readers.lib.MyToast;
 
 import java.util.ArrayList;
@@ -68,7 +69,8 @@ public class BlockFragment extends Fragment {
     }
 
     public void getBlockList() {
-        service.getBlockList(user_id).enqueue(new Callback<ArrayList<BlockCard>>() {
+        UserIdData data = new UserIdData(user_id);
+        service.getBlockList(data).enqueue(new Callback<ArrayList<BlockCard>>() {
             @Override
             public void onResponse(Call<ArrayList<BlockCard>> call, Response<ArrayList<BlockCard>> response) {
                 list = response.body();

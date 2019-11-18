@@ -1,4 +1,4 @@
-package com.capstone.readers.MemoCard;
+package com.capstone.readers.MypageMemo;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.R;
+import com.capstone.readers.ServiceApi;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +27,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
     Context context;
     private ArrayList<BlockCard> mDataset;
     private Bitmap bitmap;
+    private ServiceApi service;
 
     public BlockListAdapter(Context context, ArrayList<BlockCard> Dataset) {
         this.context = context;
@@ -49,9 +51,19 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
             mAuthor = itemView.findViewById(R.id.block_cv_author);
             mCardView = itemView.findViewById(R.id.block_cv);
             mLinearLayout = itemView.findViewById(R.id.block_cancel_btn);
+            mLinearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
 
+                }
+            });
         }
+    }
+
+    public void block() {
+
+
     }
 
     @Override
