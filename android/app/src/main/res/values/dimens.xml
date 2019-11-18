@@ -63,7 +63,7 @@
     <dimen name="epi_bookmark">30dp</dimen>
 
     <dimen name="block_icon">20dp</dimen>
-    <dimen name="block_card_height">220</dimen>
+    <dimen name="block_card_height">220dp</dimen>
 
     <dimen name="small_icon">12dp</dimen>
 
