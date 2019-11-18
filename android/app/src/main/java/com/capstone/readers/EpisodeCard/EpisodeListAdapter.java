@@ -17,6 +17,11 @@ import android.widget.TextView;
 import com.capstone.readers.R;
 import com.capstone.readers.ToonCard.ToonListAdapter;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,9 +69,43 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
     public void onBindViewHolder(EpisodeListAdapter.ViewHolder holder, int position) {
         final EpisodeCard item = mDataset.get(position);
         final int pos = position;
+        Thread mThread = new Thread(){
+            @Override
+            public void run() {
+                try{
+                    URL url = new URL(mDataset.get(pos).getEpi_thumbnail());
 
-        holder.mTitle.setText(mDataset.get(position).getTitle());
-        holder.mUpdate.setText(mDataset.get(position).getUpdate());
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.connect();
+
+                    // InputStream 값을 가져와 Bitmap으로 변환
+                    InputStream is = conn.getInputStream();
+                    bitmap = BitmapFactory.decodeStream(is);
+
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
+
+        mThread.start();;
+
+        try {
+            mThread.join();
+            holder.mThumbnail.setImageBitmap(bitmap);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        holder.mTitle.setText(mDataset.get(position).getEpi_title());
+        holder.mUpdate.setText(mDataset.get(position).getEpi_date());
+        if (mDataset.get(position).getIsBookmarked() == 1) {
+            holder.mBookmark.setImageResource(R.drawable.bookmarked);
+        }
     }
 
     @Override

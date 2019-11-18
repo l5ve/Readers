@@ -1,31 +1,52 @@
 package com.capstone.readers.EpisodeCard;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 public class EpisodeCard {
-    private String id;
-    private String thumbnail;
-    private String title;
-    private String update;
+    @SerializedName("toon_id")
+    private String toon_id;
 
-    public EpisodeCard(String id, String thumbnail, String title, String update) {
-        this.id = id;
-        this.thumbnail = thumbnail;
-        this.title = title;
-        this.update = update;
+    @SerializedName("curr_epi")
+    private String epi_title;
+
+    @SerializedName("epi_url")
+    private String epi_url;
+
+    @SerializedName("epi_thumb_url")
+    private String epi_thumbnail;
+
+    @SerializedName("epi_date")
+    private Timestamp epi_date;
+
+    @SerializedName("bm_flag")
+    private double isBookmarked;
+
+
+    public String getEpi_date(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(epi_date);
     }
 
-    public String getId() {
-        return id;
+    public String getEpi_url() {
+        return epi_url;
     }
 
-    public String getTitle() {
-        return title;
+    public String getEpi_title() {
+        return epi_title;
     }
 
-    public String getUpdate() {
-        return update;
+    public String getToon_id() {
+        return toon_id;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public double getIsBookmarked() {
+        return isBookmarked;
+    }
+
+    public String getEpi_thumbnail() {
+        return epi_thumbnail;
     }
 }

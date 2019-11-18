@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
+import com.capstone.readers.EpisodeCard.EpisodeCard;
 import com.capstone.readers.MypageMemo.MemoCard;
 import com.capstone.readers.item.*;
 import com.capstone.readers.Block.BlockCard;
@@ -40,6 +41,10 @@ public interface ServiceApi {
 
     @POST("toon/detailgenrelist")
     Call<ArrayList<ToonGenreResponse>> getDetailGenres(@Body ToonIdData data);
+
+    /* 에피소드 리스트 */
+    @POST("toon/episodelist")
+    Call<ArrayList<EpisodeCard>> getEpisodeList(@Body UserToonData data);
 
 
     /* 구독 */
