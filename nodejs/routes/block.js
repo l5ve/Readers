@@ -63,4 +63,17 @@ router.post('/delete', function(req, res){
   });
 });
 
+router.post('/list', function(req, res){
+  console.log(req.body);
+  var user_id = req.body.user_id;
+  sql = 'select i.toon_id, i.toon_name, i.toon_site, i.wrt_name, i.toon_thumb_url from user_block as b, toon_info as i where user_id = ? and i.toon_id = b.toon_id order by toon_name';
+
+  connection.query(sql, user_id, function(err, rows){
+    if(err) return res.sendStatus(400);
+
+    console.log("rows : " + JSON.stringify(rows));
+    res.status(200).json(rows);
+  });
+});
+
 module.exports = router;

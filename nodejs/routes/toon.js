@@ -160,4 +160,19 @@ router.post('/detailgenrelist', function(req, res){
   });
 });
 
+router.post('/episodelist', function(req, res){
+  var toon_id = req.body.toon_id;
+  var user_id = req.body.user_id;
+  var params = [toon_id, user_id, toon_id];
+
+  var sql = 'select toon_id, epi_name as curr_epi, epi_url, epi_thumb_url, epi_date, (select exists (select * from bookmark as b, epi_info as e where b.toon_id = e.toon_id and e.toon_id = ? and b.epi_name = curr_epi and b.user_id = ?)) as bm_flag from epi_info where toon_id = ? order by epi_date desc';
+
+  connection.query(sql, params, function(err, rows){
+    if(err) return res.sendStatus(400);
+
+    console.log("rows : " + JSON.stringify(rows));
+    res.status(200).json(rows);
+  });
+});
+
 module.exports = router;
