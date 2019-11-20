@@ -30,6 +30,7 @@ import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.ToonIdData;
 import com.capstone.readers.item.UserToonData;
+import com.capstone.readers.item.UserToonEpiData;
 import com.capstone.readers.lib.MyToast;
 
 import java.io.IOException;
@@ -197,24 +198,6 @@ public class EpisodeFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void getEpisodeList() {
-        service.getEpisodeList(utdata).enqueue(new Callback<ArrayList<EpisodeCard>>() {
-            @Override
-            public void onResponse(Call<ArrayList<EpisodeCard>> call, Response<ArrayList<EpisodeCard>> response) {
-                myDataset = response.body();
-                Log.d("EpisodeFragment", "getEpisodeList epi_title " + myDataset.get(0).getEpi_title().getClass().getName());
-                Log.d("EpisodeFragment", "getEpisodeList epi_thumbnail " + myDataset.get(0).getEpi_thumbnail().getClass().getName());
-                Log.d("EpisodeFragment", "getEpisodeList epi_url " + myDataset.get(0).getEpi_url().getClass().getName());
-                setAdapter();
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<EpisodeCard>> call, Throwable t) {
-                Log.e("EpisodeFragment", "getEpisodeList: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
-            }
-        });
-    }
 
     public void setSubscribeBtn() {
         isSubscribed = !isSubscribed;
@@ -226,11 +209,13 @@ public class EpisodeFragment extends Fragment {
             subscribe();
             mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
             mSubscribeImg.setImageResource(R.drawable.check_green);
+            mBlock.setVisibility(View.GONE);
         }
         else {
             unsubscribe();
             mSubscribeText.setTextColor(getResources().getColor(R.color.colorWhite));
             mSubscribeImg.setImageResource(R.drawable.add);
+            mBlock.setVisibility(View.VISIBLE);
         }
     }
 
@@ -244,11 +229,13 @@ public class EpisodeFragment extends Fragment {
             block();
             mBlockText.setTextColor(getResources().getColor(R.color.check_red));
             mBlockImg.setImageResource(R.drawable.check_red);
+            mSubscribe.setVisibility(View.GONE);
         }
         else {
             unblock();
             mBlockText.setTextColor(getResources().getColor(R.color.colorWhite));
             mBlockImg.setImageResource(R.drawable.hide);
+            mSubscribe.setVisibility(View.VISIBLE);
         }
     }
 
@@ -270,11 +257,13 @@ public class EpisodeFragment extends Fragment {
                     isSubscribed = true;
                     mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
                     mSubscribeImg.setImageResource(R.drawable.check_green);
+                    mBlock.setVisibility(View.GONE);
                 }
                 if ((double) mData.getBlock_flag() == 1) {
                     isBlocked = true;
                     mBlockText.setTextColor(getResources().getColor(R.color.check_red));
                     mBlockImg.setImageResource(R.drawable.check_red);
+                    mSubscribe.setVisibility(View.GONE);
                 }
             }
 
@@ -406,6 +395,24 @@ public class EpisodeFragment extends Fragment {
 
     }
 
+    public void getEpisodeList() {
+        service.getEpisodeList(utdata).enqueue(new Callback<ArrayList<EpisodeCard>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EpisodeCard>> call, Response<ArrayList<EpisodeCard>> response) {
+                myDataset = response.body();
+                Log.d("EpisodeFragment", "getEpisodeList epi_title " + myDataset.get(0).getEpi_title().getClass().getName());
+                Log.d("EpisodeFragment", "getEpisodeList epi_thumbnail " + myDataset.get(0).getEpi_thumbnail().getClass().getName());
+                Log.d("EpisodeFragment", "getEpisodeList epi_url " + myDataset.get(0).getEpi_url().getClass().getName());
+                setAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EpisodeCard>> call, Throwable t) {
+                Log.e("EpisodeFragment", "getEpisodeList: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+    }
 
     public void saveMemo() {
         MemoSaveData data = new MemoSaveData(user_id, info.getId(), mEditText.getText().toString());

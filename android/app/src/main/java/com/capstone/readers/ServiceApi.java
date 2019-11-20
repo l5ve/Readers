@@ -6,6 +6,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 import com.capstone.readers.EpisodeCard.EpisodeCard;
+import com.capstone.readers.MypageBookmark.BookmarkCard;
 import com.capstone.readers.MypageMemo.MemoCard;
 import com.capstone.readers.item.*;
 import com.capstone.readers.Block.BlockCard;
@@ -70,17 +71,24 @@ public interface ServiceApi {
     @POST("/memo/delete")
     Call<ResponseBody> deleteMemo(@Body UserToonData data);
 
+
+    /* 책갈피 */
+    @POST("/bookmark/add")
+    Call<ResponseBody> addBookmark(@Body UserToonEpiData data);
+
+    @POST("/bookmark/delete")
+    Call<ResponseBody> deleteBookmark(@Body UserToonEpiData data);
+
+
+    /* 마이페이지 */
+    @POST("/bookmark/list")
+    Call<ArrayList<BookmarkCard>> getBookmarkList(@Body MypageData data);
+
     @POST("/memo/list")
-    Call<ArrayList<MemoCard>> getMemoList(@Body MypageMemoData data);
+    Call<ArrayList<MemoCard>> getMemoList(@Body MypageData data);
 
 
     /* 숨김(차단) */
-    @POST("/block/add")
-    Call<ResponseBody> addBlock(@Body UserToonData data);
-
-    @POST("/block/delete")
-    Call<ResponseBody> deleteBlock(@Body UserToonData data);
-
     @POST("/block/list")
     Call<ArrayList<BlockCard>> getBlockList(@Body UserIdData data);
 

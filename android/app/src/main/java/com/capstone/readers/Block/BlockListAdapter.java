@@ -86,7 +86,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
                     notifyDataSetChanged();
                 }
                 else {
-                    Log.d("BlockListAdapter", "unblock: " + context.getString(R.string.unblock_fail));
+                    Log.e("BlockListAdapter", "unblock: " + context.getString(R.string.unblock_fail));
                     MyToast.s(context, context.getString(R.string.unblock_fail));
                 }
             }
@@ -95,7 +95,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("BlockListAdapter", "unblock: " + context.getString(R.string.toon_server_error));
                 MyToast.s(context, context.getString(R.string.toon_server_error));
-            }
+        }
         });
     }
 

@@ -3,6 +3,7 @@ package com.capstone.readers;
 import android.content.ClipData;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
