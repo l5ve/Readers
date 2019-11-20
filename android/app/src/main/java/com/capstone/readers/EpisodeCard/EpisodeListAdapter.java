@@ -191,6 +191,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         }
 
         toon_id = mDataset.get(position).getToon_id();
+        epi_title = mDataset.get(position).getEpi_title();
         service = RetrofitClient.getClient().create(ServiceApi.class);
     }
 
