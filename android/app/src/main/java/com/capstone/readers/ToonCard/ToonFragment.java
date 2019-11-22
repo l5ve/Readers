@@ -100,7 +100,7 @@ public class ToonFragment extends Fragment {
             @Override
             public void onScrollStateChanged (RecyclerView recyclerView, int newState) {
                 if (!mRecyclerView.canScrollVertically(1)){
-                    Log.d("ToonFragment", "End of list");
+                    Log.d("ToonFragment", "End of the list");
                     if (indicator < list.size()){
                         addMoreItem();
                     }

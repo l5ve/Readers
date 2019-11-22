@@ -97,14 +97,6 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
                         AppCompatActivity aca = (AppCompatActivity) v.getContext();
                         Fragment fg = WebviewFragment.newInstance();
                         aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
-//
-//                        Intent intent = new Intent(context, LoginWebviewActivity.class);
-//                        intent.putExtra("name", "episode");
-//                        intent.putExtra("url", url);
-//                        intent.putExtra("close", false);
-//                        intent.putExtra("automatic", true);
-//
-//                        context.startActivity(intent);
                     }
                 }
             });
@@ -120,7 +112,6 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
                     Log.d("EpisodeListAdapter", "addBookmark: " + context.getString(R.string.addbookmark_success));
-                    MyToast.s(context, context.getString(R.string.addbookmark_success));
                     mDataset.get(position).setIsBookmarked(1);
                     notifyItemChanged(position);
                 }
@@ -146,7 +137,6 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
                     Log.d("EpisodeListAdapter", "deleteBookmark: " + context.getString(R.string.deletebookmark_success));
-                    MyToast.s(context, context.getString(R.string.deletebookmark_success));
                     mDataset.get(position).setIsBookmarked(0);
                     notifyItemChanged(position);
                 }

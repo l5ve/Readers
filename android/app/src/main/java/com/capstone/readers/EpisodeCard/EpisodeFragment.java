@@ -1,5 +1,6 @@
 package com.capstone.readers.EpisodeCard;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,10 +17,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.capstone.readers.Menu3Fragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
@@ -52,13 +55,14 @@ public class EpisodeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<EpisodeCard> list;
     private ArrayList<EpisodeCard> myDataset;
     private UserToonData utdata;
     private DetailPageResponse mData;
     private boolean isSubscribed;
     private boolean isBlocked;
-    private List<ToonGenreResponse> list;
     private ArrayList<String> genres;
+    private ArrayList<ToonGenreResponse> genrelist;
 
     private ToonCard info;
     private LinearLayout mSubscribe;
@@ -82,6 +86,9 @@ public class EpisodeFragment extends Fragment {
     private String user_id;
     Bitmap bitmap;
 
+    private int indicator;
+    final int paging = 5;
+
     private ServiceApi service;
 
     public static EpisodeFragment newInstance() {
@@ -102,6 +109,9 @@ public class EpisodeFragment extends Fragment {
         user_id = ((MyApp) getActivity().getApplicationContext()).getUser_id();
         utdata = new UserToonData(user_id, info.getId());
         genres = new ArrayList<>();
+        indicator = 12;
+
+        myDataset = new ArrayList<>();
 
         mSubscribe = (LinearLayout) fv.findViewById(R.id.detail_page_subscribe);
         mSubscribeText = (TextView) fv.findViewById(R.id.detail_page_subscribe_text);
@@ -181,12 +191,19 @@ public class EpisodeFragment extends Fragment {
         mAuthor.setText(info.getAuthor());
 
 
-
         mRecyclerView = (RecyclerView) fv.findViewById(R.id.episode_list);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        myDataset = new ArrayList<>();
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                Log.d("EpisodeFragment", "End of the list");
+                if (indicator < list.size()) {
+                    addMoreItem();
+                }
+            }
+        });
 
         getEpisodeList();
 
@@ -207,15 +224,9 @@ public class EpisodeFragment extends Fragment {
         }
         else if(isSubscribed) {
             subscribe();
-            mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
-            mSubscribeImg.setImageResource(R.drawable.check_green);
-            mBlock.setVisibility(View.GONE);
         }
         else {
             unsubscribe();
-            mSubscribeText.setTextColor(getResources().getColor(R.color.colorWhite));
-            mSubscribeImg.setImageResource(R.drawable.add);
-            mBlock.setVisibility(View.VISIBLE);
         }
     }
 
@@ -227,15 +238,9 @@ public class EpisodeFragment extends Fragment {
         }
         else if(isBlocked){
             block();
-            mBlockText.setTextColor(getResources().getColor(R.color.check_red));
-            mBlockImg.setImageResource(R.drawable.check_red);
-            mSubscribe.setVisibility(View.GONE);
         }
         else {
             unblock();
-            mBlockText.setTextColor(getResources().getColor(R.color.colorWhite));
-            mBlockImg.setImageResource(R.drawable.hide);
-            mSubscribe.setVisibility(View.VISIBLE);
         }
     }
 
@@ -280,15 +285,15 @@ public class EpisodeFragment extends Fragment {
         service.getDetailGenres(data).enqueue(new Callback<ArrayList<ToonGenreResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonGenreResponse>> call, Response<ArrayList<ToonGenreResponse>> response) {
-                list = response.body();
+                genrelist = response.body();
                 if(response.code() == 200) {
-                    for (int i = 0; i < list.size(); i++) {
-                        genres.add(list.get(i).getGenre_name());
+                    for (int i = 0; i < genrelist.size(); i++) {
+                        genres.add(genrelist.get(i).getGenre_name());
 
                         Button btn = new Button(getContext());
                         btn.setMinimumWidth(0);
                         btn.setWidth((int) getResources().getDimension(R.dimen.detail_page_genre_width));
-                        btn.setText(list.get(i).getGenre_name());
+                        btn.setText(genrelist.get(i).getGenre_name());
                         btn.setBackground(getResources().getDrawable(R.drawable.loginout_button_white));
                         btn.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.detail_page_genre_text_size));
                         mGenreLayout.addView(btn);
@@ -311,10 +316,13 @@ public class EpisodeFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
+                    mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
+                    mSubscribeImg.setImageResource(R.drawable.check_green);
+                    mBlock.setVisibility(View.GONE);
                     Log.d("EpisodeFragment", "subscribe: " + getString(R.string.subs_success));
-                    MyToast.s(getContext(), getString(R.string.subs_success));
                 }
                 else {
+                    isSubscribed = !isSubscribed;
                     Log.d("EpisodeFragment", "subscribe: " + getString(R.string.subs_fail));
                     MyToast.s(getContext(), getString(R.string.subs_fail));
                 }
@@ -333,10 +341,14 @@ public class EpisodeFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
+                    mSubscribeText.setTextColor(getResources().getColor(R.color.colorWhite));
+                    mSubscribeImg.setImageResource(R.drawable.add);
+                    mBlock.setVisibility(View.VISIBLE);
                     Log.d("EpisodeFragment", "unsubscribe: " + getString(R.string.unsubs_success));
-                    MyToast.s(getContext(), getString(R.string.unsubs_success));
+
                 }
                 else {
+                    isSubscribed = !isSubscribed;
                     Log.d("EpisodeFragment", "unsubscribe: " + getString(R.string.unsubs_fail));
                     MyToast.s(getContext(), getString(R.string.unsubs_fail));
                 }
@@ -355,10 +367,13 @@ public class EpisodeFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
-                    Log.d("EpisodeFragment", "block: " + getString(R.string.block_success));
-                    MyToast.s(getContext(), getString(R.string.block_success));
+                    mBlockText.setTextColor(getResources().getColor(R.color.check_red));
+                    mBlockImg.setImageResource(R.drawable.check_red);
+                    mSubscribe.setVisibility(View.GONE);
+                    Log.d("EpisodeFragment", "unblock: " + getString(R.string.block_success));
                 }
                 else {
+                    isBlocked = !isBlocked;
                     Log.d("EpisodeFragment", "block: " + getString(R.string.block_fail));
                     MyToast.s(getContext(), getString(R.string.block_fail));
                 }
@@ -377,10 +392,13 @@ public class EpisodeFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
+                    mBlockText.setTextColor(getResources().getColor(R.color.colorWhite));
+                    mBlockImg.setImageResource(R.drawable.hide);
+                    mSubscribe.setVisibility(View.VISIBLE);
                     Log.d("EpisodeFragment", "unblock: " + getString(R.string.unblock_success));
-                    MyToast.s(getContext(), getString(R.string.unblock_success));
                 }
                 else {
+                    isBlocked = !isBlocked;
                     Log.d("EpisodeFragment", "unblock: " + getString(R.string.unblock_fail));
                     MyToast.s(getContext(), getString(R.string.unblock_fail));
                 }
@@ -399,8 +417,16 @@ public class EpisodeFragment extends Fragment {
         service.getEpisodeList(utdata).enqueue(new Callback<ArrayList<EpisodeCard>>() {
             @Override
             public void onResponse(Call<ArrayList<EpisodeCard>> call, Response<ArrayList<EpisodeCard>> response) {
-                myDataset = response.body();
-                setAdapter();
+                list = response.body();
+
+                if (response.isSuccessful() && list != null) {
+                    int i;
+                    for (i = 0; i < paging && i < list.size(); i++) {
+                        myDataset.add(list.get(i));
+                    }
+                    indicator = i;
+                    setAdapter();
+                }
             }
 
             @Override
@@ -489,6 +515,22 @@ public class EpisodeFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addMoreItem() {
+        if (indicator >= list.size())
+            return;
+
+        int limit = indicator + paging;
+        if (limit > list.size())
+            limit = list.size();
+
+        for (int i = indicator; i < limit; i++) {
+            myDataset.add(list.get(i));
+            indicator++;
+        }
+
+        mAdapter.notifyItemRangeChanged(indicator, paging);
     }
 
 }

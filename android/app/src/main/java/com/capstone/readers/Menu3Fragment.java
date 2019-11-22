@@ -30,9 +30,6 @@ import retrofit2.Response;
 public class Menu3Fragment extends Fragment {
     private String user_id;
     private String user_name;
-    private int subs_num;
-    private int bookmark_num;
-    private int memo_num;
     private MypageResponse mProfileData;
 
     private TextView profile_name;
@@ -51,7 +48,6 @@ public class Menu3Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_menu3, container, false);
 
-        service = RetrofitClient.getClient().create(ServiceApi.class);
         user_id = ((MyApp) getActivity().getApplication()).getUser_id();
         user_name = ((MyApp) getActivity().getApplication()).getUser_name();
 
@@ -61,9 +57,6 @@ public class Menu3Fragment extends Fragment {
         mypage_memo = (TextView) fv.findViewById(R.id.mypage_memo);
 
         profile_name.setText(user_name);
-        mypage_subscribe.setText(Integer.toString(subs_num));
-        mypage_bookmark.setText(Integer.toString(bookmark_num));
-        mypage_memo.setText(Integer.toString(memo_num));
 
         Fragment fg = Menu3Fragment1.newInstance();
         setChildFragment(fg);
@@ -92,7 +85,7 @@ public class Menu3Fragment extends Fragment {
             }
         });
 
-        getData();
+        getData(user_id);
 
         return fv;
     }
@@ -107,16 +100,19 @@ public class Menu3Fragment extends Fragment {
         }
     }
 
-    private void getData() {
+    public void getData(String user_id) {
+        service = RetrofitClient.getClient().create(ServiceApi.class);
         UserIdData data = new UserIdData(user_id);
         service.getMypageData(data).enqueue(new Callback<ArrayList<MypageResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<MypageResponse>> call, Response<ArrayList<MypageResponse>> response) {
-                mProfileData = response.body().get(0);
-                mypage_subscribe.setText(Integer.toString(mProfileData.getSubs_num()));
-                mypage_bookmark.setText(Integer.toString(mProfileData.getBookmark_num()));
-                mypage_memo.setText(Integer.toString(mProfileData.getMemo_num()));
-            }
+                if(response.code() == 200 && response.body() != null) {
+                    mProfileData = response.body().get(0);
+                    mypage_subscribe.setText(Integer.toString(mProfileData.getSubs_num()));
+                    mypage_bookmark.setText(Integer.toString(mProfileData.getBookmark_num()));
+                    mypage_memo.setText(Integer.toString(mProfileData.getMemo_num()));
+                }
+               }
 
             @Override
             public void onFailure(Call<ArrayList<MypageResponse>> call, Throwable t) {

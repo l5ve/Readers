@@ -81,11 +81,4 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment).commit();
     }
-
-    public void coverFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.main_frame, fragment).commit();
-        //fragmentTransaction.replace(R.id.main_frame, fragment).commit();
-    }
 }

@@ -84,7 +84,6 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
                     Log.d("BlockListAdapter", "unblock: " + context.getString(R.string.unblock_success));
-                    MyToast.s(context, context.getString(R.string.unblock_success));
                     mDataset.remove(pos);
                     notifyDataSetChanged();
                 }
