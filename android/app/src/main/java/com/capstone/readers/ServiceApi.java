@@ -8,6 +8,7 @@ import retrofit2.http.POST;
 import com.capstone.readers.EpisodeCard.EpisodeCard;
 import com.capstone.readers.MypageBookmark.BookmarkCard;
 import com.capstone.readers.MypageMemo.MemoCard;
+import com.capstone.readers.ToonCard.ToonCard;
 import com.capstone.readers.item.*;
 import com.capstone.readers.Block.BlockCard;
 
@@ -81,6 +82,12 @@ public interface ServiceApi {
 
 
     /* 마이페이지 */
+    @POST("/subscribe/daylist")
+    Call<ArrayList<ToonCard>> getSubscribeDayList(@Body getDayToonData data);
+
+    @POST("/subscribe/endlist")
+    Call<ArrayList<ToonCard>> getSubscribeEndList(@Body getEndToonData data);
+
     @POST("/bookmark/list")
     Call<ArrayList<BookmarkCard>> getBookmarkList(@Body MypageData data);
 

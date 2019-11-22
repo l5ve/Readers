@@ -68,6 +68,14 @@ public class Menu3Fragment extends Fragment {
         Fragment fg = Menu3Fragment1.newInstance();
         setChildFragment(fg);
 
+        mypage_subscribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fg = Menu3Fragment1.newInstance();
+                setChildFragment(fg);
+            }
+        });
+
         mypage_bookmark.setOnClickListener(new TextView.OnClickListener(){
             @Override
             public void onClick(View v) {

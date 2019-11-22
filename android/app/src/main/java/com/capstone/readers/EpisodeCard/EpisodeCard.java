@@ -49,4 +49,8 @@ public class EpisodeCard {
     public String getEpi_thumbnail() {
         return epi_thumbnail;
     }
+
+    public void setIsBookmarked(double value) {
+        this.isBookmarked = value;
+    }
 }

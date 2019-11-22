@@ -31,6 +31,9 @@
     <color name="ComicgtYellow">#ffde00</color>
     <color name="KtoonYellow">#facc30</color>
     <color name="ToptoonRed">#dc1e25</color>
+    <color name="ToomicsRed">#eb2a36</color>
+    <color name="FoxtoonOrange">#f2921a</color>
+    <color name="PeanutoonBlue">#3dc1d3</color>
 
     <color name="bg_default">#ffffff</color>
 

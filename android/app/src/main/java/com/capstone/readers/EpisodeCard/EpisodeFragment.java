@@ -441,6 +441,9 @@ public class EpisodeFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
+                    mEditText.getText().clear();
+                    isMemoOpened = !isMemoOpened;
+                    mMemolayout.setVisibility(View.GONE);
                     Log.d("EpisodeFragment", "deleteMemo: " + getString(R.string.memo_delete_success));
                     MyToast.s(getContext(), getString(R.string.memo_delete_success));
                 } else {

@@ -35,6 +35,7 @@ public class MyApp extends Application {
     private boolean DayTab;
     private boolean GenreTab;
     private boolean EndTab;
+    private String mypagesubscribetab;
 
     private String day;
     private String genre;
@@ -286,6 +287,14 @@ public class MyApp extends Application {
 
     public boolean getEndTab() {
         return EndTab;
+    }
+
+    public void setMypagesubscribetab(String value) {
+        this.mypagesubscribetab = value;
+    }
+
+    public String getMypagesubscribetab() {
+        return this.mypagesubscribetab;
     }
 
     public void setDay(String day) {

@@ -87,12 +87,6 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
                     MyToast.s(context, context.getString(R.string.unblock_success));
                     mDataset.remove(pos);
                     notifyDataSetChanged();
-//                    ((MainActivity)context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            notifyDataSetChanged();
-//                        }
-//                    });
                 }
                 else {
                     Log.e("BlockListAdapter", "unblock: " + context.getString(R.string.unblock_fail));
@@ -152,6 +146,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         holder.mPlatform.setText(mDataset.get(position).getPlatform());
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mAuthor.setText(mDataset.get(position).getAuthor());

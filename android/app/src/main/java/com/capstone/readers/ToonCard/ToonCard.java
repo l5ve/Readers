@@ -1,11 +1,24 @@
 package com.capstone.readers.ToonCard;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ToonCard {
+    @SerializedName("toon_id")
     private String id;
+
+    @SerializedName("toon_thumb_url")
     private String thumbnail;
+
+    @SerializedName("toon_site")
     private String platform;
+
+    @SerializedName("toon_name")
     private String title;
+
+    @SerializedName("wrt_name")
     private String author;
+
+    @SerializedName("last_date")
     private String update;
 
     public ToonCard(String id, String title, String platform, String author, String thumbnail, String update){

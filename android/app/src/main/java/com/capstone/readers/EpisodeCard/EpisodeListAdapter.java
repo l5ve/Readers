@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.capstone.readers.MyApp;
@@ -41,9 +42,6 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
     private List<EpisodeCard> mDataset;
     Bitmap bitmap;
     private ServiceApi service;
-    private String toon_id;
-    private String epi_title;
-    private boolean bookmakred;
 
     public EpisodeListAdapter(Context context, ArrayList<EpisodeCard> Dataset) {
         this.context = context;
@@ -56,6 +54,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         TextView mTitle;
         TextView mUpdate;
         CardView mCardView;
+        LinearLayout mLayout;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -65,24 +64,36 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
             mTitle = itemView.findViewById(R.id.episode_cv_title);
             mUpdate = itemView.findViewById(R.id.episode_cv_date);
             mCardView = itemView.findViewById(R.id.episode_cv);
+            mLayout = itemView.findViewById(R.id.episode_layout);
 
             mBookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    bookmakred = !bookmakred;
-                    if (bookmakred) {
-                        addBookmark();
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        /* unbookmarked 상태에서 버튼을 누른 경우 (북마크 추가 시도) */
+                        if (mDataset.get(pos).getIsBookmarked() == 1) {
+                            deleteBookmark(mDataset.get(pos).getToon_id(), mDataset.get(pos).getEpi_title(), pos);
+                        }
+                        /* bookmarked 상태에서 버튼을 누른 경우 (북마크 해제 시도) */
+                        else {
+                            addBookmark(mDataset.get(pos).getToon_id(), mDataset.get(pos).getEpi_title(), pos);
+                        }
                     }
-                    else {
-                        deleteBookmark();
-                    }
+                }
+            });
+
+            mLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
                 }
             });
 
         }
     }
 
-    public void addBookmark() {
+    public void addBookmark(String toon_id, String epi_title, final int position) {
         String user_id = ((MyApp) context.getApplicationContext()).getUser_id();
         UserToonEpiData data = new UserToonEpiData(user_id, toon_id, epi_title);
         service.addBookmark(data).enqueue(new Callback<ResponseBody>() {
@@ -91,8 +102,8 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
                 if (response.code() == 200) {
                     Log.d("EpisodeListAdapter", "addBookmark: " + context.getString(R.string.addbookmark_success));
                     MyToast.s(context, context.getString(R.string.addbookmark_success));
-                    bookmakred = true;
-                    notifyDataSetChanged();
+                    mDataset.get(position).setIsBookmarked(1);
+                    notifyItemChanged(position);
                 }
                 else {
                     Log.e("EpisodeListAdapter", "addBookmark" + context.getString(R.string.addbookmark_fail));
@@ -108,7 +119,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         });
     }
 
-    public void deleteBookmark() {
+    public void deleteBookmark(String toon_id, String epi_title, final int position) {
         String user_id = ((MyApp) context.getApplicationContext()).getUser_id();
         UserToonEpiData data = new UserToonEpiData(user_id, toon_id, epi_title);
         service.deleteBookmark(data).enqueue(new Callback<ResponseBody>() {
@@ -117,8 +128,8 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
                 if (response.code() == 200) {
                     Log.d("EpisodeListAdapter", "deleteBookmark: " + context.getString(R.string.deletebookmark_success));
                     MyToast.s(context, context.getString(R.string.deletebookmark_success));
-                    bookmakred = false;
-                    notifyDataSetChanged();
+                    mDataset.get(position).setIsBookmarked(0);
+                    notifyItemChanged(position);
                 }
                 else {
                     Log.e("EpisodeListAdapter", "deleteBookmark" + context.getString(R.string.deletebookmark_fail));
@@ -185,13 +196,8 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         holder.mUpdate.setText(mDataset.get(position).getEpi_date());
         if (mDataset.get(position).getIsBookmarked() == 1) {
             holder.mBookmark.setImageResource(R.drawable.bookmarked);
-            bookmakred = true;
-        } else {
-            bookmakred = false;
         }
 
-        toon_id = mDataset.get(position).getToon_id();
-        epi_title = mDataset.get(position).getEpi_title();
         service = RetrofitClient.getClient().create(ServiceApi.class);
     }
 

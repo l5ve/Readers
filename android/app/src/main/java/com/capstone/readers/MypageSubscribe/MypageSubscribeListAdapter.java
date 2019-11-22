@@ -1,4 +1,4 @@
-package com.capstone.readers.ToonCard;
+package com.capstone.readers.MypageSubscribe;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
+import com.capstone.readers.ToonCard.ToonCard;
+import com.capstone.readers.ToonCard.ToonListAdapter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,12 +30,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHolder> {
+public class MypageSubscribeListAdapter extends RecyclerView.Adapter<MypageSubscribeListAdapter.ViewHolder> {
     Context context;
     private List<ToonCard> mDataset;
     Bitmap bitmap;
 
-    public ToonListAdapter(Context context, ArrayList<ToonCard> Dataset) {
+    public MypageSubscribeListAdapter(Context context, ArrayList<ToonCard> Dataset) {
         this.context = context;
         mDataset = Dataset;
     }
@@ -62,7 +64,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
 
                     AppCompatActivity aca = (AppCompatActivity) view.getContext();
                     Fragment fg = EpisodeFragment.newInstance();
-                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
+                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
                 }
 
             });
@@ -70,19 +72,19 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
     }
 
     @Override
-    public ToonListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
+    public MypageSubscribeListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.recyclerview_toon, parent, false);
 
-        return new ToonListAdapter.ViewHolder(view);
+        return new MypageSubscribeListAdapter.ViewHolder(view);
     }
 
 
     // onBindViewHolder() position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
-    public void onBindViewHolder(ToonListAdapter.ViewHolder holder, int position){
+    public void onBindViewHolder(MypageSubscribeListAdapter.ViewHolder holder, int position){
         final ToonCard item = mDataset.get(position);
         final int pos = position;
         Thread mThread = new Thread(){

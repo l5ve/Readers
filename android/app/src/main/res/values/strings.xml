@@ -96,6 +96,22 @@
     <string name="foxtoon">폭스툰</string>
     <string name="peanutoon">피너툰</string>
 
+    <string name="naver_colored"><![CDATA[<b><font color=#2db400>naver</font></b>]]></string>
+    <string name="daum_colored"><![CDATA[<b><font color=#5f8ffb>daum</font></b>]]></string>
+    <string name="lezhin_colored"><![CDATA[<b><font color=#e50020>lezhin</font></b>]]></string>
+    <string name="mrblue_colored"><![CDATA[<b><font color=#00bce4>mrblue</font></b>]]></string>
+    <string name="bufftoon_colored"><![CDATA[<b><font color=#00c6d9>버프툰</font></b>]]></string>
+    <string name="bomtoon_colored"><![CDATA[<b><font color=#ff33ac>봄툰</font></b>]]></string>
+    <string name="bbuding_colored"><![CDATA[<b><font color=#ffe85a>뿌딩</font></b>]]></string>
+    <string name="kakaopage_colored"><![CDATA[<b><font color=#ffd200>카카오페이지</font></b>]]></string>
+    <string name="comica_colored"><![CDATA[<b><font color=#8633ff>코미카</font></b>]]></string>
+    <string name="comicgt_colored"><![CDATA[<b><font color=#ffde00>코믹지티</font></b>]]></string>
+    <string name="ktoon_colored"><![CDATA[<b><font color=#facc30>케이툰</font></b>]]></string>
+    <string name="toptoon_colored"><![CDATA[<b><font color=#dc1e25>탑툰</font></b>]]></string>
+    <string name="toomics_colored"><![CDATA[<b><font color=#eb2a36>투믹스</font></b>]]></string>
+    <string name="foxtoon_colored"><![CDATA[<b><font color=#f2921a>폭스툰</font></b>]]></string>
+    <string name="peanutoon_colored"><![CDATA[<b><font color=#3dc1d3>피너툰</font></b>]]></string>
+
     <string name="toon_server_error">서버 통신 에러 발생</string>
 
     <string name="detail_page_memo">메모(~140자)</string>

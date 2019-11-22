@@ -51,7 +51,7 @@ public class Menu1Fragment1 extends Fragment {
 
         // 기본 화면으로 월요일 웹툰
         Fragment fg = ToonFragment.newInstance();
-        setChildFragment(ToonFragment.newInstance(), "mon");
+        setChildFragment(fg, "mon");
 
         // 탭의 선택 상태가 변경될 때 호출되는 리스너
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){

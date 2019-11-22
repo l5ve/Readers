@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.capstone.readers.lib.MyToast;
 
-public class WebviewActivity extends AppCompatActivity {
+public class LoginWebviewActivity extends AppCompatActivity {
     private WebView mWebView;
     private WebSettings mWebSettings; //웹뷰세팅
     private String name;

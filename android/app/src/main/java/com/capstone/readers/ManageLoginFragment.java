@@ -352,7 +352,7 @@ public class ManageLoginFragment extends Fragment {
     }
 
     public void callWebview(String name, String url, Boolean close, Boolean automatic) {
-        Intent intent = new Intent(getActivity(), WebviewActivity.class);
+        Intent intent = new Intent(getActivity(), LoginWebviewActivity.class);
         intent.putExtra("name", name);
         intent.putExtra("url", url);
         intent.putExtra("close", close);

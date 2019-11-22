@@ -2,7 +2,8 @@ package com.capstone.readers.MypageBookmark;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class BookmarkCard {
     @SerializedName("toon_id")
@@ -58,7 +59,8 @@ public class BookmarkCard {
         return tood_id;
     }
 
-    public Timestamp getEpi_date() {
-        return epi_date;
+    public String getEpi_date() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(epi_date);
     }
 }
