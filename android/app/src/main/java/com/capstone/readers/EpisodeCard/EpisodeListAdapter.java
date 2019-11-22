@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -20,7 +22,8 @@ import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
-import com.capstone.readers.ToonCard.ToonListAdapter;
+import com.capstone.readers.LoginWebviewActivity;
+import com.capstone.readers.WebviewFragment;
 import com.capstone.readers.item.UserToonEpiData;
 import com.capstone.readers.lib.MyToast;
 
@@ -86,7 +89,23 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
             mLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        String url = mDataset.get(pos).getEpi_url();
 
+                        ((MyApp) context.getApplicationContext()).setEpisodeUrl(url);
+                        AppCompatActivity aca = (AppCompatActivity) v.getContext();
+                        Fragment fg = WebviewFragment.newInstance();
+                        aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
+//
+//                        Intent intent = new Intent(context, LoginWebviewActivity.class);
+//                        intent.putExtra("name", "episode");
+//                        intent.putExtra("url", url);
+//                        intent.putExtra("close", false);
+//                        intent.putExtra("automatic", true);
+//
+//                        context.startActivity(intent);
+                    }
                 }
             });
 

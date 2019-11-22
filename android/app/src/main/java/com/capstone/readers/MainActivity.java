@@ -1,12 +1,8 @@
 package com.capstone.readers;
 
-import android.content.ClipData;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -14,7 +10,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.content.SharedPreferences;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
@@ -43,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         //첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
+        transaction.replace(R.id.main_frame, menu1Fragment).commitAllowingStateLoss();
 
 
 
@@ -55,24 +50,24 @@ public class MainActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()) {
                     // 1번 메뉴: 홈
                     case R.id.nav_menu1: {
-                        transaction1.replace(R.id.frame_layout, menu1Fragment).commitAllowingStateLoss();
+                        transaction1.replace(R.id.main_frame, menu1Fragment).commitAllowingStateLoss();
 
                         break;
                     }
                     // 2번 메뉴: 추천
                     case R.id.nav_menu2: {
-                        transaction1.replace(R.id.frame_layout, menu2Fragment).commitAllowingStateLoss();
+                        transaction1.replace(R.id.main_frame, menu2Fragment).commitAllowingStateLoss();
                         break;
                     }
                     // 3번 메뉴: 마이페이지
                     case R.id.nav_menu3: {
-                        transaction1.replace(R.id.frame_layout, menu3Fragment).commitAllowingStateLoss();
+                        transaction1.replace(R.id.main_frame, menu3Fragment).commitAllowingStateLoss();
                         break;
                     }
 
                     // 4번 메뉴: 설정
                     case R.id.nav_menu4: {
-                        transaction1.replace(R.id.frame_layout, menu4Fragment).commitAllowingStateLoss();
+                        transaction1.replace(R.id.main_frame, menu4Fragment).commitAllowingStateLoss();
                         break;
                     }
                 }
@@ -84,6 +79,13 @@ public class MainActivity extends AppCompatActivity {
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment).commit();
+        fragmentTransaction.replace(R.id.main_frame, fragment).commit();
+    }
+
+    public void coverFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.main_frame, fragment).commit();
+        //fragmentTransaction.replace(R.id.main_frame, fragment).commit();
     }
 }

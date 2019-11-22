@@ -47,7 +47,7 @@ public class Menu4Fragment extends Fragment {
             public void onClick(View view) {
                 Fragment fg = BlockFragment.newInstance();
                 AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                aca.getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fg).addToBackStack(null).commit();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
             }
         });
 

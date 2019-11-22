@@ -17,7 +17,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:layout_margin="@dimen/spacing_medium">
+            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_small2">
 
             <ImageView
                 android:id="@+id/episode_cv_bookmark"

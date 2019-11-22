@@ -400,9 +400,6 @@ public class EpisodeFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<EpisodeCard>> call, Response<ArrayList<EpisodeCard>> response) {
                 myDataset = response.body();
-                Log.d("EpisodeFragment", "getEpisodeList epi_title " + myDataset.get(0).getEpi_title().getClass().getName());
-                Log.d("EpisodeFragment", "getEpisodeList epi_thumbnail " + myDataset.get(0).getEpi_thumbnail().getClass().getName());
-                Log.d("EpisodeFragment", "getEpisodeList epi_url " + myDataset.get(0).getEpi_url().getClass().getName());
                 setAdapter();
             }
 

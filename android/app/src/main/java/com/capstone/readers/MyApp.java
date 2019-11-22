@@ -35,6 +35,7 @@ public class MyApp extends Application {
     private boolean DayTab;
     private boolean GenreTab;
     private boolean EndTab;
+    private String episodeUrl;
     private String mypagesubscribetab;
 
     private String day;
@@ -287,6 +288,14 @@ public class MyApp extends Application {
 
     public boolean getEndTab() {
         return EndTab;
+    }
+
+    public void setEpisodeUrl(String url) {
+        this.episodeUrl = url;
+    }
+
+    public String getEpisodeUrl(){
+        return this.episodeUrl;
     }
 
     public void setMypagesubscribetab(String value) {
