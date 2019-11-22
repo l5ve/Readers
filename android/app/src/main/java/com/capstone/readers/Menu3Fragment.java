@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.capstone.readers.MypageBookmark.BookmarkFragment;
 import com.capstone.readers.MypageMemo.MemoFragment;
 import com.capstone.readers.item.MypageResponse;
 import com.capstone.readers.item.UserIdData;
@@ -66,6 +67,14 @@ public class Menu3Fragment extends Fragment {
 
         Fragment fg = Menu3Fragment1.newInstance();
         setChildFragment(fg);
+
+        mypage_bookmark.setOnClickListener(new TextView.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Fragment fg = BookmarkFragment.newInstance();
+                setChildFragment(fg);
+            }
+        });
 
         mypage_memo.setOnClickListener(new TextView.OnClickListener() {
             @Override

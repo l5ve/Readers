@@ -16,7 +16,7 @@ import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
-import com.capstone.readers.item.MypageMemoData;
+import com.capstone.readers.item.MypageData;
 import com.capstone.readers.lib.MyToast;
 
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class MemoFragment extends Fragment {
     }
 
     public void getData() {
-        MypageMemoData data = new MypageMemoData(user_id, order_by);
+        MypageData data = new MypageData(user_id, order_by);
         service.getMemoList(data).enqueue(new Callback<ArrayList<MemoCard>>() {
             @Override
             public void onResponse(Call<ArrayList<MemoCard>> call, Response<ArrayList<MemoCard>> response) {

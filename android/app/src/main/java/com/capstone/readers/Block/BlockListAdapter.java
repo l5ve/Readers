@@ -14,6 +14,7 @@ import android.view.View;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.capstone.readers.MainActivity;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
@@ -38,9 +39,6 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
     private ArrayList<BlockCard> mDataset;
     private Bitmap bitmap;
     private ServiceApi service;
-    private String toon_id;
-    private boolean unblocked;
-    private int thispos;
 
     public BlockListAdapter(Context context, ArrayList<BlockCard> Dataset) {
         this.context = context;
@@ -67,13 +65,18 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
             mLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    unblock();
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        unblock(mDataset.get(pos).getToon_id(), pos);
+                    }
                 }
             });
         }
     }
 
-    public void unblock() {
+
+    public void unblock(String toon_id, int position) {
+        final int pos = position;
         String user_id = ((MyApp) context.getApplicationContext()).getUser_id();
         UserToonData data = new UserToonData(user_id, toon_id);
         service.unblock(data).enqueue(new Callback<ResponseBody>() {
@@ -82,11 +85,17 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
                 if (response.code() == 200) {
                     Log.d("BlockListAdapter", "unblock: " + context.getString(R.string.unblock_success));
                     MyToast.s(context, context.getString(R.string.unblock_success));
-                    mDataset.remove(thispos);
+                    mDataset.remove(pos);
                     notifyDataSetChanged();
+//                    ((MainActivity)context).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            notifyDataSetChanged();
+//                        }
+//                    });
                 }
                 else {
-                    Log.d("BlockListAdapter", "unblock: " + context.getString(R.string.unblock_fail));
+                    Log.e("BlockListAdapter", "unblock: " + context.getString(R.string.unblock_fail));
                     MyToast.s(context, context.getString(R.string.unblock_fail));
                 }
             }
@@ -95,7 +104,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("BlockListAdapter", "unblock: " + context.getString(R.string.toon_server_error));
                 MyToast.s(context, context.getString(R.string.toon_server_error));
-            }
+        }
         });
     }
 
@@ -112,7 +121,6 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
     @Override
     public void onBindViewHolder(BlockListAdapter.ViewHolder holder, int  position) {
         final int pos = position;
-        thispos = position;
         Thread mThread = new Thread(){
             @Override
             public void run() {
@@ -147,8 +155,6 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
         holder.mPlatform.setText(mDataset.get(position).getPlatform());
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mAuthor.setText(mDataset.get(position).getAuthor());
-        toon_id = mDataset.get(position).getToon_id();
-        unblocked = false;
         service = RetrofitClient.getClient().create(ServiceApi.class);
     }
 

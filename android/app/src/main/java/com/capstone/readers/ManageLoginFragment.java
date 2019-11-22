@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -76,6 +75,7 @@ public class ManageLoginFragment extends Fragment {
                 MyToast.s(getContext(), getString(R.string.logout_done));
 
                 getActivity().startActivity(intent);
+                getActivity().finish();
             }
         });
 

@@ -46,6 +46,8 @@
                         android:id="@+id/memo_cv_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/text_size_medium2"
                         android:text="@string/title" />

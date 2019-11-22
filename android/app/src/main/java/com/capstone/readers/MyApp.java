@@ -3,21 +3,18 @@ package com.capstone.readers;
 import android.app.Application;
 import android.os.StrictMode;
 import com.capstone.readers.ToonCard.ToonCard;
-
-import java.util.ArrayList;
+import android.content.SharedPreferences;
 
 /**
  * 앱 전역에서 사용할 수 있는 클래스
  * Application 클래스를 상속
  */
 public class MyApp extends Application {
+    private SharedPreferences appData;
     private String user_id;
     private String user_pw; // 암호화된 비밀번호
     private boolean savedData;
     private String user_name;
-//    private int subs_num;
-//    private int bookmark_num;
-//    private int memo_num;
 
     private boolean login_naver;
     private boolean login_daum;
@@ -59,6 +56,8 @@ public class MyApp extends Application {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+
 //        subs_num = 0;
 //        bookmark_num = 0;
 //        memo_num = 0;
@@ -86,63 +85,54 @@ public class MyApp extends Application {
         login_toomics = false;
         login_foxtoon = false;
         login_peanutoon = false;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("SAVE_LOGIN_DATA", false);
+        editor.apply();
     }
 
     public void setUser_id(String user_id){
         this.user_id = user_id;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putString("ID", user_id);
+        editor.apply();
     }
 
     public String getUser_id(){
-        return user_id;
+        return appData.getString("ID", user_id);
     }
 
     public void setUser_pw(String user_pw){
         this.user_pw = user_pw;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putString("PWD", user_pw);
+        editor.apply();
     }
 
     public String getUser_pw(){
-        return user_pw;
+        return appData.getString("PWD", user_pw);
     }
 
     public void setSavedData(boolean savedData) {
         this.savedData = savedData;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("SAVE_LOGIN_DATA", savedData);
+        editor.apply();
     }
 
     public boolean getSavedData(){
-        return savedData;
+        return appData.getBoolean("SAVE_LOGIN_DATA", savedData);
     }
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putString("NAME", user_name);
+        editor.apply();
     }
 
     public String getUser_name() {
-        return user_name;
+        return appData.getString("NAME", user_name);
     }
-
-//    public void setSubs_num(int subs_num) {
-//        this.subs_num = subs_num;
-//    }
-//
-//    public int getSubs_num() {
-//        return subs_num;
-//    }
-//
-//    public void setBookmark_num(int bookmark_num) {
-//        this.bookmark_num = bookmark_num;
-//    }
-//
-//    public int getBookmark_num() {
-//        return bookmark_num;
-//    }
-//
-//    public void setMemo_num(int memo_num) {
-//        this.memo_num = memo_num;
-//    }
-//
-//    public int getMemo_num() {
-//        return memo_num;
-//    }
 
     public boolean isLogin_naver() {
         return login_naver;

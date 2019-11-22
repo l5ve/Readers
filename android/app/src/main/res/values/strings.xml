@@ -122,6 +122,12 @@
     <string name="subs_notice_msg">숨긴 작품은 구독할 수 없습니다.\n숨김을 해제하고 다시 시도해주세요.</string>
     <string name="block_notice_msg">구독 작품은 숨길 수 없습니다.\n구독을 해지하고 다시 시도해주세요.</string>
 
+    <string name="addbookmark_success">책갈피 추가 성공</string>
+    <string name="addbookmark_fail">책갈피 추가 실패</string>
+
+    <string name="deletebookmark_success">책갈피 삭제 성공</string>
+    <string name="deletebookmark_fail">책갈피 삭제 실패</string>
+
     <!-- 3. 마이페이지 -->
     <string name="sir">님</string>
     <string name="profile_edit">프로필 수정</string>
