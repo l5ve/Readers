@@ -94,7 +94,7 @@ router.post('/daylist', function(req, res){
 //toon/genrelist
 router.post('/genrelist', function(req, res){
   var user_id = req.body.user_id;
-  var genre_name = req.query.genre_name;
+  var genre_name = req.body.genre_name;
   var order_by = req.body.order_by; // name, site, update
   var params = [genre_name, user_id];
 
@@ -153,6 +153,21 @@ router.post('/detailgenrelist', function(req, res){
   var sql = 'select * from toon_genre where toon_id = ?';
 
   connection.query(sql, toon_id, function(err, rows){
+    if(err) return res.sendStatus(400);
+
+    console.log("rows : " + JSON.stringify(rows));
+    res.status(200).json(rows);
+  });
+});
+
+router.post('/episodelist', function(req, res){
+  var toon_id = req.body.toon_id;
+  var user_id = req.body.user_id;
+  var params = [toon_id, user_id, toon_id];
+
+  var sql = 'select toon_id, epi_name as curr_epi, epi_url, epi_thumb_url, epi_date, (select exists (select * from bookmark as b, epi_info as e where b.toon_id = e.toon_id and e.toon_id = ? and b.epi_name = curr_epi and b.user_id = ?)) as bm_flag from epi_info where toon_id = ? order by epi_date desc';
+
+  connection.query(sql, params, function(err, rows){
     if(err) return res.sendStatus(400);
 
     console.log("rows : " + JSON.stringify(rows));

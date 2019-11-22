@@ -27,8 +27,8 @@ router.post('/join', function (req, res) {
     console.log('name:', user_name);
 
     // 삽입을 수행하는 sql문.
-    var sql = 'INSERT INTO user_info (user_id, user_pwd, user_name, subs_num, bookmark_num, memo_num) VALUES (?, ?, ?, ?, ?, ?)';
-    var params = [user_id, user_pwd, user_name, 0, 0, 0];
+    var sql = 'INSERT INTO user_info (user_id, user_pwd, user_name) VALUES (?, ?, ?)';
+    var params = [user_id, user_pwd, user_name];
 
     // sql 문의 ?는 두번째 매개변수로 넘겨진 params의 값으로 치환된다.
     connection.query(sql, params, function (err, result) {
@@ -80,21 +80,29 @@ router.post('/login', function (req, res) {
                 resultCode = 200;
                 message = "로그인 성공! " + result[0].user_name + "님 환영합니다.";
                 nickname = result[0].user_name;
-                subs_num = result[0].subs_num;
-                bookmark_num = result[0].bookmark_num;
-                memo_num = result[0].memo_num;
             }
         }
 
         res.json({
             'code': resultCode,
             'message': message,
-            'name' : nickname,
-            'subs_num' : subs_num,
-            'bookmark_num' : bookmark_num,
-            'memo_num' : memo_num
+            'name' : nickname
         });
     })
+});
+
+router.post('/num', function(req, res){
+  console.log(req.body);
+  var user_id = req.body.user_id;
+  var params = [user_id, user_id, user_id, user_id];
+  var sql = 'select user_id, (select count(toon_id) from subscribe where user_id = ?) as subs_num, (select count(toon_id) from bookmark where user_id = ?) as bookmark_num, (select count(toon_id) from memo where user_id = ?) as memo_num from user_info where user_id = ?';
+
+  connection.query(sql, params, function(err, rows){
+    if(err) return res.sendStatus(400);
+
+    console.log("rows : " + JSON.stringify(rows));
+    res.status(200).json(rows);
+  });
 });
 
 module.exports = router;
