@@ -53,12 +53,17 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private TextView profile_name;
     HorizontalBarChart chart;
 
+    /* 서버 통신을 위한 데이터 */
     private UserIdData uid;
     private ArrayList<GenreWeightData> temp;
     private ArrayList<GenreWeightData> mGenreWeight;
     private ArrayList<RecommendCard> mRecommendations;
+    private ServiceApi service;
+
+    /* 그래프 x축 */
     String[] xAxisLabel;
 
+    /* Top1 장르 추천작 */
     private TextView mMessage1;
     private CardView mCardView1;
     private ImageView mImageView1;
@@ -67,6 +72,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private TextView mAuthor1;
     private TextView mDescription1;
 
+    /* Top2 장르 추천작 */
     private TextView mMessage2;
     private CardView mCardView2;
     private ImageView mImageView2;
@@ -75,6 +81,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private TextView mAuthor2;
     private TextView mDescription2;
 
+    /* Top3 장르 추천작 */
     private TextView mMessage3;
     private CardView mCardView3;
     private ImageView mImageView3;
@@ -83,10 +90,8 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private TextView mAuthor3;
     private TextView mDescription3;
 
+    /* for thumbnail */
     private Bitmap bitmap;
-
-    private ServiceApi service;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,14 +103,12 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_menu2, container, false);
 
-
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
         // 서버로 보내기 위한 데이터
         user_id = ((MyApp) getActivity().getApplication()).getUser_id();
         uid = new UserIdData(user_id);
         mGenreWeight = new ArrayList<>();
-
 
         // Get Username
         user_name = ((MyApp) getActivity().getApplication()).getUser_name();
@@ -115,6 +118,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         /** Retrive chart on Fragment*/
         chart = (HorizontalBarChart) fv.findViewById(R.id.chart);
 
+        /* 추천작 레이아웃 설정 */
         mMessage1 = (TextView) fv.findViewById(R.id.rec1_message);
         mCardView1 = (CardView) fv.findViewById(R.id.rec1_cv);
         mImageView1 = (ImageView) fv.findViewById(R.id.rec1_cv_image);
@@ -143,8 +147,8 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         // 서버로부터 해당 사용자의 정보를 바탕으로 각 장르 가중치를 받아와 그래프로 나타냄
         getGenreWeight();
 
+        // 서버로부터 Top3 장르에 해당하는 추천 작품을 하나씩 받아와 나타냄
         getRecomendations();
-
 
         return fv;
     }
@@ -228,6 +232,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         mDescription3.setText(mRecommendations.get(2).getDescription());
     }
 
+    /* thumbnail 설정 */
     private void setThumbnail(ImageView mImageView, final String thumbnail_url) {
         Thread mThread = new Thread(){
             @Override
@@ -249,7 +254,6 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
                     e.printStackTrace();
                 }
             }
-
         };
 
         mThread.start();;
@@ -262,6 +266,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         }
     }
 
+    /* 그래프 설정 */
     private void setChart() {
         /** settings */
         // -1. Axis
