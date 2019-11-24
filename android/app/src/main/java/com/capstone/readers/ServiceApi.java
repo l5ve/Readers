@@ -8,6 +8,8 @@ import retrofit2.http.POST;
 import com.capstone.readers.EpisodeCard.EpisodeCard;
 import com.capstone.readers.MypageBookmark.BookmarkCard;
 import com.capstone.readers.MypageMemo.MemoCard;
+import com.capstone.readers.Recommend.RecommendCard;
+import com.capstone.readers.item.GenreWeightData;
 import com.capstone.readers.Search.SearchCard;
 import com.capstone.readers.Toon.ToonCard;
 import com.capstone.readers.item.*;
@@ -88,6 +90,14 @@ public interface ServiceApi {
     Call<ResponseBody> deleteBookmark(@Body UserToonEpiData data);
 
 
+    /* 추천 페이지 */
+    @POST("/recommend/genrecount")
+    Call<ArrayList<GenreWeightData>> getGenreWeight(@Body UserIdData data);
+
+    @POST("/recommend/recommend")
+    Call<ArrayList<RecommendCard>> getRecommendations(@Body UserIdData data);
+
+
     /* 마이페이지 */
     @POST("/subscribe/daylist")
     Call<ArrayList<ToonCard>> getSubscribeDayList(@Body getDayToonData data);
@@ -102,13 +112,12 @@ public interface ServiceApi {
     Call<ArrayList<MemoCard>> getMemoList(@Body MypageData data);
 
 
-    /* 숨김(차단) */
-    @POST("/block/list")
-    Call<ArrayList<BlockCard>> getBlockList(@Body UserIdData data);
-
-
     /* 마이페이지 구독/책갈피/메모 수 */
     @POST("/users/num")
     Call<ArrayList<MypageResponse>> getMypageData(@Body UserIdData data);
+
+    /* 숨김(차단) */
+    @POST("/block/list")
+    Call<ArrayList<BlockCard>> getBlockList(@Body UserIdData data);
 
 }

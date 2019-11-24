@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:id="@+id/mypage_profile_container"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"
         android:background="@color/colorPrimaryBright2">
-
 
         <ImageView
             android:id="@+id/profile_image"
@@ -31,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/spacing_medium2"
-            android:text="김중앙"
+            android:text="@string/profile_name"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_large"
             android:textStyle="bold"
@@ -43,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="님의 취향 저격 웹툰!"
+            android:text="@string/recommendation_page_top"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
@@ -52,59 +51,274 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.github.mikephil.charting.charts.HorizontalBarChart
-        android:id="@+id/chart"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_size_medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/webtoon1_container"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-    />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_size_medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rec1_cv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small2"
+                card:cardCornerRadius="5dp">
 
-    <FrameLayout
-        android:id="@+id/webtoon2_container"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_size_medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/colorWhite"
+                    android:layout_margin="@dimen/spacing_small2">
 
-    <FrameLayout
-        android:id="@+id/webtoon3_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+                    <LinearLayout
+                        android:layout_width="@dimen/cardview_rec_layout1_width"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/rec1_cv_image"
+                            android:layout_width="@dimen/cardview_memo_thumbnail"
+                            android:layout_height="@dimen/cardview_memo_thumbnail"
+                            android:layout_margin="@dimen/spacing_small2"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/rec1_cv_platform"
+                            android:layout_width="@dimen/cardview_memo_thumbnail"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium"
+                            android:text="@string/platforms" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/rec1_cv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium2"
+                            android:text="@string/title" />
+
+                        <TextView
+                            android:id="@+id/rec1_cv_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_small"
+                            android:text="@string/author"
+                            android:layout_marginBottom="@dimen/spacing_small"/>
+
+                        <TextView
+                            android:id="@+id/rec1_cv_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="4"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium"
+                            android:text="@string/detail_page_description"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rec2_cv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small2"
+                card:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/colorWhite"
+                    android:layout_margin="@dimen/spacing_small2">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/cardview_rec_layout1_width"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/rec2_cv_image"
+                            android:layout_width="@dimen/cardview_memo_thumbnail"
+                            android:layout_height="@dimen/cardview_memo_thumbnail"
+                            android:layout_margin="@dimen/spacing_small2"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/rec2_cv_platform"
+                            android:layout_width="@dimen/cardview_memo_thumbnail"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium"
+                            android:text="@string/platforms" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/rec2_cv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium2"
+                            android:text="@string/title" />
+
+                        <TextView
+                            android:id="@+id/rec2_cv_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_small"
+                            android:text="@string/author"
+                            android:layout_marginBottom="@dimen/spacing_small"/>
+
+                        <TextView
+                            android:id="@+id/rec2_cv_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="4"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium"
+                            android:text="@string/detail_page_description"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="ㅇㅇ 작품을 좋아하는 ㅇㅇ님에게"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rec3_cv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small2"
+                card:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/colorWhite"
+                    android:layout_margin="@dimen/spacing_small2">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/cardview_rec_layout1_width"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/rec3_cv_image"
+                            android:layout_width="@dimen/cardview_memo_thumbnail"
+                            android:layout_height="@dimen/cardview_memo_thumbnail"
+                            android:layout_margin="@dimen/spacing_small2"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/rec3_cv_platform"
+                            android:layout_width="@dimen/cardview_memo_thumbnail"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium"
+                            android:text="@string/platforms" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/rec3_cv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium2"
+                            android:text="@string/title" />
+
+                        <TextView
+                            android:id="@+id/rec3_cv_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_small"
+                            android:text="@string/author"
+                            android:layout_marginBottom="@dimen/spacing_small"/>
+
+                        <TextView
+                            android:id="@+id/rec3_cv_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="4"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium"
+                            android:text="@string/detail_page_description"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

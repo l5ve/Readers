@@ -1,18 +1,26 @@
 package com.capstone.readers;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.capstone.readers.Recommend.RecommendCard;
+import com.capstone.readers.item.GenreWeightData;
+import com.capstone.readers.item.UserIdData;
+import com.capstone.readers.lib.MyToast;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -24,15 +32,56 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /** 2번째 메뉴인 추천페이지 화면을 나타내는 프래그먼트
  *
  */
 public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
 
-    private String name;
+    private String user_id;
+    private String user_name;
     private TextView profile_name;
+    HorizontalBarChart chart;
+
+    private UserIdData uid;
+    private ArrayList<GenreWeightData> temp;
+    private ArrayList<GenreWeightData> mGenreWeight;
+    private ArrayList<RecommendCard> mRecommendations;
+
+    private CardView mCardView1;
+    private ImageView mImageView1;
+    private TextView mPlatform1;
+    private TextView mTitle1;
+    private TextView mAuthor1;
+    private TextView mDescription1;
+
+    private CardView mCardView2;
+    private ImageView mImageView2;
+    private TextView mPlatform2;
+    private TextView mTitle2;
+    private TextView mAuthor2;
+    private TextView mDescription2;
+
+    private CardView mCardView3;
+    private ImageView mImageView3;
+    private TextView mPlatform3;
+    private TextView mTitle3;
+    private TextView mAuthor3;
+    private TextView mDescription3;
+
+    private Bitmap bitmap;
+
+    private ServiceApi service;
 
 
     @Override
@@ -45,17 +94,168 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_menu2, container, false);
 
+
+        service = RetrofitClient.getClient().create(ServiceApi.class);
+
+        // 서버로 보내기 위한 데이터
+        user_id = ((MyApp) getActivity().getApplication()).getUser_id();
+        uid = new UserIdData(user_id);
+        mGenreWeight = new ArrayList<>();
+
+
         // Get Username
-        name = ((MyApp) getActivity().getApplication()).getUser_name();
+        user_name = ((MyApp) getActivity().getApplication()).getUser_name();
         profile_name = (TextView) fv.findViewById(R.id.profile_name);
-        profile_name.setText(name);
-
-
-        /************************* 아래 부터 선호 장르 통계 그래프 표시 */
+        profile_name.setText(user_name);
 
         /** Retrive chart on Fragment*/
-        HorizontalBarChart chart = (HorizontalBarChart) fv.findViewById(R.id.chart);
+        chart = (HorizontalBarChart) fv.findViewById(R.id.chart);
 
+        mCardView1 = (CardView) fv.findViewById(R.id.rec1_cv);
+        mImageView1 = (ImageView) fv.findViewById(R.id.rec1_cv_image);
+        mPlatform1 = (TextView) fv.findViewById(R.id.rec1_cv_platform);
+        mTitle1 = (TextView) fv.findViewById(R.id.rec1_cv_title);
+        mAuthor1 = (TextView) fv.findViewById(R.id.rec1_cv_author);
+        mDescription1 = (TextView) fv.findViewById(R.id.rec1_cv_desc);
+
+        mCardView2 = (CardView) fv.findViewById(R.id.rec2_cv);
+        mImageView2 = (ImageView) fv.findViewById(R.id.rec2_cv_image);
+        mPlatform2 = (TextView) fv.findViewById(R.id.rec2_cv_platform);
+        mTitle2 = (TextView) fv.findViewById(R.id.rec2_cv_title);
+        mAuthor2 = (TextView) fv.findViewById(R.id.rec2_cv_author);
+        mDescription2 = (TextView) fv.findViewById(R.id.rec2_cv_desc);
+
+        mCardView3 = (CardView) fv.findViewById(R.id.rec3_cv);
+        mImageView3 = (ImageView) fv.findViewById(R.id.rec3_cv_image);
+        mPlatform3 = (TextView) fv.findViewById(R.id.rec3_cv_platform);
+        mTitle3 = (TextView) fv.findViewById(R.id.rec3_cv_title);
+        mAuthor3 = (TextView) fv.findViewById(R.id.rec3_cv_author);
+        mDescription3 = (TextView) fv.findViewById(R.id.rec3_cv_desc);
+
+
+        // 서버로부터 해당 사용자의 정보를 바탕으로 각 장르 가중치를 받아와 그래프로 나타냄
+        getGenreWeight();
+
+        getRecomendations();
+
+
+        return fv;
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    // 모든 장르의 가중치를 받아옴
+    private void getGenreWeight() {
+        service.getGenreWeight(uid).enqueue(new Callback<ArrayList<GenreWeightData>>() {
+            @Override
+            public void onResponse(Call<ArrayList<GenreWeightData>> call, Response<ArrayList<GenreWeightData>> response) {
+                temp = response.body();
+
+                for (int i = 0; i < temp.size(); i++) {
+                    mGenreWeight.add(temp.get(temp.size() - 1 - i));
+                }
+
+                for (int i = 0; i < mGenreWeight.size(); i++) {
+                    Log.d("Menu2Fragment", "mGenreWeight " + i + mGenreWeight.get(i).getGenre_name() + mGenreWeight.get(i).getWeight());
+                }
+                Log.d("Menu2Fragment", "getGenreWeight size: " + mGenreWeight.size());
+                setChart();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<GenreWeightData>> call, Throwable t) {
+                Log.e("Menu2Fragment", "getGenreWeight: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+    }
+
+    private void getRecomendations() {
+        service.getRecommendations(uid).enqueue(new Callback<ArrayList<RecommendCard>>() {
+            @Override
+            public void onResponse(Call<ArrayList<RecommendCard>> call, Response<ArrayList<RecommendCard>> response) {
+                mRecommendations = response.body();
+
+                setRecommendations();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<RecommendCard>> call, Throwable t) {
+                Log.e("Menu2Fragment", "getRecommendations: " + getString(R.string.toon_server_error));
+                MyToast.s(getContext(), getString(R.string.toon_server_error));
+            }
+        });
+    }
+
+    private void setRecommendations() {
+        setThumbnail(mImageView1, mRecommendations.get(0).getThumbnail());
+        mPlatform1.setText(mRecommendations.get(0).getPlatform());
+        mTitle1.setText(mRecommendations.get(0).getTitle());
+        mAuthor1.setText(mRecommendations.get(0).getAuthor());
+        mDescription1.setText(mRecommendations.get(0).getDescription());
+
+        setThumbnail(mImageView2, mRecommendations.get(1).getThumbnail());
+        mPlatform2.setText(mRecommendations.get(1).getPlatform());
+        mTitle2.setText(mRecommendations.get(1).getTitle());
+        mAuthor2.setText(mRecommendations.get(1).getAuthor());
+        mDescription2.setText(mRecommendations.get(1).getDescription());
+
+        setThumbnail(mImageView3, mRecommendations.get(2).getThumbnail());
+        mPlatform3.setText(mRecommendations.get(2).getPlatform());
+        mTitle3.setText(mRecommendations.get(2).getTitle());
+        mAuthor3.setText(mRecommendations.get(2).getAuthor());
+        mDescription3.setText(mRecommendations.get(2).getDescription());
+    }
+
+    private void setThumbnail(ImageView mImageView, final String thumbnail_url) {
+        Thread mThread = new Thread(){
+            @Override
+            public void run() {
+                try{
+                    URL url = new URL(thumbnail_url);
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.connect();
+
+                    // InputStream 값을 가져와 Bitmap으로 변환
+                    InputStream is = conn.getInputStream();
+                    bitmap = BitmapFactory.decodeStream(is);
+
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
+
+        mThread.start();;
+
+        try {
+            mThread.join();
+            mImageView.setImageBitmap(bitmap);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void setChart() {
         /** settings */
         // -1. Axis
         YAxis yAxis = chart.getAxisLeft();
@@ -80,7 +280,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
         // -3.
         chart.getDescription().setEnabled(false);
-        chart.setNoDataText("데이터가 없습니다");  // 효력x
+        chart.setNoDataText(getResources().getString(R.string.no_data));  // 효력x
         chart.setNoDataTextColor(Color.parseColor("#281e42"));
         chart.getAxisRight().setEnabled(false);
         chart.setHorizontalFadingEdgeEnabled(false);
@@ -91,7 +291,14 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         /** set data */
 
         // -1. Labels
-        String[] xAxisLabel = new String[] {"감성", "개그", "드라마", "로맨스", "스릴러", "스토리", "스포츠", "시대극", "옴니버스", "액션", "일상", "에피소드", "판타지"};
+        Log.d("Menu2Fragment", "Heeeeeeeeeeeeeeeeeeeeeeeeeeere, mGenreWeight size: " + mGenreWeight.size());
+        String[] xAxisLabel = new String[mGenreWeight.size()];
+        //String[] xAxisLabel = new String[] {"감성", "개그", "드라마", "로맨스", "스릴러", "스토리", "스포츠", "시대극", "옴니버스", "액션", "일상", "에피소드", "판타지"};
+        for (int i = 0; i < mGenreWeight.size(); i++) {
+            xAxisLabel[i] = mGenreWeight.get(i).getGenre_name();
+            Log.d("Menu2Fragment", "xAxisLabel[" + i + "]: " + xAxisLabel[i]);
+        }
+
         /**
          ArrayList xAxisLabel = new ArrayList();
          xAxisLabel.add("Mon");
@@ -99,25 +306,28 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
          ... 이런 식으로도 가능
          */
         chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabel));
-        chart.getXAxis().setLabelCount(13);
+        chart.getXAxis().setLabelCount(mGenreWeight.size());
         chart.getXAxis().setCenterAxisLabels(false);
         // -2. Data (Temporary)
-        ArrayList values = new ArrayList();
-        for (int i = 0; i < 13; i++) {
-            values.add(new BarEntry(i, (float) i+1));
+        ArrayList<BarEntry> values = new ArrayList<>();
+        for (int i = 0; i < mGenreWeight.size(); i++) {
+            values.add(new BarEntry(i, (float) mGenreWeight.get(i).getWeight()));
         }
+//        for (int i = 0; i < 13; i++) {
+//            values.add(new BarEntry(i, (float) i+1));
+//        }
 
 
 
-        BarDataSet set1 = new BarDataSet(values, "선호 장르 통계");
+        BarDataSet set1 = new BarDataSet(values, getResources().getString(R.string.preferred_genre_stats));
         // Setting bar colors
         set1.setColors(new int[] {  Color.parseColor("#281e42"),
-                                    Color.parseColor("#493e5f"),
-                                    Color.parseColor("#6a617c"),
-                                    Color.parseColor("#8e869c"),
-                                    Color.parseColor("#b2adbc"),
-                                    Color.parseColor("#d8d5dd")
-                                });
+                Color.parseColor("#493e5f"),
+                Color.parseColor("#6a617c"),
+                Color.parseColor("#8e869c"),
+                Color.parseColor("#b2adbc"),
+                Color.parseColor("#d8d5dd")
+        });
         // set1.setColors(ColorTemplate.MATERIAL_COLORS);
         //             or ColorTemplate.VORDIPLOM_COLORS    for 알록달록~~
         BarData data = new BarData(set1);
@@ -157,23 +367,6 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         chart.setFitBars(true);
         chart.animateY(1000);
         chart.invalidate();
-
-        return fv;
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
     }
 
 }
