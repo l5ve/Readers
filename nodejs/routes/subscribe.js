@@ -142,17 +142,20 @@ router.post('/delete', function(req, res){
   });
 });
 
-router.post('/list', function(req, res){
+router.post('/daylist', function(req, res){
   console.log(req.body);
   var user_id = req.body.user_id;
   var order_by = req.body.order_by; // name, update, site
+  var is_end = req.body.is_end;
+  var toon_weekday = req.body.toon_weekday;
+  var params = [user_id, toon_weekday, is_end];
 
-  var name_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id group by i.toon_id order by toon_name';
-  var update_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id group by i.toon_id order by last_date desc, toon_name';
-  var site_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id group by i.toon_id order by toon_site, toon_name';
+  var name_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e, toon_weekday as w where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id and w.toon_id = i.toon_id and w.toon_weekday = ? and i.is_end = ? group by i.toon_id order by toon_name';
+  var update_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e, toon_weekday as w where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id and w.toon_id = i.toon_id and w.toon_weekday = ? and i.is_end = ? group by i.toon_id order by last_date desc, toon_name';
+  var site_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e, toon_weekday as w where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id and w.toon_id = i.toon_id and w.toon_weekday = ? and i.is_end = ? group by i.toon_id order by toon_site, toon_name';
 
   if (order_by == 'name'){
-    connection.query(name_sql, user_id, function(err, rows){
+    connection.query(name_sql, params, function(err, rows){
       if(err) return res.sendStatus(400);
 
       console.log("rows : " + JSON.stringify(rows));
@@ -161,7 +164,7 @@ router.post('/list', function(req, res){
   }
 
   else if (order_by == 'update'){
-    connection.query(update_sql, user_id, function(err, rows){
+    connection.query(update_sql, params, function(err, rows){
       if(err) return res.sendStatus(400);
 
       console.log("rows : " + JSON.stringify(rows));
@@ -170,7 +173,46 @@ router.post('/list', function(req, res){
   }
 
   else {
-    connection.query(site_sql, user_id, function(err, rows){
+    connection.query(site_sql, params, function(err, rows){
+      if(err) return res.sendStatus(400);
+
+      console.log("rows : " + JSON.stringify(rows));
+      res.status(200).json(rows);
+    });
+  }
+});
+
+router.post('/endlist', function(req, res){
+  console.log(req.body);
+  var user_id = req.body.user_id;
+  var order_by = req.body.order_by; // name, update, site
+  var is_end = req.body.is_end;
+  var params = [user_id, is_end];
+
+  var name_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id and i.is_end = ? group by i.toon_id order by toon_name';
+  var update_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id and i.is_end = ? group by i.toon_id order by last_date desc, toon_name';
+  var site_sql = 'select i.toon_id, i.toon_site, i.toon_name, i.wrt_name, i.toon_thumb_url, max(epi_date) as last_date from subscribe as s, toon_info as i, epi_info as e where s.user_id = ? and s.toon_id = i.toon_id and i.toon_id = e.toon_id and i.is_end = ? group by i.toon_id order by toon_site, toon_name';
+
+  if (order_by == 'name'){
+    connection.query(name_sql, params, function(err, rows){
+      if(err) return res.sendStatus(400);
+
+      console.log("rows : " + JSON.stringify(rows));
+      res.status(200).json(rows);
+    });
+  }
+
+  else if (order_by == 'update'){
+    connection.query(update_sql, params, function(err, rows){
+      if(err) return res.sendStatus(400);
+
+      console.log("rows : " + JSON.stringify(rows));
+      res.status(200).json(rows);
+    });
+  }
+
+  else {
+    connection.query(site_sql, params, function(err, rows){
       if(err) return res.sendStatus(400);
 
       console.log("rows : " + JSON.stringify(rows));

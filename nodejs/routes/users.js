@@ -99,8 +99,19 @@ router.post('/num', function(req, res){
 
   connection.query(sql, params, function(err, rows){
     if(err) return res.sendStatus(400);
+    res.status(200).json(rows);
+  });
+});
 
-    console.log("rows : " + JSON.stringify(rows));
+router.post('/genre', function(req, res){
+  console.log(req.body);
+  var user_id = req.body.user_id;
+  var genre_name = req.body.genre_name;
+  var params = [user_id, genre_name];
+  var sql = 'insert into user_genre (user_id, genre_name) values (?, ?)';
+
+  connection.query(sql, params, function(err, rows){
+    if(err) return res.sendStatus(400);
     res.status(200).json(rows);
   });
 });

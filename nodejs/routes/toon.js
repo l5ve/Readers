@@ -98,9 +98,9 @@ router.post('/genrelist', function(req, res){
   var order_by = req.body.order_by; // name, site, update
   var params = [genre_name, user_id];
 
-  var name_sql = 'select t.toon_id, t.toon_name, t.toon_site, t.wrt_name, t.toon_thumb_url, max(epi_date) as last_date from toon_info as t, epi_info as e where t.toon_id = e.toon_id and t.is_end = ? and t.toon_id not in (select toon_id from user_block where user_id = ?) group by t.toon_id order by t.toon_name';
-  var site_sql = 'select t.toon_id, t.toon_name, t.toon_site, t.wrt_name, t.toon_thumb_url, max(epi_date) as last_date from toon_info as t, epi_info as e where t.toon_id = e.toon_id and t.is_end = ? and t.toon_id not in (select toon_id from user_block where user_id = ?) group by t.toon_id order by t.toon_site, t.toon_name';
-  var update_sql = 'select t.toon_id, t.toon_name, t.toon_site, t.wrt_name, t.toon_thumb_url, max(epi_date) as last_date from toon_info as t, epi_info as e where t.toon_id = e.toon_id and t.is_end = ? and t.toon_id not in (select toon_id from user_block where user_id = ?) group by t.toon_id order by last_date desc, t.toon_name';
+  var name_sql = 'select t.toon_id, t.toon_name, t.toon_site, t.wrt_name, t.toon_thumb_url, g.genre_name, max(epi_date) as last_date from toon_info as t, epi_info as e, toon_genre as g where t.toon_id = e.toon_id and t.toon_id = g.toon_id and genre_name = ? and t.toon_id not in (select toon_id from user_block where user_id = ?) group by t.toon_id order by t.toon_name';
+  var site_sql = 'select t.toon_id, t.toon_name, t.toon_site, t.wrt_name, t.toon_thumb_url, g.genre_name, max(epi_date) as last_date from toon_info as t, epi_info as e, toon_genre as g where t.toon_id = e.toon_id and t.toon_id = g.toon_id and genre_name = ? and t.toon_id not in (select toon_id from user_block where user_id = ?) group by t.toon_id order by t.toon_site, t.toon_name';
+  var update_sql = 'select t.toon_id, t.toon_name, t.toon_site, t.wrt_name, t.toon_thumb_url, g.genre_name, max(epi_date) as last_date from toon_info as t, epi_info as e, toon_genre as g where t.toon_id = e.toon_id and t.toon_id = g.toon_id and genre_name = ? and t.toon_id not in (select toon_id from user_block where user_id = ?) group by t.toon_id order by last_date desc, t.toon_name';
 
   if (order_by == 'name'){
     connection.query(name_sql, params, function(err, rows){
@@ -166,6 +166,20 @@ router.post('/episodelist', function(req, res){
   var params = [toon_id, user_id, toon_id];
 
   var sql = 'select toon_id, epi_name as curr_epi, epi_url, epi_thumb_url, epi_date, (select exists (select * from bookmark as b, epi_info as e where b.toon_id = e.toon_id and e.toon_id = ? and b.epi_name = curr_epi and b.user_id = ?)) as bm_flag from epi_info where toon_id = ? order by epi_date desc';
+
+  connection.query(sql, params, function(err, rows){
+    if(err) return res.sendStatus(400);
+
+    console.log("rows : " + JSON.stringify(rows));
+    res.status(200).json(rows);
+  });
+});
+
+router.post('/search', function(req, res){
+  var word = req.body.word;
+  var s_word = '%' + word + '%';
+  var params = [s_word, s_word];
+  var sql = 'select toon_id, toon_name, toon_site, wrt_name, toon_thumb_url from toon_info where toon_name like ? or wrt_name like ?';
 
   connection.query(sql, params, function(err, rows){
     if(err) return res.sendStatus(400);
