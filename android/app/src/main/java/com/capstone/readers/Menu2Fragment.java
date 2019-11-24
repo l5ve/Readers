@@ -57,7 +57,9 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private ArrayList<GenreWeightData> temp;
     private ArrayList<GenreWeightData> mGenreWeight;
     private ArrayList<RecommendCard> mRecommendations;
+    String[] xAxisLabel;
 
+    private TextView mMessage1;
     private CardView mCardView1;
     private ImageView mImageView1;
     private TextView mPlatform1;
@@ -65,6 +67,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private TextView mAuthor1;
     private TextView mDescription1;
 
+    private TextView mMessage2;
     private CardView mCardView2;
     private ImageView mImageView2;
     private TextView mPlatform2;
@@ -72,6 +75,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private TextView mAuthor2;
     private TextView mDescription2;
 
+    private TextView mMessage3;
     private CardView mCardView3;
     private ImageView mImageView3;
     private TextView mPlatform3;
@@ -111,6 +115,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         /** Retrive chart on Fragment*/
         chart = (HorizontalBarChart) fv.findViewById(R.id.chart);
 
+        mMessage1 = (TextView) fv.findViewById(R.id.rec1_message);
         mCardView1 = (CardView) fv.findViewById(R.id.rec1_cv);
         mImageView1 = (ImageView) fv.findViewById(R.id.rec1_cv_image);
         mPlatform1 = (TextView) fv.findViewById(R.id.rec1_cv_platform);
@@ -118,6 +123,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         mAuthor1 = (TextView) fv.findViewById(R.id.rec1_cv_author);
         mDescription1 = (TextView) fv.findViewById(R.id.rec1_cv_desc);
 
+        mMessage2 = (TextView) fv.findViewById(R.id.rec2_message);
         mCardView2 = (CardView) fv.findViewById(R.id.rec2_cv);
         mImageView2 = (ImageView) fv.findViewById(R.id.rec2_cv_image);
         mPlatform2 = (TextView) fv.findViewById(R.id.rec2_cv_platform);
@@ -125,6 +131,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         mAuthor2 = (TextView) fv.findViewById(R.id.rec2_cv_author);
         mDescription2 = (TextView) fv.findViewById(R.id.rec2_cv_desc);
 
+        mMessage3 = (TextView) fv.findViewById(R.id.rec3_message);
         mCardView3 = (CardView) fv.findViewById(R.id.rec3_cv);
         mImageView3 = (ImageView) fv.findViewById(R.id.rec3_cv_image);
         mPlatform3 = (TextView) fv.findViewById(R.id.rec3_cv_platform);
@@ -167,11 +174,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
                 for (int i = 0; i < temp.size(); i++) {
                     mGenreWeight.add(temp.get(temp.size() - 1 - i));
                 }
-
-                for (int i = 0; i < mGenreWeight.size(); i++) {
-                    Log.d("Menu2Fragment", "mGenreWeight " + i + mGenreWeight.get(i).getGenre_name() + mGenreWeight.get(i).getWeight());
-                }
-                Log.d("Menu2Fragment", "getGenreWeight size: " + mGenreWeight.size());
+                // 가중치를 토대로 그래프 그리기
                 setChart();
             }
 
@@ -183,12 +186,14 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         });
     }
 
+    // 상위 장르 3개에 대해서 1개씩 추천작품을 받아옴
     private void getRecomendations() {
         service.getRecommendations(uid).enqueue(new Callback<ArrayList<RecommendCard>>() {
             @Override
             public void onResponse(Call<ArrayList<RecommendCard>> call, Response<ArrayList<RecommendCard>> response) {
                 mRecommendations = response.body();
 
+                // 추천 받은 작품 레이아웃 설정
                 setRecommendations();
             }
 
@@ -201,18 +206,21 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     }
 
     private void setRecommendations() {
+        mMessage1.setText(xAxisLabel[0] + " " + getResources().getString(R.string.rec_string0) + " " + user_name + getResources().getString(R.string.rec_string0_1));
         setThumbnail(mImageView1, mRecommendations.get(0).getThumbnail());
         mPlatform1.setText(mRecommendations.get(0).getPlatform());
         mTitle1.setText(mRecommendations.get(0).getTitle());
         mAuthor1.setText(mRecommendations.get(0).getAuthor());
         mDescription1.setText(mRecommendations.get(0).getDescription());
 
+        mMessage2.setText(user_name + getResources().getString(R.string.rec_string1_0) + " " + xAxisLabel[1] + " " +getResources().getString(R.string.rec_string1));
         setThumbnail(mImageView2, mRecommendations.get(1).getThumbnail());
         mPlatform2.setText(mRecommendations.get(1).getPlatform());
         mTitle2.setText(mRecommendations.get(1).getTitle());
         mAuthor2.setText(mRecommendations.get(1).getAuthor());
         mDescription2.setText(mRecommendations.get(1).getDescription());
 
+        mMessage3.setText(xAxisLabel[2] + " " + getResources().getString(R.string.rec_string2));
         setThumbnail(mImageView3, mRecommendations.get(2).getThumbnail());
         mPlatform3.setText(mRecommendations.get(2).getPlatform());
         mTitle3.setText(mRecommendations.get(2).getTitle());
@@ -254,7 +262,6 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         }
     }
 
-
     private void setChart() {
         /** settings */
         // -1. Axis
@@ -292,7 +299,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
         // -1. Labels
         Log.d("Menu2Fragment", "Heeeeeeeeeeeeeeeeeeeeeeeeeeere, mGenreWeight size: " + mGenreWeight.size());
-        String[] xAxisLabel = new String[mGenreWeight.size()];
+        xAxisLabel = new String[mGenreWeight.size()];
         //String[] xAxisLabel = new String[] {"감성", "개그", "드라마", "로맨스", "스릴러", "스토리", "스포츠", "시대극", "옴니버스", "액션", "일상", "에피소드", "판타지"};
         for (int i = 0; i < mGenreWeight.size(); i++) {
             xAxisLabel[i] = mGenreWeight.get(i).getGenre_name();
