@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
-import com.capstone.readers.ToonCard.ToonCard;
+import com.capstone.readers.Toon.ToonCard;
 
 import java.io.IOException;
 import java.io.InputStream;

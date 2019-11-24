@@ -2,7 +2,7 @@ package com.capstone.readers;
 
 import android.app.Application;
 import android.os.StrictMode;
-import com.capstone.readers.ToonCard.ToonCard;
+import com.capstone.readers.Toon.ToonCard;
 import android.content.SharedPreferences;
 
 /**
@@ -46,9 +46,11 @@ public class MyApp extends Application {
     public final int subscribe_score = 10;
     public final int bookmark_score = 1;
 
-    private double[] genre_weight;
+    private boolean[] genre_selected;
+    private String[] genre_list;
 
     private ToonCard detail_page_info;
+    private String search_keyword;
 
     @Override
     public void onCreate() {
@@ -60,14 +62,25 @@ public class MyApp extends Application {
 
         appData = getSharedPreferences("appData", MODE_PRIVATE);
 
-//        subs_num = 0;
-//        bookmark_num = 0;
-//        memo_num = 0;
-
-        genre_weight = new double[13];
+        genre_selected = new boolean[13];
         for (int i = 0; i < 13; i++) {
-            genre_weight[i] = 0;
+            genre_selected[i] = false;
         }
+
+        genre_list = new String[13];
+        genre_list[0] = "감성";
+        genre_list[1] = "개그";
+        genre_list[2] = "드라마";
+        genre_list[3] = "로맨스";
+        genre_list[4] = "스릴러";
+        genre_list[5] = "스토리";
+        genre_list[6] = "스포츠";
+        genre_list[7] = "시대극";
+        genre_list[8] = "옴니버스";
+        genre_list[9] = "액션";
+        genre_list[10] = "일상";
+        genre_list[11] = "에피소드";
+        genre_list[12] = "판타지";
     }
 
     public void initialize(){
@@ -330,7 +343,23 @@ public class MyApp extends Application {
         return this.detail_page_info;
     }
 
-    public void setGenre_weight(int i, double weight) {
-        genre_weight[i] += weight;
+    public void setGenre_selected(int i, boolean value) {
+        genre_selected[i] = value;
+    }
+
+    public boolean[] getGenre_selected() {
+        return genre_selected;
+    }
+
+    public String[] getGenre_list() {
+        return genre_list;
+    }
+
+    public String getSearch_keyword() {
+        return search_keyword;
+    }
+
+    public void setSearch_keyword(String search_keyword) {
+        this.search_keyword = search_keyword;
     }
 }

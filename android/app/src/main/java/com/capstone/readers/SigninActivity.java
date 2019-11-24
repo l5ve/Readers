@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.capstone.readers.Taste.TasteFragment;
+import com.capstone.readers.item.UserTasteData;
 import com.capstone.readers.lib.MyToast;
 import com.capstone.readers.item.JoinResponse;
 import com.capstone.readers.item.JoinData;
@@ -32,6 +33,8 @@ public class SigninActivity extends AppCompatActivity {
     private EditText pwdText;
     private EditText pwdText_ver;
     private ImageButton sign_up_Btn;
+    private boolean[] taste_selected;
+    private String[] genre_list;
 
     private ServiceApi service;
 
@@ -46,6 +49,7 @@ public class SigninActivity extends AppCompatActivity {
         sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_Btn);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
+        genre_list = ((MyApp) getApplication()).getGenre_list();
 
         sign_up_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -120,7 +124,17 @@ public class SigninActivity extends AppCompatActivity {
 
                     // 200: 회원가입 성공 시 받는 코드
                     if (result.getCode() == 200) {
-                        save();
+
+                        SecurityUtil securityUtil = new SecurityUtil();
+                        String enc_pwd = securityUtil.encryptSHA256(pwdText.getText().toString().trim());
+
+                        ((MyApp) getApplication()).setUser_id(idText.getText().toString().trim());
+                        ((MyApp) getApplication()).setUser_pw(enc_pwd);
+                        ((MyApp) getApplication()).setSavedData(true);
+                        ((MyApp) getApplication()).setUser_name(nameText.getText().toString().trim());
+
+                        setTaste();
+
                         Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
                         Log.d("SigninActivity", "Set result_ok and go back to loginActivity");
@@ -140,6 +154,33 @@ public class SigninActivity extends AppCompatActivity {
         });
     }
 
+
+    private void setTaste() {
+        String user_id = idText.getText().toString().trim();
+        taste_selected = ((MyApp) getApplication()).getGenre_selected();
+        UserTasteData data;
+
+        for (int i = 0; i < taste_selected.length; i++) {
+            if (taste_selected[i] == true) {
+                data = new UserTasteData(user_id, genre_list[i]);
+                Log.d("SigninActivity", "setTaste: " + user_id + genre_list[i]);
+                service.setTaste(data).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.code() == 200) {
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+            }
+        }
+
+    }
+
     private boolean isIdValid(String id) {
         return id.length() >= 5;
     }
@@ -153,17 +194,5 @@ public class SigninActivity extends AppCompatActivity {
             return true;
         else
             return false;
-    }
-
-    // 설정값을 저장하는 함수
-    private void save() {
-        // 저장시킬 이름이 이미 존재하면 덮어씌움
-        SecurityUtil securityUtil = new SecurityUtil();
-        String enc_pwd = securityUtil.encryptSHA256(pwdText.getText().toString().trim());
-
-        ((MyApp) getApplication()).setUser_id(idText.getText().toString().trim());
-        ((MyApp) getApplication()).setUser_pw(enc_pwd);
-        ((MyApp) getApplication()).setSavedData(true);
-        ((MyApp) getApplication()).setUser_name(nameText.getText().toString().trim());
     }
 }

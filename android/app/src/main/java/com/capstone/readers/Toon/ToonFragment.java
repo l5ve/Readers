@@ -1,4 +1,4 @@
-package com.capstone.readers.ToonCard;
+package com.capstone.readers.Toon;
 
 import android.os.Bundle;
 import android.util.Log;

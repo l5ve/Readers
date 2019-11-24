@@ -1,6 +1,6 @@
 package com.capstone.readers.item;
 
-import com.capstone.readers.ToonCard.ToonCard;
+import com.capstone.readers.Toon.ToonCard;
 import com.google.gson.annotations.SerializedName;
 
 public class ToonResponse {

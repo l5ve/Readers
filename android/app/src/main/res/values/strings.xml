@@ -144,6 +144,8 @@
     <string name="deletebookmark_success">책갈피 삭제 성공</string>
     <string name="deletebookmark_fail">책갈피 삭제 실패</string>
 
+    <string name="search_result">통합 검색 결과</string>
+
     <!-- 3. 마이페이지 -->
     <string name="sir">님</string>
     <string name="profile_edit">프로필 수정</string>

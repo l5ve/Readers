@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.capstone.readers.ToonCard.ToonFragment;
+import com.capstone.readers.Toon.ToonFragment;
 
 /** 1-3 홈화면의 완결 웹툰 정렬 화면을 나타내는 프래그먼트
  *

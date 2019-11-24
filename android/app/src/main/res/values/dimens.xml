@@ -67,4 +67,7 @@
 
     <dimen name="small_icon">12dp</dimen>
 
+    <dimen name="search_bar_height">36dp</dimen>
+    <dimen name="search_bar_width">275dp</dimen>
+
 </resources>

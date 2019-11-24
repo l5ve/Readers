@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TasteListAdapter extends RecyclerView.Adapter<TasteListAdapter.ViewHolder> {
     Context context;
     private ArrayList<String> mDataset;
-    public final int genre_choice_score = 100;
 
     public TasteListAdapter(Context context, ArrayList<String> Dataset) {
         this.context = context;
@@ -38,11 +37,11 @@ public class TasteListAdapter extends RecyclerView.Adapter<TasteListAdapter.View
                     checked = !checked;
                     if(checked) {
                         mButton.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.taste_button_clicked));
-                        ((MyApp) context.getApplicationContext()).setGenre_weight(getAdapterPosition(), genre_choice_score);
+                        ((MyApp) context.getApplicationContext()).setGenre_selected(getAdapterPosition(), true);
                     }
                     else {
                         mButton.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.taste_button));
-                        ((MyApp) context.getApplicationContext()).setGenre_weight(getAdapterPosition(), 0);
+                        ((MyApp) context.getApplicationContext()).setGenre_selected(getAdapterPosition(), false);
                     }
                 }
             });
