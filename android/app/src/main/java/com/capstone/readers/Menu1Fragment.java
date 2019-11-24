@@ -1,20 +1,19 @@
 package com.capstone.readers;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toolbar;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.capstone.readers.R;
+import com.capstone.readers.Search.SearchFragment;
 import com.capstone.readers.lib.MyLog;
 import com.google.android.material.tabs.TabLayout;
 
@@ -22,6 +21,10 @@ import com.google.android.material.tabs.TabLayout;
  *
  */
 public class Menu1Fragment extends Fragment {
+    private EditText search_bar;
+    private ImageButton search_btn;
+    private TabLayout tabs;
+    private String search_keyword;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +34,10 @@ public class Menu1Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_menu1, container, false);
 
-        TabLayout tabs = (TabLayout) fv.findViewById(R.id.first_tabs);
+        tabs = (TabLayout) fv.findViewById(R.id.first_tabs);
+        search_bar = (EditText) fv.findViewById(R.id.search_bar);
+        search_btn = (ImageButton) fv.findViewById(R.id.search_button);
+
         setChildFragment(Menu1Fragment1.newInstance());
 
         /* 탭의 상태가 변경될 때 호출되는 리스너 */
@@ -71,6 +77,18 @@ public class Menu1Fragment extends Fragment {
             }
         });
 
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search_keyword = search_bar.getText().toString().trim();
+                ((MyApp) getActivity().getApplication()).setSearch_keyword(search_keyword);
+                Fragment fg = SearchFragment.newInstance();
+                AppCompatActivity aca = (AppCompatActivity) v.getContext();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
+            }
+        });
+
+
         return fv;
     }
 
@@ -83,6 +101,5 @@ public class Menu1Fragment extends Fragment {
             childFt.commit();
         }
     }
-
 
 }

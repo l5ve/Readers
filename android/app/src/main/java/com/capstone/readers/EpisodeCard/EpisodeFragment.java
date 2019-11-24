@@ -1,6 +1,5 @@
 package com.capstone.readers.EpisodeCard;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,18 +20,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.capstone.readers.Menu3Fragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
-import com.capstone.readers.ToonCard.ToonCard;
+import com.capstone.readers.Toon.ToonCard;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.item.ToonGenreResponse;
 import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.ToonIdData;
 import com.capstone.readers.item.UserToonData;
-import com.capstone.readers.item.UserToonEpiData;
 import com.capstone.readers.lib.MyToast;
 
 import java.io.IOException;
@@ -42,7 +38,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

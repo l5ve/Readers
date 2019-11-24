@@ -3,7 +3,6 @@ package com.capstone.readers.MypageBookmark;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
-import com.capstone.readers.ToonCard.ToonCard;
+import com.capstone.readers.Toon.ToonCard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;

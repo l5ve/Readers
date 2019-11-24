@@ -92,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SIGNIN) {
             Log.d("회원가입/", "회원가입 성공 후 인텐트 로그인 액티비티에 전달");
             if (resultCode == RESULT_OK) {
-                save(true);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 Log.d("LoginActivity", "Get the result from SigninActivity and go to the main activity");

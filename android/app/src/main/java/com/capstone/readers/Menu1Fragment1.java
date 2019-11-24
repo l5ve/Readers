@@ -6,14 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
-import com.capstone.readers.EpisodeCard.EpisodeFragment;
-import com.capstone.readers.ToonCard.ToonFragment;
-import com.capstone.readers.ToonCard.ToonListAdapter;
+import com.capstone.readers.Toon.ToonFragment;
 import com.capstone.readers.lib.MyLog;
 import com.google.android.material.tabs.TabLayout;
 

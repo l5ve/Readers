@@ -1,10 +1,10 @@
-package com.capstone.readers.ToonCard;
+package com.capstone.readers.Search;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ToonCard {
+public class SearchCard {
     @SerializedName("toon_id")
-    private String id;
+    private String toon_id;
 
     @SerializedName("toon_thumb_url")
     private String thumbnail;
@@ -18,22 +18,6 @@ public class ToonCard {
     @SerializedName("wrt_name")
     private String author;
 
-    @SerializedName("last_date")
-    private String update;
-
-    public ToonCard(String id, String title, String platform, String author, String thumbnail, String update){
-        this.id = id;
-        this.title = title;
-        this.platform = platform;
-        this.author = author;
-        this.thumbnail = thumbnail;
-        this.update = update;
-    }
-
-    public String getUpdate() {
-        return update;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -46,8 +30,8 @@ public class ToonCard {
         return author;
     }
 
-    public String getId() {
-        return id;
+    public String getToon_id() {
+        return toon_id;
     }
 
     public String getThumbnail(){

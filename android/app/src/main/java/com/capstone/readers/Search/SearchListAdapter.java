@@ -1,13 +1,13 @@
-package com.capstone.readers.MypageSubscribe;
+package com.capstone.readers.Search;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
+import com.capstone.readers.MypageMemo.MemoListAdapter;
 import com.capstone.readers.R;
 import com.capstone.readers.Toon.ToonCard;
 
@@ -26,14 +27,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MypageSubscribeListAdapter extends RecyclerView.Adapter<MypageSubscribeListAdapter.ViewHolder> {
+public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
     Context context;
-    private List<ToonCard> mDataset;
-    Bitmap bitmap;
+    private ArrayList<SearchCard> mDataset;
+    private Bitmap bitmap;
 
-    public MypageSubscribeListAdapter(Context context, ArrayList<ToonCard> Dataset) {
+    public SearchListAdapter(Context context, ArrayList<SearchCard> Dataset) {
         this.context = context;
         mDataset = Dataset;
     }
@@ -43,47 +43,47 @@ public class MypageSubscribeListAdapter extends RecyclerView.Adapter<MypageSubsc
         TextView mPlatform;
         TextView mTitle;
         TextView mAuthor;
-        CardView mCardView;
+        LinearLayout mLayout;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            // 뷰 객체에 대한 참조
-            mImageView = itemView.findViewById(R.id.toon_cv_image);
-            mPlatform = itemView.findViewById(R.id.toon_cv_platform);
-            mTitle = itemView.findViewById(R.id.toon_cv_title);
-            mAuthor = itemView.findViewById(R.id.toon_cv_author);
-            mCardView = itemView.findViewById(R.id.toon_cv);
+            mImageView = (ImageView) itemView.findViewById(R.id.search_cv_image);
+            mPlatform = (TextView) itemView.findViewById(R.id.search_cv_platform);
+            mTitle = (TextView) itemView.findViewById(R.id.search_cv_title);
+            mAuthor = (TextView) itemView.findViewById(R.id.search_cv_author);
+            mLayout = (LinearLayout) itemView.findViewById(R.id.search_cv);
 
-            mCardView.setOnClickListener(new View.OnClickListener(){
+            mLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    ((MyApp) context.getApplicationContext()).setDetail_page_info(mDataset.get(getAdapterPosition()));
+                public void onClick(View v) {
+                    SearchCard s = mDataset.get(getAdapterPosition());
+                    ToonCard data = new ToonCard(s.getToon_id(), s.getTitle(), s.getPlatform(), s.getAuthor(), s.getThumbnail(), "");
+                    ((MyApp) context.getApplicationContext()).setDetail_page_info(data);
 
-                    AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                    AppCompatActivity aca = (AppCompatActivity) v.getContext();
                     Fragment fg = EpisodeFragment.newInstance();
-                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
+                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
                 }
-
             });
+
         }
     }
 
+    // onCreateViewHolder() 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴
     @Override
-    public MypageSubscribeListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
+    public SearchListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.recyclerview_toon, parent, false);
+        View view = inflater.inflate(R.layout.recyclerview_search, parent, false);
 
-        return new MypageSubscribeListAdapter.ViewHolder(view);
+        return new SearchListAdapter.ViewHolder(view);
     }
-
 
     // onBindViewHolder() position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
-    public void onBindViewHolder(MypageSubscribeListAdapter.ViewHolder holder, int position){
-        final ToonCard item = mDataset.get(position);
+    public void onBindViewHolder(SearchListAdapter.ViewHolder holder, int position){
         final int pos = position;
         Thread mThread = new Thread(){
             @Override
@@ -118,25 +118,13 @@ public class MypageSubscribeListAdapter extends RecyclerView.Adapter<MypageSubsc
         }
 
         holder.mPlatform.setText(mDataset.get(position).getPlatform());
-        switch(mDataset.get(position).getPlatform()){
-            case "naver":
-                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.naver_colored)));
-                break;
-            case "daum":
-                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.daum_colored)));
-                break;
-            case "lezhin":
-                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.lezhin_colored)));
-                break;
-        }
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mAuthor.setText(mDataset.get(position).getAuthor());
-    }
+        }
 
     // getItemCount() 전체 데이터 갯수 리턴
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
-
 }

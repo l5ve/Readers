@@ -85,7 +85,7 @@ public class Menu3Fragment extends Fragment {
             }
         });
 
-        getData(user_id);
+        getData();
 
         return fv;
     }
@@ -100,14 +100,14 @@ public class Menu3Fragment extends Fragment {
         }
     }
 
-    public void getData(String user_id) {
+    public void getData() {
         service = RetrofitClient.getClient().create(ServiceApi.class);
         UserIdData data = new UserIdData(user_id);
         service.getMypageData(data).enqueue(new Callback<ArrayList<MypageResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<MypageResponse>> call, Response<ArrayList<MypageResponse>> response) {
+                mProfileData = response.body().get(0);
                 if(response.code() == 200 && response.body() != null) {
-                    mProfileData = response.body().get(0);
                     mypage_subscribe.setText(Integer.toString(mProfileData.getSubs_num()));
                     mypage_bookmark.setText(Integer.toString(mProfileData.getBookmark_num()));
                     mypage_memo.setText(Integer.toString(mProfileData.getMemo_num()));

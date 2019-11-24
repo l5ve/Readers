@@ -6,23 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
-import com.capstone.readers.ToonCard.ToonFragment;
+import com.capstone.readers.Toon.ToonFragment;
 import com.capstone.readers.lib.MyLog;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
 
 /** 1-2 홈화면의 장르별 정렬을 나타내는 프래그먼트
  *
  */
 public class Menu1Fragment2 extends Fragment {
     private TabLayout tabLayout;
-    private ArrayList<String> GenreList;
+    private String[] genre_list;
 
     public static Menu1Fragment2 newInstance(){
         return new Menu1Fragment2();
@@ -37,19 +32,7 @@ public class Menu1Fragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment2_menu1, container, false);
 
-        GenreList = new ArrayList<String>();
-        GenreList.add("감성");
-        GenreList.add("개그");
-        GenreList.add("드라마");
-        GenreList.add("로맨스");
-        GenreList.add("스릴러");
-        GenreList.add("스토리");
-        GenreList.add("스포츠");
-        GenreList.add("옴니버스");
-        GenreList.add("액션");
-        GenreList.add("일상");
-        GenreList.add("에피소드");
-        GenreList.add("판타지");
+        genre_list = ((MyApp) getActivity().getApplication()).getGenre_list();
 
         // Initialize the tablayout
         tabLayout = (TabLayout) fv.findViewById(R.id.webtoon_genre_tab);
@@ -64,7 +47,7 @@ public class Menu1Fragment2 extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {int pos = tab.getPosition();
                 Fragment fg;
                 fg = ToonFragment.newInstance();
-                setChildFragment(fg, GenreList.get(pos));
+                setChildFragment(fg, genre_list[pos]);
                 MyLog.d("Menu1Fragment2", "선택된 탭 " +pos);
             }
 

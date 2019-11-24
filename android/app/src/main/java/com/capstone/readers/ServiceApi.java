@@ -8,7 +8,8 @@ import retrofit2.http.POST;
 import com.capstone.readers.EpisodeCard.EpisodeCard;
 import com.capstone.readers.MypageBookmark.BookmarkCard;
 import com.capstone.readers.MypageMemo.MemoCard;
-import com.capstone.readers.ToonCard.ToonCard;
+import com.capstone.readers.Search.SearchCard;
+import com.capstone.readers.Toon.ToonCard;
 import com.capstone.readers.item.*;
 import com.capstone.readers.Block.BlockCard;
 
@@ -25,6 +26,9 @@ public interface ServiceApi {
     @POST("/users/join")
     Call<JoinResponse> userJoin(@Body JoinData data);
 
+    @POST("/users/genre")
+    Call<ResponseBody> setTaste(@Body UserTasteData data);
+
 
     /* 웹툰 리스트 메뉴-요일별/장르별/완결 */
     @POST("/toon/daylist")
@@ -36,6 +40,9 @@ public interface ServiceApi {
     @POST("/toon/endlist")
     Call<ArrayList<ToonResponse>> getEndToon(@Body getEndToonData data);
 
+    /* 검색 */
+    @POST("/toon/search")
+    Call<ArrayList<SearchCard>> getSearchResult(@Body SearchData data);
 
     /* 작품 상세 페이지 */
     @POST("toon/detailpage")
