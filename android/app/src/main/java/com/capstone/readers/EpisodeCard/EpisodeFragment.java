@@ -3,6 +3,7 @@ package com.capstone.readers.EpisodeCard;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -180,7 +181,50 @@ public class EpisodeFragment extends Fragment {
         /* 작품 상세 페이지 상단의 작품 썸네일 설정 */
         setThumbnail(info.getThumbnail());
 
-        mPlatform.setText(info.getPlatform());
+        switch(info.getPlatform()){
+            case "naver":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.naver_colored)));
+                break;
+            case "daum":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.daum_colored)));
+                break;
+            case "lezhin":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.lezhin_colored)));
+                break;
+            case "mrblue":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.mrblue_colored)));
+                break;
+            case "buff":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.bufftoon_colored)));
+                break;
+            case "bomtoon":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.bomtoon_colored)));
+                break;
+            case "bbuding":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.bbuding_colored)));
+                break;
+            case "kakao":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.kakaopage_colored)));
+                break;
+            case "comica":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.comica_colored)));
+                break;
+            case "comicgt":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.comicgt_colored)));
+                break;
+            case "ktoon":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.ktoon_colored)));
+                break;
+            case "toptoon":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.toptoon_colored)));
+                break;
+            case "toomics":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.toomics_colored)));
+                break;
+            case "peanutoon":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.peanutoon_colored)));
+                break;
+        }
 
         mTitle.setText(info.getTitle());
         mAuthor.setText(info.getAuthor());

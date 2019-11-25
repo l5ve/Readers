@@ -40,9 +40,6 @@ public class ToonFragment extends Fragment {
     private ArrayList<ToonCard> myDataset;
 
     private RadioGroup sort_group;
-    private RadioButton sort_title;
-    private RadioButton sort_update;
-    private RadioButton sort_platform;
     private String order_by;
     private String user_id;
     private Boolean DayTab;
@@ -87,9 +84,6 @@ public class ToonFragment extends Fragment {
 
         /* 제목순/업데이트순/연재처순 */
         sort_group = (RadioGroup) fv.findViewById(R.id.toon_sort_group);
-        sort_title = (RadioButton) fv.findViewById(R.id.toon_sort_title);
-        sort_update = (RadioButton) fv.findViewById(R.id.toon_sort_update);
-        sort_platform = (RadioButton) fv.findViewById(R.id.toon_sort_platform);
 
         /* RecyclerView GridLayoutManager 지정 */
         mRecyclerView = (RecyclerView) fv.findViewById(R.id.toon_list);

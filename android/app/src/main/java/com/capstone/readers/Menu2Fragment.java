@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -218,7 +219,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private void setRecommendations() {
         mMessage1.setText(mRec.get(0).getGenre_name() + " " + getResources().getString(R.string.rec_string0) + " " + user_name + getResources().getString(R.string.rec_string0_1));
         setThumbnail(mImageView1, mRec.get(0).getThumbnail());
-        mPlatform1.setText(mRec.get(0).getPlatform());
+        setPlatform(mPlatform1, mRec.get(0).getPlatform());
         mTitle1.setText(mRec.get(0).getTitle());
         mAuthor1.setText(mRec.get(0).getAuthor());
         mDescription1.setText(mRec.get(0).getDescription());
@@ -236,7 +237,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
         mMessage2.setText(user_name + getResources().getString(R.string.rec_string1_0) + " " + mRec.get(1).getGenre_name() + " " +getResources().getString(R.string.rec_string1));
         setThumbnail(mImageView2, mRec.get(1).getThumbnail());
-        mPlatform2.setText(mRec.get(1).getPlatform());
+        setPlatform(mPlatform2, mRec.get(1).getPlatform());
         mTitle2.setText(mRec.get(1).getTitle());
         mAuthor2.setText(mRec.get(1).getAuthor());
         mDescription2.setText(mRec.get(1).getDescription());
@@ -254,7 +255,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
         mMessage3.setText(mRec.get(2).getGenre_name() + " " + getResources().getString(R.string.rec_string2));
         setThumbnail(mImageView3, mRec.get(2).getThumbnail());
-        mPlatform3.setText(mRec.get(2).getPlatform());
+        setPlatform(mPlatform3, mRec.get(2).getPlatform());
         mTitle3.setText(mRec.get(2).getTitle());
         mAuthor3.setText(mRec.get(2).getAuthor());
         mDescription3.setText(mRec.get(2).getDescription());
@@ -269,6 +270,53 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
                 aca.getSupportFragmentManager().beginTransaction().replace(R.id.rec_frame, fg).addToBackStack(null).commit();
             }
         });
+    }
+
+    private void setPlatform(TextView mPlatform, String platform) {
+        switch(platform){
+            case "naver":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.naver_colored)));
+                break;
+            case "daum":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.daum_colored)));
+                break;
+            case "lezhin":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.lezhin_colored)));
+                break;
+            case "mrblue":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.mrblue_colored)));
+                break;
+            case "buff":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.bufftoon_colored)));
+                break;
+            case "bomtoon":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.bomtoon_colored)));
+                break;
+            case "bbuding":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.bbuding_colored)));
+                break;
+            case "kakao":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.kakaopage_colored)));
+                break;
+            case "comica":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.comica_colored)));
+                break;
+            case "comicgt":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.comicgt_colored)));
+                break;
+            case "ktoon":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.ktoon_colored)));
+                break;
+            case "toptoon":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.toptoon_colored)));
+                break;
+            case "toomics":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.toomics_colored)));
+                break;
+            case "peanutoon":
+                mPlatform.setText(Html.fromHtml(getResources().getString(R.string.peanutoon_colored)));
+                break;
+        }
     }
 
     /* thumbnail 설정 */

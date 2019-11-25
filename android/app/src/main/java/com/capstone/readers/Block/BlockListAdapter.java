@@ -3,6 +3,7 @@ package com.capstone.readers.Block;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -145,10 +146,53 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
             e.printStackTrace();
         }
 
-        holder.mPlatform.setText(mDataset.get(position).getPlatform());
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mAuthor.setText(mDataset.get(position).getAuthor());
         service = RetrofitClient.getClient().create(ServiceApi.class);
+        switch(mDataset.get(position).getPlatform()){
+            case "naver":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.naver_colored)));
+                break;
+            case "daum":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.daum_colored)));
+                break;
+            case "lezhin":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.lezhin_colored)));
+                break;
+            case "mrblue":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.mrblue_colored)));
+                break;
+            case "buff":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.bufftoon_colored)));
+                break;
+            case "bomtoon":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.bomtoon_colored)));
+                break;
+            case "bbuding":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.bbuding_colored)));
+                break;
+            case "kakao":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.kakaopage_colored)));
+                break;
+            case "comica":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.comica_colored)));
+                break;
+            case "comicgt":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.comicgt_colored)));
+                break;
+            case "ktoon":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.ktoon_colored)));
+                break;
+            case "toptoon":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.toptoon_colored)));
+                break;
+            case "toomics":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.toomics_colored)));
+                break;
+            case "peanutoon":
+                holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.peanutoon_colored)));
+                break;
+        }
     }
 
     @Override
