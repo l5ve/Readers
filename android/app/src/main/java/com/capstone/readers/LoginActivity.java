@@ -1,28 +1,21 @@
 package com.capstone.readers;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.capstone.readers.lib.MyLog;
-import com.capstone.readers.lib.MyToast;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.capstone.readers.item.LoginResponse;
 import com.capstone.readers.item.LoginData;
+import com.capstone.readers.item.LoginResponse;
+import com.capstone.readers.lib.MyToast;
 import com.capstone.readers.security.SecurityUtil;
-
-import java.security.Security;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

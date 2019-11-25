@@ -1,13 +1,6 @@
 package com.capstone.readers.EpisodeCard;
 
 import android.content.Context;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -18,11 +11,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
-import com.capstone.readers.LoginWebviewActivity;
 import com.capstone.readers.WebviewFragment;
 import com.capstone.readers.item.UserToonEpiData;
 import com.capstone.readers.lib.MyToast;
@@ -57,7 +55,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         TextView mTitle;
         TextView mUpdate;
         CardView mCardView;
-        LinearLayout mLayout;
+        ConstraintLayout mLayout;
 
         ViewHolder(View itemView) {
             super(itemView);

@@ -1,12 +1,9 @@
 package com.capstone.readers.lib;
 
-import android.Manifest;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
-
-import androidx.core.content.ContextCompat;
 
 import java.util.Locale;
 import java.util.regex.Pattern;

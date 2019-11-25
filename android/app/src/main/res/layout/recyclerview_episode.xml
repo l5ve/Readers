@@ -29,7 +29,7 @@
                 card:srcCompat="@drawable/bookmark" />
 
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/episode_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -40,29 +40,41 @@
                     android:layout_width="@dimen/cardview_toon_thumbnail"
                     android:layout_height="@dimen/cardview_toon_thumbnail"
                     android:layout_marginVertical="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small2"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+
+                    card:layout_constraintStart_toStartOf="parent"
+                    card:layout_constraintTop_toTopOf="parent"
+                    card:layout_constraintBottom_toBottomOf="parent"/>
 
                 <TextView
                     android:id="@+id/episode_cv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small2"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/text_size_medium"
                     android:text="@string/title"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+
+                    card:layout_constraintStart_toEndOf="@+id/episode_cv_thumbnail"
+                    card:layout_constraintTop_toTopOf="parent"
+                    card:layout_constraintBottom_toBottomOf="parent"/>
 
                 <TextView
                     android:id="@+id/episode_cv_date"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="@dimen/text_size_small"
                     android:text="@string/update"
                     android:layout_gravity="center"
-                    android:gravity="end"/>
+                    android:gravity="end"
 
-            </LinearLayout>
+                    card:layout_constraintEnd_toEndOf="parent"
+                    card:layout_constraintTop_toTopOf="parent"
+                    card:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

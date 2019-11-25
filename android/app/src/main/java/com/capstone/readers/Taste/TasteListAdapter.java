@@ -2,16 +2,16 @@ package com.capstone.readers.Taste;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 
 import java.util.ArrayList;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class TasteListAdapter extends RecyclerView.Adapter<TasteListAdapter.ViewHolder> {
     Context context;

@@ -2,7 +2,7 @@ package com.capstone.readers.security;
 
 import android.util.Log;
 
-import java.security.*;
+import java.security.MessageDigest;
 
 public class SecurityUtil {
     public String encryptSHA256(String str){

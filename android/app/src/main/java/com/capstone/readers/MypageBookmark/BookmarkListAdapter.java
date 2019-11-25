@@ -9,15 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.capstone.readers.EpisodeCard.EpisodeFragment;
-import com.capstone.readers.MyApp;
-import com.capstone.readers.R;
-import com.capstone.readers.Toon.ToonCard;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.capstone.readers.EpisodeCard.EpisodeFragment;
+import com.capstone.readers.MyApp;
+import com.capstone.readers.R;
+import com.capstone.readers.Toon.ToonCard;
 
 import java.io.IOException;
 import java.io.InputStream;

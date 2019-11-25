@@ -1,7 +1,5 @@
 package com.capstone.readers.item;
 
-import com.google.gson.annotations.SerializedName;
-
 public class ToonData {
     private String toon_id;
 
