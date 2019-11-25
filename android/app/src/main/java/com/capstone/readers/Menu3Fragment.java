@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,9 +34,9 @@ public class Menu3Fragment extends Fragment {
     private MypageResponse mProfileData;
 
     private TextView profile_name;
-    private TextView mypage_subscribe;
-    private TextView mypage_bookmark;
-    private TextView mypage_memo;
+    private LinearLayout mypage_subscribe;
+    private LinearLayout mypage_bookmark;
+    private LinearLayout mypage_memo;
     private ServiceApi service;
 
     @Override
@@ -52,9 +53,9 @@ public class Menu3Fragment extends Fragment {
         user_name = ((MyApp) getActivity().getApplication()).getUser_name();
 
         profile_name = (TextView) fv.findViewById(R.id.profile_name);
-        mypage_subscribe = (TextView) fv.findViewById(R.id.mypage_subscribe);
-        mypage_bookmark = (TextView) fv.findViewById(R.id.mypage_bookmark);
-        mypage_memo = (TextView) fv.findViewById(R.id.mypage_memo);
+        mypage_subscribe = (LinearLayout) fv.findViewById(R.id.mypage_subscribe);
+        mypage_bookmark = (LinearLayout) fv.findViewById(R.id.mypage_bookmark);
+        mypage_memo = (LinearLayout) fv.findViewById(R.id.mypage_memo);
 
         profile_name.setText(user_name);
 
@@ -85,7 +86,7 @@ public class Menu3Fragment extends Fragment {
             }
         });
 
-        getData();
+//        getData();
 
         return fv;
     }
@@ -100,25 +101,20 @@ public class Menu3Fragment extends Fragment {
         }
     }
 
-    public void getData() {
-        service = RetrofitClient.getClient().create(ServiceApi.class);
-        UserIdData data = new UserIdData(user_id);
-        service.getMypageData(data).enqueue(new Callback<ArrayList<MypageResponse>>() {
-            @Override
-            public void onResponse(Call<ArrayList<MypageResponse>> call, Response<ArrayList<MypageResponse>> response) {
-                mProfileData = response.body().get(0);
-                if(response.code() == 200 && response.body() != null) {
-                    mypage_subscribe.setText(Integer.toString(mProfileData.getSubs_num()));
-                    mypage_bookmark.setText(Integer.toString(mProfileData.getBookmark_num()));
-                    mypage_memo.setText(Integer.toString(mProfileData.getMemo_num()));
-                }
-               }
-
-            @Override
-            public void onFailure(Call<ArrayList<MypageResponse>> call, Throwable t) {
-                Log.e("Menu3Fragment", "getData: " +getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
-            }
-        });
-    }
+//    public void getData() {
+//        service = RetrofitClient.getClient().create(ServiceApi.class);
+//        UserIdData data = new UserIdData(user_id);
+//        service.getMypageData(data).enqueue(new Callback<ArrayList<MypageResponse>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<MypageResponse>> call, Response<ArrayList<MypageResponse>> response) {
+//                mProfileData = response.body().get(0);
+//               }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<MypageResponse>> call, Throwable t) {
+//                Log.e("Menu3Fragment", "getData: " +getString(R.string.toon_server_error));
+//                MyToast.s(getContext(), getString(R.string.toon_server_error));
+//            }
+//        });
+//    }
 }

@@ -68,6 +68,9 @@
 
     <dimen name="small_icon">12dp</dimen>
 
+    <dimen name="mypage_icon">55dp</dimen>
+    <dimen name="mypage_icon_text">18sp</dimen>
+
     <dimen name="search_bar_height">36dp</dimen>
     <dimen name="search_bar_width">275dp</dimen>
 

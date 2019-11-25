@@ -14,10 +14,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.Recommend.RecommendCard;
+import com.capstone.readers.Toon.ToonCard;
 import com.capstone.readers.item.GenreWeightData;
 import com.capstone.readers.item.UserIdData;
 import com.capstone.readers.lib.MyToast;
@@ -57,7 +60,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private UserIdData uid;
     private ArrayList<GenreWeightData> temp;
     private ArrayList<GenreWeightData> mGenreWeight;
-    private ArrayList<RecommendCard> mRecommendations;
+    private ArrayList<RecommendCard> mRec;
     private ServiceApi service;
 
     /* 그래프 x축 */
@@ -89,6 +92,8 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     private TextView mTitle3;
     private TextView mAuthor3;
     private TextView mDescription3;
+
+    private ToonCard detialPageInfo;
 
     /* for thumbnail */
     private Bitmap bitmap;
@@ -177,6 +182,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
                 for (int i = 0; i < temp.size(); i++) {
                     mGenreWeight.add(temp.get(temp.size() - 1 - i));
+                    Log.d("Menu2Fragment", "mGenreWeight " + i + mGenreWeight.get(i).getGenre_name() + mGenreWeight.get(i).getWeight());
                 }
                 // 가중치를 토대로 그래프 그리기
                 setChart();
@@ -195,7 +201,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         service.getRecommendations(uid).enqueue(new Callback<ArrayList<RecommendCard>>() {
             @Override
             public void onResponse(Call<ArrayList<RecommendCard>> call, Response<ArrayList<RecommendCard>> response) {
-                mRecommendations = response.body();
+                mRec = response.body();
 
                 // 추천 받은 작품 레이아웃 설정
                 setRecommendations();
@@ -210,26 +216,59 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     }
 
     private void setRecommendations() {
-        mMessage1.setText(xAxisLabel[0] + " " + getResources().getString(R.string.rec_string0) + " " + user_name + getResources().getString(R.string.rec_string0_1));
-        setThumbnail(mImageView1, mRecommendations.get(0).getThumbnail());
-        mPlatform1.setText(mRecommendations.get(0).getPlatform());
-        mTitle1.setText(mRecommendations.get(0).getTitle());
-        mAuthor1.setText(mRecommendations.get(0).getAuthor());
-        mDescription1.setText(mRecommendations.get(0).getDescription());
+        mMessage1.setText(mRec.get(0).getGenre_name() + " " + getResources().getString(R.string.rec_string0) + " " + user_name + getResources().getString(R.string.rec_string0_1));
+        setThumbnail(mImageView1, mRec.get(0).getThumbnail());
+        mPlatform1.setText(mRec.get(0).getPlatform());
+        mTitle1.setText(mRec.get(0).getTitle());
+        mAuthor1.setText(mRec.get(0).getAuthor());
+        mDescription1.setText(mRec.get(0).getDescription());
+        mCardView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detialPageInfo = new ToonCard(mRec.get(0).getId(), mRec.get(0).getTitle(), mRec.get(0).getPlatform(), mRec.get(0).getAuthor(), mRec.get(0).getThumbnail(), "");
+                ((MyApp) getActivity().getApplication()).setDetail_page_info(detialPageInfo);
 
-        mMessage2.setText(user_name + getResources().getString(R.string.rec_string1_0) + " " + xAxisLabel[1] + " " +getResources().getString(R.string.rec_string1));
-        setThumbnail(mImageView2, mRecommendations.get(1).getThumbnail());
-        mPlatform2.setText(mRecommendations.get(1).getPlatform());
-        mTitle2.setText(mRecommendations.get(1).getTitle());
-        mAuthor2.setText(mRecommendations.get(1).getAuthor());
-        mDescription2.setText(mRecommendations.get(1).getDescription());
+                AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                Fragment fg = EpisodeFragment.newInstance();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.rec_frame, fg).addToBackStack(null).commit();
+            }
+        });
 
-        mMessage3.setText(xAxisLabel[2] + " " + getResources().getString(R.string.rec_string2));
-        setThumbnail(mImageView3, mRecommendations.get(2).getThumbnail());
-        mPlatform3.setText(mRecommendations.get(2).getPlatform());
-        mTitle3.setText(mRecommendations.get(2).getTitle());
-        mAuthor3.setText(mRecommendations.get(2).getAuthor());
-        mDescription3.setText(mRecommendations.get(2).getDescription());
+        mMessage2.setText(user_name + getResources().getString(R.string.rec_string1_0) + " " + mRec.get(1).getGenre_name() + " " +getResources().getString(R.string.rec_string1));
+        setThumbnail(mImageView2, mRec.get(1).getThumbnail());
+        mPlatform2.setText(mRec.get(1).getPlatform());
+        mTitle2.setText(mRec.get(1).getTitle());
+        mAuthor2.setText(mRec.get(1).getAuthor());
+        mDescription2.setText(mRec.get(1).getDescription());
+        mCardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detialPageInfo = new ToonCard(mRec.get(1).getId(), mRec.get(1).getTitle(), mRec.get(1).getPlatform(), mRec.get(1).getAuthor(), mRec.get(1).getThumbnail(), "");
+                ((MyApp) getActivity().getApplication()).setDetail_page_info(detialPageInfo);
+
+                AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                Fragment fg = EpisodeFragment.newInstance();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.rec_frame, fg).addToBackStack(null).commit();
+            }
+        });
+
+        mMessage3.setText(mRec.get(2).getGenre_name() + " " + getResources().getString(R.string.rec_string2));
+        setThumbnail(mImageView3, mRec.get(2).getThumbnail());
+        mPlatform3.setText(mRec.get(2).getPlatform());
+        mTitle3.setText(mRec.get(2).getTitle());
+        mAuthor3.setText(mRec.get(2).getAuthor());
+        mDescription3.setText(mRec.get(2).getDescription());
+        mCardView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detialPageInfo = new ToonCard(mRec.get(2).getId(), mRec.get(2).getTitle(), mRec.get(2).getPlatform(), mRec.get(2).getAuthor(), mRec.get(2).getThumbnail(), "");
+                ((MyApp) getActivity().getApplication()).setDetail_page_info(detialPageInfo);
+
+                AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                Fragment fg = EpisodeFragment.newInstance();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.rec_frame, fg).addToBackStack(null).commit();
+            }
+        });
     }
 
     /* thumbnail 설정 */

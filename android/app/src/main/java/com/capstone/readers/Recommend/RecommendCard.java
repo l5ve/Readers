@@ -21,6 +21,9 @@ public class RecommendCard {
     @SerializedName("toon_desc")
     private String description;
 
+    @SerializedName("genre_name")
+    private String genre_name;
+
     public String getAuthor() {
         return author;
     }
@@ -43,5 +46,9 @@ public class RecommendCard {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getGenre_name() {
+        return genre_name;
     }
 }

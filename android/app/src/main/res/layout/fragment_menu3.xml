@@ -56,13 +56,25 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="@dimen/spacing_small">
+            android:layout_marginVertical="@dimen/spacing_small">
 
             <LinearLayout
+                android:id="@+id/mypage_subscribe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_margin="@dimen/spacing_small">
+
+                <TextView
+                    android:layout_width="@dimen/mypage_icon"
+                    android:layout_height="@dimen/mypage_icon"
+                    android:layout_gravity="center"
+                    android:background="@drawable/mysubscribe"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="60dp"
@@ -71,27 +83,28 @@
                     android:gravity="center"
                     android:text="@string/subscribe"
                     android:textColor="@color/colorGrayBright"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="@dimen/mypage_icon_text"
                     android:textStyle="bold" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mypage_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="@dimen/spacing_small">
+
                 <TextView
-                    android:id="@+id/mypage_subscribe"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/mypage_icon"
+                    android:layout_height="@dimen/mypage_icon"
                     android:layout_gravity="center"
-                    android:background="@drawable/mypage_button"
+                    android:background="@drawable/mybookmark"
                     android:gravity="center"
                     android:text=""
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/text_size_large"
                     android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/spacing_small">
 
                 <TextView
                     android:layout_width="60dp"
@@ -100,27 +113,28 @@
                     android:gravity="center"
                     android:text="@string/bookmark"
                     android:textColor="@color/colorGrayBright"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="@dimen/mypage_icon_text"
                     android:textStyle="bold" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mypage_memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="@dimen/spacing_small">
+
                 <TextView
-                    android:id="@+id/mypage_bookmark"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/mypage_icon"
+                    android:layout_height="@dimen/mypage_icon"
                     android:layout_gravity="center"
-                    android:background="@drawable/mypage_button"
+                    android:background="@drawable/mymemo"
                     android:gravity="center"
                     android:text=""
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/text_size_large"
                     android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/spacing_small">
 
                 <TextView
                     android:layout_width="60dp"
@@ -129,19 +143,7 @@
                     android:gravity="center"
                     android:text="@string/memo"
                     android:textColor="@color/colorGrayBright"
-                    android:textSize="@dimen/text_size_large"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/mypage_memo"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/mypage_button"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="@dimen/mypage_icon_text"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

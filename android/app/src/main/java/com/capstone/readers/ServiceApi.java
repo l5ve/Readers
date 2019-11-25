@@ -113,8 +113,8 @@ public interface ServiceApi {
 
 
     /* 마이페이지 구독/책갈피/메모 수 */
-    @POST("/users/num")
-    Call<ArrayList<MypageResponse>> getMypageData(@Body UserIdData data);
+//    @POST("/users/num")
+//    Call<ArrayList<MypageResponse>> getMypageData(@Body UserIdData data);
 
     /* 숨김(차단) */
     @POST("/block/list")
