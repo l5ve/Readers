@@ -74,14 +74,12 @@
         android:layout_marginTop="@dimen/spacing_medium2"
         android:layout_marginBottom="@dimen/spacing_medium"/>
 
-
-    <FrameLayout
-        android:id="@+id/taste_frame"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taste_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_medium2">
-
-    </FrameLayout>
+        android:background="@android:color/transparent"
+        android:layout_marginHorizontal="@dimen/spacing_xxxlarge"/>
 
     <ImageButton
         android:id="@+id/sign_up_Btn"

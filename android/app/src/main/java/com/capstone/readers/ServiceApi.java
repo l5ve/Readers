@@ -1,21 +1,38 @@
 package com.capstone.readers;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
-
+import com.capstone.readers.Block.BlockCard;
 import com.capstone.readers.EpisodeCard.EpisodeCard;
 import com.capstone.readers.MypageBookmark.BookmarkCard;
 import com.capstone.readers.MypageMemo.MemoCard;
 import com.capstone.readers.Recommend.RecommendCard;
-import com.capstone.readers.item.GenreWeightData;
 import com.capstone.readers.Search.SearchCard;
 import com.capstone.readers.Toon.ToonCard;
-import com.capstone.readers.item.*;
-import com.capstone.readers.Block.BlockCard;
+import com.capstone.readers.item.DetailPageResponse;
+import com.capstone.readers.item.GenreWeightData;
+import com.capstone.readers.item.JoinData;
+import com.capstone.readers.item.JoinResponse;
+import com.capstone.readers.item.LoginData;
+import com.capstone.readers.item.LoginResponse;
+import com.capstone.readers.item.MemoSaveData;
+import com.capstone.readers.item.MypageData;
+import com.capstone.readers.item.SearchData;
+import com.capstone.readers.item.ToonGenreResponse;
+import com.capstone.readers.item.ToonIdData;
+import com.capstone.readers.item.ToonResponse;
+import com.capstone.readers.item.UserIdData;
+import com.capstone.readers.item.UserTasteData;
+import com.capstone.readers.item.UserToonData;
+import com.capstone.readers.item.UserToonEpiData;
+import com.capstone.readers.item.getDayToonData;
+import com.capstone.readers.item.getEndToonData;
+import com.capstone.readers.item.getGenreToonData;
 
 import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 public interface ServiceApi {
     public final static String API_URL = "http://ec2-52-78-23-232.ap-northeast-2.compute.amazonaws.com/";

@@ -11,13 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
-import com.capstone.readers.MypageMemo.MemoListAdapter;
 import com.capstone.readers.R;
 import com.capstone.readers.Toon.ToonCard;
 

@@ -8,17 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.capstone.readers.lib.EtcLib;
-import com.capstone.readers.lib.MyLog;
 import com.capstone.readers.lib.RemoteLib;
-import com.capstone.readers.lib.StringLib;
 
 /**
  * 시작 액티비티이며 이 액티비티에서 사용자 정보 조회 후
@@ -68,7 +60,7 @@ public class IndexActivity extends AppCompatActivity {
                     startTask();
 
                 }
-            }, 800);
+            }, 500);
         }
     }
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +15,6 @@ import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
-import com.capstone.readers.Toon.ToonListAdapter;
 import com.capstone.readers.item.SearchData;
 import com.capstone.readers.lib.MyToast;
 

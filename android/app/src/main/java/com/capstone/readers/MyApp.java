@@ -1,9 +1,10 @@
 package com.capstone.readers;
 
 import android.app.Application;
-import android.os.StrictMode;
-import com.capstone.readers.Toon.ToonCard;
 import android.content.SharedPreferences;
+import android.os.StrictMode;
+
+import com.capstone.readers.Toon.ToonCard;
 
 /**
  * 앱 전역에서 사용할 수 있는 클래스

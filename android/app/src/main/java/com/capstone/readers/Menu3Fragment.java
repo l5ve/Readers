@@ -1,7 +1,6 @@
 package com.capstone.readers;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.capstone.readers.MypageBookmark.BookmarkFragment;
 import com.capstone.readers.MypageMemo.MemoFragment;
 import com.capstone.readers.item.MypageResponse;
-import com.capstone.readers.item.UserIdData;
-import com.capstone.readers.lib.MyToast;
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /** 3번째 메뉴인 마이페이지 화면을 나타내는 프래그먼트
  *

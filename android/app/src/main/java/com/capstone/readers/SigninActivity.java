@@ -1,7 +1,6 @@
 package com.capstone.readers;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,17 +9,17 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.capstone.readers.Taste.TasteFragment;
+import com.capstone.readers.Taste.TasteListAdapter;
+import com.capstone.readers.item.JoinData;
+import com.capstone.readers.item.JoinResponse;
 import com.capstone.readers.item.UserTasteData;
 import com.capstone.readers.lib.MyToast;
-import com.capstone.readers.item.JoinResponse;
-import com.capstone.readers.item.JoinData;
 import com.capstone.readers.security.SecurityUtil;
-import java.security.Security;
 
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -35,6 +34,11 @@ public class SigninActivity extends AppCompatActivity {
     private ImageButton sign_up_Btn;
     private boolean[] taste_selected;
     private String[] genre_list;
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<String> myDataset;
 
     private ServiceApi service;
 
@@ -58,10 +62,32 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
-        /* 사용자가 취향을 고를 수 있는 button을 담은 recyclerview */
-        Fragment fg = TasteFragment.newInstance();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.taste_frame, fg).addToBackStack(null).commit();
+//        /* 사용자가 취향을 고를 수 있는 button을 담은 recyclerview */
+//        Fragment fg = TasteFragment.newInstance();
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(R.id.taste_frame, fg).addToBackStack(null).commit();
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.taste_recyclerview);
+        mLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        myDataset = new ArrayList<>();
+        myDataset.add(getResources().getString(R.string.sentimental));
+        myDataset.add(getResources().getString(R.string.humor));
+        myDataset.add(getResources().getString(R.string.drama));
+        myDataset.add(getResources().getString(R.string.love));
+        myDataset.add(getResources().getString(R.string.thriller));
+        myDataset.add(getResources().getString(R.string.story));
+        myDataset.add(getResources().getString(R.string.sports));
+        myDataset.add(getResources().getString(R.string.historical));
+        myDataset.add(getResources().getString(R.string.omnibus));
+        myDataset.add(getResources().getString(R.string.action));
+        myDataset.add(getResources().getString(R.string.daily_life));
+        myDataset.add(getResources().getString(R.string.episode));
+        myDataset.add(getResources().getString(R.string.fantasy));
+
+        mAdapter = new TasteListAdapter(getApplicationContext(), myDataset);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void attemptSignin(){
@@ -105,6 +131,20 @@ public class SigninActivity extends AppCompatActivity {
         // 닉네임 유효성 검사
         if (name.isEmpty()) {
             MyToast.s(getApplicationContext(), R.string.nickname_warning);
+            cancel = true;
+        }
+
+
+        taste_selected = ((MyApp) getApplication()).getGenre_selected();
+        int num = 0;
+
+        for (int i = 0; i < taste_selected.length; i++) {
+            if (taste_selected[i] == true)
+                num++;
+        }
+
+        if (num < 3) {
+            MyToast.s(getApplicationContext(), getResources().getString(R.string.select_notice));
             cancel = true;
         }
 
@@ -157,7 +197,6 @@ public class SigninActivity extends AppCompatActivity {
 
     private void setTaste() {
         String user_id = idText.getText().toString().trim();
-        taste_selected = ((MyApp) getApplication()).getGenre_selected();
         UserTasteData data;
 
         for (int i = 0; i < taste_selected.length; i++) {

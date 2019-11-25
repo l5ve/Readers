@@ -1,56 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/spacing_medium">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="@dimen/text_size_xlarge3"
             android:layout_height="@dimen/text_size_xlarge3"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_medium"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_small2"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/readers_logo_white" />
 
-        <EditText
-            android:id="@+id/search_bar"
-            android:layout_width="@dimen/search_bar_width"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
             android:layout_gravity="center"
-            android:background="@drawable/search_layout"
-            android:hint="@string/search__message"
-            android:paddingHorizontal="@dimen/spacing_medium"
-            android:textSize="@dimen/text_size_medium"
+            >
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/search_button"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_bar_height"
+                android:layout_gravity="center"
+                android:background="@drawable/search_layout"
+                android:hint="@string/search_message"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:textSize="@dimen/text_size_medium"
 
-        <ImageButton
-            android:id="@+id/search_button"
-            android:layout_width="@dimen/search_bar_height"
-            android:layout_height="@dimen/search_bar_height"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_medium"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile_image_temp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageButton
+                android:id="@+id/search_button"
+                android:layout_width="@dimen/search_bar_height"
+                android:layout_height="@dimen/search_bar_height"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/spacing_small2"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/spacing_small2"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/searchbutton"
+
+                app:layout_constraintEnd_toEndOf="@+id/search_bar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/first_tabs"
