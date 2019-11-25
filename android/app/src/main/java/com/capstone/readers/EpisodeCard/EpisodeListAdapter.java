@@ -55,7 +55,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
         TextView mTitle;
         TextView mUpdate;
         CardView mCardView;
-        ConstraintLayout mLayout;
+        LinearLayout mLayout;
 
         ViewHolder(View itemView) {
             super(itemView);

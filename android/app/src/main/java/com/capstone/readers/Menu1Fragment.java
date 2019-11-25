@@ -74,6 +74,28 @@ public class Menu1Fragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                MyLog.d("Menu1Fragment", "선택된 탭: "+position);
+
+                Fragment fg;
+                switch (position) {
+                    case 0:
+                        fg = Menu1Fragment1.newInstance();
+                        setChildFragment(fg);
+                        break;
+                    case 1:
+                        fg = Menu1Fragment2.newInstance();
+                        setChildFragment(fg);
+                        break;
+                    case 2:
+                        fg = Menu1Fragment3.newInstance();
+                        setChildFragment(fg);
+                        break;
+                    case 3:
+                        fg = Menu1Fragment4.newInstance();
+                        setChildFragment(fg);
+
+                }
             }
         });
 
@@ -83,8 +105,9 @@ public class Menu1Fragment extends Fragment {
                 search_keyword = search_bar.getText().toString().trim();
                 ((MyApp) getActivity().getApplication()).setSearch_keyword(search_keyword);
                 Fragment fg = SearchFragment.newInstance();
-                AppCompatActivity aca = (AppCompatActivity) v.getContext();
-                aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
+                setChildFragment(fg);
+//                AppCompatActivity aca = (AppCompatActivity) v.getContext();
+//                aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
             }
         });
 

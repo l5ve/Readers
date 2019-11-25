@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:layout_margin="@dimen/spacing_medium">
+            android:layout_margin="@dimen/spacing_small2">
 
             <ImageView
                 android:id="@+id/toon_cv_image"
@@ -47,6 +47,8 @@
                 android:id="@+id/toon_cv_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_size_small"
                 android:text="@string/author" />
