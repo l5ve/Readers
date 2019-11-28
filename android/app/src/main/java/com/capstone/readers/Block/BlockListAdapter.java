@@ -95,8 +95,8 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("BlockListAdapter", "unblock: " + context.getString(R.string.toon_server_error));
-                MyToast.s(context, context.getString(R.string.toon_server_error));
+                Log.e("BlockListAdapter", "unblock: " + context.getString(R.string.server_error));
+                MyToast.s(context, context.getString(R.string.server_error));
         }
         });
     }

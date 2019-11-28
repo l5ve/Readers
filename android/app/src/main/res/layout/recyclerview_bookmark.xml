@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <ImageButton
+        android:id="@+id/bookmark_unbookmark"
+        android:layout_width="@dimen/epi_bookmark"
+        android:layout_height="@dimen/epi_bookmark"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        card:srcCompat="@drawable/unbookmark_colored" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/bookmark_cv"
         android:layout_width="match_parent"
@@ -76,4 +89,4 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</RelativeLayout>
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -34,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox checkBox;
     private ImageButton loginBtn;
     private ImageButton sign_up_Btn;
+    private TextView mFindId;
+    private TextView mFindPw;
 
     private ServiceApi service;
 
@@ -50,7 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         checkBox = (CheckBox) findViewById(R.id.checkBox);
         loginBtn = (ImageButton) findViewById(R.id.loginBtn);
         sign_up_Btn = (ImageButton) findViewById(R.id.sign_up_page_Btn);
-
+        mFindId = (TextView) findViewById(R.id.forgot_id);
+        mFindPw = (TextView) findViewById(R.id.forgot_pw);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
@@ -66,6 +70,35 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_SIGNIN);
+            }
+        });
+
+        mFindId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                String[] address = {"readers.cau@gmail.com"};
+                email.setType("plain/Text");
+                email.putExtra(Intent.EXTRA_EMAIL, address);
+                email.putExtra(Intent.EXTRA_SUBJECT, "[아이디 찾기] 제목을 작성해주세요.");
+                email.putExtra(Intent.EXTRA_TEXT, "문의 내용을 작성해주세요.\n");
+                email.setType("message/rfc822");
+                startActivity(email);
+            }
+        });
+
+        mFindPw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent email = new Intent(Intent.ACTION_SEND);
+                String[] address = {"readers.cau@gmail.com"};
+                email.setType("plain/Text");
+                email.putExtra(Intent.EXTRA_EMAIL, address);
+                email.putExtra(Intent.EXTRA_SUBJECT, "[비밀번호 찾기] 제목을 작성해주세요.");
+                email.putExtra(Intent.EXTRA_TEXT, "문의 내용을 작성해주세요.\n");
+                email.setType("message/rfc822");
+                startActivity(email);
             }
         });
 

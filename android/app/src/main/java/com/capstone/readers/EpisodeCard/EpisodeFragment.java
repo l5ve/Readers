@@ -313,8 +313,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<DetailPageResponse>> call, Throwable t) {
-                Log.e("EpisodeFragment", "getDetailPageData: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "getDetailPageData: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -344,8 +344,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ToonGenreResponse>> call, Throwable t) {
-                Log.e("EpisodeFragment", "getGenres: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "getGenres: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -369,8 +369,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("EpisodeFragment", "subscribe: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "subscribe: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -395,8 +395,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("EpisodeFragment", "unsubscribe: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "unsubscribe: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -420,8 +420,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("EpisodeFragment", "block: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "block: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -445,8 +445,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("EpisodeFragment", "unblock: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "unblock: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
 
@@ -470,8 +470,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<EpisodeCard>> call, Throwable t) {
-                Log.e("EpisodeFragment", "getEpisodeList: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "getEpisodeList: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -492,8 +492,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -516,8 +516,8 @@ public class EpisodeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("EpisodeFragment", "deleteMemo: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("EpisodeFragment", "deleteMemo: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }

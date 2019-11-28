@@ -6,11 +6,41 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
 
+    <RadioGroup
+        android:id="@+id/search_sort_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/search_sort_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:checked="true"
+            android:layout_weight="1"
+            android:text="@string/search_title" />
+
+        <RadioButton
+            android:id="@+id/search_sort_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/search_author" />
+
+        <RadioButton
+            android:id="@+id/search_sort_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/search_desc" />
+    </RadioGroup>
+
     <TextView
         android:id="@+id/search_result_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_small2"
+        android:layout_margin="@dimen/spacing_small"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_size_medium"
         android:text="@string/search_result" />

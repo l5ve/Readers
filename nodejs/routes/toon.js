@@ -175,18 +175,4 @@ router.post('/episodelist', function(req, res){
   });
 });
 
-router.post('/search', function(req, res){
-  var word = req.body.word;
-  var s_word = '%' + word + '%';
-  var params = [s_word, s_word];
-  var sql = 'select toon_id, toon_name, toon_site, wrt_name, toon_thumb_url from toon_info where toon_name like ? or wrt_name like ?';
-
-  connection.query(sql, params, function(err, rows){
-    if(err) return res.sendStatus(400);
-
-    console.log("rows : " + JSON.stringify(rows));
-    res.status(200).json(rows);
-  });
-});
-
 module.exports = router;

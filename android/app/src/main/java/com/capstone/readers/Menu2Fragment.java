@@ -191,8 +191,8 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
             @Override
             public void onFailure(Call<ArrayList<GenreWeightData>> call, Throwable t) {
-                Log.e("Menu2Fragment", "getGenreWeight: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("Menu2Fragment", "getGenreWeight: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -210,8 +210,8 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
             @Override
             public void onFailure(Call<ArrayList<RecommendCard>> call, Throwable t) {
-                Log.e("Menu2Fragment", "getRecommendations: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("Menu2Fragment", "getRecommendations: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }

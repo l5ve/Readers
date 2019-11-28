@@ -106,8 +106,8 @@ public class MemoFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<MemoCard>> call, Throwable t) {
-                Log.e("MemoFragment", "getData: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("MemoFragment", "getData: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
 

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,10 +17,13 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
-import com.capstone.readers.Toon.ToonCard;
+import com.capstone.readers.RetrofitClient;
+import com.capstone.readers.ServiceApi;
+import com.capstone.readers.WebviewFragment;
+import com.capstone.readers.item.UserToonEpiData;
+import com.capstone.readers.lib.MyToast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,10 +33,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapter.ViewHolder> {
     Context context;
     private List<BookmarkCard> mDataset;
     private Bitmap bitmap;
+    private ServiceApi service;
 
     public BookmarkListAdapter(Context context, ArrayList<BookmarkCard> Dataset) {
         this.context = context;
@@ -39,6 +50,7 @@ public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageButton mUnbookmark;
         ImageView mImageView;
         TextView mPlatform;
         TextView mTitle;
@@ -49,6 +61,7 @@ public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapte
         ViewHolder(View itemView) {
             super(itemView);
 
+            mUnbookmark = itemView.findViewById(R.id.bookmark_unbookmark);
             mImageView = itemView.findViewById(R.id.bookmark_cv_image);
             mPlatform = itemView.findViewById(R.id.bookmark_cv_platform);
             mTitle = itemView.findViewById(R.id.bookmark_cv_title);
@@ -56,19 +69,58 @@ public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapte
             mAuthor = itemView.findViewById(R.id.bookmark_cv_author);
             mCardView = itemView.findViewById(R.id.bookmark_cv);
 
+            mUnbookmark.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        deleteBookmark(mDataset.get(pos).getTood_id(), mDataset.get(pos).getEpi_title(), pos);
+                    }
+                }
+            });
+
             mCardView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    BookmarkCard temp = mDataset.get(getAdapterPosition());
-                    ToonCard data = new ToonCard(temp.getTood_id(), temp.getTitle(), temp.getPlatform(), temp.getAuthor(), temp.getThumbnail(), "");
-                    ((MyApp) context.getApplicationContext()).setDetail_page_info(data);
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        String url = mDataset.get(pos).getEpi_url();
 
-                    AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                    Fragment fg = EpisodeFragment.newInstance();
-                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
+                        ((MyApp) context.getApplicationContext()).setEpisodeUrl(url);
+
+                        AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                        Fragment fg = WebviewFragment.newInstance();
+                        aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
+                    }
+
                 }
             });
         }
+    }
+
+    private void deleteBookmark(String toon_id, String epi_title, final int position) {
+        String user_id = ((MyApp) context.getApplicationContext()).getUser_id();
+        UserToonEpiData data = new UserToonEpiData(user_id, toon_id, epi_title);
+        service.deleteBookmark(data).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Log.d("BookmarkListAdapter", "deleteBookmark: " + context.getString(R.string.deletebookmark_success));
+                    mDataset.remove(position);
+                    notifyDataSetChanged();
+                }
+                else {
+                    Log.e("BookmarkListAdapter", "deleteBookmark" + context.getString(R.string.deletebookmark_fail));
+                    MyToast.s(context, context.getString(R.string.deletebookmark_fail));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("BookmarkListAdapter", "deleteBookmark: " + context.getString(R.string.server_error));
+                MyToast.s(context, context.getString(R.string.server_error));
+            }
+        });
     }
 
     @Override
@@ -163,6 +215,8 @@ public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapte
                 holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.peanutoon_colored)));
                 break;
         }
+
+        service = RetrofitClient.getClient().create(ServiceApi.class);
     }
 
     @Override
