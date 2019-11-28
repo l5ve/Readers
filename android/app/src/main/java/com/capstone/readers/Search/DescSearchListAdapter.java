@@ -1,29 +1,24 @@
-package com.capstone.readers.MypageBookmark;
+package com.capstone.readers.Search;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
-import com.capstone.readers.RetrofitClient;
-import com.capstone.readers.ServiceApi;
-import com.capstone.readers.WebviewFragment;
-import com.capstone.readers.item.UserToonEpiData;
-import com.capstone.readers.lib.MyToast;
+import com.capstone.readers.Toon.ToonCard;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,110 +26,65 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapter.ViewHolder> {
+public class DescSearchListAdapter extends RecyclerView.Adapter<DescSearchListAdapter.ViewHolder> {
     Context context;
-    private List<BookmarkCard> mDataset;
+    private ArrayList<DescSearchCard> mDataset;
     private Bitmap bitmap;
-    private ServiceApi service;
 
-    public BookmarkListAdapter(Context context, ArrayList<BookmarkCard> Dataset) {
+    public DescSearchListAdapter(Context context, ArrayList<DescSearchCard> Dataset) {
         this.context = context;
         mDataset = Dataset;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageButton mUnbookmark;
         ImageView mImageView;
         TextView mPlatform;
         TextView mTitle;
-        TextView mEpisode;
         TextView mAuthor;
-        CardView mCardView;
+        LinearLayout mLayout;
+        TextView mDesc;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            mUnbookmark = itemView.findViewById(R.id.bookmark_unbookmark);
-            mImageView = itemView.findViewById(R.id.bookmark_cv_image);
-            mPlatform = itemView.findViewById(R.id.bookmark_cv_platform);
-            mTitle = itemView.findViewById(R.id.bookmark_cv_title);
-            mEpisode = itemView.findViewById(R.id.bookmark_cv_episode);
-            mAuthor = itemView.findViewById(R.id.bookmark_cv_author);
-            mCardView = itemView.findViewById(R.id.bookmark_cv);
+            mImageView = (ImageView) itemView.findViewById(R.id.desc_search_cv_image);
+            mPlatform = (TextView) itemView.findViewById(R.id.desc_search_cv_platform);
+            mTitle = (TextView) itemView.findViewById(R.id.desc_search_cv_title);
+            mAuthor = (TextView) itemView.findViewById(R.id.desc_search_cv_author);
+            mLayout = (LinearLayout) itemView.findViewById(R.id.desc_search_cv);
+            mDesc = (TextView) itemView.findViewById(R.id.desc_search_cv_description);
 
-            mUnbookmark.setOnClickListener(new View.OnClickListener() {
+            mLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) {
-                        deleteBookmark(mDataset.get(pos).getTood_id(), mDataset.get(pos).getEpi_title(), pos);
-                    }
+                    DescSearchCard s = mDataset.get(getAdapterPosition());
+                    ToonCard data = new ToonCard(s.getToon_id(), s.getTitle(), s.getPlatform(), s.getAuthor(), s.getThumbnail(), "");
+                    ((MyApp) context.getApplicationContext()).setDetail_page_info(data);
+
+                    AppCompatActivity aca = (AppCompatActivity) v.getContext();
+                    Fragment fg = EpisodeFragment.newInstance();
+                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
                 }
             });
 
-            mCardView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) {
-                        String url = mDataset.get(pos).getEpi_url();
-
-                        ((MyApp) context.getApplicationContext()).setEpisodeUrl(url);
-
-                        AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                        Fragment fg = WebviewFragment.newInstance();
-                        aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
-                    }
-
-                }
-            });
         }
     }
 
-    private void deleteBookmark(String toon_id, String epi_title, final int position) {
-        String user_id = ((MyApp) context.getApplicationContext()).getUser_id();
-        UserToonEpiData data = new UserToonEpiData(user_id, toon_id, epi_title);
-        service.deleteBookmark(data).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-                    Log.d("BookmarkListAdapter", "deleteBookmark: " + context.getString(R.string.deletebookmark_success));
-                    mDataset.remove(position);
-                    notifyDataSetChanged();
-                }
-                else {
-                    Log.e("BookmarkListAdapter", "deleteBookmark" + context.getString(R.string.deletebookmark_fail));
-                    MyToast.s(context, context.getString(R.string.deletebookmark_fail));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("BookmarkListAdapter", "deleteBookmark: " + context.getString(R.string.server_error));
-                MyToast.s(context, context.getString(R.string.server_error));
-            }
-        });
-    }
-
+    // onCreateViewHolder() 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴
     @Override
-    public BookmarkListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DescSearchListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.recyclerview_bookmark, parent, false);
+        View view = inflater.inflate(R.layout.recyclerview_descsearch, parent, false);
 
-        return new BookmarkListAdapter.ViewHolder(view);
+        return new DescSearchListAdapter.ViewHolder(view);
     }
 
+    // onBindViewHolder() position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
-    public void onBindViewHolder(BookmarkListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(DescSearchListAdapter.ViewHolder holder, int position){
         final int pos = position;
         Thread mThread = new Thread(){
             @Override
@@ -169,8 +119,8 @@ public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapte
         }
 
         holder.mTitle.setText(mDataset.get(position).getTitle());
-        holder.mEpisode.setText(mDataset.get(position).getEpi_title());
         holder.mAuthor.setText(mDataset.get(position).getAuthor());
+        holder.mDesc.setText(mDataset.get(position).getDescription());
         switch(mDataset.get(position).getPlatform()){
             case "naver":
                 holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.naver_colored)));
@@ -216,12 +166,11 @@ public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapte
                 break;
         }
 
-        service = RetrofitClient.getClient().create(ServiceApi.class);
     }
 
+    // getItemCount() 전체 데이터 갯수 리턴
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
-
 }

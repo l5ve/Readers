@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
@@ -171,8 +170,8 @@ public class ToonFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ToonResponse>> call, Throwable t) {
-                Log.e("ToonFragment", "getDayData: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("ToonFragment", "getDayData: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
 
@@ -200,8 +199,8 @@ public class ToonFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ToonResponse>> call, Throwable t) {
-                Log.e("ToonFragment", "getGenreData: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("ToonFragment", "getGenreData: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
 
@@ -229,8 +228,8 @@ public class ToonFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ToonResponse>> call, Throwable t) {
-                Log.e("ToonFragment", "getEndData: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("ToonFragment", "getEndData: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }

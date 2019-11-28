@@ -113,7 +113,7 @@
     <string name="foxtoon_colored"><![CDATA[<b><font color=#f2921a>폭스툰</font></b>]]></string>
     <string name="peanutoon_colored"><![CDATA[<b><font color=#3dc1d3>피너툰</font></b>]]></string>
 
-    <string name="toon_server_error">서버 통신 에러 발생</string>
+    <string name="server_error">서버 통신 에러 발생</string>
 
     <string name="detail_page_memo">메모(~140자)</string>
     <string name="memo_save_success">메모 저장 성공</string>
@@ -145,7 +145,11 @@
     <string name="deletebookmark_success">책갈피 삭제 성공</string>
     <string name="deletebookmark_fail">책갈피 삭제 실패</string>
 
-    <string name="search_result">통합 검색 결과</string>
+    <string name="search_result">검색 결과</string>
+
+    <string name="search_title">작품명</string>
+    <string name="search_author">작가명</string>
+    <string name="search_desc">작품 설명</string>
 
 
     <!-- 2. 추천페이지 -->

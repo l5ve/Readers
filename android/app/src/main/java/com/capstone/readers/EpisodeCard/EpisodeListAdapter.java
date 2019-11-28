@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -121,8 +120,8 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("EpisodeListAdapter", "addBookmark: " + context.getString(R.string.toon_server_error));
-                MyToast.s(context, context.getString(R.string.toon_server_error));
+                Log.e("EpisodeListAdapter", "addBookmark: " + context.getString(R.string.server_error));
+                MyToast.s(context, context.getString(R.string.server_error));
             }
         });
     }
@@ -146,8 +145,8 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("EpisodeListAdapter", "deleteBookmark: " + context.getString(R.string.toon_server_error));
-                MyToast.s(context, context.getString(R.string.toon_server_error));
+                Log.e("EpisodeListAdapter", "deleteBookmark: " + context.getString(R.string.server_error));
+                MyToast.s(context, context.getString(R.string.server_error));
             }
         });
     }
