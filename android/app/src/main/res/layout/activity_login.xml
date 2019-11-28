@@ -54,8 +54,46 @@
         android:layout_marginLeft="@dimen/spacing_xxxlarge2"
         android:id="@+id/checkBox"
         android:checked="true"
-        android:layout_marginBottom="@dimen/spacing_medium2"
         />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimaryBright1"
+        android:layout_margin="@dimen/spacing_small"
+        app:srcCompat="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/forgot_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryBright5"
+            android:textSize="@dimen/text_size_small2"
+            android:text="@string/forgot_id" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryBright5"
+            android:textSize="@dimen/text_size_small2"
+            android:text="   |   " />
+
+        <TextView
+            android:id="@+id/forgot_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryBright5"
+            android:textSize="@dimen/text_size_small2"
+            android:text="@string/forgot_pw" />
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/loginBtn"
