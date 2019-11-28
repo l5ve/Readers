@@ -2,7 +2,9 @@ package com.capstone.readers;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         //첫 화면 지정
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.main_frame, menu1Fragment).commitAllowingStateLoss();
-
-
 
         // bottomNavigationView의 아이템이 선택될 때 호출될 리스너 등록
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /* replace fragment method that can be accessed from other fragments */
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -26,12 +27,16 @@ import retrofit2.Response;
 
 public class SearchFragment extends Fragment {
     private String word;
+    private SearchData data;
     private TextView mTextView;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<SearchCard> myDataset;
+    private ArrayList<DescSearchCard> DescDataset;
     private ServiceApi service;
+
+    private RadioGroup sort_group;
 
     public static SearchFragment newInstance() {
         return new SearchFragment();
@@ -47,29 +52,56 @@ public class SearchFragment extends Fragment {
         View fv = inflater.inflate(R.layout.fragment_search, container, false);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
+        word = ((MyApp) getActivity().getApplication()).getSearch_keyword();
+        data = new SearchData(word);
+
         mTextView = fv.findViewById(R.id.search_result_text);
 
         myDataset = new ArrayList<>();
+        DescDataset = new ArrayList<>();
+
         /* RecyclerView GridLayoutManager 지정 */
         mRecyclerView = (RecyclerView) fv.findViewById(R.id.search_list);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        getSearchResult();
+        /* 작품명/작가명/작품 설명으로 검색 */
+        sort_group = (RadioGroup) fv.findViewById(R.id.search_sort_group);
+        sort_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.search_sort_title) {
+                    myDataset.clear();
+                    getTitleSearchResult();
+                }
+                else if (checkedId == R.id.search_sort_author) {
+                    myDataset.clear();
+                    getAuthorSearchResult();
+                }
+                else if (checkedId == R.id.search_sort_desc) {
+                    DescDataset.clear();
+                    getDescSearchResult();
+                }
+            }
+        });
 
         return fv;
     }
 
-    /* RecyclerView adapter 지정 */
+    /* RecyclerView adapter 지정 - 작품명, 작가명 검색 */
     public void setAdapter() {
         mAdapter = new SearchListAdapter(getContext(), myDataset);
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private void getSearchResult() {
-        word = ((MyApp) getActivity().getApplication()).getSearch_keyword();
-        SearchData data = new SearchData(word);
-        service.getSearchResult(data).enqueue(new Callback<ArrayList<SearchCard>>() {
+    /* RecyclerView adapter 지정 - 작품 설명 검색 */
+    public void setDescAdapter() {
+        mAdapter = new DescSearchListAdapter(getContext(), DescDataset);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void getTitleSearchResult() {
+        service.getTitleSearchResult(data).enqueue(new Callback<ArrayList<SearchCard>>() {
             @Override
             public void onResponse(Call<ArrayList<SearchCard>> call, Response<ArrayList<SearchCard>> response) {
                 myDataset = response.body();
@@ -79,8 +111,42 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<SearchCard>> call, Throwable t) {
-                Log.e("SearchFragment", "getSearchResult: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("SearchFragment", "getTitleSearchResult: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
+            }
+        });
+    }
+
+    private void getAuthorSearchResult() {
+        service.getAuthorSearchResult(data).enqueue(new Callback<ArrayList<SearchCard>>() {
+            @Override
+            public void onResponse(Call<ArrayList<SearchCard>> call, Response<ArrayList<SearchCard>> response) {
+                myDataset = response.body();
+                mTextView.setText(getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
+                setAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<SearchCard>> call, Throwable t) {
+                Log.e("SearchFragment", "getAuthorSearchResult: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
+            }
+        });
+    }
+
+    private void getDescSearchResult() {
+        service.getDescSearchResult(data).enqueue(new Callback<ArrayList<DescSearchCard>>() {
+            @Override
+            public void onResponse(Call<ArrayList<DescSearchCard>> call, Response<ArrayList<DescSearchCard>> response) {
+                DescDataset = response.body();
+                mTextView.setText(getResources().getString(R.string.search_result) + "(" + DescDataset.size() + ")");
+                setDescAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<DescSearchCard>> call, Throwable t) {
+                Log.e("SearchFragment", "getDescSearchResult: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }

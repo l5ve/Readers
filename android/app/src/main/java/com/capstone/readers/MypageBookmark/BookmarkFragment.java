@@ -107,8 +107,8 @@ public class BookmarkFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<BookmarkCard>> call, Throwable t) {
-                Log.e("BookmarkFragment", "getData: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("BookmarkFragment", "getData: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }

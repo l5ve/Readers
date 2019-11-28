@@ -5,6 +5,7 @@ import com.capstone.readers.EpisodeCard.EpisodeCard;
 import com.capstone.readers.MypageBookmark.BookmarkCard;
 import com.capstone.readers.MypageMemo.MemoCard;
 import com.capstone.readers.Recommend.RecommendCard;
+import com.capstone.readers.Search.DescSearchCard;
 import com.capstone.readers.Search.SearchCard;
 import com.capstone.readers.Toon.ToonCard;
 import com.capstone.readers.item.DetailPageResponse;
@@ -60,8 +61,14 @@ public interface ServiceApi {
     Call<ArrayList<ToonResponse>> getEndToon(@Body getEndToonData data);
 
     /* 검색 */
-    @POST("/toon/search")
-    Call<ArrayList<SearchCard>> getSearchResult(@Body SearchData data);
+    @POST("/search/title")
+    Call<ArrayList<SearchCard>> getTitleSearchResult(@Body SearchData data);
+
+    @POST("/search/writer")
+    Call<ArrayList<SearchCard>> getAuthorSearchResult(@Body SearchData data);
+
+    @POST("/search/desc")
+    Call<ArrayList<DescSearchCard>> getDescSearchResult(@Body SearchData data);
 
     /* 작품 상세 페이지 */
     @POST("toon/detailpage")

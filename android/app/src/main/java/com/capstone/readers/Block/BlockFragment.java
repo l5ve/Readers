@@ -84,8 +84,8 @@ public class BlockFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<BlockCard>> call, Throwable t) {
-                Log.e("BlockFragment", "getBlockList: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("BlockFragment", "getBlockList: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }

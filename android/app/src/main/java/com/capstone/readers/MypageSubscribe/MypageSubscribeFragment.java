@@ -154,8 +154,8 @@ public class MypageSubscribeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ToonCard>> call, Throwable t) {
-                Log.e("MypageSubscribeFragment", "getDayData: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("MypageSubscribeFragment", "getDayData: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
@@ -179,8 +179,8 @@ public class MypageSubscribeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ToonCard>> call, Throwable t) {
-                Log.e("MypageSubscribeFragment", "getEndData: " + getString(R.string.toon_server_error));
-                MyToast.s(getContext(), getString(R.string.toon_server_error));
+                Log.e("MypageSubscribeFragment", "getEndData: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
             }
         });
     }
