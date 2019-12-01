@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,17 +44,17 @@ public class MypageSubscribeListAdapter extends RecyclerView.Adapter<MypageSubsc
         TextView mPlatform;
         TextView mTitle;
         TextView mAuthor;
-        CardView mCardView;
+        LinearLayout mCardView;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             // 뷰 객체에 대한 참조
-            mImageView = itemView.findViewById(R.id.toon_cv_image);
-            mPlatform = itemView.findViewById(R.id.toon_cv_platform);
-            mTitle = itemView.findViewById(R.id.toon_cv_title);
-            mAuthor = itemView.findViewById(R.id.toon_cv_author);
-            mCardView = itemView.findViewById(R.id.toon_cv);
+            mImageView = (ImageView) itemView.findViewById(R.id.toon_cv_image);
+            mPlatform = (TextView) itemView.findViewById(R.id.toon_cv_platform);
+            mTitle = (TextView) itemView.findViewById(R.id.toon_cv_title);
+            mAuthor = (TextView) itemView.findViewById(R.id.toon_cv_author);
+            mCardView = (LinearLayout) itemView.findViewById(R.id.toon_cv);
 
             mCardView.setOnClickListener(new View.OnClickListener(){
                 @Override

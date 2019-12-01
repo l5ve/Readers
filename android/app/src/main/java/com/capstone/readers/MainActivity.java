@@ -50,23 +50,26 @@ public class MainActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()) {
                     // 1번 메뉴: 홈
                     case R.id.nav_menu1: {
+                        //fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         transaction1.replace(R.id.main_frame, menu1Fragment).commitAllowingStateLoss();
-
                         break;
                     }
                     // 2번 메뉴: 추천
                     case R.id.nav_menu2: {
+                        //fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         transaction1.replace(R.id.main_frame, menu2Fragment).commitAllowingStateLoss();
                         break;
                     }
                     // 3번 메뉴: 마이페이지
                     case R.id.nav_menu3: {
+                        //fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         transaction1.replace(R.id.main_frame, menu3Fragment).commitAllowingStateLoss();
                         break;
                     }
 
                     // 4번 메뉴: 설정
                     case R.id.nav_menu4: {
+                        //fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         transaction1.replace(R.id.main_frame, menu4Fragment).commitAllowingStateLoss();
                         break;
                     }
@@ -74,12 +77,5 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-    }
-
-    /* replace fragment method that can be accessed from other fragments */
-    public void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main_frame, fragment).commit();
     }
 }

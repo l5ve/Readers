@@ -4,7 +4,13 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.capstone.readers.Toon.ToonCard;
+import com.capstone.readers.Toon.ToonListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 앱 전역에서 사용할 수 있는 클래스
@@ -42,10 +48,10 @@ public class MyApp extends Application {
     private String day;
     private String genre;
 
-    public final int genre_choice_score = 100;
-    public final int hide_score = 10;
-    public final int subscribe_score = 10;
-    public final int bookmark_score = 1;
+    private RecyclerView.Adapter globalTLA;
+    private int pos;
+    private List<ToonCard> mDataset;
+    private boolean existedBefore;
 
     private boolean[] genre_selected;
     private String[] genre_list;
@@ -86,23 +92,22 @@ public class MyApp extends Application {
 
     public void initialize(){
         savedData = false;
-        login_naver = false;
-        login_daum = false;
-        login_lezhin = false;
-        login_mrblue = false;
-        login_bufftoon = false;
-        login_bomtoon = false;
-        login_bbuding = false;
-        login_kakaopage = false;
-        login_comica = false;
-        login_comicgt = false;
-        login_ktoon = false;
-        login_toptoon = false;
-        login_toomics = false;
-        login_foxtoon = false;
-        login_peanutoon = false;
         SharedPreferences.Editor editor = appData.edit();
         editor.putBoolean("SAVE_LOGIN_DATA", false);
+        editor.putBoolean("login_naver", false);
+        editor.putBoolean("login_daum", false);
+        editor.putBoolean("login_lezhin", false);
+        editor.putBoolean("login_mrblue", false);
+        editor.putBoolean("login_bufftoon", false);
+        editor.putBoolean("login_bomtoon", false);
+        editor.putBoolean("login_bbuding", false);
+        editor.putBoolean("login_kakaopage", false);
+        editor.putBoolean("login_comica", false);
+        editor.putBoolean("login_ktoon", false);
+        editor.putBoolean("login_toptoon", false);
+        editor.putBoolean("login_toomics", false);
+        editor.putBoolean("login_foxtoon", false);
+        editor.putBoolean("login_peanutoon", false);
         editor.apply();
     }
 
@@ -151,123 +156,153 @@ public class MyApp extends Application {
     }
 
     public boolean isLogin_naver() {
-        return login_naver;
+        return appData.getBoolean("login_naver", false);
     }
 
     public boolean isLogin_bbuding() {
-        return login_bbuding;
+        return appData.getBoolean("login_bbuding", false);
     }
 
     public boolean isLogin_bomtoon() {
-        return login_bomtoon;
+        return appData.getBoolean("login_bomtoon", false);
     }
 
     public boolean isLogin_bufftoon() {
-        return login_bufftoon;
+        return appData.getBoolean("login_bufftoon", false);
     }
 
     public boolean isLogin_daum() {
-        return login_daum;
+        return appData.getBoolean("login_daum", false);
     }
 
     public boolean isLogin_comica() {
-        return login_comica;
+        return appData.getBoolean("login_comica", false);
     }
 
     public boolean isLogin_comicgt() {
-        return login_comicgt;
+        return appData.getBoolean("login_comicgt", false);
     }
 
     public boolean isLogin_foxtoon() {
-        return login_foxtoon;
+        return appData.getBoolean("login_foxtoon", false);
     }
 
     public boolean isLogin_kakaopage() {
-        return login_kakaopage;
+        return appData.getBoolean("login_kakaopage", false);
     }
 
     public boolean isLogin_lezhin() {
-        return login_lezhin;
+        return appData.getBoolean("login_lezhin", false);
     }
 
     public boolean isLogin_ktoon() {
-        return login_ktoon;
+        return appData.getBoolean("login_ktoon", false);
     }
 
     public boolean isLogin_mrblue() {
-        return login_mrblue;
+        return appData.getBoolean("login_mrblue", false);
     }
 
     public boolean isLogin_peanutoon() {
-        return login_peanutoon;
+        return appData.getBoolean("login_peanutoon", false);
     }
 
     public boolean isLogin_toomics() {
-        return login_toomics;
+        return appData.getBoolean("login_toomics", false);
     }
 
     public boolean isLogin_toptoon() {
-        return login_toptoon;
+        return appData.getBoolean("login_toptoon", false);
     }
 
     public void setLogin_naver(boolean login_naver) {
-        this.login_naver = login_naver;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_naver", login_naver);
+        editor.apply();
     }
 
     public void setLogin_daum(boolean login_daum) {
-        this.login_daum = login_daum;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_daum", login_daum);
+        editor.apply();
     }
 
     public void setLogin_lezhin(boolean login_lezhin) {
-        this.login_lezhin = login_lezhin;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_lezhin", login_lezhin);
+        editor.apply();
     }
 
     public void setLogin_mrblue(boolean login_mrblue) {
-        this.login_mrblue = login_mrblue;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_mrblue", login_mrblue);
+        editor.apply();
     }
 
     public void setLogin_bufftoon(boolean login_bufftoon) {
-        this.login_bufftoon = login_bufftoon;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_bufftoon", login_bufftoon);
+        editor.apply();
     }
 
     public void setLogin_bomtoon(boolean login_bomtoon) {
-        this.login_bomtoon = login_bomtoon;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_bomtoon", login_bomtoon);
+        editor.apply();
     }
 
     public void setLogin_bbuding(boolean login_bbuding) {
-        this.login_bbuding = login_bbuding;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_bbuding", login_bbuding);
+        editor.apply();
     }
 
     public void setLogin_kakaopage(boolean login_kakaopage) {
-        this.login_kakaopage = login_kakaopage;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_kakaopage", login_kakaopage);
+        editor.apply();
     }
 
     public void setLogin_comica(boolean login_comica) {
-        this.login_comica = login_comica;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_comica", login_comica);
+        editor.apply();
     }
 
     public void setLogin_comicgt(boolean login_comicgt) {
-        this.login_comicgt = login_comicgt;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_comicgt", login_comicgt);
+        editor.apply();
     }
 
     public void setLogin_ktoon(boolean login_ktoon) {
-        this.login_ktoon = login_ktoon;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_ktoon", login_ktoon);
+        editor.apply();
     }
 
     public void setLogin_toptoon(boolean login_toptoon) {
-        this.login_toptoon = login_toptoon;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_toptoon", login_toptoon);
+        editor.apply();
     }
 
     public void setLogin_toomics(boolean login_toomics) {
-        this.login_toomics = login_toomics;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_toomics", login_toomics);
+        editor.apply();
     }
 
     public void setLogin_foxtoon(boolean login_foxtoon) {
-        this.login_foxtoon = login_foxtoon;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_foxtoon", login_foxtoon);
+        editor.apply();
     }
 
     public void setLogin_peanutoon(boolean login_peanutoon) {
-        this.login_peanutoon = login_peanutoon;
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("login_peanutoon", login_peanutoon);
+        editor.apply();
     }
 
     public void setDayTab() {
@@ -362,5 +397,37 @@ public class MyApp extends Application {
 
     public void setSearch_keyword(String search_keyword) {
         this.search_keyword = search_keyword;
+    }
+
+    public void setGlobalTLA(RecyclerView.Adapter adapter) {
+        this.globalTLA = adapter;
+    }
+
+    public RecyclerView.Adapter getGlobalTLA() {
+        return globalTLA;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public List<ToonCard> getmDataset() {
+        return mDataset;
+    }
+
+    public void setmDataset(List<ToonCard> data) {
+        mDataset = data;
+    }
+
+    public void setExistedBefore(boolean value) {
+        this.existedBefore = value;
+    }
+
+    public boolean getExistedBefore() {
+        return existedBefore;
     }
 }

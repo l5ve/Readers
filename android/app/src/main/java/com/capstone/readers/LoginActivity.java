@@ -209,12 +209,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isIdValid(String id) {
-        return id.length() >= 5;
+        return id.length() > 5;
     }
 
-
     private boolean isPasswordValid(String password) {
-        return password.length() >= 5;
+        return password.length() > 5;
     }
 
     // 설정값을 저장하는 함수

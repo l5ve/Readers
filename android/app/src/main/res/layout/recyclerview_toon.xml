@@ -6,7 +6,6 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/toon_cv"
         android:layout_width="@dimen/tooncard_width"
         android:layout_height="@dimen/tooncard_height"
         android:layout_margin="@dimen/spacing_small"
@@ -17,6 +16,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/toon_cv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

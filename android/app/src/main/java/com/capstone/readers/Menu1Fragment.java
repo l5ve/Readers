@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.Search.SearchFragment;
 import com.capstone.readers.lib.MyLog;
 import com.google.android.material.tabs.TabLayout;
@@ -140,5 +141,4 @@ public class Menu1Fragment extends Fragment {
         AppCompatActivity aca = (AppCompatActivity) getContext();
         aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_big_container, fg).addToBackStack(null).commit();
     }
-
 }

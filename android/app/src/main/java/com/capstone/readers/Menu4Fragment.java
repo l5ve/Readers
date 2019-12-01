@@ -17,6 +17,7 @@ import com.capstone.readers.Block.BlockFragment;
 
 public class Menu4Fragment extends Fragment {
     private TextView settingLoginBtn;
+    private TextView settingProfileBtn;
     private TextView settingHideBtn;
     private TextView settingNoticeBtn;
     private TextView settingAskBtn;
@@ -29,6 +30,7 @@ public class Menu4Fragment extends Fragment {
         View fv = inflater.inflate(R.layout.fragment_menu4, container, false);
 
         settingLoginBtn = (TextView) fv.findViewById(R.id.setting_login_btn);
+        settingProfileBtn = (TextView) fv.findViewById(R.id.setting_profile_edit);
         settingHideBtn = (TextView) fv.findViewById(R.id.setting_hide_btn);
         settingNoticeBtn = (TextView) fv.findViewById(R.id.setting_notice_btn);
         settingAskBtn = (TextView) fv.findViewById(R.id.setting_ask_btn);
@@ -39,6 +41,15 @@ public class Menu4Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment fg = ManageLoginFragment.newInstance();
+                AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
+            }
+        });
+
+        settingProfileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fg = ProfileFragment.newInstance();
                 AppCompatActivity aca = (AppCompatActivity) view.getContext();
                 aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
             }

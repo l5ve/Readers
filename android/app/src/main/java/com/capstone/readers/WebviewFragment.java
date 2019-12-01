@@ -35,7 +35,6 @@ public class WebviewFragment extends Fragment {
         url = ((MyApp) getActivity().getApplication()).getEpisodeUrl();
 
         mWebView.setVisibility(View.VISIBLE);
-        mWebView.setVisibility(View.VISIBLE);
         mWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
         mWebSettings = mWebView.getSettings(); //세부 세팅 등록
         mWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바스크립트 허용 여부

@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/signin_id"
-        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_medium"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -71,15 +71,15 @@
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/text_size_medium"
         android:gravity="center"
-        android:layout_marginTop="@dimen/spacing_medium2"
-        android:layout_marginBottom="@dimen/spacing_medium"/>
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_small2"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/taste_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:layout_marginHorizontal="@dimen/spacing_xxxlarge"/>
+        android:layout_marginHorizontal="@dimen/spacing_large"/>
 
     <ImageButton
         android:id="@+id/sign_up_Btn"

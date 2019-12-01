@@ -53,6 +53,7 @@
     <string name="your_taste">당신의 취향을 3가지 이상 골라주세요</string>
     <string name="sign_up_done">반갑습니다.\n회원가입이 완료되었습니다.</string>
     <string name="different_pw">비밀번호가 다릅니다.</string>
+    <string name="nickname_length_warning">닉네임을 1자 이상 입력해주세요.</string>
     <string name="id_length_warning">아이디를 6자 이상 입력해주세요.</string>
     <string name="pwd_length_warning">비밀번호를 6자 이상 입력해주세요.</string>
     <string name="nickname_warning">닉네임을 입력해주세요.</string>
@@ -195,6 +196,25 @@
     <string name="manage_login_notice">스위치 버튼을 켜면 각 연재처의 로그인 화면이 나옵니다.\n스위치 버튼을 끄면 자동으로 로그아웃이 됩니다.\n현재 버프툰, 카카오페이지, 코미카, 탑툰은 자동 로그아웃 기능을 제공하고 있지 않습니다. 직접 로그아웃 해주세요.\n스위치 버튼은 로그인 여부를 편리하게 확인하기 위함입니다. 실수로 로그인 버튼을 누르고 로그인을 하지 않았다면 스위치 버튼을 한 번 더 눌러서 꺼주세요.\n리더스 앱 로그아웃 시 버프툰, 카카오페이지, 코미카, 탑툰을 제외한 모든 연재처에서 자동으로 로그아웃이 됩니다.</string>
 
     <string name="cancel_hide">숨김 해제</string>
+
+    <string name="change_pw">·비밀번호 변경하기</string>
+    <string name="change_pw_btn">비밀번호 변경</string>
+    <string name="change_nickname">·닉네임 변경하기</string>
+    <string name="change_nickname_btn">닉네임 변경</string>
+
+    <string name="current_pw">현재 비밀번호</string>
+    <string name="new_pw">새 비밀번호</string>
+    <string name="new_pw_ver">새 비밀번호 확인</string>
+    <string name="new_nickname">새 닉네임</string>
+
+    <string name="notice_input_current_pw">현재 비밀번호를 입력해주세요.</string>
+    <string name="new_pw_length_warning">새 비밀번호를 6자 이상 입력해주세요.</string>
+    <string name="not_new_pw">현재 비밀번호와 다른 비밀번호로 설정해주세요.</string>
+    <string name="wrong_pw">현재 비밀번호가 알맞지 않습니다.</string>
+    <string name="pw_no_match">새 비밀번호가 다릅니다.</string>
+    <string name="notice_pw_changed">비밀번호가 변경되었습니다.</string>
+    <string name="notice_nickname_changed">닉네임이 변경되었습니다.</string>
+
 
    <!-- 정렬 -->
     <string name="sort_new">최신순</string>
