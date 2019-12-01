@@ -6,6 +6,7 @@ import android.os.StrictMode;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.capstone.readers.MypageMemo.MemoCard;
 import com.capstone.readers.Toon.ToonCard;
 
 import java.util.List;
@@ -48,13 +49,15 @@ public class MyApp extends Application {
 
     private boolean fromHomeTab;
     private boolean fromMypage;
+    private boolean fromMemo;
     private RecyclerView.Adapter globalAdapter;
     private int pos;
     private List<ToonCard> mDataset;
     private boolean existedBefore;
-
     private int mypagePos;
     private List<ToonCard> mypageDataset;
+    private int memoPos;
+    private List<MemoCard> memoDataset;
 
     private boolean[] genre_selected;
     private String[] genre_list;
@@ -453,6 +456,11 @@ public class MyApp extends Application {
     public void setFromHomeTab(boolean value) {
         this.fromHomeTab = value;
         this.fromMypage = !value;
+        if (mypageDataset != null)
+            mypageDataset.clear();
+        this.fromMemo = !value;
+        if (memoDataset != null)
+            memoDataset.clear();
     }
 
     public boolean getFromHomeTab() {
@@ -462,6 +470,11 @@ public class MyApp extends Application {
     public void setFromMypage(boolean value) {
         this.fromMypage = value;
         this.fromHomeTab = !value;
+        if (mDataset != null)
+            mDataset.clear();
+        this.fromMemo = !value;
+        if (memoDataset != null)
+            memoDataset.clear();
     }
 
     public boolean getFromMypage() {
@@ -470,6 +483,44 @@ public class MyApp extends Application {
 
     public void setFromOthers() {
         this.fromHomeTab = false;
+        if (mDataset != null)
+            mDataset.clear();
         this.fromMypage = false;
+        if (mypageDataset != null)
+            mypageDataset.clear();
+        this.fromMemo = false;
+        if (memoDataset != null)
+            memoDataset.clear();
+    }
+
+    public void setFromMemo(boolean value) {
+        this.fromMemo = value;
+
+        this.fromHomeTab = !value;
+        if (mDataset != null)
+            mDataset.clear();
+        this.fromMypage = !value;
+        if (mypageDataset != null)
+            mypageDataset.clear();
+    }
+
+    public boolean getFromMemo() {
+        return fromMemo;
+    }
+
+    public void setMemoPos(int pos) {
+        memoPos = pos;
+    }
+
+    public int getMemoPos() {
+        return memoPos;
+    }
+
+    public void setMemoDataset(List<MemoCard> data) {
+        memoDataset = data;
+    }
+
+    public List<MemoCard> getMemoDataset() {
+        return memoDataset;
     }
 }

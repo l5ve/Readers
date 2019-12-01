@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.MyApp;
+import com.capstone.readers.MypageMemo.MemoCard;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
@@ -38,7 +39,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -534,6 +539,25 @@ public class EpisodeFragment extends Fragment {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
                     Log.d("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_success));
+
+                    /* 마이페이지 메모화면에서 넘어온 경우 saveMemo()를 호출한 것은 메모를 수정한 것이므로 메모 내용 업데이트 */
+                    boolean fromMemo = ((MyApp) getContext().getApplicationContext()).getFromMemo();
+                    if (fromMemo) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        String temp = sdf.format(Calendar.getInstance().getTime());
+                        Timestamp today = Timestamp.valueOf(temp);
+                        String memo = mEditText.getText().toString();
+                        MemoCard data = new MemoCard(info.getId(), info.getThumbnail(), info.getPlatform(), info.getTitle(), info.getAuthor(), memo, today);
+
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getMemoPos();
+                        Log.d("EpisodeFragment", "deletememo: remove item " + pos + " from the adapter");
+                        List<MemoCard> mDataset = ((MyApp) getContext().getApplicationContext()).getMemoDataset();
+                        mDataset.remove(pos);
+                        mDataset.add(pos, data);
+                        adapter.notifyItemChanged(pos);
+                    }
+
                     MyToast.s(getContext(), getString(R.string.memo_save_success));
                 } else {
                     Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_fail));
@@ -558,6 +582,18 @@ public class EpisodeFragment extends Fragment {
                     isMemoOpened = !isMemoOpened;
                     mMemolayout.setVisibility(View.GONE);
                     Log.d("EpisodeFragment", "deleteMemo: " + getString(R.string.memo_delete_success));
+
+                    /* 마이페이지 메모화면에서 넘어온 경우 해당 메모를 삭제하면 마이페이지 메모 목록에서도 삭제 */
+                    boolean fromMemo = ((MyApp) getContext().getApplicationContext()).getFromMemo();
+                    if (fromMemo) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getMemoPos();
+                        Log.d("EpisodeFragment", "deletememo: remove item " + pos + " from the adapter");
+                        List<MemoCard> mDataset = ((MyApp) getContext().getApplicationContext()).getMemoDataset();
+                        mDataset.remove(pos);
+                        adapter.notifyItemRemoved(pos);
+                    }
+
                     MyToast.s(getContext(), getString(R.string.memo_delete_success));
                 } else {
                     Log.e("EpisodeFragment", "deleteMemo: " + getString(R.string.memo_delete_fail));
