@@ -111,7 +111,6 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
                     Log.d("EpisodeListAdapter", "addBookmark: " + context.getString(R.string.addbookmark_success));
                     mDataset.get(position).setIsBookmarked(1);
                     notifyDataSetChanged();
-                    //notifyItemChanged(position);
                 }
                 else {
                     Log.e("EpisodeListAdapter", "addBookmark" + context.getString(R.string.addbookmark_fail));

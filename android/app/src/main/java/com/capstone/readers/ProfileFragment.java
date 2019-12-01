@@ -1,6 +1,7 @@
 package com.capstone.readers;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,10 @@ import com.capstone.readers.item.ChangePwData;
 import com.capstone.readers.lib.MyToast;
 import com.capstone.readers.security.SecurityUtil;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class ProfileFragment extends Fragment {
     private EditText mCurrentPw;
     private EditText mNewPw;
@@ -28,6 +33,7 @@ public class ProfileFragment extends Fragment {
     private String new_enc_pw;
     private SecurityUtil securityUtil;
     private String user_id;
+    private ServiceApi service;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -38,6 +44,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        service = RetrofitClient.getClient().create(ServiceApi.class);
         securityUtil = new SecurityUtil();
         user_id = ((MyApp) getActivity().getApplication()).getUser_id();
 
@@ -120,18 +127,56 @@ public class ProfileFragment extends Fragment {
     }
 
     // 새 비밀번호를 서버에 보내 등록하는 메소드
-    private void changePassword(String enc_pwd) {
+    private void changePassword(final String enc_pwd) {
         ChangePwData data = new ChangePwData(user_id, enc_pwd);
+        service.changePassword(data).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    ((MyApp) getActivity().getApplication()).setUser_pw(enc_pwd);
+                    Log.d("ProfileFragment", "changePassword" + getResources().getString(R.string.change_pw_success));
+                    mCurrentPw.getText().clear();
+                    mNewPw.getText().clear();
+                    mNewPw_ver.getText().clear();
+                    MyToast.s(getContext(), R.string.change_pw_success);
+                }
+                else {
+                    MyToast.s(getContext(), R.string.change_pw_fail);
+                    Log.e("ProfileFragment", "changePassword code: " + response.code());
+                }
+            }
 
-        // 성공 시 MyApp 클래스에도 저장하기
-        MyToast.s(getContext(), "뿡뿡");
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("ProfileFragment", "changePassword: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
+            }
+        });
     }
 
     // 새 닉네임을 서버에 보내 등록하느 ㄴ메소드
-    private void changeNickname(String nickname) {
+    private void changeNickname(final String nickname) {
         ChangeNameData data = new ChangeNameData(user_id, nickname);
+        service.changeNickname(data).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    ((MyApp) getActivity().getApplication()).setUser_name(nickname);
+                    Log.d("ProfileFragment", "changeNickname" + getResources().getString(R.string.change_nickname_success));
+                    mNewName.getText().clear();
+                    MyToast.s(getContext(), R.string.change_nickname_success);
+                }
+                else {
+                    MyToast.s(getContext(), R.string.change_nickname_fail);
+                    Log.e("ProfileFragment", "changeNickname code: " + response.code());
+                }
+            }
 
-        // 성공 시 MyApp 클래스에도 저장하기
-        MyToast.s(getContext(), "뿡뿡2");
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("ProfileFragment", "changeNickname: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
+            }
+        });
     }
 }

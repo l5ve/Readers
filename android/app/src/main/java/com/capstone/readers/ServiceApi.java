@@ -144,11 +144,11 @@ public interface ServiceApi {
 //    Call<ArrayList<MypageResponse>> getMypageData(@Body UserIdData data);
 
     /* 설정페이지 프로필 수정 */
-    @POST("/user/changepw")
-    Call<Response> changePassword(@Body ChangePwData data);
+    @POST("/users/changepwd")
+    Call<ResponseBody> changePassword(@Body ChangePwData data);
 
-    @POST("/user/changename")
-    Call<Response> changeNickname(@Body ChangeNameData data);
+    @POST("/users/changename")
+    Call<ResponseBody> changeNickname(@Body ChangeNameData data);
 
     /* 설정페이지 숨김(차단) */
     @POST("/block/list")
