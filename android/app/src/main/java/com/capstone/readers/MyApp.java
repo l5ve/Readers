@@ -467,4 +467,9 @@ public class MyApp extends Application {
     public boolean getFromMypage() {
         return fromMypage;
     }
+
+    public void setFromOthers() {
+        this.fromHomeTab = false;
+        this.fromMypage = false;
+    }
 }

@@ -83,6 +83,7 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
                     MemoCard temp = mDataset.get(getAdapterPosition());
                     ToonCard data = new ToonCard(temp.getToon_id(), temp.getTitle(), temp.getPlatform(), temp.getAuthor(), temp.getThumbnail(), temp.getMemo_date());
                     ((MyApp) context.getApplicationContext()).setDetail_page_info(data);
+                    ((MyApp) context.getApplicationContext()).setFromOthers();
 
                     AppCompatActivity aca = (AppCompatActivity) view.getContext();
                     Fragment fg = EpisodeFragment.newInstance();
