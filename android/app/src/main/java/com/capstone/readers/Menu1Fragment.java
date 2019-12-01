@@ -1,6 +1,7 @@
 package com.capstone.readers;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,12 +103,19 @@ public class Menu1Fragment extends Fragment {
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                search_keyword = search_bar.getText().toString().trim();
-                ((MyApp) getActivity().getApplication()).setSearch_keyword(search_keyword);
-                Fragment fg = SearchFragment.newInstance();
-                setChildFragment(fg);
-//                AppCompatActivity aca = (AppCompatActivity) v.getContext();
-//                aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
+                setSearchFragment();
+            }
+        });
+
+        // Enter 키 입력 시 검색
+        search_bar.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    setSearchFragment();
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -123,6 +131,14 @@ public class Menu1Fragment extends Fragment {
             childFt.addToBackStack(null);
             childFt.commit();
         }
+    }
+
+    public void setSearchFragment() {
+        search_keyword = search_bar.getText().toString().trim();
+        ((MyApp) getActivity().getApplication()).setSearch_keyword(search_keyword);
+        Fragment fg = SearchFragment.newInstance();
+        AppCompatActivity aca = (AppCompatActivity) getContext();
+        aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_big_container, fg).addToBackStack(null).commit();
     }
 
 }

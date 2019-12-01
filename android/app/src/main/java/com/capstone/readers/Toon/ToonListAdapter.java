@@ -61,7 +61,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
 
                     AppCompatActivity aca = (AppCompatActivity) view.getContext();
                     Fragment fg = EpisodeFragment.newInstance();
-                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
+                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_big_container, fg).addToBackStack(null).commit();
                 }
 
             });

@@ -101,64 +101,66 @@
                     android:layout_height="@dimen/cardview_big_thumbnail"
                     android:layout_margin="@dimen/spacing_small2"/>
 
-                <LinearLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/spacing_small">
+                    android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/detail_page_platform"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_small2"
-                        android:textStyle="bold"
-                        android:text="@string/platforms" />
+                        android:orientation="vertical" >
 
-                    <TextView
-                        android:id="@+id/detail_page_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/text_size_medium2"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="@string/title" />
+                        <TextView
+                            android:id="@+id/detail_page_platform"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/platforms"
+                            android:textSize="@dimen/text_size_small2"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/detail_page_author"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/text_size_small"
-                        android:text="@string/author" />
+                        <TextView
+                            android:id="@+id/detail_page_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text="@string/title"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_medium2" />
 
-                    <TextView
-                        android:id="@+id/detail_page_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_small2"
-                        android:maxLines="5"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/text_size_small"
-                        android:text="@string/detail_page_description" />
+                        <TextView
+                            android:id="@+id/detail_page_author"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/author"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_small" />
 
-                    <HorizontalScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/detail_page_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small2"
+                            android:maxLines="5"
+                            android:text="@string/detail_page_description"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_small" />
 
-                        <LinearLayout
-                            android:id="@+id/detail_page_genre_layout"
+                        <HorizontalScrollView
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/detail_page_genre_height"
-                            android:orientation="horizontal" >
+                            android:layout_height="wrap_content">
 
-                        </LinearLayout>
-                    </HorizontalScrollView>
+                            <LinearLayout
+                                android:id="@+id/detail_page_genre_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/detail_page_genre_height"
+                                android:orientation="horizontal">
 
+                            </LinearLayout>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                </ScrollView>
 
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
