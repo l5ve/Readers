@@ -62,7 +62,7 @@
                             android:layout_gravity="center_vertical"
                             android:scaleType="fitCenter"
                             android:background="@android:color/transparent"
-                            card:srcCompat="@drawable/minus"
+                            card:srcCompat="@drawable/delete"
                             card:layout_constraintTop_toTopOf="parent"
                             card:layout_constraintBottom_toBottomOf="parent"
                             card:layout_constraintEnd_toEndOf="parent"/>

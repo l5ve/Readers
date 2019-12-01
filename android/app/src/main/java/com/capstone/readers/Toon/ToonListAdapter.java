@@ -64,6 +64,7 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
+                        ((MyApp) context.getApplicationContext()).setFromHomeTab(true);
                         ((MyApp) context.getApplicationContext()).setDetail_page_info(mDataset.get(pos));
                         ((MyApp) context.getApplicationContext()).setPos(pos);
                         ((MyApp) context.getApplicationContext()).setmDataset(mDataset);

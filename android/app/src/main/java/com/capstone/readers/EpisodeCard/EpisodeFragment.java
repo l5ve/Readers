@@ -26,7 +26,6 @@ import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.Toon.ToonCard;
-import com.capstone.readers.Toon.ToonListAdapter;
 import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.ToonGenreResponse;
@@ -360,6 +359,18 @@ public class EpisodeFragment extends Fragment {
                     mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
                     mSubscribeImg.setImageResource(R.drawable.check_green);
                     mBlock.setVisibility(View.GONE);
+
+                    /* 마이페이지 구독화면에서 넘어온 경우 구독 해제 했다가 다시 구독 시 해당 웹툰을 목록에 추가 */
+                    boolean fromMypage = ((MyApp) getContext().getApplicationContext()).getFromMypage();
+                    if (fromMypage) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getMypagePos();
+                        Log.d("EpisodeFragment", "add item " + pos + " to the adapter");
+                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getMypageDataset();
+                        mDataset.add(pos, info);
+                        adapter.notifyItemInserted(pos);
+                    }
+
                     Log.d("EpisodeFragment", "subscribe: " + getString(R.string.subs_success));
                 }
                 else {
@@ -385,6 +396,18 @@ public class EpisodeFragment extends Fragment {
                     mSubscribeText.setTextColor(getResources().getColor(R.color.colorWhite));
                     mSubscribeImg.setImageResource(R.drawable.add);
                     mBlock.setVisibility(View.VISIBLE);
+
+                    /* 마이페이지 구독화면에서 넘어온 경우 구독 해제 시 해당 웹툰을 목록에서 삭제 */
+                    boolean fromMypage = ((MyApp) getContext().getApplicationContext()).getFromMypage();
+                    if (fromMypage) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getMypagePos();
+                        Log.d("EpisodeFragment", "unsubscribe: remove item " + pos + " from the adapter");
+                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getMypageDataset();
+                        mDataset.remove(pos);
+                        adapter.notifyItemRemoved(pos);
+                    }
+
                     Log.d("EpisodeFragment", "unsubscribe: " + getString(R.string.unsubs_success));
 
                 }
@@ -412,12 +435,16 @@ public class EpisodeFragment extends Fragment {
                     mBlockImg.setImageResource(R.drawable.check_red);
                     mSubscribe.setVisibility(View.GONE);
 
-                    RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalTLA();
-                    int pos = ((MyApp) getContext().getApplicationContext()).getPos();
-                    Log.d("EpisodeFragment", "remove item " + pos + " from the adapter");
-                    List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
-                    mDataset.remove(pos);
-                    adapter.notifyItemRemoved(pos);
+                    /* 홈 화면 (요일별/장르별/완결)에서 넘어온 경우 숨김 시 해당 웹툰을 목록에서 삭제 */
+                    boolean fromHomeTab = ((MyApp) getContext().getApplicationContext()).getFromHomeTab();
+                    if (fromHomeTab) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getPos();
+                        Log.d("EpisodeFragment", "remove item " + pos + " from the adapter");
+                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
+                        mDataset.remove(pos);
+                        adapter.notifyItemRemoved(pos);
+                    }
 
                     Log.d("EpisodeFragment", "unblock: " + getString(R.string.block_success));
                 }
@@ -445,14 +472,18 @@ public class EpisodeFragment extends Fragment {
                     mBlockImg.setImageResource(R.drawable.hide);
                     mSubscribe.setVisibility(View.VISIBLE);
 
-                    boolean existbefore = ((MyApp) getContext().getApplicationContext()).getExistedBefore();
-                    if (existbefore) {
-                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalTLA();
-                        int pos = ((MyApp) getContext().getApplicationContext()).getPos();
-                        Log.d("EpisodeFragment", "add item " + pos + " to the adapter");
-                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
-                        mDataset.add(pos, info);
-                        adapter.notifyItemInserted(pos);
+                    /* 홈 화면 (요일별/장르별/완결)에서 넘어온 경우 숨김했다가 숨김 해제 시 해당 웹툰을 목록에 추가*/
+                    boolean fromHomeTab = ((MyApp) getContext().getApplicationContext()).getFromHomeTab();
+                    if (fromHomeTab) {
+                        boolean existbefore = ((MyApp) getContext().getApplicationContext()).getExistedBefore();
+                        if (existbefore) {
+                            RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                            int pos = ((MyApp) getContext().getApplicationContext()).getPos();
+                            Log.d("EpisodeFragment", "add item " + pos + " to the adapter");
+                            List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
+                            mDataset.add(pos, info);
+                            adapter.notifyItemInserted(pos);
+                        }
                     }
                     Log.d("EpisodeFragment", "unblock: " + getString(R.string.unblock_success));
                 }

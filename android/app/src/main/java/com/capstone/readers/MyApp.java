@@ -7,9 +7,7 @@ import android.os.StrictMode;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.Toon.ToonCard;
-import com.capstone.readers.Toon.ToonListAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,10 +46,15 @@ public class MyApp extends Application {
     private String day;
     private String genre;
 
-    private RecyclerView.Adapter globalTLA;
+    private boolean fromHomeTab;
+    private boolean fromMypage;
+    private RecyclerView.Adapter globalAdapter;
     private int pos;
     private List<ToonCard> mDataset;
     private boolean existedBefore;
+
+    private int mypagePos;
+    private List<ToonCard> mypageDataset;
 
     private boolean[] genre_selected;
     private String[] genre_list;
@@ -399,12 +402,12 @@ public class MyApp extends Application {
         this.search_keyword = search_keyword;
     }
 
-    public void setGlobalTLA(RecyclerView.Adapter adapter) {
-        this.globalTLA = adapter;
+    public void setGlobalAdapter(RecyclerView.Adapter adapter) {
+        this.globalAdapter = adapter;
     }
 
-    public RecyclerView.Adapter getGlobalTLA() {
-        return globalTLA;
+    public RecyclerView.Adapter getGlobalAdapter() {
+        return globalAdapter;
     }
 
     public void setPos(int pos) {
@@ -429,5 +432,39 @@ public class MyApp extends Application {
 
     public boolean getExistedBefore() {
         return existedBefore;
+    }
+
+    public void setMypageDataset(List<ToonCard> data) {
+        mypageDataset = data;
+    }
+
+    public List<ToonCard> getMypageDataset() {
+        return mypageDataset;
+    }
+
+    public void setMypagePos(int position) {
+        this.mypagePos = position;
+    }
+
+    public int getMypagePos() {
+        return mypagePos;
+    }
+
+    public void setFromHomeTab(boolean value) {
+        this.fromHomeTab = value;
+        this.fromMypage = !value;
+    }
+
+    public boolean getFromHomeTab() {
+        return fromHomeTab;
+    }
+
+    public void setFromMypage(boolean value) {
+        this.fromMypage = value;
+        this.fromHomeTab = !value;
+    }
+
+    public boolean getFromMypage() {
+        return fromMypage;
     }
 }

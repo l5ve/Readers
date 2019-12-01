@@ -132,6 +132,7 @@ public class MypageSubscribeFragment extends Fragment {
     /* RecyclerView adapter 지정 */
     public void setAdapter() {
         mAdapter = new MypageSubscribeListAdapter(getContext(), myDataset);
+        ((MyApp) getContext().getApplicationContext()).setGlobalAdapter(mAdapter);
         mRecyclerView.setAdapter(mAdapter);
     }
 
