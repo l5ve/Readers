@@ -85,6 +85,8 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        getTitleSearchResult();
+
         return fv;
     }
 

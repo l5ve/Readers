@@ -38,7 +38,9 @@ public class Menu4Fragment extends Fragment {
         settingLoginBtn.setOnClickListener(new TextView.OnClickListener(){
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).replaceFragment(ManageLoginFragment.newInstance());
+                Fragment fg = ManageLoginFragment.newInstance();
+                AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
             }
         });
 
