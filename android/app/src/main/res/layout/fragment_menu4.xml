@@ -5,148 +5,162 @@
     android:layout_height="match_parent"
     android:background="@color/colorGrayBright">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/menu4_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/text_size_xlarge"
-            android:layout_height="@dimen/text_size_xlarge"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_medium"
-            app:srcCompat="@drawable/readers_logo_black" />
-
-        <TextView
-            android:id="@+id/setting_login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:layout_gravity="center"
-            android:layout_marginVertical="@dimen/spacing_medium"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:text="@string/login_setting"
-            android:textSize="@dimen/text_size_large3" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimaryBright5">
-
-        <ImageView
-            android:layout_width="@dimen/text_size_xlarge"
-            android:layout_height="@dimen/text_size_xlarge"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_medium"
-            app:srcCompat="@drawable/readers_logo_white" />
-
-        <TextView
-            android:id="@+id/setting_profile_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:layout_gravity="center"
-            android:layout_marginVertical="@dimen/spacing_medium"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:text="@string/profile_edit"
-            android:textSize="@dimen/text_size_large3" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/text_size_xlarge"
-            android:layout_height="@dimen/text_size_xlarge"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_medium"
-            app:srcCompat="@drawable/readers_logo_black" />
-
-        <TextView
-            android:id="@+id/setting_hide_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:layout_marginVertical="@dimen/spacing_medium"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:text="@string/hide_setting"
-            android:textSize="@dimen/text_size_large3"  />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorPrimaryBright5">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="@dimen/text_size_xlarge"
-                android:layout_height="@dimen/text_size_xlarge"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/spacing_medium"
-                app:srcCompat="@drawable/readers_logo_white" />
-
-            <TextView
-                android:id="@+id/setting_notice_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start"
-                android:layout_marginVertical="@dimen/spacing_medium"
-                android:layout_marginHorizontal="@dimen/spacing_medium"
-                android:text="@string/notice"
-                android:textSize="@dimen/text_size_large3"  />
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/setting_notice_contents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/notice_background"
-            android:visibility="gone">
-            <TextView
+                <ImageView
+                    android:layout_width="@dimen/text_size_xlarge"
+                    android:layout_height="@dimen/text_size_xlarge"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    app:srcCompat="@drawable/readers_logo_black" />
+
+                <TextView
+                    android:id="@+id/setting_login_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="@dimen/spacing_medium"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:text="@string/login_setting"
+                    android:textSize="@dimen/text_size_large3" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start"
-                android:layout_marginVertical="@dimen/spacing_medium"
-                android:layout_marginHorizontal="@dimen/spacing_large"
-                android:text="Readers의 회원이 되신 것을 환영합니다!\n현재는 공지할 사항이 없습니다.\n문의할 내용이 있다면 아래의 문의 버튼을 눌러 관리자에게 이메일을 보내주세요."
-                android:textSize="@dimen/text_size_medium"
-                />
+                android:orientation="horizontal"
+                android:background="@color/colorPrimaryBright5">
+
+                <ImageView
+                    android:layout_width="@dimen/text_size_xlarge"
+                    android:layout_height="@dimen/text_size_xlarge"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    app:srcCompat="@drawable/readers_logo_white" />
+
+                <TextView
+                    android:id="@+id/setting_profile_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="@dimen/spacing_medium"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:text="@string/profile_edit"
+                    android:textSize="@dimen/text_size_large3" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/text_size_xlarge"
+                    android:layout_height="@dimen/text_size_xlarge"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    app:srcCompat="@drawable/readers_logo_black" />
+
+                <TextView
+                    android:id="@+id/setting_hide_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginVertical="@dimen/spacing_medium"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:text="@string/hide_setting"
+                    android:textSize="@dimen/text_size_large3"  />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorPrimaryBright5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/text_size_xlarge"
+                        android:layout_height="@dimen/text_size_xlarge"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        app:srcCompat="@drawable/readers_logo_white" />
+
+                    <TextView
+                        android:id="@+id/setting_notice_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:layout_marginVertical="@dimen/spacing_medium"
+                        android:layout_marginHorizontal="@dimen/spacing_medium"
+                        android:text="@string/notice"
+                        android:textSize="@dimen/text_size_large3"  />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/setting_notice_contents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/notice_background"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:layout_marginVertical="@dimen/spacing_medium"
+                        android:layout_marginHorizontal="@dimen/spacing_large"
+                        android:text="Readers의 회원이 되신 것을 환영합니다!\n현재는 공지할 사항이 없습니다.\n문의할 내용이 있다면 아래의 문의 버튼을 눌러 관리자에게 이메일을 보내주세요."
+                        android:textSize="@dimen/text_size_medium"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/text_size_xlarge"
+                    android:layout_height="@dimen/text_size_xlarge"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    app:srcCompat="@drawable/readers_logo_black" />
+
+                <TextView
+                    android:id="@+id/setting_ask_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginVertical="@dimen/spacing_medium"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:text="@string/FAQ"
+                    android:textSize="@dimen/text_size_large3"  />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/text_size_xlarge"
-            android:layout_height="@dimen/text_size_xlarge"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_medium"
-            app:srcCompat="@drawable/readers_logo_black" />
-
-        <TextView
-            android:id="@+id/setting_ask_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:layout_marginVertical="@dimen/spacing_medium"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:text="@string/FAQ"
-            android:textSize="@dimen/text_size_large3"  />
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

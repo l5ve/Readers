@@ -42,7 +42,7 @@ public class Menu4Fragment extends Fragment {
             public void onClick(View view) {
                 Fragment fg = ManageLoginFragment.newInstance();
                 AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.menu4_frame, fg).addToBackStack(null).commit();
             }
         });
 
@@ -51,7 +51,7 @@ public class Menu4Fragment extends Fragment {
             public void onClick(View view) {
                 Fragment fg = ProfileFragment.newInstance();
                 AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.menu4_frame, fg).addToBackStack(null).commit();
             }
         });
 
@@ -60,7 +60,7 @@ public class Menu4Fragment extends Fragment {
             public void onClick(View view) {
                 Fragment fg = BlockFragment.newInstance();
                 AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.menu4_frame, fg).addToBackStack(null).commit();
             }
         });
 
