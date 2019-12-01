@@ -107,7 +107,7 @@ public class BookmarkListAdapter extends RecyclerView.Adapter<BookmarkListAdapte
                 if (response.code() == 200) {
                     Log.d("BookmarkListAdapter", "deleteBookmark: " + context.getString(R.string.deletebookmark_success));
                     mDataset.remove(position);
-                    notifyDataSetChanged();
+                    notifyItemRemoved(position);
                 }
                 else {
                     Log.e("BookmarkListAdapter", "deleteBookmark" + context.getString(R.string.deletebookmark_fail));

@@ -4,10 +4,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.EpisodeCard.EpisodeFragment;
+import com.capstone.readers.Menu1Fragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
 
@@ -42,28 +47,32 @@ public class ToonListAdapter extends RecyclerView.Adapter<ToonListAdapter.ViewHo
         TextView mPlatform;
         TextView mTitle;
         TextView mAuthor;
-        CardView mCardView;
+        LinearLayout mCardView;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             // 뷰 객체에 대한 참조
-            mImageView = itemView.findViewById(R.id.toon_cv_image);
-            mPlatform = itemView.findViewById(R.id.toon_cv_platform);
-            mTitle = itemView.findViewById(R.id.toon_cv_title);
-            mAuthor = itemView.findViewById(R.id.toon_cv_author);
-            mCardView = itemView.findViewById(R.id.toon_cv);
+            mImageView = (ImageView) itemView.findViewById(R.id.toon_cv_image);
+            mPlatform = (TextView) itemView.findViewById(R.id.toon_cv_platform);
+            mTitle = (TextView) itemView.findViewById(R.id.toon_cv_title);
+            mAuthor = (TextView) itemView.findViewById(R.id.toon_cv_author);
+            mCardView = (LinearLayout) itemView.findViewById(R.id.toon_cv);
 
             mCardView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    ((MyApp) context.getApplicationContext()).setDetail_page_info(mDataset.get(getAdapterPosition()));
-
-                    AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                    Fragment fg = EpisodeFragment.newInstance();
-                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        ((MyApp) context.getApplicationContext()).setDetail_page_info(mDataset.get(pos));
+                        ((MyApp) context.getApplicationContext()).setPos(pos);
+                        ((MyApp) context.getApplicationContext()).setmDataset(mDataset);
+                        ((MyApp) context.getApplicationContext()).setExistedBefore(true);
+                        AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                        Fragment fg = EpisodeFragment.newInstance();
+                        aca.getSupportFragmentManager().beginTransaction().add(R.id.frag1_big_container, fg).addToBackStack(null).commit();
+                    }
                 }
-
             });
         }
     }

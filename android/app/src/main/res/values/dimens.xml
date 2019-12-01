@@ -33,7 +33,9 @@
 
     <dimen name="text_box1">110sp</dimen>
 
-    <dimen name="sign_in_genre_buttons">20sp</dimen>
+    <dimen name="tap_height">48dp</dimen>
+
+    <dimen name="sign_in_genre_buttons">18sp</dimen>
 
     <dimen name="icon_size_small">30sp</dimen>
     <dimen name="icon_size_medium">75sp</dimen>
@@ -62,7 +64,7 @@
     <dimen name="tooncard_height">200dp</dimen>
 
     <dimen name="epicard_height">100dp</dimen>
-    <dimen name="epi_bookmark">25dp</dimen>
+    <dimen name="epi_bookmark">20dp</dimen>
 
     <dimen name="block_icon">20dp</dimen>
     <dimen name="block_card_height">220dp</dimen>

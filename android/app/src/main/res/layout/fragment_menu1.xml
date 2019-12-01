@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,6 +40,8 @@
                 android:layout_height="@dimen/search_bar_height"
                 android:layout_gravity="center"
                 android:background="@drawable/search_layout"
+                android:focusedByDefault="true"
+                android:maxLines="1"
                 android:hint="@string/search_message"
                 android:paddingHorizontal="@dimen/spacing_medium"
                 android:textSize="@dimen/text_size_medium"
@@ -66,47 +70,56 @@
 
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/first_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryBright2"
-        app:tabTextColor="@color/colorGray"
-        app:tabSelectedTextColor="@color/colorWhite"
-        app:tabIndicatorColor="@color/colorPrimaryBright2"
-        app:tabMode="fixed"
-        >
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/frag1_tab1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/list_day" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/frag1_tab2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/list_genre" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/frag1_tab3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/list_end" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/frag1_tab4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/platforms" />
-    </com.google.android.material.tabs.TabLayout>
-
     <FrameLayout
-        android:id="@+id/frag1_container"
+        android:id="@+id/frag1_big_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/first_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tap_height"
+            android:background="@color/colorPrimaryBright2"
+            app:tabTextColor="@color/colorGray"
+            app:tabSelectedTextColor="@color/colorWhite"
+            app:tabIndicatorColor="@color/colorPrimaryBright2"
+            app:tabMode="fixed"
+            >
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/frag1_tab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/list_day" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/frag1_tab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/list_genre" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/frag1_tab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/list_end" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/frag1_tab4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/platforms" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <FrameLayout
+            android:id="@+id/frag1_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/tap_height"
+            android:layout_gravity="bottom">
+
+        </FrameLayout>
     </FrameLayout>
+
 
 </LinearLayout>

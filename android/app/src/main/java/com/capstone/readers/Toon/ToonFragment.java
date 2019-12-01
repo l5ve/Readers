@@ -146,6 +146,7 @@ public class ToonFragment extends Fragment {
     /* RecyclerView adapter 지정 */
     public void setAdapter() {
         mAdapter = new ToonListAdapter(getContext(), myDataset);
+        ((MyApp) getContext().getApplicationContext()).setGlobalTLA(mAdapter);
         mRecyclerView.setAdapter(mAdapter);
     }
 

@@ -64,7 +64,7 @@ public class DescSearchListAdapter extends RecyclerView.Adapter<DescSearchListAd
 
                     AppCompatActivity aca = (AppCompatActivity) v.getContext();
                     Fragment fg = EpisodeFragment.newInstance();
-                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_container, fg).addToBackStack(null).commit();
+                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.frag1_big_container, fg).addToBackStack(null).commit();
                 }
             });
 

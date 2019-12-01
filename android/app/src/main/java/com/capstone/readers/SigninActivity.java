@@ -110,28 +110,39 @@ public class SigninActivity extends AppCompatActivity {
         if (pwd.isEmpty()) {
             MyToast.s(getApplicationContext(), R.string.login_warning);
             cancel = true;
+            return;
         } else if(!isPasswordValid(pwd)) {
             MyToast.s(getApplicationContext(), R.string.pwd_length_warning);
             cancel = true;
+            return;
         } else if(!isPasswordConsistent(pwd, pwd_ver)) {
             MyToast.s(getApplicationContext(),  R.string.different_pw);
             cancel = true;
+            return;
         }
 
         // ID 유효성 검사
         if (id.isEmpty()) {
             MyToast.s(getApplicationContext(), R.string.login_warning);
             cancel = true;
+            return;
         } else if(!isIdValid(id)) {
             MyToast.s(getApplicationContext(), R.string.id_length_warning);
             cancel = true;
+            return;
         }
 
+        if (name.equals("")) {
+            MyToast.s(getApplicationContext(), R.string.nickname_length_warning);
+            cancel = true;
+            return;
+        }
 
         // 닉네임 유효성 검사
         if (name.isEmpty()) {
             MyToast.s(getApplicationContext(), R.string.nickname_warning);
             cancel = true;
+            return;
         }
 
 
@@ -146,6 +157,7 @@ public class SigninActivity extends AppCompatActivity {
         if (num < 3) {
             MyToast.s(getApplicationContext(), getResources().getString(R.string.select_notice));
             cancel = true;
+            return;
         }
 
         if (!cancel) {
@@ -221,11 +233,11 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private boolean isIdValid(String id) {
-        return id.length() >= 5;
+        return id.length() > 5;
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() >= 5;
+        return password.length() > 5;
     }
 
     private boolean isPasswordConsistent(String pw, String pw_ver) {

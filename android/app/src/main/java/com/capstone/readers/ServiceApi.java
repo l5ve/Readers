@@ -8,6 +8,8 @@ import com.capstone.readers.Recommend.RecommendCard;
 import com.capstone.readers.Search.DescSearchCard;
 import com.capstone.readers.Search.SearchCard;
 import com.capstone.readers.Toon.ToonCard;
+import com.capstone.readers.item.ChangeNameData;
+import com.capstone.readers.item.ChangePwData;
 import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.GenreWeightData;
 import com.capstone.readers.item.JoinData;
@@ -30,6 +32,7 @@ import com.capstone.readers.item.getGenreToonData;
 
 import java.util.ArrayList;
 
+import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -140,8 +143,14 @@ public interface ServiceApi {
 //    @POST("/users/num")
 //    Call<ArrayList<MypageResponse>> getMypageData(@Body UserIdData data);
 
-    /* 숨김(차단) */
+    /* 설정페이지 프로필 수정 */
+    @POST("/user/changepw")
+    Call<Response> changePassword(@Body ChangePwData data);
+
+    @POST("/user/changename")
+    Call<Response> changeNickname(@Body ChangeNameData data);
+
+    /* 설정페이지 숨김(차단) */
     @POST("/block/list")
     Call<ArrayList<BlockCard>> getBlockList(@Body UserIdData data);
-
 }

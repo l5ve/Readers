@@ -110,7 +110,8 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
                 if (response.code() == 200) {
                     Log.d("EpisodeListAdapter", "addBookmark: " + context.getString(R.string.addbookmark_success));
                     mDataset.get(position).setIsBookmarked(1);
-                    notifyItemChanged(position);
+                    notifyDataSetChanged();
+                    //notifyItemChanged(position);
                 }
                 else {
                     Log.e("EpisodeListAdapter", "addBookmark" + context.getString(R.string.addbookmark_fail));
@@ -135,7 +136,8 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
                 if (response.code() == 200) {
                     Log.d("EpisodeListAdapter", "deleteBookmark: " + context.getString(R.string.deletebookmark_success));
                     mDataset.get(position).setIsBookmarked(0);
-                    notifyItemChanged(position);
+                    notifyDataSetChanged();
+                    //notifyItemChanged(position);
                 }
                 else {
                     Log.e("EpisodeListAdapter", "deleteBookmark" + context.getString(R.string.deletebookmark_fail));
@@ -164,6 +166,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
     // onBindViewHolder() position에 해당하는 데이터의 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(EpisodeListAdapter.ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
         final EpisodeCard item = mDataset.get(position);
         final int pos = position;
         Thread mThread = new Thread(){
@@ -198,11 +201,11 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
             e.printStackTrace();
         }
 
-        holder.mTitle.setText(mDataset.get(position).getEpi_title());
-        holder.mUpdate.setText(mDataset.get(position).getEpi_date());
-        if (mDataset.get(position).getIsBookmarked() == 1) {
+        if (mDataset.get(holder.getAdapterPosition()).getIsBookmarked() == 1) {
             holder.mBookmark.setImageResource(R.drawable.bookmarked);
         }
+        holder.mTitle.setText(mDataset.get(position).getEpi_title());
+        holder.mUpdate.setText(mDataset.get(position).getEpi_date());
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
     }

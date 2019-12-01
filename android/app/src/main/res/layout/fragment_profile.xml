@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrayBright">
+
+    <TextView
+        android:id="@+id/profile_change_pw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryBright2"
+        android:padding="@dimen/spacing_small2"
+        android:textSize="@dimen/text_size_large2"
+        android:textColor="@color/colorWhite"
+        android:text="@string/change_pw" />
+
+    <LinearLayout
+        android:id="@+id/profile_pw_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryBright5">
+
+        <EditText
+            android:id="@+id/profile_current_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:ems="10"
+            android:hint="@string/current_pw"
+            android:textSize="@dimen/text_size_medium"
+            android:background="@drawable/input_layout"
+            android:padding="@dimen/spacing_small2" />
+
+        <EditText
+            android:id="@+id/profile_new_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:ems="10"
+            android:hint="@string/new_pw"
+            android:textSize="@dimen/text_size_medium"
+            android:background="@drawable/input_layout"
+            android:padding="@dimen/spacing_small2"/>
+
+        <EditText
+            android:id="@+id/profile_new_pw_ver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:ems="10"
+            android:hint="@string/new_pw_ver"
+            android:textSize="@dimen/text_size_medium"
+            android:background="@drawable/input_layout"
+            android:padding="@dimen/spacing_small2"/>
+
+        <Button
+            android:id="@+id/profile_change_pw_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:background="@drawable/taste_button_clicked"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/colorBlack"
+            android:text="@string/change_pw_btn" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/profile_change_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryBright2"
+        android:padding="@dimen/spacing_small2"
+        android:textSize="@dimen/text_size_large2"
+        android:textColor="@color/colorWhite"
+        android:text="@string/change_nickname" />
+
+
+    <LinearLayout
+        android:id="@+id/profile_nickname_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryBright5">
+
+        <EditText
+            android:id="@+id/profile_nickname_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:ems="10"
+            android:hint="@string/new_nickname"
+            android:textSize="@dimen/text_size_medium"
+            android:background="@drawable/input_layout"
+            android:padding="@dimen/spacing_small2" />
+
+        <Button
+            android:id="@+id/profile_change_nickname_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:background="@drawable/taste_button_clicked"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/colorBlack"
+            android:text="@string/change_nickname_btn" />
+    </LinearLayout>
+</LinearLayout>

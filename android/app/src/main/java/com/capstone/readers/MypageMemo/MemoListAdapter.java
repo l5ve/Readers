@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.capstone.readers.EpisodeCard.EpisodeFragment;
 import com.capstone.readers.MyApp;
 import com.capstone.readers.R;
+import com.capstone.readers.RetrofitClient;
+import com.capstone.readers.ServiceApi;
 import com.capstone.readers.Toon.ToonCard;
+import com.capstone.readers.item.UserToonData;
+import com.capstone.readers.lib.MyToast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +34,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 // 메모 리스트의 메모를 처리하는 어댑터
 public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHolder> {
     final boolean OrderNew = true;
@@ -35,6 +46,7 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
     Context context;
     private List<MemoCard> mDataset;
     private Bitmap bitmap;
+    private ServiceApi service;
 
     // 생성자에서 데이터 리스트 객체를 전달받음
     public MemoListAdapter(Context context, ArrayList<MemoCard> Dataset) {
@@ -50,18 +62,20 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
         TextView mMemo;
         TextView mUpdate;
         CardView mCardView;
+        ImageButton mDelete;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             // 뷰 객체에 대한 참조
-            mImageView = itemView.findViewById(R.id.memo_cv_image);
-            mPlatform = itemView.findViewById(R.id.memo_cv_platform);
-            mTitle = itemView.findViewById(R.id.memo_cv_title);
-            mAuthor = itemView.findViewById(R.id.memo_cv_author);
-            mMemo = itemView.findViewById(R.id.memo_cv_text);
-            mUpdate = itemView.findViewById(R.id.memo_cv_update);
-            mCardView = itemView.findViewById(R.id.memo_cv);
+            mImageView = (ImageView) itemView.findViewById(R.id.memo_cv_image);
+            mPlatform = (TextView) itemView.findViewById(R.id.memo_cv_platform);
+            mTitle = (TextView) itemView.findViewById(R.id.memo_cv_title);
+            mAuthor = (TextView) itemView.findViewById(R.id.memo_cv_author);
+            mMemo = (TextView) itemView.findViewById(R.id.memo_cv_text);
+            mUpdate = (TextView) itemView.findViewById(R.id.memo_cv_update);
+            mCardView = (CardView) itemView.findViewById(R.id.memo_cv);
+            mDelete = (ImageButton) itemView.findViewById(R.id.memo_cv_delete);
 
             mCardView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -75,7 +89,42 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
                     aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
                 }
             });
+
+            mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        deleteMemo(mDataset.get(pos).getToon_id(), pos);
+                    }
+                }
+            });
         }
+    }
+
+
+    public void deleteMemo(String toon_id, final int position) {
+        String user_id = ((MyApp) context.getApplicationContext()).getUser_id();
+        UserToonData utdata = new UserToonData(user_id, toon_id);
+        service.deleteMemo(utdata).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Log.d("MemoListAdapter", "deleteMemo: " + context.getResources().getString(R.string.memo_delete_success));
+                    mDataset.remove(position);
+                    notifyItemRemoved(position);
+                } else {
+                    Log.e("MemoListAdapter", "deleteMemo: " + context.getResources().getString(R.string.memo_delete_fail));
+                    MyToast.s(context, context.getResources().getString(R.string.memo_delete_fail));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("MemoListAdapter", "deleteMemo: " + context.getResources().getString(R.string.server_error));
+                MyToast.s(context, context.getResources().getString(R.string.server_error));
+            }
+        });
     }
 
     // onCreateViewHolder() 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴
@@ -173,6 +222,7 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
                 holder.mPlatform.setText(Html.fromHtml(context.getResources().getString(R.string.peanutoon_colored)));
                 break;
         }
+        service = RetrofitClient.getClient().create(ServiceApi.class);
     }
 
     // getItemCount() 전체 데이터 갯수 리턴

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -85,6 +86,8 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        getTitleSearchResult();
+
         return fv;
     }
 
@@ -105,7 +108,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<SearchCard>> call, Response<ArrayList<SearchCard>> response) {
                 myDataset = response.body();
-                mTextView.setText(getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
+                mTextView.setText(getResources().getString(R.string.search_title) + " " + getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
                 setAdapter();
             }
 
@@ -122,7 +125,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<SearchCard>> call, Response<ArrayList<SearchCard>> response) {
                 myDataset = response.body();
-                mTextView.setText(getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
+                mTextView.setText(getResources().getString(R.string.search_author) + " " + getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
                 setAdapter();
             }
 
@@ -139,7 +142,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<DescSearchCard>> call, Response<ArrayList<DescSearchCard>> response) {
                 DescDataset = response.body();
-                mTextView.setText(getResources().getString(R.string.search_result) + "(" + DescDataset.size() + ")");
+                mTextView.setText(getResources().getString(R.string.search_desc) + " " + getResources().getString(R.string.search_result) + "(" + DescDataset.size() + ")");
                 setDescAdapter();
             }
 

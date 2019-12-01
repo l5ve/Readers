@@ -26,6 +26,7 @@ import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.Toon.ToonCard;
+import com.capstone.readers.Toon.ToonListAdapter;
 import com.capstone.readers.item.DetailPageResponse;
 import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.ToonGenreResponse;
@@ -39,6 +40,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -409,6 +411,14 @@ public class EpisodeFragment extends Fragment {
                     mBlockText.setTextColor(getResources().getColor(R.color.check_red));
                     mBlockImg.setImageResource(R.drawable.check_red);
                     mSubscribe.setVisibility(View.GONE);
+
+                    RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalTLA();
+                    int pos = ((MyApp) getContext().getApplicationContext()).getPos();
+                    Log.d("EpisodeFragment", "remove item " + pos + " from the adapter");
+                    List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
+                    mDataset.remove(pos);
+                    adapter.notifyItemRemoved(pos);
+
                     Log.d("EpisodeFragment", "unblock: " + getString(R.string.block_success));
                 }
                 else {
@@ -434,6 +444,16 @@ public class EpisodeFragment extends Fragment {
                     mBlockText.setTextColor(getResources().getColor(R.color.colorWhite));
                     mBlockImg.setImageResource(R.drawable.hide);
                     mSubscribe.setVisibility(View.VISIBLE);
+
+                    boolean existbefore = ((MyApp) getContext().getApplicationContext()).getExistedBefore();
+                    if (existbefore) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalTLA();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getPos();
+                        Log.d("EpisodeFragment", "add item " + pos + " to the adapter");
+                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
+                        mDataset.add(pos, info);
+                        adapter.notifyItemInserted(pos);
+                    }
                     Log.d("EpisodeFragment", "unblock: " + getString(R.string.unblock_success));
                 }
                 else {
