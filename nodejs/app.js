@@ -12,7 +12,7 @@ var app = express();
 var schedule = require('node-schedule');
 var spawn = require('child_process').spawn;
 
-var job = schedule.scheduleJob('0 30 12 * * *', function(){
+var job = schedule.scheduleJob('0 30 0 * * *', function(){
   var process1 = spawn('python3', ["./crawling/naver_end.py"]);
   var process2 = spawn('python3', ["./crawling/naver_in_series.py"]);
   var process3 = spawn('python3', ["./crawling/naver_episode.py"]);
