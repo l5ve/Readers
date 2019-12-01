@@ -79,7 +79,7 @@
     <string name="list_genre">장르별</string>
     <string name="list_end">완결</string>
     <string name="platforms">연재처</string>
-    <string name="search_message">작품명, 작가명 검색</string>
+    <string name="search_message">작품명, 작가명, 작품 설명 검색</string>
 
     <string name="naver">네이버웹툰</string>
     <string name="daum">다음웹툰</string>

@@ -2,13 +2,12 @@
 <LinearLayout
     android:id="@+id/search_cv"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginHorizontal="@dimen/spacing_small2"
-    android:layout_marginVertical="@dimen/spacing_medium"
-    android:background="@color/colorGrayBright">
+    android:layout_marginVertical="@dimen/spacing_small2"
+    android:background="@color/colorWhite">
 
     <ImageView
         android:id="@+id/search_cv_image"

@@ -38,6 +38,7 @@
                 android:layout_height="@dimen/search_bar_height"
                 android:layout_gravity="center"
                 android:background="@drawable/search_layout"
+                android:maxLines="1"
                 android:hint="@string/search_message"
                 android:paddingHorizontal="@dimen/spacing_medium"
                 android:textSize="@dimen/text_size_medium"
