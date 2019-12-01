@@ -97,10 +97,10 @@
     <string name="foxtoon">폭스툰</string>
     <string name="peanutoon">피너툰</string>
 
-    <string name="naver_colored"><![CDATA[<b><font color=#2db400>NAVER</font></b>]]></string>
-    <string name="daum_colored"><![CDATA[<b><font color=#5f8ffb>DAUM</font></b>]]></string>
+    <string name="naver_colored"><![CDATA[<b><font color=#2db400>네이버웹툰</font></b>]]></string>
+    <string name="daum_colored"><![CDATA[<b><font color=#5f8ffb>다음웹툰</font></b>]]></string>
     <string name="lezhin_colored"><![CDATA[<b><font color=#e50020>레진코믹스</font></b>]]></string>
-    <string name="mrblue_colored"><![CDATA[<b><font color=#00bce4>mrblue</font></b>]]></string>
+    <string name="mrblue_colored"><![CDATA[<b><font color=#00bce4>미스터블루</font></b>]]></string>
     <string name="bufftoon_colored"><![CDATA[<b><font color=#00c6d9>버프툰</font></b>]]></string>
     <string name="bomtoon_colored"><![CDATA[<b><font color=#ff33ac>봄툰</font></b>]]></string>
     <string name="bbuding_colored"><![CDATA[<b><font color=#ffe85a>뿌딩</font></b>]]></string>
