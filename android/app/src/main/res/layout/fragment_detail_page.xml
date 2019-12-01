@@ -85,21 +85,46 @@
                 android:layout_marginVertical="@dimen/spacing_xsmall2"
                 android:layout_marginHorizontal="@dimen/spacing_small2">
 
-                <ImageButton
-                    android:id="@+id/detail_page_memo_btn"
-                    android:layout_width="@dimen/detail_page_memo_btn"
-                    android:layout_height="@dimen/detail_page_memo_btn"
-                    android:layout_gravity="bottom"
-                    android:scaleType="fitCenter"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/memo" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="@dimen/spacing_small">
 
-                <ImageView
-                    android:id="@+id/detail_page_thumbnail"
-                    android:layout_gravity="center"
-                    android:layout_width="@dimen/cardview_big_thumbnail"
-                    android:layout_height="@dimen/cardview_big_thumbnail"
-                    android:layout_margin="@dimen/spacing_small2"/>
+                    <ImageView
+                        android:id="@+id/detail_page_thumbnail"
+                        android:layout_width="@dimen/cardview_big_thumbnail"
+                        android:layout_height="@dimen/cardview_big_thumbnail"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/spacing_small" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <ImageButton
+                            android:id="@+id/detail_page_memo_btn"
+                            android:layout_width="@dimen/detail_page_memo_btn"
+                            android:layout_height="@dimen/detail_page_memo_btn"
+                            android:layout_gravity="bottom"
+                            android:background="@android:color/transparent"
+                            android:scaleType="fitCenter"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/memo" />
+
+                        <Button
+                            android:id="@+id/detail_page_first_epi"
+                            android:layout_width="@dimen/detail_page_first_epi_btn"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/firstepi_button"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="@dimen/spacing_small"
+                            android:textSize="@dimen/text_size_xsmall2"
+                            android:text="@string/see_first_epi" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <ScrollView
                     android:layout_width="match_parent"

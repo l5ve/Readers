@@ -152,6 +152,8 @@
     <string name="search_author">작가명</string>
     <string name="search_desc">작품 설명</string>
 
+    <string name="see_first_epi">첫화보기</string>
+
 
     <!-- 2. 추천페이지 -->
     <string name="recommendation_page_top">님의 취향 저격 웹툰!</string>

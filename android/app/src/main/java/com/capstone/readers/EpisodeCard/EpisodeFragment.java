@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +28,9 @@ import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.Toon.ToonCard;
+import com.capstone.readers.WebviewFragment;
 import com.capstone.readers.item.DetailPageResponse;
+import com.capstone.readers.item.EpiUrlData;
 import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.ToonGenreResponse;
 import com.capstone.readers.item.ToonIdData;
@@ -73,6 +76,8 @@ public class EpisodeFragment extends Fragment {
     private LinearLayout mBlock;
     private TextView mBlockText;
     private ImageView mBlockImg;
+    private Button mFirstepi;
+    private String firstepi;
     private ImageButton mMemobtn;
     private LinearLayout mMemolayout;
     private EditText mEditText;
@@ -128,6 +133,7 @@ public class EpisodeFragment extends Fragment {
         mDesc = (TextView) fv.findViewById(R.id.detail_page_desc);
         mGenreLayout = (LinearLayout) fv.findViewById(R.id.detail_page_genre_layout);
 
+        mFirstepi = (Button) fv.findViewById(R.id.detail_page_first_epi);
         mMemobtn = (ImageButton) fv.findViewById(R.id.detail_page_memo_btn);
         mEditText = (EditText) fv.findViewById(R.id.detail_page_memo_input);
         mMemoSave = (Button) fv.findViewById(R.id.detail_page_memo_save);
@@ -141,6 +147,8 @@ public class EpisodeFragment extends Fragment {
         getDetailPageData();
         /* 작품 장르를 받아옴 */
         getGenres();
+        /* 작품 첫화 url을 받아옴 */
+        getFirstEpi();
 
         mSubscribe.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -156,6 +164,16 @@ public class EpisodeFragment extends Fragment {
             }
         });
 
+        /* 첫화보기 버튼 클릭 시 */
+        mFirstepi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MyApp) getActivity().getApplication()).setEpisodeUrl(firstepi);
+                AppCompatActivity aca = (AppCompatActivity) v.getContext();
+                Fragment fg = WebviewFragment.newInstance();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
+            }
+        });
 
         /* 메모 버튼 클릭 시 메모 레이아웃 여닫기 */
         mMemobtn.setOnClickListener(new View.OnClickListener(){
@@ -287,6 +305,22 @@ public class EpisodeFragment extends Fragment {
         else {
             unblock();
         }
+    }
+
+    private void getFirstEpi() {
+        ToonIdData data = new ToonIdData(info.getId());
+        service.getFirstEpiUrl(data).enqueue(new Callback<ArrayList<EpiUrlData>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EpiUrlData>> call, Response<ArrayList<EpiUrlData>> response) {
+                firstepi = response.body().get(0).getUrl();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EpiUrlData>> call, Throwable t) {
+                Log.e("EpisodeFragment", "getFirstEpi: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
+            }
+        });
     }
 
     public void getDetailPageData(){
