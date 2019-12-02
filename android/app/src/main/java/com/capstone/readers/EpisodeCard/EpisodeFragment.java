@@ -312,7 +312,9 @@ public class EpisodeFragment extends Fragment {
         service.getFirstEpiUrl(data).enqueue(new Callback<ArrayList<EpiUrlData>>() {
             @Override
             public void onResponse(Call<ArrayList<EpiUrlData>> call, Response<ArrayList<EpiUrlData>> response) {
-                firstepi = response.body().get(0).getUrl();
+                if (response.code() == 200) {
+                    firstepi = response.body().get(0).getUrl();
+                }
             }
 
             @Override
@@ -328,26 +330,28 @@ public class EpisodeFragment extends Fragment {
         service.getDetailPageData(data).enqueue(new Callback<ArrayList<DetailPageResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<DetailPageResponse>> call, Response<ArrayList<DetailPageResponse>> response) {
-                mData = response.body().get(0);
+                if (response.code() == 200) {
+                    mData = response.body().get(0);
 
-                mDesc.setText(mData.getToon_desc());
-                if(mData.getContent() != null) {
-                    isMemoOpened = true;
-                    mEditText.setText(mData.getContent());
-                    mMemolayout.setVisibility(View.VISIBLE);
-                }
+                    mDesc.setText(mData.getToon_desc());
+                    if(mData.getContent() != null) {
+                        isMemoOpened = true;
+                        mEditText.setText(mData.getContent());
+                        mMemolayout.setVisibility(View.VISIBLE);
+                    }
 
-                if ((double) mData.getSubs_flag() == 1) {
-                    isSubscribed = true;
-                    mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
-                    mSubscribeImg.setImageResource(R.drawable.check_green);
-                    mBlock.setVisibility(View.GONE);
-                }
-                if ((double) mData.getBlock_flag() == 1) {
-                    isBlocked = true;
-                    mBlockText.setTextColor(getResources().getColor(R.color.check_red));
-                    mBlockImg.setImageResource(R.drawable.check_red);
-                    mSubscribe.setVisibility(View.GONE);
+                    if ((double) mData.getSubs_flag() == 1) {
+                        isSubscribed = true;
+                        mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
+                        mSubscribeImg.setImageResource(R.drawable.check_green);
+                        mBlock.setVisibility(View.GONE);
+                    }
+                    if ((double) mData.getBlock_flag() == 1) {
+                        isBlocked = true;
+                        mBlockText.setTextColor(getResources().getColor(R.color.check_red));
+                        mBlockImg.setImageResource(R.drawable.check_red);
+                        mSubscribe.setVisibility(View.GONE);
+                    }
                 }
             }
 
