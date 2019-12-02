@@ -55,6 +55,7 @@
     <dimen name="detail_page_genre_height">30dp</dimen>
     <dimen name="detail_page_genre_text_size">12sp</dimen>
 
+    <dimen name="detail_page_bookmark">25dp</dimen>
     <dimen name="detail_page_first_epi_btn">65dp</dimen>
     <dimen name="detail_page_memo_btn">30dp</dimen>
     <dimen name="detail_page_memo_height">120dp</dimen>

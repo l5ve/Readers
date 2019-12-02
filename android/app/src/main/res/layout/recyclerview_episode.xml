@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/episode_cv_bookmark"
-                android:layout_width="@dimen/epi_bookmark"
-                android:layout_height="@dimen/epi_bookmark"
+                android:layout_width="@dimen/detail_page_bookmark"
+                android:layout_height="@dimen/detail_page_bookmark"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/spacing_small"
                 card:srcCompat="@drawable/bookmark" />

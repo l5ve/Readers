@@ -313,7 +313,9 @@ public class EpisodeFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<EpiUrlData>> call, Response<ArrayList<EpiUrlData>> response) {
                 if (response.code() == 200) {
-                    firstepi = response.body().get(0).getUrl();
+                    if (response.body().size() != 0) {
+                        firstepi = response.body().get(0).getUrl();
+                    }
                 }
             }
 

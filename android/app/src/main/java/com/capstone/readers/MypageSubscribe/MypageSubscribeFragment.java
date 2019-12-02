@@ -140,9 +140,8 @@ public class MypageSubscribeFragment extends Fragment {
         service.getSubscribeDayList(data).enqueue(new Callback<ArrayList<ToonCard>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonCard>> call, Response<ArrayList<ToonCard>> response) {
-                list = response.body();
-
-                if (response.isSuccessful() && list != null) {
+                if (response.code() == 200) {
+                    list = response.body();
                     int i;
                     for (i = 0; i < paging && i < list.size(); i++) {
                         myDataset.add(list.get(i));
@@ -165,9 +164,8 @@ public class MypageSubscribeFragment extends Fragment {
         service.getSubscribeEndList(data).enqueue(new Callback<ArrayList<ToonCard>>() {
             @Override
             public void onResponse(Call<ArrayList<ToonCard>> call, Response<ArrayList<ToonCard>> response) {
-                list = response.body();
-
-                if (response.isSuccessful() && list != null) {
+                if (response.code() == 200) {
+                    list = response.body();
                     int i;
                     for (i = 0; i < paging && i < list.size(); i++) {
                         myDataset.add(list.get(i));
