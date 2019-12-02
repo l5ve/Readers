@@ -11,6 +11,7 @@ import com.capstone.readers.Toon.ToonCard;
 import com.capstone.readers.item.ChangeNameData;
 import com.capstone.readers.item.ChangePwData;
 import com.capstone.readers.item.DetailPageResponse;
+import com.capstone.readers.item.EpiUrlData;
 import com.capstone.readers.item.GenreWeightData;
 import com.capstone.readers.item.JoinData;
 import com.capstone.readers.item.JoinResponse;
@@ -79,6 +80,9 @@ public interface ServiceApi {
 
     @POST("toon/detailgenrelist")
     Call<ArrayList<ToonGenreResponse>> getDetailGenres(@Body ToonIdData data);
+
+    @POST("/toon/firstepi")
+    Call<ArrayList<EpiUrlData>> getFirstEpiUrl(@Body ToonIdData data);
 
     /* 에피소드 리스트 */
     @POST("toon/episodelist")

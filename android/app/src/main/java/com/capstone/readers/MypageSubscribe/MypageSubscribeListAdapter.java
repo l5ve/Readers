@@ -59,11 +59,16 @@ public class MypageSubscribeListAdapter extends RecyclerView.Adapter<MypageSubsc
             mCardView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    ((MyApp) context.getApplicationContext()).setDetail_page_info(mDataset.get(getAdapterPosition()));
-
-                    AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                    Fragment fg = EpisodeFragment.newInstance();
-                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        ((MyApp) context.getApplicationContext()).setFromMypage(true);
+                        ((MyApp) context.getApplicationContext()).setDetail_page_info(mDataset.get(pos));
+                        ((MyApp) context.getApplicationContext()).setMypagePos(pos);
+                        ((MyApp) context.getApplicationContext()).setMypageDataset(mDataset);
+                        AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                        Fragment fg = EpisodeFragment.newInstance();
+                        aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
+                    }
                 }
 
             });

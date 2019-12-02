@@ -59,6 +59,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                     SearchCard s = mDataset.get(getAdapterPosition());
                     ToonCard data = new ToonCard(s.getToon_id(), s.getTitle(), s.getPlatform(), s.getAuthor(), s.getThumbnail(), "");
                     ((MyApp) context.getApplicationContext()).setDetail_page_info(data);
+                    ((MyApp) context.getApplicationContext()).setFromOthers();
 
                     AppCompatActivity aca = (AppCompatActivity) v.getContext();
                     Fragment fg = EpisodeFragment.newInstance();

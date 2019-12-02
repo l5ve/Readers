@@ -65,9 +65,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        /* 회원가입 액티비티로 이동 */
         sign_up_Btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                ((MyApp) getApplicationContext()).initialize();
                 Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_SIGNIN);
             }

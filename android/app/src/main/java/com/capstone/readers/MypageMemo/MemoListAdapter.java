@@ -80,13 +80,19 @@ public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.ViewHo
             mCardView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    MemoCard temp = mDataset.get(getAdapterPosition());
-                    ToonCard data = new ToonCard(temp.getToon_id(), temp.getTitle(), temp.getPlatform(), temp.getAuthor(), temp.getThumbnail(), temp.getMemo_date());
-                    ((MyApp) context.getApplicationContext()).setDetail_page_info(data);
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        MemoCard temp = mDataset.get(pos);
+                        ToonCard data = new ToonCard(temp.getToon_id(), temp.getTitle(), temp.getPlatform(), temp.getAuthor(), temp.getThumbnail(), "");
 
-                    AppCompatActivity aca = (AppCompatActivity) view.getContext();
-                    Fragment fg = EpisodeFragment.newInstance();
-                    aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
+                        ((MyApp) context.getApplicationContext()).setFromMemo(true);
+                        ((MyApp) context.getApplicationContext()).setDetail_page_info(data);
+                        ((MyApp) context.getApplicationContext()).setMemoPos(pos);
+                        ((MyApp) context.getApplicationContext()).setMemoDataset(mDataset);
+                        AppCompatActivity aca = (AppCompatActivity) view.getContext();
+                        Fragment fg = EpisodeFragment.newInstance();
+                        aca.getSupportFragmentManager().beginTransaction().replace(R.id.mypage_fragment, fg).addToBackStack(null).commit();
+                    }
                 }
             });
 

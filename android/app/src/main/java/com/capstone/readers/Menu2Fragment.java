@@ -228,6 +228,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
             public void onClick(View view) {
                 detialPageInfo = new ToonCard(mRec.get(0).getId(), mRec.get(0).getTitle(), mRec.get(0).getPlatform(), mRec.get(0).getAuthor(), mRec.get(0).getThumbnail(), "");
                 ((MyApp) getActivity().getApplication()).setDetail_page_info(detialPageInfo);
+                ((MyApp) getActivity().getApplication()).setFromOthers();
 
                 AppCompatActivity aca = (AppCompatActivity) view.getContext();
                 Fragment fg = EpisodeFragment.newInstance();
@@ -246,6 +247,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
             public void onClick(View view) {
                 detialPageInfo = new ToonCard(mRec.get(1).getId(), mRec.get(1).getTitle(), mRec.get(1).getPlatform(), mRec.get(1).getAuthor(), mRec.get(1).getThumbnail(), "");
                 ((MyApp) getActivity().getApplication()).setDetail_page_info(detialPageInfo);
+                ((MyApp) getActivity().getApplication()).setFromOthers();
 
                 AppCompatActivity aca = (AppCompatActivity) view.getContext();
                 Fragment fg = EpisodeFragment.newInstance();
@@ -264,6 +266,7 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
             public void onClick(View view) {
                 detialPageInfo = new ToonCard(mRec.get(2).getId(), mRec.get(2).getTitle(), mRec.get(2).getPlatform(), mRec.get(2).getAuthor(), mRec.get(2).getThumbnail(), "");
                 ((MyApp) getActivity().getApplication()).setDetail_page_info(detialPageInfo);
+                ((MyApp) getActivity().getApplication()).setFromOthers();
 
                 AppCompatActivity aca = (AppCompatActivity) view.getContext();
                 Fragment fg = EpisodeFragment.newInstance();

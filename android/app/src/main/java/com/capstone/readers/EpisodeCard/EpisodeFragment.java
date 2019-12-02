@@ -17,17 +17,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.readers.MyApp;
+import com.capstone.readers.MypageMemo.MemoCard;
 import com.capstone.readers.R;
 import com.capstone.readers.RetrofitClient;
 import com.capstone.readers.ServiceApi;
 import com.capstone.readers.Toon.ToonCard;
-import com.capstone.readers.Toon.ToonListAdapter;
+import com.capstone.readers.WebviewFragment;
 import com.capstone.readers.item.DetailPageResponse;
+import com.capstone.readers.item.EpiUrlData;
 import com.capstone.readers.item.MemoSaveData;
 import com.capstone.readers.item.ToonGenreResponse;
 import com.capstone.readers.item.ToonIdData;
@@ -39,7 +42,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -69,6 +76,8 @@ public class EpisodeFragment extends Fragment {
     private LinearLayout mBlock;
     private TextView mBlockText;
     private ImageView mBlockImg;
+    private Button mFirstepi;
+    private String firstepi;
     private ImageButton mMemobtn;
     private LinearLayout mMemolayout;
     private EditText mEditText;
@@ -124,6 +133,7 @@ public class EpisodeFragment extends Fragment {
         mDesc = (TextView) fv.findViewById(R.id.detail_page_desc);
         mGenreLayout = (LinearLayout) fv.findViewById(R.id.detail_page_genre_layout);
 
+        mFirstepi = (Button) fv.findViewById(R.id.detail_page_first_epi);
         mMemobtn = (ImageButton) fv.findViewById(R.id.detail_page_memo_btn);
         mEditText = (EditText) fv.findViewById(R.id.detail_page_memo_input);
         mMemoSave = (Button) fv.findViewById(R.id.detail_page_memo_save);
@@ -137,6 +147,8 @@ public class EpisodeFragment extends Fragment {
         getDetailPageData();
         /* 작품 장르를 받아옴 */
         getGenres();
+        /* 작품 첫화 url을 받아옴 */
+        getFirstEpi();
 
         mSubscribe.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -152,6 +164,16 @@ public class EpisodeFragment extends Fragment {
             }
         });
 
+        /* 첫화보기 버튼 클릭 시 */
+        mFirstepi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MyApp) getActivity().getApplication()).setEpisodeUrl(firstepi);
+                AppCompatActivity aca = (AppCompatActivity) v.getContext();
+                Fragment fg = WebviewFragment.newInstance();
+                aca.getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fg).addToBackStack(null).commit();
+            }
+        });
 
         /* 메모 버튼 클릭 시 메모 레이아웃 여닫기 */
         mMemobtn.setOnClickListener(new View.OnClickListener(){
@@ -285,31 +307,51 @@ public class EpisodeFragment extends Fragment {
         }
     }
 
+    private void getFirstEpi() {
+        ToonIdData data = new ToonIdData(info.getId());
+        service.getFirstEpiUrl(data).enqueue(new Callback<ArrayList<EpiUrlData>>() {
+            @Override
+            public void onResponse(Call<ArrayList<EpiUrlData>> call, Response<ArrayList<EpiUrlData>> response) {
+                if (response.code() == 200) {
+                    firstepi = response.body().get(0).getUrl();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<EpiUrlData>> call, Throwable t) {
+                Log.e("EpisodeFragment", "getFirstEpi: " + getString(R.string.server_error));
+                MyToast.s(getContext(), getString(R.string.server_error));
+            }
+        });
+    }
+
     public void getDetailPageData(){
         UserToonData data = new UserToonData(user_id, info.getId());
         service.getDetailPageData(data).enqueue(new Callback<ArrayList<DetailPageResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<DetailPageResponse>> call, Response<ArrayList<DetailPageResponse>> response) {
-                mData = response.body().get(0);
+                if (response.code() == 200) {
+                    mData = response.body().get(0);
 
-                mDesc.setText(mData.getToon_desc());
-                if(mData.getContent() != null) {
-                    isMemoOpened = true;
-                    mEditText.setText(mData.getContent());
-                    mMemolayout.setVisibility(View.VISIBLE);
-                }
+                    mDesc.setText(mData.getToon_desc());
+                    if(mData.getContent() != null) {
+                        isMemoOpened = true;
+                        mEditText.setText(mData.getContent());
+                        mMemolayout.setVisibility(View.VISIBLE);
+                    }
 
-                if ((double) mData.getSubs_flag() == 1) {
-                    isSubscribed = true;
-                    mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
-                    mSubscribeImg.setImageResource(R.drawable.check_green);
-                    mBlock.setVisibility(View.GONE);
-                }
-                if ((double) mData.getBlock_flag() == 1) {
-                    isBlocked = true;
-                    mBlockText.setTextColor(getResources().getColor(R.color.check_red));
-                    mBlockImg.setImageResource(R.drawable.check_red);
-                    mSubscribe.setVisibility(View.GONE);
+                    if ((double) mData.getSubs_flag() == 1) {
+                        isSubscribed = true;
+                        mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
+                        mSubscribeImg.setImageResource(R.drawable.check_green);
+                        mBlock.setVisibility(View.GONE);
+                    }
+                    if ((double) mData.getBlock_flag() == 1) {
+                        isBlocked = true;
+                        mBlockText.setTextColor(getResources().getColor(R.color.check_red));
+                        mBlockImg.setImageResource(R.drawable.check_red);
+                        mSubscribe.setVisibility(View.GONE);
+                    }
                 }
             }
 
@@ -360,6 +402,18 @@ public class EpisodeFragment extends Fragment {
                     mSubscribeText.setTextColor(getResources().getColor(R.color.check_green));
                     mSubscribeImg.setImageResource(R.drawable.check_green);
                     mBlock.setVisibility(View.GONE);
+
+                    /* 마이페이지 구독화면에서 넘어온 경우 구독 해제 했다가 다시 구독 시 해당 웹툰을 목록에 추가 */
+                    boolean fromMypage = ((MyApp) getContext().getApplicationContext()).getFromMypage();
+                    if (fromMypage) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getMypagePos();
+                        Log.d("EpisodeFragment", "add item " + pos + " to the adapter");
+                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getMypageDataset();
+                        mDataset.add(pos, info);
+                        adapter.notifyItemInserted(pos);
+                    }
+
                     Log.d("EpisodeFragment", "subscribe: " + getString(R.string.subs_success));
                 }
                 else {
@@ -385,6 +439,18 @@ public class EpisodeFragment extends Fragment {
                     mSubscribeText.setTextColor(getResources().getColor(R.color.colorWhite));
                     mSubscribeImg.setImageResource(R.drawable.add);
                     mBlock.setVisibility(View.VISIBLE);
+
+                    /* 마이페이지 구독화면에서 넘어온 경우 구독 해제 시 해당 웹툰을 목록에서 삭제 */
+                    boolean fromMypage = ((MyApp) getContext().getApplicationContext()).getFromMypage();
+                    if (fromMypage) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getMypagePos();
+                        Log.d("EpisodeFragment", "unsubscribe: remove item " + pos + " from the adapter");
+                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getMypageDataset();
+                        mDataset.remove(pos);
+                        adapter.notifyItemRemoved(pos);
+                    }
+
                     Log.d("EpisodeFragment", "unsubscribe: " + getString(R.string.unsubs_success));
 
                 }
@@ -412,12 +478,16 @@ public class EpisodeFragment extends Fragment {
                     mBlockImg.setImageResource(R.drawable.check_red);
                     mSubscribe.setVisibility(View.GONE);
 
-                    RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalTLA();
-                    int pos = ((MyApp) getContext().getApplicationContext()).getPos();
-                    Log.d("EpisodeFragment", "remove item " + pos + " from the adapter");
-                    List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
-                    mDataset.remove(pos);
-                    adapter.notifyItemRemoved(pos);
+                    /* 홈 화면 (요일별/장르별/완결)에서 넘어온 경우 숨김 시 해당 웹툰을 목록에서 삭제 */
+                    boolean fromHomeTab = ((MyApp) getContext().getApplicationContext()).getFromHomeTab();
+                    if (fromHomeTab) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getPos();
+                        Log.d("EpisodeFragment", "remove item " + pos + " from the adapter");
+                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
+                        mDataset.remove(pos);
+                        adapter.notifyItemRemoved(pos);
+                    }
 
                     Log.d("EpisodeFragment", "unblock: " + getString(R.string.block_success));
                 }
@@ -445,14 +515,18 @@ public class EpisodeFragment extends Fragment {
                     mBlockImg.setImageResource(R.drawable.hide);
                     mSubscribe.setVisibility(View.VISIBLE);
 
-                    boolean existbefore = ((MyApp) getContext().getApplicationContext()).getExistedBefore();
-                    if (existbefore) {
-                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalTLA();
-                        int pos = ((MyApp) getContext().getApplicationContext()).getPos();
-                        Log.d("EpisodeFragment", "add item " + pos + " to the adapter");
-                        List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
-                        mDataset.add(pos, info);
-                        adapter.notifyItemInserted(pos);
+                    /* 홈 화면 (요일별/장르별/완결)에서 넘어온 경우 숨김했다가 숨김 해제 시 해당 웹툰을 목록에 추가*/
+                    boolean fromHomeTab = ((MyApp) getContext().getApplicationContext()).getFromHomeTab();
+                    if (fromHomeTab) {
+                        boolean existbefore = ((MyApp) getContext().getApplicationContext()).getExistedBefore();
+                        if (existbefore) {
+                            RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                            int pos = ((MyApp) getContext().getApplicationContext()).getPos();
+                            Log.d("EpisodeFragment", "add item " + pos + " to the adapter");
+                            List<ToonCard> mDataset = ((MyApp) getContext().getApplicationContext()).getmDataset();
+                            mDataset.add(pos, info);
+                            adapter.notifyItemInserted(pos);
+                        }
                     }
                     Log.d("EpisodeFragment", "unblock: " + getString(R.string.unblock_success));
                 }
@@ -503,6 +577,25 @@ public class EpisodeFragment extends Fragment {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
                     Log.d("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_success));
+
+                    /* 마이페이지 메모화면에서 넘어온 경우 saveMemo()를 호출한 것은 메모를 수정한 것이므로 메모 내용 업데이트 */
+                    boolean fromMemo = ((MyApp) getContext().getApplicationContext()).getFromMemo();
+                    if (fromMemo) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        String temp = sdf.format(Calendar.getInstance().getTime());
+                        Timestamp today = Timestamp.valueOf(temp);
+                        String memo = mEditText.getText().toString();
+                        MemoCard data = new MemoCard(info.getId(), info.getThumbnail(), info.getPlatform(), info.getTitle(), info.getAuthor(), memo, today);
+
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getMemoPos();
+                        Log.d("EpisodeFragment", "deletememo: remove item " + pos + " from the adapter");
+                        List<MemoCard> mDataset = ((MyApp) getContext().getApplicationContext()).getMemoDataset();
+                        mDataset.remove(pos);
+                        mDataset.add(pos, data);
+                        adapter.notifyItemChanged(pos);
+                    }
+
                     MyToast.s(getContext(), getString(R.string.memo_save_success));
                 } else {
                     Log.e("EpisodeFragment", "saveMemo: " + getString(R.string.memo_save_fail));
@@ -527,6 +620,18 @@ public class EpisodeFragment extends Fragment {
                     isMemoOpened = !isMemoOpened;
                     mMemolayout.setVisibility(View.GONE);
                     Log.d("EpisodeFragment", "deleteMemo: " + getString(R.string.memo_delete_success));
+
+                    /* 마이페이지 메모화면에서 넘어온 경우 해당 메모를 삭제하면 마이페이지 메모 목록에서도 삭제 */
+                    boolean fromMemo = ((MyApp) getContext().getApplicationContext()).getFromMemo();
+                    if (fromMemo) {
+                        RecyclerView.Adapter adapter = ((MyApp) getContext().getApplicationContext()).getGlobalAdapter();
+                        int pos = ((MyApp) getContext().getApplicationContext()).getMemoPos();
+                        Log.d("EpisodeFragment", "deletememo: remove item " + pos + " from the adapter");
+                        List<MemoCard> mDataset = ((MyApp) getContext().getApplicationContext()).getMemoDataset();
+                        mDataset.remove(pos);
+                        adapter.notifyItemRemoved(pos);
+                    }
+
                     MyToast.s(getContext(), getString(R.string.memo_delete_success));
                 } else {
                     Log.e("EpisodeFragment", "deleteMemo: " + getString(R.string.memo_delete_fail));

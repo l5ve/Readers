@@ -91,6 +91,7 @@ public class MemoFragment extends Fragment {
 
     public void setAdapter() {
         mAdapter = new MemoListAdapter(getContext(), myDataset);
+        ((MyApp) getContext().getApplicationContext()).setGlobalAdapter(mAdapter);
         mRecyclerView.setAdapter(mAdapter);
     }
 
