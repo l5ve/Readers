@@ -73,13 +73,15 @@ public class BlockFragment extends Fragment {
         service.getBlockList(data).enqueue(new Callback<ArrayList<BlockCard>>() {
             @Override
             public void onResponse(Call<ArrayList<BlockCard>> call, Response<ArrayList<BlockCard>> response) {
-                list = response.body();
+                if (response.code() == 200) {
+                    list = response.body();
 
-                for (int i = 0; i < list.size(); i++) {
-                    myDataset.add(list.get(i));
+                    for (int i = 0; i < list.size(); i++) {
+                        myDataset.add(list.get(i));
+                    }
+
+                    setAdapter();
                 }
-
-                setAdapter();
             }
 
             @Override

@@ -100,9 +100,11 @@ public class MemoFragment extends Fragment {
         service.getMemoList(data).enqueue(new Callback<ArrayList<MemoCard>>() {
             @Override
             public void onResponse(Call<ArrayList<MemoCard>> call, Response<ArrayList<MemoCard>> response) {
-                myDataset = response.body();
+                if (response.code() == 200) {
+                    myDataset = response.body();
 
-                setAdapter();
+                    setAdapter();
+                }
             }
 
             @Override

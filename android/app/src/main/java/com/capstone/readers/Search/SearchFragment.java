@@ -107,9 +107,11 @@ public class SearchFragment extends Fragment {
         service.getTitleSearchResult(data).enqueue(new Callback<ArrayList<SearchCard>>() {
             @Override
             public void onResponse(Call<ArrayList<SearchCard>> call, Response<ArrayList<SearchCard>> response) {
-                myDataset = response.body();
-                mTextView.setText(getResources().getString(R.string.search_title) + " " + getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
-                setAdapter();
+                if (response.code() == 200) {
+                    myDataset = response.body();
+                    mTextView.setText(getResources().getString(R.string.search_title) + " " + getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
+                    setAdapter();
+                }
             }
 
             @Override
@@ -124,9 +126,11 @@ public class SearchFragment extends Fragment {
         service.getAuthorSearchResult(data).enqueue(new Callback<ArrayList<SearchCard>>() {
             @Override
             public void onResponse(Call<ArrayList<SearchCard>> call, Response<ArrayList<SearchCard>> response) {
-                myDataset = response.body();
-                mTextView.setText(getResources().getString(R.string.search_author) + " " + getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
-                setAdapter();
+                if (response.code() == 200) {
+                    myDataset = response.body();
+                    mTextView.setText(getResources().getString(R.string.search_author) + " " + getResources().getString(R.string.search_result) + "(" + myDataset.size() + ")");
+                    setAdapter();
+                }
             }
 
             @Override
@@ -141,9 +145,11 @@ public class SearchFragment extends Fragment {
         service.getDescSearchResult(data).enqueue(new Callback<ArrayList<DescSearchCard>>() {
             @Override
             public void onResponse(Call<ArrayList<DescSearchCard>> call, Response<ArrayList<DescSearchCard>> response) {
-                DescDataset = response.body();
-                mTextView.setText(getResources().getString(R.string.search_desc) + " " + getResources().getString(R.string.search_result) + "(" + DescDataset.size() + ")");
-                setDescAdapter();
+                if (response.code() == 200) {
+                    DescDataset = response.body();
+                    mTextView.setText(getResources().getString(R.string.search_desc) + " " + getResources().getString(R.string.search_result) + "(" + DescDataset.size() + ")");
+                    setDescAdapter();
+                }
             }
 
             @Override

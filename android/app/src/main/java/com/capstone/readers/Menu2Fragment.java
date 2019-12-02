@@ -179,14 +179,16 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         service.getGenreWeight(uid).enqueue(new Callback<ArrayList<GenreWeightData>>() {
             @Override
             public void onResponse(Call<ArrayList<GenreWeightData>> call, Response<ArrayList<GenreWeightData>> response) {
-                temp = response.body();
+                if (response.code() == 200) {
+                    temp = response.body();
 
-                for (int i = 0; i < temp.size(); i++) {
-                    mGenreWeight.add(temp.get(temp.size() - 1 - i));
-                    Log.d("Menu2Fragment", "mGenreWeight " + i + mGenreWeight.get(i).getGenre_name() + mGenreWeight.get(i).getWeight());
+                    for (int i = 0; i < temp.size(); i++) {
+                        mGenreWeight.add(temp.get(temp.size() - 1 - i));
+                        Log.d("Menu2Fragment", "mGenreWeight " + i + mGenreWeight.get(i).getGenre_name() + mGenreWeight.get(i).getWeight());
+                    }
+                    // 가중치를 토대로 그래프 그리기
+                    setChart();
                 }
-                // 가중치를 토대로 그래프 그리기
-                setChart();
             }
 
             @Override
@@ -202,10 +204,12 @@ public class Menu2Fragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         service.getRecommendations(uid).enqueue(new Callback<ArrayList<RecommendCard>>() {
             @Override
             public void onResponse(Call<ArrayList<RecommendCard>> call, Response<ArrayList<RecommendCard>> response) {
-                mRec = response.body();
+                if (response.code() == 200) {
+                    mRec = response.body();
 
-                // 추천 받은 작품 레이아웃 설정
-                setRecommendations();
+                    // 추천 받은 작품 레이아웃 설정
+                    setRecommendations();
+                }
             }
 
             @Override

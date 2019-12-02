@@ -100,9 +100,11 @@ public class BookmarkFragment extends Fragment {
         service.getBookmarkList(data).enqueue(new Callback<ArrayList<BookmarkCard>>() {
             @Override
             public void onResponse(Call<ArrayList<BookmarkCard>> call, Response<ArrayList<BookmarkCard>> response) {
-                myDataset = response.body();
+                if (response.code() == 200) {
+                    myDataset = response.body();
 
-                setAdapter();
+                    setAdapter();
+                }
             }
 
             @Override

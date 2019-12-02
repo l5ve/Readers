@@ -295,7 +295,7 @@ public class ManageLoginFragment extends Fragment {
 
 
         Switch switch_toomics = (Switch) fv.findViewById(R.id.switch_toomics);
-        switch_toomics.setChecked(((MyApp) getActivity().getApplication()).isLogin_naver());
+        switch_toomics.setChecked(((MyApp) getActivity().getApplication()).isLogin_toomics());
         switch_toomics.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
