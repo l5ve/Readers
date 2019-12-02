@@ -97,7 +97,7 @@ public class MyApp extends Application {
     }
 
     public void initialize(){
-        savedData = false;
+        setSavedData(false);
         SharedPreferences.Editor editor = appData.edit();
         editor.putBoolean("SAVE_LOGIN_DATA", false);
         editor.putBoolean("login_naver", false);
