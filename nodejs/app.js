@@ -43,6 +43,7 @@ app.use('/subscribe', require('./routes/subscribe'));
 app.use('/toon', require('./routes/toon'));
 app.use('/block', require('./routes/block'));
 app.use('/recommend', require('./routes/recommend'));
+app.use('/search', require('./routes/search'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

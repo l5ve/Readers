@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 router.post('/title', function(req, res){
   var word = req.body.word;
   var s_word = '%' + word + '%';
-  var sql = 'select toon_id, toon_name, toon_site, wrt_name, toon_thumb_url, toon_desc from toon_info where toon_name like ?';
+  var sql = 'select toon_id, toon_name, toon_site, wrt_name, toon_thumb_url, toon_desc from toon_info where toon_name like ? order by toon_name';
 
   connection.query(sql, s_word, function(err, rows){
     if(err) return res.sendStatus(400);
@@ -26,7 +26,7 @@ router.post('/title', function(req, res){
 router.post('/writer', function(req, res){
   var word = req.body.word;
   var s_word = '%' + word + '%';
-  var sql = 'select toon_id, toon_name, toon_site, wrt_name, toon_thumb_url, toon_desc from toon_info where wrt_name like ?';
+  var sql = 'select toon_id, toon_name, toon_site, wrt_name, toon_thumb_url, toon_desc from toon_info where wrt_name like ? order by toon_name';
 
   connection.query(sql, s_word, function(err, rows){
     if(err) return res.sendStatus(400);
@@ -39,7 +39,7 @@ router.post('/writer', function(req, res){
 router.post('/desc', function(req, res){
   var word = req.body.word;
   var s_word = '%' + word + '%';
-  var sql = 'select toon_id, toon_name, toon_site, wrt_name, toon_thumb_url, toon_desc from toon_info where toon_desc like ?';
+  var sql = 'select toon_id, toon_name, toon_site, wrt_name, toon_thumb_url, toon_desc from toon_info where toon_desc like ? order by toon_name';
 
   connection.query(sql, s_word, function(err, rows){
     if(err) return res.sendStatus(400);

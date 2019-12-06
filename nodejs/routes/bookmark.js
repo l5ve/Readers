@@ -68,8 +68,8 @@ router.post('/list', function(req, res){
   var user_id = req.body.user_id;
   var order_by = req.body.order_by; // desc, asc, site
 
-  var desc_sql = 'select i.toon_id, i.toon_site, i.toon_name, e.epi_name, i.wrt_name, e.epi_date, e.epi_url, e.epi_thumb_url from toon_info as i, bookmark as b, epi_info as e where user_id = ? and i.toon_id = b.toon_id and b.toon_id = e.toon_id and b.epi_name = e.epi_name order by e.epi_date desc';
-  var asc_sql = 'select i.toon_id, i.toon_site, i.toon_name, e.epi_name, i.wrt_name, e.epi_date, e.epi_url, e.epi_thumb_url from toon_info as i, bookmark as b, epi_info as e where user_id = ? and i.toon_id = b.toon_id and b.toon_id = e.toon_id and b.epi_name = e.epi_name order by e.epi_date asc';
+  var desc_sql = 'select i.toon_id, i.toon_site, i.toon_name, e.epi_name, i.wrt_name, e.epi_date, e.epi_url, e.epi_thumb_url from toon_info as i, bookmark as b, epi_info as e where user_id = ? and i.toon_id = b.toon_id and b.toon_id = e.toon_id and b.epi_name = e.epi_name order by e.epi_date desc, e.epi_name*1 desc';
+  var asc_sql = 'select i.toon_id, i.toon_site, i.toon_name, e.epi_name, i.wrt_name, e.epi_date, e.epi_url, e.epi_thumb_url from toon_info as i, bookmark as b, epi_info as e where user_id = ? and i.toon_id = b.toon_id and b.toon_id = e.toon_id and b.epi_name = e.epi_name order by e.epi_date asc, e.epi_name*1 asc';
   var site_sql = 'select i.toon_id, i.toon_site, i.toon_name, e.epi_name, i.wrt_name, e.epi_date, e.epi_url, e.epi_thumb_url from toon_info as i, bookmark as b, epi_info as e where user_id = ? and i.toon_id = b.toon_id and b.toon_id = e.toon_id and b.epi_name = e.epi_name order by toon_site, toon_name';
 
   if (order_by == 'desc'){

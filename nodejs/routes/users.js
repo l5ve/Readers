@@ -116,4 +116,30 @@ router.post('/genre', function(req, res){
   });
 });
 
+router.post('/changepwd', function(req, res){
+  console.log(req.body);
+  var user_id = req.body.user_id;
+  var user_pwd = req.body.user_pwd;
+  var params = [user_pwd, user_id];
+  var sql = 'update user_info set user_pwd = ? where user_id = ?';
+
+  connection.query(sql, params, function(err, rows){
+    if(err) return res.sendStatus(400);
+    res.status(200).json(rows);
+  });
+});
+
+router.post('/changename', function(req, res){
+  console.log(req.body);
+  var user_id = req.body.user_id;
+  var user_name = req.body.user_name;
+  var params = [user_name, user_id];
+  var sql = 'update user_info set user_name = ? where user_id = ?';
+
+  connection.query(sql, params, function(err, rows){
+    if(err) return res.sendStatus(400);
+    res.status(200).json(rows);
+  });
+});
+
 module.exports = router;
