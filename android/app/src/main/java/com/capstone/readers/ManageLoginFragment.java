@@ -20,11 +20,6 @@ import androidx.fragment.app.Fragment;
 import com.capstone.readers.lib.MyToast;
 
 public class ManageLoginFragment extends Fragment {
-    public static final int REQUEST_CODE_WEBVIEW = 101;
-
-    private WebView mWebView; // 웹뷰 선언
-    private WebSettings mWebSettings; //웹뷰세팅
-    private LinearLayout manage_login_container;
     private ScrollView manage_login_scroll;
     private LinearLayout manage_login_notice;
     private TextView manage_login_notice_content;
@@ -44,7 +39,6 @@ public class ManageLoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_managelogin, container, false);
 
-        manage_login_container = (LinearLayout) fv.findViewById(R.id.manage_login_container);
         manage_login_scroll = (ScrollView) fv.findViewById(R.id.manage_login_scroll);
         manage_login_scroll.setVerticalScrollBarEnabled(true);
         manage_login_notice = (LinearLayout) fv.findViewById(R.id.manage_login_notice);

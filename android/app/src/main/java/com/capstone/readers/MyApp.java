@@ -22,22 +22,6 @@ public class MyApp extends Application {
     private boolean savedData;
     private String user_name;
 
-    private boolean login_naver;
-    private boolean login_daum;
-    private boolean login_lezhin;
-    private boolean login_mrblue;
-    private boolean login_bufftoon;
-    private boolean login_bomtoon;
-    private boolean login_bbuding;
-    private boolean login_kakaopage;
-    private boolean login_comica;
-    private boolean login_comicgt;
-    private boolean login_ktoon;
-    private boolean login_toptoon;
-    private boolean login_toomics;
-    private boolean login_foxtoon;
-    private boolean login_peanutoon;
-
     private boolean DayTab;
     private boolean GenreTab;
     private boolean EndTab;

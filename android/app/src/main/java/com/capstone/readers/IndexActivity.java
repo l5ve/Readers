@@ -12,10 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.capstone.readers.lib.RemoteLib;
 
-/**
- * 시작 액티비티이며 이 액티비티에서 사용자 정보 조회 후
- * 메인 액티비티를 실행할 지, 프로필 액티비티를 실행할 지를 결정함.
- */
+
 public class IndexActivity extends AppCompatActivity {
     Context context;
     private boolean saveLoginData;
@@ -41,10 +38,6 @@ public class IndexActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 일정 시간(0.8초) 이후에 startTask() 메소드를 호출해서
-     * 서버에서 사용자 정보를 조회한다.
-     */
     @Override
     protected void onStart() {
         super.onStart();

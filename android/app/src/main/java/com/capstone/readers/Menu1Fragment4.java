@@ -18,9 +18,6 @@ import androidx.fragment.app.Fragment;
  *
  */
 public class Menu1Fragment4 extends Fragment {
-    private WebView mWebView; // 웹뷰 선언
-    private WebSettings mWebSettings; //웹뷰세팅
-    private LinearLayout button_container;
     private ScrollView platform_scroll;
 
     public static Menu1Fragment4 newInstance(){
@@ -35,8 +32,6 @@ public class Menu1Fragment4 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment4_menu1, container, false);
-        mWebView = (WebView) fv.findViewById(R.id.platform_webview);
-        button_container = (LinearLayout) fv.findViewById(R.id.button_container);
         platform_scroll = (ScrollView) fv.findViewById(R.id.platform_scroll);
         platform_scroll.setVerticalScrollBarEnabled(true);
 

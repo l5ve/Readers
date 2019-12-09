@@ -77,8 +77,6 @@ public class Menu3Fragment extends Fragment {
             }
         });
 
-//        getData();
-
         return fv;
     }
 
@@ -91,21 +89,4 @@ public class Menu3Fragment extends Fragment {
             childFt.commit();
         }
     }
-
-//    public void getData() {
-//        service = RetrofitClient.getClient().create(ServiceApi.class);
-//        UserIdData data = new UserIdData(user_id);
-//        service.getMypageData(data).enqueue(new Callback<ArrayList<MypageResponse>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<MypageResponse>> call, Response<ArrayList<MypageResponse>> response) {
-//                mProfileData = response.body().get(0);
-//               }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<MypageResponse>> call, Throwable t) {
-//                Log.e("Menu3Fragment", "getData: " +getString(R.string.toon_server_error));
-//                MyToast.s(getContext(), getString(R.string.toon_server_error));
-//            }
-//        });
-//    }
 }
